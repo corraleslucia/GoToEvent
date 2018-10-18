@@ -1,0 +1,40 @@
+/* Box sizing: Margin, borders and padding are drawn outside the set width of your content. */
+*, 
+*:before, 
+*:after {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+html{
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
+    'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.form-title {
+    margin-left: 10%;
+    
+}
+
+.form-admin {
+    margin-left: 10%;
+    padding: 3%;
+    border-style: solid;
+    width: 33%;
+    height: auto;
+}
+
+.form-med-size {
+    height: auto;
+}
+
+.artist-button {
+    margin: 50px 72px;
+}
+.category-button {
+    margin: 40px 100px;
+}
+
+.form-group {
+    margin-top: 10px;
+}
