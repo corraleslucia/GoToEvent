@@ -11,16 +11,20 @@ html{
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande',
     'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
-.form-title {
-    margin-left: 10%;
-    
+
+
+section { 
+    text-align: center;
 }
 
-.form-admin {
-    margin-left: 10%;
+
+
+.form-admin,
+.form-login {
+    margin-left: 32%;
+    margin-right: 32%;
     padding: 3%;
     border-style: solid;
-    width: 33%;
     height: auto;
 }
 

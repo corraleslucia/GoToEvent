@@ -1,10 +1,11 @@
 <?php namespace daos\daolist;
+use daos\IDao as IDao;
 
 
 /**
  *
  */
-class ArtistDao extends singleton
+class ArtistDao extends singleton implements IDao
 {
     private $list;
 

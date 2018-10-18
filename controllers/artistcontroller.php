@@ -15,6 +15,7 @@ class ArtistController
 
     public function index()
     {
+        
     }
 
     public function store($name)
