@@ -2,6 +2,7 @@
 
 class SeatType
 {
+    private $id;
     private $name;
 
     public function __construct($n){
@@ -10,6 +11,14 @@ class SeatType
 
     public function getName(){
         return $this->name;
+    }
+
+    public function getId(){
+        return $this->id;
+    }
+
+    public function setId($newId){
+        $this->id = $newId;
     }
 
     public function setName($newName){

@@ -2,6 +2,7 @@
 
 class Location
 {
+    private $id;
     private $name;
     private $adress;
     private $city;
@@ -34,6 +35,14 @@ class Location
 
     public function setCity($newCity){
         $this->city = $newCity;
+    }
+
+    public function getId(){
+        return $this->id;
+    }
+
+    public function setId($newId){
+        $this->id = $newId;
     }
 }
 

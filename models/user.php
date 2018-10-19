@@ -4,6 +4,7 @@ namespace models;
 
 class User
 {
+    private $id;
     private $mail;
     private $pass;
     private $name;
@@ -36,6 +37,14 @@ class User
 
     public function getType(){
         return $this->type;
+    }
+
+    public function getId(){
+        return $this->id;
+    }
+
+    public function setId($newId){
+        $this->id = $newId;
     }
 
     public function setMail($newMail){

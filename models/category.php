@@ -2,6 +2,7 @@
 
 class Category
 {
+    private $id;
     private $description;
 
     function __construct($d){
@@ -10,6 +11,14 @@ class Category
 
     public function getDescription(){
         return $this->description;
+    }
+
+    public function getId(){
+        return $this->id;
+    }
+
+    public function setId($newId){
+        $this->id = $newId;
     }
 
     public function setDescription($newDescription){
