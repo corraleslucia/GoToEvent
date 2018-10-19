@@ -2,15 +2,14 @@
 
 class EventSeat
 {
+    private $id;
     private $seatType;
-    private $calendar;
     private $totalQuantity;
     private $price;
     private $remaningQuantity;
 
-    public function __construct($st,$c,$tq,$p,$rq){
+    public function __construct($st, $tq, $p, $rq){
         $this->seatType=$st;
-        $this->calendar=$c;
         $this->totalQuantity=$tq;
         $this->price=$p;
         $this->remaningQuantity=$rq;
@@ -24,12 +23,13 @@ class EventSeat
         $this->seatType = $newSeatType;
     }
 
-    public function getCalendar(){
-        return $this->calendar;
+
+    public function getId(){
+        return $this->id;
     }
 
-    public function setCalendar($newCalendar){
-        $this->calendar = $newCalendar;
+    public function setId($newId){
+        $this->id = $newId;
     }
 
     public function getTotalQuantity(){

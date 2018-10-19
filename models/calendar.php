@@ -5,23 +5,24 @@ namespace models;
 class Calendar
 {
     private $date;
-    private $event;
+    private $id;
     private $location;
-    private $artist;
+    private $artists;
+    private $eventSeats;
 
-    function __construct($d, $e, $l, $a){
+    function __construct($d, $l, $a, $es){
         $this->date = $d;
-        $this->event = $e;
         $this->location = $l;
         $this->artist = $a;
+        $this->eventSeats = $es;
     }
 
     public function getDate(){
         return $this->date;
     }
 
-    public function getEvent(){
-        return $this->event;
+    public function getId(){
+        return $this->id;
     }
 
     public function getLocation(){
@@ -32,12 +33,20 @@ class Calendar
         return $this->artist;
     }
 
+    public function getEventSeat(){
+        return $this->eventSeat;
+    }
+
+    public function setEventSeat($newEventSeat){
+        $this->eventSeat = $newEventSeat;
+    }
+
     public function setDate($newDate){
         $this->date = $newDate;
     }
 
-    public function setEvent($newEvent){
-        $this->event = $newEvent;
+    public function setId($newId){
+        $this->id = $newId;
     }
 
     public function setLocation($newLocation){
