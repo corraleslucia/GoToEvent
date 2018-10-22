@@ -1,4 +1,4 @@
-<?php namespace daobd;
+<?php namespace daos\daodb;
 
 class Singleton
 {

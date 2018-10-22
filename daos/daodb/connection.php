@@ -1,20 +1,87 @@
-<?php namespace daobd;
+<?php namespace daos\daodb;
+
 /**
 *
 */
-class Connection
-{
-	public function get_Connection()
-	{
-			try
-			{
-				$connection=new\PDO("mysql:host=".HOST.";dbname=".DB,USER,PASS);
-			}
-			catch(PDOException $e)
-			{
-				echo "ERROR:".$e->getMessage();
-			}
-			 return $connection;
-	}
+class Connection {
+
+     private $pdo = null;
+     private $pdoStatement = null;
+     private static $instance = null;
+
+     /**
+      *
+      */
+     public function __construct() {
+          try {
+               $this->pdo = new \PDO("mysql:host=" . HOST . ";dbname=" . DB, USER, PASS);
+               $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
+          } catch (Exception $ex) {
+               throw $ex;
+          }
+     }
+
+     /**
+      *
+      */
+     public static function getInstance()
+     {
+         if(self::$instance == null)
+            self::$instance = new Connection();
+
+         return self::$instance;
+     }
+
+
+     /**
+      *
+      */
+     public function execute($query, $parameters = array())
+     {
+          try
+          {
+			// Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
+               $this->pdoStatement = $this->pdo->prepare($query);
+
+               foreach($parameters as $parameterName => $value)
+               {
+                    // Reemplazo los marcadores de parametro por los valores reales utilizando el método bindParam().
+                    $this->pdoStatement->bindParam(":".$parameterName, $value);
+               }
+
+               $this->pdoStatement->execute();
+
+               return $this->pdoStatement->fetchAll();
+          }
+          catch(Exception $ex)
+          {
+               throw $ex;
+          }
+     }
+
+     /**
+      *
+      */
+     public function executeNonQuery($query, $parameters = array())
+     {
+          try
+          {
+               // Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
+               $this->pdoStatement = $this->pdo->prepare($query);
+
+               foreach($parameters as $parameterName => $value) {
+                    // Reemplazo los marcadores de parametro por los valores reales utilizando el método bindParam().
+                    $this->pdoStatement->bindParam(":$parameterName", $parameters[$parameterName]);
+               }
+
+               $this->pdoStatement->execute();
+
+               return $this->pdoStatement->rowCount();
+          }
+          catch(\PDOException $ex)
+          {
+               throw $ex;
+          }
+     }
+
 }
- ?>
