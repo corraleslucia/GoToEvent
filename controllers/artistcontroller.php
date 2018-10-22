@@ -1,7 +1,7 @@
 <?php namespace controllers;
 
-use daos\daoList\ArtistDao as Dao;
-//use daos\daodb\ArtistDao as Dao;
+//use daos\daoList\ArtistDao as Dao;
+use daos\daodb\ArtistDb as Dao;
 use models\Artist;
 
 class ArtistController
@@ -15,7 +15,7 @@ class ArtistController
 
     public function index()
     {
-        
+
     }
 
     public function store($name)

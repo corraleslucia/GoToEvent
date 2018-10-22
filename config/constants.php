@@ -12,7 +12,7 @@ $base=explode($_SERVER['DOCUMENT_ROOT'],ROOT);
   define('USER',"root");
   define('PASS',"");
   define('DB',"gotoevent");
-  
+
 
 
 ?>
