@@ -1,7 +1,7 @@
 <?php namespace daos\daodb;
 use daos\IDao as IDao;
 
-use models\Artist as M_Artist;
+use \models\Artist as M_Artist;
 use daos\daodb\Connection as Connection;
 
      /**
@@ -105,7 +105,7 @@ use daos\daodb\Connection as Connection;
           /**
            *
            */
-          public function delete($name) {
+          public function delete($_name) {
                /*$sql = "DELETE FROM usuarios WHERE email = :email";
 
                $obj_pdo = new Conexion();
@@ -139,7 +139,7 @@ use daos\daodb\Connection as Connection;
 			$value = is_array($value) ? $value : [];
 
 			$resp = array_map(function($p){
-				return new M_Artist($p['id'], $p['name']);
+				return new M_Artist($p['name'], $p['id_artist']);
 			}, $value);
 
                return count($resp) > 1 ? $resp : $resp['0'];

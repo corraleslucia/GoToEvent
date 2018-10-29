@@ -1,8 +1,6 @@
 <?php namespace controllers;
 
-//use daos\daoList\CategoryDao as Dao;
-//use daos\daodb\CategoryDao as Dao;
-
+use daos\daodb\CategoryDb as Dao;
 use models\Category;
 
 class CategoryController
@@ -16,6 +14,7 @@ class CategoryController
 
     public function index()
     {
+
     }
 
     public function store($description)
@@ -23,7 +22,11 @@ class CategoryController
         $category = new Category($description);
 
         $this->dao->create($category);
+
+        var_dump ($this->dao->readAll());
+
     }
+
 }
 
 ?>

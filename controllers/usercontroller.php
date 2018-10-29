@@ -1,10 +1,9 @@
 <?php namespace controllers;
 
-//use daos\daoList\ArtistDao as Dao;
-use daos\daodb\ArtistDb as Dao;
-use models\Artist;
+use daos\daodb\UserDb as Dao;
+use models\User;
 
-class ArtistController
+class UserController
 {
     protected $dao;
 
@@ -18,12 +17,11 @@ class ArtistController
 
     }
 
-
-    public function store($name)
+    public function store($mail, $pass, $name, $lastname)
     {
-        $artist = new Artist($name);
+            $user = new User($mail, $pass, $name, $lastname);
 
-        $this->dao->create($artist);
+        $this->dao->create($user);
 
         var_dump ($this->dao->readAll());
 

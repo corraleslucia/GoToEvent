@@ -7,10 +7,11 @@ class Location
     private $adress;
     private $city;
 
-    public function __construct($n,$a,$c){
+    public function __construct($n,$a,$c, $id=""){
+        $this->id = $id;
         $this->name=$n;
         $this->adress=$a;
-        $this->city=$city;
+        $this->city=$c;
     }
 
     public function getName(){

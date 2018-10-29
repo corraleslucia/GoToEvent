@@ -7,24 +7,25 @@ class Event
     private $id;
     private $description;
     private $category;
-    private $caldendars;
+    private $calendars;
 
-    function __construct($d, $cat, $cal){
+    function __construct($d, $cat, $id="", $cal=""){
+        $this->id = $id;
         $this->description = $d;
         $this->category = $cat;
-        $this->calendar = $cal;
+        $this->calendars = $cal;
     }
 
     public function getDescription(){
         return $this->description;
     }
-    
+
     public function getCategory(){
         return $this->category;
     }
 
     public function getCalendar(){
-        return $this->caldendar;
+        return $this->calendars;
     }
 
     public function getId(){
@@ -40,14 +41,14 @@ class Event
     }
 
     public function setCalendar($newCalendar){
-        $this->calendar = $newCalendar;
+        $this->calendars = $newCalendar;
     }
 
     public function setId($newId){
         $this->id = $newId;
     }
 
-    
+
 
 
 

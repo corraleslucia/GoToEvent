@@ -1,4 +1,5 @@
 <?php namespace controllers;
+
 class HomeController
 {
 
@@ -9,7 +10,8 @@ class HomeController
     public function index()
     {
         //require(ROOT.'views/home.php');
-        require(ROOT.'views/createartist.php');
+        require(ROOT.'views/home.php');
+
     }
 
 }

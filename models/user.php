@@ -11,12 +11,13 @@ class User
     private $lastName;
     private $type;
 
-    function __construct($m, $p, $n, $ln, $t){
+    function __construct($m, $p, $n, $ln, $id=""){
+        $this->id = $id;
         $this->mail = $m;
         $this->pass = $p;
         $this->name = $n;
         $this->lastName = $ln;
-        $this->type = $t;
+        $this->type = 2;
     }
 
     public function getMail(){

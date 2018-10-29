@@ -5,8 +5,8 @@ class Artist
     private $id;
     private $name;
 
-    public function __construct($n){
-        $this->id="";
+    public function __construct($n, $id=""){
+        $this->id=$id;
         $this->name=$n;
     }
 

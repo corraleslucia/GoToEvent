@@ -1,5 +1,26 @@
-<?php
-namespace views;
+<?php namespace views;
+
+include('header.php');
+include('navAdmin.php');
+
+use \daos\daodb\SeatTypeDb as DaoSeatType;
+use \daos\daodb\CalendarDb as DaoCalendar;
+use \daos\daodb\EventDb as DaoEvent;
+use \daos\daodb\LocationDb as DaoLocation;
+
+$daoEvent = DaoEvent::getInstance();
+$events = $daoEvent->readAll();
+
+$daoSeatType = DaoSeatType::getInstance();
+$seatsTypes = $daoSeatType->readAll();
+
+$daoCalendar = DaoCalendar::getInstance();
+$calendars = $daoCalendar->readAll();
+
+$daoLocation = DaoLocation::getInstance();
+
+
+
 ?>
 
 <!DOCTYPE html>
@@ -17,26 +38,33 @@ namespace views;
   <section class="content">
     <h2 class="form-title">Alta plaza evento:</h2>
     <form action="EventSeat/store" method="POST" class="form-admin">
-        <div class="form-group">
-            <label>Tipo plaza: </label>
-            <select>
-                <option value="#">###########</option>
-                <option value="#">###########</option>
-                <option value="#">###########</option>
-                <option value="#">###########</option>
-            </select>
-
-        </div>
 
         <div class="form-group">
             <label>Calendario: </label>
-            <select>
-                <option value="#">Date - event description</option>
-                <option value="#">###########</option>
-                <option value="#">###########</option>
-                <option value="#">###########</option>
+            <select class="form-control" name="id_calendar" required>
+                <?php foreach ($calendars as $key => $value)
+                {
+                    $location = $daoLocation->readID($value->getLocation());
+                    $event = $daoEvent->readID($value->getIdEvent());
+                    ?>
+                    <option value = "<?php echo $value->getId()?>"> <?php echo $event->getDescription() . " - " .  $value->getDate() . " - " . $location->getName()?> </option>
+
+                <?php } ?>
             </select>
         </div>
+
+        <div class="form-group">
+            <label>Tipo de plaza: </label>
+            <select class="form-control" name="id_seatType" required>
+                <?php foreach ($seatsTypes as $key => $value)
+                {
+                    ?>
+                    <option value = "<?php echo $value->getId()?>"> <?php echo $value->getName()?> </option>
+
+                <?php } ?>
+            </select>
+        </div>
+
 
         <div class="form-group">
             <label>Cantidad total: </label>

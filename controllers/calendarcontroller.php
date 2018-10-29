@@ -1,38 +1,49 @@
 <?php namespace controllers;
 
-//use daos\daoList\CalendarDao as Dao;
-//use daos\daodb\CalendarDao as DaoCalendar;
-//use daos\daodb\EventDao as DaoEvent;
-//use daos\daodb\LocationDao as DaoLocation;
-//use daos\daodb\ArtistDao as DaoArtist;
-
+use daos\daodb\CalendarDb as Dao;
+use daos\daodb\ArtistsXCalendarsDb as DaoAC;
 use models\Calendar;
+use models\ArtistInCalendar;
+
 
 class CalendarController
 {
-    protected $daoCalendar;
-    protected $daoEvent;
-    protected $daoLocation;
-    protected $daoArtist;
+    protected $dao;
+    protected $daoAC;
 
     public function __construct()
     {
-        $this->daoCalendar= DaoCalendar::getInstance();
-        $this->DaoEvent= DaoEvent::getInstance();
-        $this->DaoLocation= DaoLocation::getInstance();
-        $this->DaoArtist= DaoArtist::getInstance();
+        $this->dao= Dao::getInstance();
+        $this->daoAC= DaoAC::getInstance();
     }
 
     public function index()
     {
+
     }
 
-    public function store($date, $event, $location, $artists)
+    public function store($date, $time, $id_event, $id_location, $_artists)
     {
-        $calendar = new Calendar($date, $event, $location, $artists);
+        $calendar = new Calendar($date, $time, $id_location, $_artists, $id_event);
 
         $this->dao->create($calendar);
+
+        $readInfo['date'] = $date;
+        $readInfo['time'] = $time;
+        $readInfo['id_event'] = $id_event;
+        $readInfo['id_location'] = $id_location;
+
+        $_calendar = $this->dao->read($readInfo);
+
+        foreach ($_artists as $key => $value)
+        {
+            $_artistInCalendar = new ArtistInCalendar($value, $_calendar->getId());
+            $this->daoAC->create($_artistInCalendar);
+        }
+
+
     }
+
 }
 
 ?>

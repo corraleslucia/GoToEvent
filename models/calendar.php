@@ -5,16 +5,21 @@ namespace models;
 class Calendar
 {
     private $date;
+    private $time;
     private $id;
     private $location;
     private $artists;
     private $eventSeats;
+    private $id_event;
 
-    function __construct($d, $l, $a, $es){
+    function __construct($d, $t, $l, $a, $id_event, $id="", $es=""){
+        $this->id = $id;
         $this->date = $d;
+        $this->time = $t;
         $this->location = $l;
-        $this->artist = $a;
+        $this->artists = $a;
         $this->eventSeats = $es;
+        $this->id_event = $id_event;
     }
 
     public function getDate(){
@@ -29,16 +34,26 @@ class Calendar
         return $this->location;
     }
 
-    public function getArtist(){
-        return $this->artist;
+    public function getArtists(){
+        return $this->artists;
     }
 
-    public function getEventSeat(){
-        return $this->eventSeat;
+    public function getEventSeats(){
+        return $this->eventSeats;
     }
 
-    public function setEventSeat($newEventSeat){
-        $this->eventSeat = $newEventSeat;
+    public function getTime ()
+    {
+        return $this->time;
+    }
+
+    public function setTime ($newTime)
+    {
+        $this->time = $newTime;
+    }
+
+    public function setEventSeats($newEventSeat){
+        $this->eventSeats = $newEventSeat;
     }
 
     public function setDate($newDate){
@@ -53,8 +68,18 @@ class Calendar
         $this->location = $location;
     }
 
-    public function setArtist($newArtist){
-        $this->artist = $newArtist;
+    public function setArtists($newArtist){
+        $this->artists = $newArtist;
+    }
+
+    public function getIdEvent ()
+    {
+        return $this->id_event;
+    }
+
+    public function setIdEvent ($newIdEvent)
+    {
+        $this_id_event = $newIdEvent;
     }
 }
 ?>

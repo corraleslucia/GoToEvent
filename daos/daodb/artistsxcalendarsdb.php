@@ -1,13 +1,14 @@
 <?php namespace daos\daodb;
 use daos\IDao as IDao;
 
-use \models\SeatType as M_SeatType;
+use \models\ArtistInCalendar as M_ArtistInCalendar;
 use daos\daodb\Connection as Connection;
+
 
      /**
       *
       */
-     class SeatTypeDb extends singleton implements IDao
+     class ArtistsXCalendarsDb extends singleton implements IDao
      {
           private $connection;
 
@@ -16,12 +17,13 @@ use daos\daodb\Connection as Connection;
           /**
            *
            */
-          public function create($_seatType) {
+          public function create($_artistsxcalendars) {
 
                // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
-			$sql = "INSERT INTO seats_type (name) VALUES (:name)";
+			$sql = "INSERT INTO artists_in_calendars (id_artist,id_calendar) VALUES (:id_artist,:id_calendar)";
 
-               $parameters['name'] = $_seatType->getName();
+               $parameters['id_artist'] = $_artistsxcalendars->getIdArtist();
+               $parameters['id_calendar'] = $_artistsxcalendars->getIdCalendar();
 
                try {
                     // creo la instancia connection
@@ -37,9 +39,9 @@ use daos\daodb\Connection as Connection;
           /**
            *
            */
-          public function read($_name) {
+          public function read($_info) {
 
-               $sql = "SELECT * FROM seats_type where name = :name";
+               $sql = "SELECT * FROM  where name = :name";
 
                $parameters['name'] = $_name;
 
@@ -57,11 +59,12 @@ use daos\daodb\Connection as Connection;
                     return false;
           }
 
+
           /**
            *
            */
           public function readAll() {
-               $sql = "SELECT * FROM seats_type";
+               $sql = "SELECT * FROM artists_in_calendars";
 
                try {
                     $this->connection = Connection::getInstance();
@@ -80,10 +83,10 @@ use daos\daodb\Connection as Connection;
           /**
            *
            */
-          public function edit($_seatType) {
-               $sql = "UPDATE seats_type SET name = :name";
+          public function edit($_artist) {
+               $sql = "UPDATE artists SET name = :name";
 
-               $parameters['name'] = $_seatType->getName();
+               $parameters['name'] = $_artist->getName();
 
 
                try {
@@ -129,17 +132,17 @@ use daos\daodb\Connection as Connection;
           }
 
           /**
-		* Transforma el listado de seats_type en
-		* objetos de la clase SeatType
+		* Transforma el listado de artistas en
+		* objetos de la clase Artista
 		*
-		* @param  Array  Listado de seats_Type a transformar
+		* @param  Array $gente Listado de artistas a transformar
 		*/
 		protected function mapear($value) {
 
 			$value = is_array($value) ? $value : [];
 
 			$resp = array_map(function($p){
-				return new M_SeatType($p['name'], $p['id_seats_type']);
+				return new M_ArtistInCalendar($p['id_artist'], $p['id_calendar']);
 			}, $value);
 
                return count($resp) > 1 ? $resp : $resp['0'];

@@ -9,8 +9,8 @@ namespace views;
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Login - GoToEvent</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="../css/normalize.css"/>
-  <link rel="stylesheet" type="text/css" media="screen" href="../css/style.css"/>
+  <link rel="stylesheet" type="text/css" media="screen" href="css/normalize.css"/>
+  <link rel="stylesheet" type="text/css" media="screen" href="css/style.css"/>
 
 </head>
 <body>
@@ -21,12 +21,12 @@ namespace views;
             <label>E-mail: </label>
             <input type="email" name="mail">
         </div>
-        
+
         <div class="form-group">
             <label>Contraseña: </label>
             <input type="password" name="pass">
         </div>
-       
+
 
       <button type="submit" class ="category-button">Iniciar Sesion</button>
     </form>

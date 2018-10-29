@@ -1,7 +1,9 @@
 <?php
 namespace views;
-?>
 
+include('header.php');
+include('navAdmin.php');
+ ?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -9,7 +11,7 @@ namespace views;
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Alta Artista</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="css/normalize.css"/>
+  <link rel="stylesheet" type="text/css" media="screen" href= "css/normalize.css"/>
   <link rel="stylesheet" type="text/css" media="screen" href="css/style.css"/>
 
 </head>

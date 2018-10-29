@@ -1,7 +1,7 @@
 <?php namespace controllers;
 
-//use daos\daoList\SeatType as Dao;
-//use daos\daodb\SeatType as Dao;
+//use daos\daoList\ArtistDao as Dao;
+use daos\daodb\SeatTypeDb as Dao;
 use models\SeatType;
 
 class SeatTypeController
@@ -15,6 +15,7 @@ class SeatTypeController
 
     public function index()
     {
+
     }
 
     public function store($name)
@@ -23,7 +24,10 @@ class SeatTypeController
 
         $this->dao->create($seatType);
 
+        var_dump ($this->dao->readAll());
+
     }
+
 }
 
 ?>

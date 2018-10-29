@@ -1,21 +1,17 @@
 <?php namespace controllers;
 
-//use daos\daoList\EventSeatDao as Dao;
-//use daos\daodb\EventSeatDao as DaoEventSeat;
-//use daos\daodb\CalendarDao as DaoCalendar;
-
-
+use daos\daodb\EventSeatDb as Dao;
 use models\EventSeat;
+
 
 class EventSeatController
 {
-    protected $daoEventSeat;
-    protected $daoCalendar;
+    protected $dao;
+
 
     public function __construct()
     {
-        $this->daoEventSeat= DaoEventSeat::getInstance();
-        $this->daoCalendar= DaoCalendar::getInstance();
+        $this->dao= Dao::getInstance();
 
     }
 
@@ -23,11 +19,13 @@ class EventSeatController
     {
     }
 
-    public function store($seatType,$calendar,$totalQuantity,$price,$remaningQuantity)
+    public function store($calendar,$seatType,$totalQuantity,$price)
     {
-        $eventSeat = new EventSeat($seatType,$calendar,$totalQuantity,$price,$remaningQuantity);
+        $eventSeat = new EventSeat($seatType,$totalQuantity,$price,$calendar);
 
         $this->dao->create($eventSeat);
+
+        var_dump ($this->dao->readAll());
     }
 }
 

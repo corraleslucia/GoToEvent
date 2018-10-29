@@ -1,24 +1,23 @@
 <?php namespace controllers;
 
-//use daos\daoList\EventDao as Dao;
-//use daos\daodb\EventDao as DaoEvent;
-//use daos\daodb\CategoryDao as DaoCategory;
+use daos\daodb\EventDb as Dao;
 
 use models\Event;
 
 class EventController
 {
-    protected $daoEvent;
+    protected $dao;
     protected $daoCategory;
+
 
     public function __construct()
     {
-        $this->daoEvent= DaoEvent::getInstance();
-        $this->daoCategory= DaoCategory::getInstance();
+        $this->dao= Dao::getInstance();
     }
 
     public function index()
     {
+
     }
 
     public function store($description,$category)
@@ -26,6 +25,8 @@ class EventController
         $event = new Event($description, $category);
 
         $this->dao->create($event);
+
+        var_dump ($this->dao->readAll());
     }
 }
 

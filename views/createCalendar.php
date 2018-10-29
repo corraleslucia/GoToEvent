@@ -1,5 +1,22 @@
-<?php
-namespace views;
+<?php namespace views;
+
+include('header.php');
+include('navAdmin.php');
+
+
+use \daos\daodb\ArtistDb as DaoArtist;
+use \daos\daodb\LocationDb as DaoLocation;
+use \daos\daodb\EventDb as DaoEvent;
+
+$daoArtist = DaoArtist::getInstance();
+$artists = $daoArtist->readAll();
+
+$daoLocation = DaoLocation::getInstance();
+$locations = $daoLocation->readAll();
+
+$daoEvent = DaoEvent::getInstance();
+$events = $daoEvent->readAll();
+
 ?>
 
 <!DOCTYPE html>
@@ -23,32 +40,44 @@ namespace views;
         </div>
 
         <div class="form-group">
+        <label>Hora: </label>
+        <input type="time" name="cal-time" required>
+        </div>
+
+        <div class="form-group">
             <label>Evento: </label>
-            <select>
-                <option value="#">###########</option>
-                <option value="#">###########</option>
-                <option value="#">###########</option>
-                <option value="#">###########</option>
+            <select class="form-control" name="id_event" required>
+                <?php foreach ($events as $key => $value)
+                {
+                    ?>
+                    <option value = "<?php echo $value->getId()?>"> <?php echo $value->getDescription()?> </option>
+
+                <?php } ?>
             </select>
 
         </div>
 
         <div class="form-group">
             <label>Lugar: </label>
-            <select>
-                <option value="#">###########</option>
-                <option value="#">###########</option>
-                <option value="#">###########</option>
-                <option value="#">###########</option>
+            <select class="form-control" name="id_location" required>
+                <?php foreach ($locations as $key => $value)
+                {
+                    ?>
+                    <option value = "<?php echo $value->getId()?>"> <?php echo $value->getName()?> </option>
+
+                <?php } ?>
             </select>
 
         </div>
 
-        <div class="form-group">
+        <div class="form-group" >
             <label>Artista/s: </label><br>
-            <input type="checkbox" name="#####" value="###">***************<br>
-            <input type="checkbox" name="#####" value="###">***************<br>
-            <input type="checkbox" name="#####" value="###">***************<br>
+            <?php foreach ($artists as $key => $value)
+            {
+                ?>
+                <input type="checkbox" name="artists[]" value="<?php echo $value->getId()?>"><?php echo $value->getName()?><br>
+
+            <?php } ?>
 
         </div>
 

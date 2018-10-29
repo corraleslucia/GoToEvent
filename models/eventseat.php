@@ -7,12 +7,15 @@ class EventSeat
     private $totalQuantity;
     private $price;
     private $remaningQuantity;
+    private $id_calendar;
 
-    public function __construct($st, $tq, $p, $rq){
+    public function __construct($st, $tq, $p, $c, $rq= "", $id=""){
+        $this->id = $id;
         $this->seatType=$st;
         $this->totalQuantity=$tq;
         $this->price=$p;
-        $this->remaningQuantity=$rq;
+        $this->remaningQuantity=$tq;
+        $this->id_calendar = $c;
     }
 
     public function getSeatType(){
@@ -54,6 +57,16 @@ class EventSeat
 
     public function setRemaningQuantity($newRemaningQuantity){
         $this->remaningQuantity = $newRemaningQuantity;
+    }
+
+    public function getIdCalendar ()
+    {
+        return $this->id_calendar;
+    }
+
+    public function setIdCalendar ($newIdCalendar)
+    {
+        $this->id_calendar = $newIdCalendar;
     }
 }
 

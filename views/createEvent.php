@@ -1,5 +1,13 @@
 <?php
 namespace views;
+
+include('header.php');
+include('navAdmin.php');
+
+use \daos\daodb\CategoryDb as Dao;
+
+$daoCategory = Dao::getInstance();
+$categories = $daoCategory->readAll();
 ?>
 
 <!DOCTYPE html>
@@ -23,12 +31,14 @@ namespace views;
         </div>
 
         <div class="form-group">
-            <label>Categoria: </label>
-            <select>
-                <option value="#">###########</option>
-                <option value="#">###########</option>
-                <option value="#">###########</option>
-                <option value="#">###########</option>
+            <label for="">Categoria</label>
+            <select class="form-control" name="id_category" required>
+                <?php foreach ($categories as $key => $value)
+                {
+                    ?>
+                    <option value = "<?php echo $value->getId()?>"> <?php echo $value->getDescription()?> </option>
+
+                <?php } ?>
             </select>
 
         </div>
