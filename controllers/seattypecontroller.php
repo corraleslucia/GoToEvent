@@ -18,13 +18,29 @@ class SeatTypeController
 
     }
 
+    public function add ()
+    {
+        $val = null;
+        require(ROOT.'views/createSeatType.php');
+    }
+
+    public function list ()
+    {
+        $seatTypes = $this->dao->readAll();
+        require(ROOT.'views/listSeatTypes.php');
+
+    }
+
+
     public function store($name)
     {
         $seatType = new SeatType($name);
 
         $this->dao->create($seatType);
 
-        var_dump ($this->dao->readAll());
+        $val = "Tipo de plaza Creada.";
+
+        require(ROOT.'views/createSeatType.php');
 
     }
 

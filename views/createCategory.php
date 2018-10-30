@@ -12,14 +12,19 @@ include('navAdmin.php');
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Alta Categoria</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="css/normalize.css"/>
-  <link rel="stylesheet" type="text/css" media="screen" href="css/style.css"/>
+  <link rel="stylesheet" type="text/css" media="screen" href="<?php echo BASE ?>css/normalize.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="<?php echo BASE ?>css/style.css" />
 
 </head>
 <body>
   <section class="content">
+      <?php if ($val)
+      {?>
+          <p> <?php echo $val; ?> </p>
+      <?php }
+      ?>
     <h2 class="form-title">Alta de categoria:</h2>
-    <form action="Category/store" method="POST" class="form-admin">
+    <form action="store" method="POST" class="form-admin">
       <div class="form-group">
         <label>Descripcion: </label>
         <input type="text" name="cat-name" required>

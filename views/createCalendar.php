@@ -3,20 +3,6 @@
 include('header.php');
 include('navAdmin.php');
 
-
-use \daos\daodb\ArtistDb as DaoArtist;
-use \daos\daodb\LocationDb as DaoLocation;
-use \daos\daodb\EventDb as DaoEvent;
-
-$daoArtist = DaoArtist::getInstance();
-$artists = $daoArtist->readAll();
-
-$daoLocation = DaoLocation::getInstance();
-$locations = $daoLocation->readAll();
-
-$daoEvent = DaoEvent::getInstance();
-$events = $daoEvent->readAll();
-
 ?>
 
 <!DOCTYPE html>
@@ -26,14 +12,14 @@ $events = $daoEvent->readAll();
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Alta Calendario</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="css/normalize.css"/>
-  <link rel="stylesheet" type="text/css" media="screen" href="css/style.css"/>
+  <link rel="stylesheet" type="text/css" media="screen" href="<?php echo BASE ?>css/normalize.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="<?php echo BASE ?>css/style.css" />
 
 </head>
 <body>
   <section class="content">
     <h2 class="form-title">Alta de calendario:</h2>
-    <form action="Calendar/store" method="POST" class="form-admin form-med-size">
+    <form action="<?php echo BASE ?>calendar/store" method="POST" class="form-admin form-med-size">
         <div class="form-group">
         <label>Fecha: </label>
         <input type="date" name="cal-date" required>
@@ -45,15 +31,8 @@ $events = $daoEvent->readAll();
         </div>
 
         <div class="form-group">
-            <label>Evento: </label>
-            <select class="form-control" name="id_event" required>
-                <?php foreach ($events as $key => $value)
-                {
-                    ?>
-                    <option value = "<?php echo $value->getId()?>"> <?php echo $value->getDescription()?> </option>
-
-                <?php } ?>
-            </select>
+            <label>Evento: <?php echo $event->getDescription()?> </label>
+            <input type="hidden" name="id_event" value="<?php echo $event->getId()?>" >
 
         </div>
 

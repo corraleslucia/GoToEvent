@@ -17,13 +17,29 @@ class CategoryController
 
     }
 
+
+    public function add ()
+    {
+        $val = null;
+        require(ROOT.'views/createCategory.php');
+    }
+
+    public function list ()
+    {
+        $categories = $this->dao->readAll();
+        require(ROOT.'views/listCategories.php');
+
+    }
+
     public function store($description)
     {
         $category = new Category($description);
 
         $this->dao->create($category);
 
-        var_dump ($this->dao->readAll());
+        $val = "Categoria Creada";
+
+        require(ROOT.'views/createCategory.php');
 
     }
 

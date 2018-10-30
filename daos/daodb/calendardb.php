@@ -119,6 +119,30 @@ use daos\daodb\Connection as Connection;
           /**
            *
            */
+
+           public function readId($id) {
+
+                $sql = "SELECT * FROM calendars where id_calendar = :id_calendar";
+
+                $parameters['id_calendar'] = $id;
+
+                try {
+                     $this->connection = Connection::getInstance();
+                     $resultSet = $this->connection->execute($sql, $parameters);
+                } catch(Exception $ex) {
+                    throw $ex;
+                }
+
+
+                if(!empty($resultSet))
+                     return $this->mapear($resultSet);
+                else
+                     return false;
+           }
+
+          /**
+           *
+           */
           public function edit($_calendar) {
                $sql = "UPDATE calendars SET calendar_date = :calendar_date, id_location = :id_location, id_event = :id_event";
 

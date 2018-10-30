@@ -18,6 +18,19 @@ class ArtistController
 
     }
 
+    public function add ()
+    {
+        $val = null;
+        require(ROOT.'views/createArtist.php');
+    }
+
+    public function list ()
+    {
+        $artists = $this->dao->readAll();
+        require(ROOT.'views/listArtists.php');
+
+    }
+
 
     public function store($name)
     {
@@ -25,7 +38,9 @@ class ArtistController
 
         $this->dao->create($artist);
 
-        var_dump ($this->dao->readAll());
+        $val = "Artista Creado";
+
+        require(ROOT.'views/createArtist.php');
 
     }
 

@@ -17,13 +17,29 @@ class UserController
 
     }
 
+    public function add ()
+    {
+        $val = null;
+        require(ROOT.'views/createUser.php');
+    }
+
+    public function list ()
+    {
+        $users = $this->dao->readAll();
+        require(ROOT.'views/listUsers.php');
+
+    }
+
+
     public function store($mail, $pass, $name, $lastname)
     {
-            $user = new User($mail, $pass, $name, $lastname);
+        $user = new User($mail, $pass, $name, $lastname);
 
         $this->dao->create($user);
 
-        var_dump ($this->dao->readAll());
+        $val = "Usuario Creado";
+
+        require(ROOT.'views/createUser.php');
 
     }
 

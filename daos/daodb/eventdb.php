@@ -22,6 +22,7 @@ class EventDb extends singleton implements IDao
        $sql = "INSERT INTO events (description,id_category) VALUES (:description,:id_category)";
 
           $parameters['description'] = $_event->getDescription();
+
           $parameters['id_category'] = $_event->getCategory();
 
           try {
