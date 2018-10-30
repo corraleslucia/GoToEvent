@@ -4,10 +4,6 @@ namespace views;
 include('header.php');
 include('navAdmin.php');
 
-use \daos\daodb\CategoryDb as Dao;
-
-$daoCategory = Dao::getInstance();
-$categories = $daoCategory->readAll();
 ?>
 
 <!DOCTYPE html>
@@ -17,14 +13,14 @@ $categories = $daoCategory->readAll();
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Alta Evento</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="css/normalize.css"/>
-  <link rel="stylesheet" type="text/css" media="screen" href="css/style.css"/>
+  <link rel="stylesheet" type="text/css" media="screen" href="<?php echo BASE ?>css/normalize.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="<?php echo BASE ?>css/style.css" />
 
 </head>
 <body>
   <section class="content">
     <h2 class="form-title">Alta de evento:</h2>
-    <form action="Event/store" method="POST" class="form-admin">
+    <form action="store" method="POST" class="form-admin">
         <div class="form-group">
         <label>Nombre: </label>
         <input type="text" name="ev-name">

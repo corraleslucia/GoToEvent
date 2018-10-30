@@ -8,8 +8,8 @@ namespace views;
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/normalize.css">
-    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo BASE ?>css/normalize.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="<?php echo BASE ?>css/style.css">
 </head>
 <body>
     <header class="general">

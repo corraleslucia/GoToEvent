@@ -3,23 +3,6 @@
 include('header.php');
 include('navAdmin.php');
 
-use \daos\daodb\SeatTypeDb as DaoSeatType;
-use \daos\daodb\CalendarDb as DaoCalendar;
-use \daos\daodb\EventDb as DaoEvent;
-use \daos\daodb\LocationDb as DaoLocation;
-
-$daoEvent = DaoEvent::getInstance();
-$events = $daoEvent->readAll();
-
-$daoSeatType = DaoSeatType::getInstance();
-$seatsTypes = $daoSeatType->readAll();
-
-$daoCalendar = DaoCalendar::getInstance();
-$calendars = $daoCalendar->readAll();
-
-$daoLocation = DaoLocation::getInstance();
-
-
 
 ?>
 
@@ -30,27 +13,20 @@ $daoLocation = DaoLocation::getInstance();
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Alta Plaza Evento</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="css/normalize.css"/>
-  <link rel="stylesheet" type="text/css" media="screen" href="css/style.css"/>
+  <link rel="stylesheet" type="text/css" media="screen" href="<?php echo BASE ?>css/normalize.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="<?php echo BASE ?>css/style.css" />
 
 </head>
 <body>
   <section class="content">
     <h2 class="form-title">Alta plaza evento:</h2>
-    <form action="EventSeat/store" method="POST" class="form-admin">
+    <form action="<?php echo BASE ?>eventseat/store" method="POST" class="form-admin">
 
         <div class="form-group">
-            <label>Calendario: </label>
-            <select class="form-control" name="id_calendar" required>
-                <?php foreach ($calendars as $key => $value)
-                {
-                    $location = $daoLocation->readID($value->getLocation());
-                    $event = $daoEvent->readID($value->getIdEvent());
-                    ?>
-                    <option value = "<?php echo $value->getId()?>"> <?php echo $event->getDescription() . " - " .  $value->getDate() . " - " . $location->getName()?> </option>
+            <label>Calendario:  <?php echo $event->getDescription() . " - " .  $_calendar->getDate() . " - " . $location->getName()?> </label>
 
-                <?php } ?>
-            </select>
+            <input type="hidden" name="id_calendar" value="<?php echo $_calendar->getId()?>" >
+
         </div>
 
         <div class="form-group">
@@ -78,7 +54,8 @@ $daoLocation = DaoLocation::getInstance();
 
 
 
-      <button type="submit" class ="category-button">Agregar plaza evento</button>
+      <button type="submit" name= "button" value="end" class ="category-button">Finalizar</button>
+      <button type="submit" name= "button" value="continue" class ="category-button">Agregar otra plaza evento</button>
     </form>
 
   </section>

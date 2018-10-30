@@ -12,8 +12,8 @@ include('navAdmin.php');
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <title>Alta Lugar Evento</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href="css/normalize.css"/>
-  <link rel="stylesheet" type="text/css" media="screen" href="css/style.css"/>
+  <link rel="stylesheet" type="text/css" media="screen" href="<?php echo BASE ?>css/normalize.css">
+  <link rel="stylesheet" type="text/css" media="screen" href="<?php echo BASE ?>css/style.css" />
 
 </head>
 <body>
