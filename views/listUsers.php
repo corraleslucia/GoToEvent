@@ -18,13 +18,13 @@ include(ROOT.'views/navAdmin.php');
 <body>
   <section class="content">
     <h3>USUARIOS</h3>
-    <div class="events-content">
+    <div class="container">
         <?php
             foreach ($users as $key => $value) {
 
         ?>
 
-        <div class="event">
+        <div class="element">
             <h4> EMAIL: <?php echo$value->getMail()?></h4>
             <h4> NOMBRE: <?php echo $value->getName()?></h4>
             <h4> APELLIDO: <?php echo $value->getLastName()?></h4>

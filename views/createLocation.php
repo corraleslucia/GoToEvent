@@ -23,8 +23,9 @@ include('navAdmin.php');
           <p> <?php echo $val; ?> </p>
       <?php }
       ?>
-    <h2 class="form-title">Alta de lugar de evento:</h2>
+    
     <form action="store" method="POST" class="form-admin form-med-size">
+      <h2 class="form-title">Alta de lugar de evento:</h2>
       <div class="form-group">
         <label>Nombre lugar: </label>
         <input type="text" name="loc-name" required>
@@ -39,8 +40,10 @@ include('navAdmin.php');
         <label>Ciudad: </label>
         <input type="text" name="loc-city" required>
       </div>
-
-      <button type="submit" class ="artist-button">Agregar lugar evento</button>
+      <div class="div-form-button">
+        <button type="submit" class ="form-button">Agregar lugar evento</button>
+      </div>
+      
     </form>
 
   </section>

@@ -24,7 +24,7 @@ class SeatTypeController
         require(ROOT.'views/createSeatType.php');
     }
 
-    public function list ()
+    public function _list ()
     {
         $seatTypes = $this->dao->readAll();
         require(ROOT.'views/listSeatTypes.php');

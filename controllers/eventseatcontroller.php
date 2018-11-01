@@ -48,7 +48,7 @@ class EventSeatController
 
     }
 
-    public function list ()
+    public function _list ()
     {
 
     }

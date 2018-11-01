@@ -19,7 +19,7 @@ include(ROOT.'views/navAdmin.php');
   <section class="content">
     <h3>PLAZAS EVENTO</h3>
 
-    <div class="events-content">
+    <div class="container">
         <br>
         <label>Evento: <?php echo $event->getDescription()?> </label>
         <br>
@@ -38,7 +38,7 @@ include(ROOT.'views/navAdmin.php');
                 }
         ?>
 
-        <div class="event">
+        <div class="element">
             <h4><?php echo "Tipo de plaza: "  . $_seatTypeName ?></h4>
             <h4><?php echo "Cantidad total: " . $value->getTotalQuantity()?></h4>
             <h4><?php echo "Precio: $ " . $value->getPrice()?></h4>

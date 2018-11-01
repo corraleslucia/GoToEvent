@@ -18,13 +18,13 @@ include(ROOT.'views/navAdmin.php');
 <body>
   <section class="content">
     <h3>Tipos de Plazas</h3>
-    <div class="events-content">
+    <div class="container">
         <?php
             foreach ($seatTypes as $key => $value) {
 
         ?>
 
-        <div class="event">
+        <div class="element">
             <h4><?php echo $value->getName()?></h4>
         </div>
 

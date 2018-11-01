@@ -17,7 +17,7 @@ include('navAdmin.php');
 
 </head>
 <body>
-  <section class="content">
+  <section class="content form-content">
 
       <?php if ($val)
       {?>
@@ -25,31 +25,34 @@ include('navAdmin.php');
       <?php }
       ?>
 
-    <h2 class="form-title">Alta de usuario:</h2>
+    
 
     <form action="store" method="POST" class="form-admin">
+        <h2 class="form-title">Alta de usuario:</h2>
         <div class="form-group">
-        <label>Mail: </label>
-        <input type="email" name="us_mail" required>
+          <label>Mail: </label>
+          <input class="input" type="email" name="us_mail" required>
         </div>
 
         <div class="form-group">
-        <label>Pass: </label>
-        <input type="password" name="us-pass" required>
+          <label>Pass: </label>
+          <input class="input" type="password" name="us-pass" required>
         </div>
 
         <div class="form-group">
-        <label>Nombre: </label>
-        <input type="text" name="us-name" required>
+          <label>Nombre: </label>
+          <input class="input" type="text" name="us-name" required>
         </div>
 
         <div class="form-group">
-        <label>Apellido: </label>
-        <input type="text" name="us-lastname" required>
+          <label>Apellido: </label>
+          <input class="input" type="text" name="us-lastname" required>
         </div>
 
-
-      <button type="submit" class ="user-button">Agregar usuario</button>
+        <div class="div-form-button">
+          <button type="submit" class ="form-button">Agregar usuario</button>
+        </div>
+          
     </form>
 
   </section>

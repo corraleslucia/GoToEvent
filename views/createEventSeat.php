@@ -19,9 +19,9 @@ include('navAdmin.php');
 </head>
 <body>
   <section class="content">
-    <h2 class="form-title">Alta plaza evento:</h2>
+    
     <form action="<?php echo BASE ?>eventseat/store" method="POST" class="form-admin">
-
+        <h2 class="form-title">Alta plaza evento:</h2>
         <div class="form-group">
             <label>Calendario:  <?php echo $event->getDescription() . " - " .  $_calendar['0']->getDate() . " - " . $_calendar['0']->gettime() . " - " . $location->getName()?> </label>
 
@@ -53,9 +53,10 @@ include('navAdmin.php');
         </div>
 
 
-
-      <button type="submit" name= "button" value="end" class ="category-button">Finalizar</button>
-      <button type="submit" name= "button" value="continue" class ="category-button">Agregar otra plaza evento</button>
+        <div class="div-form-button">
+            <button type="submit" name= "button" value="continue" class ="form-button button-half">Agregar otra plaza evento</button>
+            <button type="submit" name= "button" value="end" class ="form-button button-half">Finalizar</button>
+        </div>
     </form>
 
   </section>

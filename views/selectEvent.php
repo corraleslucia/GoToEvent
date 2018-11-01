@@ -19,9 +19,9 @@ include('navAdmin.php');
 </head>
 <body>
   <section class="content">
-    <h2 class="form-title">Agregar Nuevo Calendario</h2>
+    
     <form action="<?php echo BASE ?>calendar/readEvent" method="POST" class="form-admin">
-
+        <h2 class="form-title">Agregar Nuevo Calendario</h2>
         <div class="form-group">
             <label>Evento: </label>
             <select class="form-control" name="id_event" required>
@@ -33,8 +33,10 @@ include('navAdmin.php');
                 <?php } ?>
             </select>
         </div>
-
-      <button type="submit" class ="event-button">Seleccionar Evento</button>
+      <div class="div-form-button">
+        <button type="submit" class ="form-button">Seleccionar Evento</button>
+      </div>
+      
     </form>
 
   </section>

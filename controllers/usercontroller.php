@@ -23,7 +23,7 @@ class UserController
         require(ROOT.'views/createUser.php');
     }
 
-    public function list ()
+    public function _list ()
     {
         $users = $this->dao->readAll();
         require(ROOT.'views/listUsers.php');

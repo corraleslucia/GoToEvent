@@ -22,15 +22,17 @@ include('navAdmin.php');
           <p> <?php echo $val; ?> </p>
       <?php }
       ?>
-    <h2 class="form-title">Alta de artista:</h2>
+    
 
     <form action="store" method="POST" class="form-admin">
+      <h2 class="form-title">Alta de artista:</h2>
       <div class="form-group">
         <label>Nombre: </label>
         <input type="text" name="art-name" required>
       </div>
-
-      <button type="submit" class ="artist-button">Agregar artista</button>
+      <div class="div-form-button">
+        <button type="submit" class ="form-button">Agregar artista</button>
+      </div>
     </form>
 
   </section>

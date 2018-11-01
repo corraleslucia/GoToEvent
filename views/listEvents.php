@@ -18,7 +18,7 @@ include(ROOT.'views/navAdmin.php');
 <body>
   <section class="content">
     <h3>PROXIMOS EVENTOS</h3>
-    <div class="events-content">
+    <div class="container">
         <?php
             foreach ($events as $key => $value) {
                 foreach ($categories as $_key => $_value) {
@@ -28,10 +28,15 @@ include(ROOT.'views/navAdmin.php');
                     }
                 }
         ?>
-
-            <div class="event">
-            <a href="<?= BASE ?>event/showEventDetails/<?php echo $value->getId()?>"> <h4><?php echo $value->getDescription()?></h4> </a>
-            <div class="p-listev-art"><p>Categoria:<?php echo $_categoryName?></p></div>
+        <div class="element">
+            <a class="link-divs "href="<?= BASE ?>event/showEventDetails/<?php echo $value->getId()?>">
+                <div class="p-listev-art">
+                    <p><?php echo $value->getDescription()?></p> 
+                </div>
+                <div class="p-listev-art">
+                    <p>Categoria: <?php echo $_categoryName?></p>
+                </div>
+            </a>
         </div>
     <?php } ?>
     </div>

@@ -18,13 +18,13 @@ include(ROOT.'views/navAdmin.php');
 <body>
   <section class="content">
     <h3>LUGARES</h3>
-    <div class="events-content">
+    <div class="container">
         <?php
             foreach ($locations as $key => $value) {
 
         ?>
 
-        <div class="event">
+        <div class="element">
             <h4><?php echo $value->getName()?></h4>
             <div class="p-listev-art"><p>Direccion: <?php echo $value->getAdress()?> </p></div>
             <div class="p-listev-plc"><p>Ciudad: <?php echo $value->getCity()?> </p></div>

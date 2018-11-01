@@ -23,14 +23,17 @@ include('navAdmin.php');
           <p> <?php echo $val; ?> </p>
       <?php }
       ?>
-    <h2 class="form-title">Alta de tipo plaza:</h2>
+    
     <form action="store" method="POST" class="form-admin">
+      <h2 class="form-title">Alta de tipo plaza:</h2>
       <div class="form-group">
         <label>Nombre: </label>
         <input type="text" name="st-name" required>
       </div>
-
-      <button type="submit" class ="artist-button">Agregar tipo plaza</button>
+      <div class="div-form-button">
+        <button type="submit" class ="form-button">Agregar tipo plaza</button>
+      </div>
+      
     </form>
 
   </section>

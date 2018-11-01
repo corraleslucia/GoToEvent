@@ -60,7 +60,7 @@ class EventController
         require(ROOT.'views/createEvent.php');
     }
 
-    public function list ()
+    public function _list ()
     {
         $events = $this->dao->readAll();
         $categories = $this->daoCategory->readAll();

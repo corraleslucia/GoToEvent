@@ -19,8 +19,9 @@ include('navAdmin.php');
 </head>
 <body>
   <section class="content">
-    <h2 class="form-title">Alta de evento:</h2>
+    
     <form action="store" method="POST" class="form-admin">
+        <h2 class="form-title">Alta de evento:</h2>
         <div class="form-group">
         <label>Nombre: </label>
         <input type="text" name="ev-name">
@@ -38,8 +39,10 @@ include('navAdmin.php');
             </select>
 
         </div>
-
-      <button type="submit" class ="category-button">Agregar evento</button>
+      <div class="div-form-button">
+        <button type="submit" class ="form-button">Agregar evento</button>
+      </div>
+      
     </form>
 
   </section>

@@ -18,16 +18,17 @@ include('navAdmin.php');
 </head>
 <body>
   <section class="content">
-    <h2 class="form-title">Alta de calendario:</h2>
+    
     <form action="<?php echo BASE ?>calendar/store" method="POST" class="form-admin form-med-size">
+        <h2 class="form-title">Alta de calendario:</h2>
         <div class="form-group">
-        <label>Fecha: </label>
-        <input type="date" name="cal-date" required>
+            <label>Fecha: </label>
+            <input type="date" name="cal-date" required>
         </div>
 
         <div class="form-group">
-        <label>Hora: </label>
-        <input type="time" name="cal-time" required>
+            <label>Hora: </label>
+            <input type="time" name="cal-time" required>
         </div>
 
         <div class="form-group">
@@ -60,9 +61,9 @@ include('navAdmin.php');
 
         </div>
 
-
-      <button type="submit" class ="category-button">Agregar calendario</button>
-
+        <div class="div-form-button">             
+            <button type="submit" class ="form-button">Agregar calendario</button>
+        </div> 
     </form>
 
   </section>

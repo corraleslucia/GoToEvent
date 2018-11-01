@@ -24,7 +24,7 @@ class LocationController
         require(ROOT.'views/createLocation.php');
     }
 
-    public function list ()
+    public function _list ()
     {
         $locations = $this->dao->readAll();
         require(ROOT.'views/listLocations.php');

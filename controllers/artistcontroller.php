@@ -24,7 +24,7 @@ class ArtistController
         require(ROOT.'views/createArtist.php');
     }
 
-    public function list ()
+    public function _list()
     {
         $artists = $this->dao->readAll();
         require(ROOT.'views/listArtists.php');

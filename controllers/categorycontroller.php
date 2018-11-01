@@ -24,7 +24,7 @@ class CategoryController
         require(ROOT.'views/createCategory.php');
     }
 
-    public function list ()
+    public function _list ()
     {
         $categories = $this->dao->readAll();
         require(ROOT.'views/listCategories.php');

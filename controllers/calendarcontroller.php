@@ -57,7 +57,7 @@ class CalendarController
     }
 
 
-    public function list ()
+    public function _list ()
     {
 
     }

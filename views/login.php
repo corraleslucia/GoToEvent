@@ -27,6 +27,9 @@ namespace views;
             <label>Contraseña: </label>
             <input type="password" name="pass">
         </div>
+        <div>
+          <a href="">Registrarse</a>
+        </div>
 
 
       <button type="submit" class ="category-button">Iniciar Sesion</button>

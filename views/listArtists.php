@@ -18,14 +18,16 @@ include(ROOT.'views/navAdmin.php');
 <body>
   <section class="content">
     <h3>ARTISTAS</h3>
-    <div class="events-content">
+    <div class="container">
         <?php
             foreach ($artists as $key => $value) {
 
         ?>
 
-        <div class="event">
+        <div class="element">
+          <a class="link-divs" href="">
             <h4><?php echo $value->getName()?></h4>
+          </a>
         </div>
 
 

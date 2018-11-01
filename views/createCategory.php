@@ -23,14 +23,17 @@ include('navAdmin.php');
           <p> <?php echo $val; ?> </p>
       <?php }
       ?>
-    <h2 class="form-title">Alta de categoria:</h2>
+    
     <form action="store" method="POST" class="form-admin">
+      <h2 class="form-title">Alta de categoria:</h2>
       <div class="form-group">
         <label>Descripcion: </label>
         <input type="text" name="cat-name" required>
       </div>
-
-      <button type="submit" class ="category-button">Agregar categoria</button>
+      
+      <div class="div-form-button">
+        <button type="submit" class ="form-button">Agregar categoria</button>
+      </div>
     </form>
 
   </section>
