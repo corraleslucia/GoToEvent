@@ -81,6 +81,27 @@ class EventSeatDb extends singleton implements IDao
                return false;
      }
 
+     public function readAllFromCalendar ($calendarId)
+     {
+         $sql = "SELECT * FROM event_seats where id_calendar = :id_calendar";
+
+         $parameters['id_calendar'] = $calendarId;
+
+         try {
+              $this->connection = Connection::getInstance();
+              $resultSet = $this->connection->execute($sql, $parameters);
+         } catch(Exception $ex) {
+             throw $ex;
+         }
+
+
+         if(!empty($resultSet))
+              return $this->mapear($resultSet);
+         else
+              return false;
+
+     }
+
 
      /**
       *
@@ -147,9 +168,10 @@ class EventSeatDb extends singleton implements IDao
            return new M_EventSeat($p['id_seat_type'], $p['total_quantity'], $p['price'], $p['id_calendar'], $p['remaning_quantity'], $p['id_event_seat']);
        }, $value);
 
-          return count($resp) > 1 ? $resp : $resp['0'];
+          return count($resp) > 0 ? $resp : $resp['0'];
 
    }
+
 }
 
 

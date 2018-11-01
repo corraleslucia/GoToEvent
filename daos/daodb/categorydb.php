@@ -76,6 +76,30 @@ use daos\daodb\Connection as Connection;
                     return false;
           }
 
+          /**
+           *
+           */
+          public function readId($id) {
+
+               $sql = "SELECT * FROM categories where id_category = :id_category";
+
+               $parameters['id_category'] = $id;
+
+               try {
+                    $this->connection = Connection::getInstance();
+                    $resultSet = $this->connection->execute($sql, $parameters);
+               } catch(Exception $ex) {
+                   throw $ex;
+               }
+
+
+               if(!empty($resultSet))
+                    return $this->mapear($resultSet);
+               else
+                    return false;
+          }
+
+
 
           /**
            *

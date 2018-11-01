@@ -18,13 +18,30 @@ class LocationController
 
     }
 
+    public function add ()
+    {
+        $val = null;
+        require(ROOT.'views/createLocation.php');
+    }
+
+    public function list ()
+    {
+        $locations = $this->dao->readAll();
+        require(ROOT.'views/listLocations.php');
+
+    }
+
+
     public function store($name, $adress, $city)
     {
         $location = new Location($name, $adress, $city);
 
         $this->dao->create($location);
 
-        var_dump ($this->dao->readAll());
+        $val = "Lugar Creado";
+
+        require(ROOT.'views/createLocation.php');
+
 
     }
 

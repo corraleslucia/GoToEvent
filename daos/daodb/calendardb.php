@@ -67,6 +67,33 @@ use daos\daodb\Connection as Connection;
                      return false;
            }
 
+           /**
+            *
+            */
+            public function readFromEvent($id_event)
+            {
+
+                 $sql = "SELECT * FROM calendars where id_event = :id_event";
+
+
+                 $parameters['id_event'] = $id_event;
+
+
+                 try {
+                      $this->connection = Connection::getInstance();
+                      $resultSet = $this->connection->execute($sql, $parameters);
+                 } catch(Exception $ex) {
+                     throw $ex;
+                 }
+
+
+                 if(!empty($resultSet))
+                      return $this->mapear($resultSet);
+                 else
+                      return false;
+            }
+
+
          /* public function read($_readInfo) {
 
                $calendar_date = $_readInfo['date'];
@@ -208,7 +235,7 @@ use daos\daodb\Connection as Connection;
 				return new M_Calendar($p['calendar_date'], $p['calendar_time'], $p['id_location'], null, $p['id_event'], $p['id_calendar']);
 			}, $value);
 
-               return count($resp) > 1 ? $resp : $resp['0'];
+               return count($resp) > 0 ? $resp : $resp['0'];
 
 		}
      }

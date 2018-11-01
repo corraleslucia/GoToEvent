@@ -76,6 +76,30 @@ use daos\daodb\Connection as Connection;
                     return false;
           }
 
+          /**
+           *
+           */
+
+           public function readId($id) {
+
+                $sql = "SELECT * FROM seats_type where id_event = :id_event";
+
+                $parameters['id_event'] = $id;
+
+                try {
+                     $this->connection = Connection::getInstance();
+                     $resultSet = $this->connection->execute($sql, $parameters);
+                } catch(Exception $ex) {
+                    throw $ex;
+                }
+
+
+                if(!empty($resultSet))
+                     return $this->mapear($resultSet);
+                else
+                     return false;
+           }
+
 
           /**
            *
@@ -142,7 +166,7 @@ use daos\daodb\Connection as Connection;
 				return new M_SeatType($p['name'], $p['id_seats_type']);
 			}, $value);
 
-               return count($resp) > 1 ? $resp : $resp['0'];
+               return count($resp) > 0 ? $resp : $resp['0'];
 
 		}
      }
