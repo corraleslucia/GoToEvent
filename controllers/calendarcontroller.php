@@ -4,6 +4,7 @@ use daos\daodb\CalendarDb as Dao;
 use daos\daodb\ArtistsXCalendarsDb as DaoAC;
 use \daos\daodb\LocationDb as DaoLocation;
 use \daos\daodb\ArtistDb as DaoArtist;
+use \daos\daodb\EventDb as DaoEvent;
 
 use controllers\EventSeatController as C_EventSeat;
 
@@ -11,6 +12,7 @@ use models\Calendar;
 use models\ArtistInCalendar;
 use models\Artist;
 use models\Location;
+use models\Event;
 
 
 
@@ -21,6 +23,7 @@ class CalendarController
     protected $daoArtist;
     protected $daoLocation;
     protected $eventSeatController;
+    protected $daoEvent;
 
     public function __construct()
     {
@@ -28,6 +31,7 @@ class CalendarController
         $this->dao= Dao::getInstance();
         $this->daoAC= DaoAC::getInstance();
         $this->daoLocation= DaoLocation::getInstance();
+        $this->daoEvent= DaoEvent::getInstance();
         $this->daoArtist= DaoArtist::getInstance();
     }
 
@@ -38,12 +42,20 @@ class CalendarController
 
     public function add ($event)
     {
+
         $val = null;
         $artists = $this->daoArtist->readAll();
         $locations = $this->daoLocation->readAll();
         require(ROOT.'views/createCalendar.php');
 
     }
+
+    public function readEvent ($id_event)
+    {
+        $event = $this->daoEvent->readId($id_event);
+        $this->add ($event);
+    }
+
 
     public function list ()
     {
@@ -60,11 +72,11 @@ class CalendarController
         $readInfo['id_event'] = $id_event;
         $readInfo['id_location'] = $id_location;
 
-        $_calendar = $this->dao->read($readInfo);
+        $_calendar= $this->dao->read($readInfo);
 
         foreach ($_artists as $key => $value)
         {
-            $_artistInCalendar = new ArtistInCalendar($value, $_calendar->getId());
+            $_artistInCalendar = new ArtistInCalendar($value, $_calendar['0']->getId());
             $this->daoAC->create($_artistInCalendar);
         }
 

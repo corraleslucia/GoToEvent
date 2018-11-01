@@ -18,8 +18,13 @@ include('navAdmin.php');
 </head>
 <body>
   <section class="content">
+      <?php if ($val)
+      {?>
+          <p> <?php echo $val; ?> </p>
+      <?php }
+      ?>
     <h2 class="form-title">Alta de lugar de evento:</h2>
-    <form action="Location/store" method="POST" class="form-admin form-med-size">
+    <form action="store" method="POST" class="form-admin form-med-size">
       <div class="form-group">
         <label>Nombre lugar: </label>
         <input type="text" name="loc-name" required>

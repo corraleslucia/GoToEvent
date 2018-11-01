@@ -23,9 +23,9 @@ include('navAdmin.php');
     <form action="<?php echo BASE ?>eventseat/store" method="POST" class="form-admin">
 
         <div class="form-group">
-            <label>Calendario:  <?php echo $event->getDescription() . " - " .  $_calendar->getDate() . " - " . $location->getName()?> </label>
+            <label>Calendario:  <?php echo $event->getDescription() . " - " .  $_calendar['0']->getDate() . " - " . $_calendar['0']->gettime() . " - " . $location->getName()?> </label>
 
-            <input type="hidden" name="id_calendar" value="<?php echo $_calendar->getId()?>" >
+            <input type="hidden" name="id_calendar" value="<?php echo $_calendar['0']->getId()?>" >
 
         </div>
 

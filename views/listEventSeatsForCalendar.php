@@ -18,19 +18,31 @@ include(ROOT.'views/navAdmin.php');
 <body>
   <section class="content">
     <h3>PLAZAS EVENTO</h3>
+
     <div class="events-content">
+        <br>
+        <label>Evento: <?php echo $event->getDescription()?> </label>
+        <br>
+        <label>Fecha: <?php echo $_calendar['0']->getDate() . " - " . $_calendar['0']->getTime()?> </label>
+        <br>
+        <label>Lugar: <?php echo $location->getName()?> </label>
+        <br>
+
         <?php
             foreach ($eventSeats as $key => $value) {
-
+                foreach ($_seatsType as $_key => $_value) {
+                    if ($value->getSeatType() === $_value->getId())
+                    {
+                        $_seatTypeName = $_value->getName();
+                    }
+                }
         ?>
 
         <div class="event">
-            <h4><?php echo $value->getSeatType()?></h4>
-            <h4><?php echo $value->getTotalQuantity()?></h4>
-            <h4><?php echo $value->getPrice()?></h4>
+            <h4><?php echo "Tipo de plaza: "  . $_seatTypeName ?></h4>
+            <h4><?php echo "Cantidad total: " . $value->getTotalQuantity()?></h4>
+            <h4><?php echo "Precio: $ " . $value->getPrice()?></h4>
         </div>
-
-
     <?php } ?>
     </div>
 

@@ -60,6 +60,29 @@ use daos\daodb\Connection as Connection;
           /**
            *
            */
+          public function readId($id) {
+
+               $sql = "SELECT * FROM artists where id_artist = :id_artist";
+
+               $parameters['id_artist'] = $id;
+
+               try {
+                    $this->connection = Connection::getInstance();
+                    $resultSet = $this->connection->execute($sql, $parameters);
+               } catch(Exception $ex) {
+                   throw $ex;
+               }
+
+
+               if(!empty($resultSet))
+                    return $this->mapear($resultSet);
+               else
+                    return false;
+          }
+
+          /**
+           *
+           */
           public function readAll() {
                $sql = "SELECT * FROM artists";
 
@@ -142,7 +165,7 @@ use daos\daodb\Connection as Connection;
 				return new M_Artist($p['name'], $p['id_artist']);
 			}, $value);
 
-               return count($resp) > 1 ? $resp : $resp['0'];
+               return count($resp) > 0 ? $resp : $resp['0'];
 
 		}
      }
