@@ -39,24 +39,34 @@ use daos\daodb\Connection as Connection;
           /**
            *
            */
+          public function readAllArtistsFromCalendar($id_calendar) {
+
+              $sql = "SELECT * FROM artists_in_calendars where id_calendar = :id_calendar";
+
+
+              $parameters['id_calendar'] = $id_calendar;
+
+
+              try {
+                   $this->connection = Connection::getInstance();
+                   $resultSet = $this->connection->execute($sql, $parameters);
+              } catch(Exception $ex) {
+                  throw $ex;
+              }
+
+
+              if(!empty($resultSet))
+                   return $this->mapear($resultSet);
+              else
+                   return false;
+          }
+
+          /**
+           *
+           */
           public function read($_info) {
 
-               $sql = "SELECT * FROM  where name = :name";
 
-               $parameters['name'] = $_name;
-
-               try {
-                    $this->connection = Connection::getInstance();
-                    $resultSet = $this->connection->execute($sql, $parameters);
-               } catch(Exception $ex) {
-                   throw $ex;
-               }
-
-
-               if(!empty($resultSet))
-                    return $this->mapear($resultSet);
-               else
-                    return false;
           }
 
 
@@ -145,7 +155,7 @@ use daos\daodb\Connection as Connection;
 				return new M_ArtistInCalendar($p['id_artist'], $p['id_calendar']);
 			}, $value);
 
-               return count($resp) > 1 ? $resp : $resp['0'];
+               return count($resp) > 0 ? $resp : $resp['0'];
 
 		}
      }

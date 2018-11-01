@@ -150,7 +150,7 @@ use daos\daodb\Connection as Connection;
 				return new M_User($p['mail'], $p['pass'], $p['name'], $p['last_name'], $p['user_type'], $p['id_user']);
 			}, $value);
 
-               return count($resp) > 1 ? $resp : $resp['0'];
+               return count($resp) > 0 ? $resp : $resp['0'];
 
 		}
      }

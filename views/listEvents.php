@@ -20,9 +20,16 @@ include(ROOT.'views/navAdmin.php');
     <h3>PROXIMOS EVENTOS</h3>
     <div class="events-content">
         <?php
-        /* aca va un forEach con los divs "event" que sean necesarios*/
+            foreach ($events as $key => $value) {
+                foreach ($categories as $_key => $_value) {
+                    if ($value->getCategory() === $_value->getId())
+                    {
+                        $_categoryName = $_value->getDescription();
+                    }
+                }
         ?>
 
+<<<<<<< HEAD
         <div class="event">
             <a class="link-divs" href="">
                 <h4>Ricky Martin vuelve con todo</h4>
@@ -46,7 +53,13 @@ include(ROOT.'views/navAdmin.php');
                 <div class="p-listev-plc"><p>Lugar: Teatro Gran Rex</p></div>
                 <div class="p-listev-date"><p>1/11/2018</p></div>
             </a>
+=======
+            <div class="event">
+            <a href="<?= BASE ?>event/showEventDetails/<?php echo $value->getId()?>"> <h4><?php echo $value->getDescription()?></h4> </a>
+            <div class="p-listev-art"><p>Categoria:<?php echo $_categoryName?></p></div>
+>>>>>>> master
         </div>
+    <?php } ?>
     </div>
 
   </section>

@@ -40,8 +40,8 @@ class EventSeatController
     {
         $val = null;
 
-        $location = $this->daoLocation->readID($_calendar->getLocation());
-        $event = $this->daoEvent->readID($_calendar->getIdEvent());
+        $location = $this->daoLocation->readID($_calendar['0']->getLocation());
+        $event = $this->daoEvent->readID($_calendar['0']->getIdEvent());
         $seatsTypes = $this->daoSeatType->readAll();
 
         require(ROOT.'views/createEventSeat.php');
@@ -59,9 +59,11 @@ class EventSeatController
 
         $this->dao->create($eventSeat);
 
+        $_calendar = $this->daoCalendar->readID($calendar);
+
+
         if ($buttonAction === "continue")
         {
-            $_calendar = $this->daoCalendar->readID($calendar);
 
             $this->add($_calendar);
 
@@ -70,8 +72,17 @@ class EventSeatController
         {
             $val = "Plaza Creada.";
 
-            $eventSeats = $this->dao->readAll();
-            require(ROOT.'views/listEventSeats.php');
+            $location = $this->daoLocation->readID($_calendar['0']->getLocation());
+
+            $event = $this->daoEvent->readID($_calendar['0']->getIdEvent());
+
+            $_seatsType = $this->daoSeatType->readAll();
+
+
+            $eventSeats = $this->dao->readAllFromCalendar($_calendar['0']->getId());
+
+
+            require(ROOT.'views/listEventSeatsForCalendar.php');
         }
     }
 }
