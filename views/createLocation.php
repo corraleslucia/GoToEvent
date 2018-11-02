@@ -1,8 +1,8 @@
 <?php
 namespace views;
 
-include('header.php');
-include('navAdmin.php');
+include(ROOT.'views/headerAdmin.php');
+include(ROOT.'views/navAdmin.php');
 ?>
 
 <!DOCTYPE html>
@@ -27,18 +27,18 @@ include('navAdmin.php');
     <form action="store" method="POST" class="form-admin form-med-size">
       <h2 class="form-title">Alta de lugar de evento:</h2>
       <div class="form-group">
-        <label>Nombre lugar: </label>
-        <input type="text" name="loc-name" required>
+        <label class="label-l">Nombre lugar: </label>
+        <input class="input-s" type="text" name="loc-name" required>
       </div>
 
       <div class="form-group">
-        <label>Direccion: </label>
-        <input type="text" name="loc-adress" required>
+        <label class="label-l" >Direccion: </label>
+        <input class="input-s" type="text" name="loc-adress" required>
       </div>
 
       <div class="form-group">
-        <label>Ciudad: </label>
-        <input type="text" name="loc-city" required>
+        <label class="label-l" >Ciudad: </label>
+        <input class="input-s" type="text" name="loc-city" required>
       </div>
       <div class="div-form-button">
         <button type="submit" class ="form-button">Agregar lugar evento</button>

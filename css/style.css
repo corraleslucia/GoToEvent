@@ -43,7 +43,7 @@ section {
 
 .form-group {
     margin-top: 10px;
-    padding-left: 15%;
+    padding-left: 10%;
 }
 
 .form-admin h2,
@@ -70,6 +70,28 @@ section {
     background: rgb(252, 179, 44);
     transition-property: background;
     transition-duration: .5s;
+}
+
+.label {
+    display: inline-block;
+    width: 90px;
+}
+
+.label-l {
+    display: inline-block;
+    width: 120px;
+}
+
+.input-s {
+    display: inline-block;
+    width: 60%;
+    border-radius: 4px;
+}
+
+.input {
+    display: inline-block;
+    width: 70%;
+    border-radius: 4px;
 }
 
 .button-half {
@@ -106,10 +128,17 @@ header.general{
     border-right: 1px solid rgba(150, 139, 139, 0.7);
 }
 .column2 img{
-    width: 70%;
+    width: 85%;
     height:auto;
     display: inline-block;
-    margin: 5px 8px;
+    margin: 0px 3px;
+}
+
+.column2.admin img {
+    width: 65%;
+    height:auto;
+    display: inline-block;
+    margin: 4px 10px;
 }
 .column2 a{
     width: 100%;
@@ -124,7 +153,10 @@ header.general{
 
 .column3{
     width: 30%;
-    
+}
+
+.column3.admin {
+    width: 25%;
 }
 .column3 h3{
     margin-top: 0%;
@@ -231,6 +263,25 @@ a {
     transition-property: background-color, color;
     transition-duration: 1s;
 }
+
+.column3-bot {
+    text-align: center;
+}
+
+.column3-bot a {
+    display: inline-block;
+    text-decoration: none;
+    width: 100%;
+    height: 25px;
+    padding-top: 4px;
+    color: #FFF;
+}
+
+.column3-bot a:hover {
+    background-color: rgb(145, 143, 143);
+    color: #272626;
+}
+
 
 /* LISTAR EVENTOS */
 

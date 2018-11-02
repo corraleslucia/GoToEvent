@@ -1,8 +1,8 @@
 <?php
 namespace views;
 
-include('header.php');
-include('navAdmin.php');
+include(ROOT.'views/headerAdmin.php');
+include(ROOT.'views/navAdmin.php');
 
 ?>
 
@@ -23,12 +23,12 @@ include('navAdmin.php');
     <form action="store" method="POST" class="form-admin">
         <h2 class="form-title">Alta de evento:</h2>
         <div class="form-group">
-        <label>Nombre: </label>
-        <input type="text" name="ev-name">
+        <label class="label" >Nombre: </label>
+        <input class="input" type="text" name="ev-name" required>
         </div>
 
         <div class="form-group">
-            <label for="">Categoria</label>
+            <label class="label" for="">Categoria</label>
             <select class="form-control" name="id_category" required>
                 <?php foreach ($categories as $key => $value)
                 {

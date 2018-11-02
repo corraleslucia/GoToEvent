@@ -1,8 +1,8 @@
 <?php
 namespace views;
 
-include('header.php');
-include('navAdmin.php');
+include(ROOT.'views/headerAdmin.php');
+include(ROOT.'views/navAdmin.php');
  ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -27,8 +27,8 @@ include('navAdmin.php');
     <form action="store" method="POST" class="form-admin">
       <h2 class="form-title">Alta de artista:</h2>
       <div class="form-group">
-        <label>Nombre: </label>
-        <input type="text" name="art-name" required>
+        <label class="label" >Nombre: </label>
+        <input class="input" type="text" name="art-name" required>
       </div>
       <div class="div-form-button">
         <button type="submit" class ="form-button">Agregar artista</button>

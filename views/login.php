@@ -16,23 +16,26 @@ namespace views;
 <body>
   <section class="content">
 
-    <h2 class="form-title">Login</h2>
+    
     <form action="User/login" method="POST" class="form-login">
-        <div class="form-group">
-            <label>E-mail: </label>
-            <input type="email" name="mail">
-        </div>
+    <h2 class="form-title">Login</h2>
+      <div class="form-group">
+          <label class="label">E-mail: </label>
+          <input class="input" type="email" name="mail">
+      </div>
 
-        <div class="form-group">
-            <label>Contraseña: </label>
-            <input type="password" name="pass">
-        </div>
-        <div>
-          <a href="">Registrarse</a>
-        </div>
+      <div class="form-group">
+          <label class="label">Contraseña: </label>
+          <input class="input" type="password" name="pass">
+      </div>
+    
+      <div class="div-form-button">
+        <button type="submit" class ="form-button">Iniciar Sesion</button>
+      </div>
 
-
-      <button type="submit" class ="category-button">Iniciar Sesion</button>
+      <div style="text-align:center">
+        <p>No estas resgitrado? <a href="user/register">Registrate aquí</a></p>
+      </div>
     </form>
 
   </section>

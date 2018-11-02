@@ -1,7 +1,7 @@
 <?php namespace views;
 
-include('header.php');
-include('navAdmin.php');
+include(ROOT.'views/headerAdmin.php');
+include(ROOT.'views/navAdmin.php');
 
 ?>
 
@@ -22,12 +22,12 @@ include('navAdmin.php');
     <form action="<?php echo BASE ?>calendar/store" method="POST" class="form-admin form-med-size">
         <h2 class="form-title">Alta de calendario:</h2>
         <div class="form-group">
-            <label>Fecha: </label>
+            <label class="label">Fecha: </label>
             <input type="date" name="cal-date" required>
         </div>
 
         <div class="form-group">
-            <label>Hora: </label>
+            <label class="label">Hora: </label>
             <input type="time" name="cal-time" required>
         </div>
 
@@ -38,7 +38,7 @@ include('navAdmin.php');
         </div>
 
         <div class="form-group">
-            <label>Lugar: </label>
+            <label class="label">Lugar: </label>
             <select class="form-control" name="id_location" required>
                 <?php foreach ($locations as $key => $value)
                 {

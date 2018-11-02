@@ -1,8 +1,8 @@
 <?php
 namespace views;
 
-include('header.php');
-include('navAdmin.php');
+include(ROOT.'views/headerAdmin.php');
+include(ROOT.'views/navAdmin.php');
 ?>
 
 <!DOCTYPE html>
@@ -27,8 +27,8 @@ include('navAdmin.php');
     <form action="store" method="POST" class="form-admin">
       <h2 class="form-title">Alta de categoria:</h2>
       <div class="form-group">
-        <label>Descripcion: </label>
-        <input type="text" name="cat-name" required>
+        <label class="label-l" >Descripcion: </label>
+        <input class="input-s" type="text" name="cat-name" required>
       </div>
       
       <div class="div-form-button">

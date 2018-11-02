@@ -1,6 +1,6 @@
 <?php
 namespace views;
-include(ROOT.'views/header.php');
+include(ROOT.'views/headerAdmin.php');
 include(ROOT.'views/navAdmin.php');
  ?>
 
@@ -31,7 +31,7 @@ include(ROOT.'views/navAdmin.php');
         <div class="element">
             <a class="link-divs "href="<?= BASE ?>event/showEventDetails/<?php echo $value->getId()?>">
                 <div class="p-listev-art">
-                    <p><?php echo $value->getDescription()?></p> 
+                    <p style="font-size:22px"><b><?php echo $value->getDescription()?></b></p> 
                 </div>
                 <div class="p-listev-art">
                     <p>Categoria: <?php echo $_categoryName?></p>

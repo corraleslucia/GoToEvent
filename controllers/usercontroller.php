@@ -20,6 +20,12 @@ class UserController
     public function add ()
     {
         $val = null;
+        require(ROOT.'views/createUserAdmin.php');
+    }
+
+    public function register ()
+    {
+        $val = null;
         require(ROOT.'views/createUser.php');
     }
 

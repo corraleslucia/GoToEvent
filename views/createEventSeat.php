@@ -1,7 +1,7 @@
 <?php namespace views;
 
-include('header.php');
-include('navAdmin.php');
+include(ROOT.'views/headerAdmin.php');
+include(ROOT.'views/navAdmin.php');
 
 
 ?>
@@ -25,12 +25,12 @@ include('navAdmin.php');
         <div class="form-group">
             <label>Calendario:  <?php echo $event->getDescription() . " - " .  $_calendar['0']->getDate() . " - " . $_calendar['0']->gettime() . " - " . $location->getName()?> </label>
 
-            <input type="hidden" name="id_calendar" value="<?php echo $_calendar['0']->getId()?>" >
+            <input class="input" type="hidden" name="id_calendar" value="<?php echo $_calendar['0']->getId()?>" >
 
         </div>
 
         <div class="form-group">
-            <label>Tipo de plaza: </label>
+            <label class="label" >Tipo de plaza: </label>
             <select class="form-control" name="id_seatType" required>
                 <?php foreach ($seatsTypes as $key => $value)
                 {
@@ -43,13 +43,13 @@ include('navAdmin.php');
 
 
         <div class="form-group">
-            <label>Cantidad total: </label>
-            <input type="number" name="ev-seat-cant" required>
+            <label class="label">Cantidad total: </label>
+            <input class="input" type="number" name="ev-seat-cant" required>
         </div>
 
         <div class="form-group">
-            <label>Precio: </label>
-            <input type="number" name="ev-seat-price" required>
+            <label class="label" >Precio: </label>
+            <input class="input" type="number" name="ev-seat-price" required>
         </div>
 
 
