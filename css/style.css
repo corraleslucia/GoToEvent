@@ -219,9 +219,16 @@ header.general{
 .nav {
     margin: 0;
 }
-.nav > li {
+
+.nav-bar-admin .nav > li {
     float:left;
     width: 185px;
+    text-align: center;
+}
+
+.nav-bar-user .nav > li {
+    float:left;
+    width: 310px;
     text-align: center;
 }
 
@@ -244,10 +251,16 @@ ul {
     color: #272626;
 }
 
-.nav li ul {
+.nav-bar-admin .nav li ul {
     display:none;
     position:absolute;
     width: 185px;
+}
+
+.nav-bar-user .nav li ul {
+    display:none;
+    position:absolute;
+    width: 310px;
 }
 
 .nav li:hover > ul {
