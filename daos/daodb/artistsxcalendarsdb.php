@@ -41,7 +41,7 @@ use daos\daodb\Connection as Connection;
            */
           public function readAllArtistsFromCalendar($id_calendar) {
 
-              $sql = "SELECT * FROM artists_in_calendars where id_calendar = :id_calendar";
+              $sql = "SELECT id_calendar, a.name as id_artist FROM artists_in_calendars aic inner join artists a on aic.id_artist = a.id_artist  where id_calendar = :id_calendar";
 
 
               $parameters['id_calendar'] = $id_calendar;

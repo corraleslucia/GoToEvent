@@ -65,7 +65,7 @@ class EventDb extends singleton implements IDao
 
       public function readId($id) {
 
-           $sql = "SELECT * FROM events where id_event = :id_event";
+           $sql = "SELECT e.description as description, c.description as id_category, e.id_event as id_event FROM events e inner join categories c on e.id_category = c.id_category where e.id_event = :id_event";
 
            $parameters['id_event'] = $id;
 
@@ -87,7 +87,7 @@ class EventDb extends singleton implements IDao
       *
       */
      public function readAll() {
-          $sql = "SELECT * FROM events";
+          $sql = "SELECT e.description as description, c.description as id_category, e.id_event as id_event FROM events e inner join categories c on e.id_category = c.id_category";
 
           try {
                $this->connection = Connection::getInstance();

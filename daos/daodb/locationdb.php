@@ -19,9 +19,10 @@ use daos\daodb\Connection as Connection;
           public function create($_location) {
 
                // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
-			$sql = "INSERT INTO locations (name,adress,city) VALUES (:name, :adress, :city)";
+			$sql = "INSERT INTO locations (name,capacity,adress,city) VALUES (:name, :capacity, :adress, :city)";
 
                $parameters['name'] = $_location->getName();
+               $parameters['capacity'] = $_location->getCapacity();
                $parameters['adress'] = $_location->getAdress();
                $parameters['city'] = $_location->getCity();
 
@@ -166,7 +167,7 @@ use daos\daodb\Connection as Connection;
 			$value = is_array($value) ? $value : [];
 
 			$resp = array_map(function($p){
-				return new M_Location($p['name'],$p['adress'], $p['city'], $p['id_location']);
+				return new M_Location($p['name'],$p['capacity'], $p['adress'], $p['city'], $p['id_location']);
 			}, $value);
 
                return count($resp) > 1 ? $resp : $resp['0'];

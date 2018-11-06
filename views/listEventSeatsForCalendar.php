@@ -21,25 +21,20 @@ include(ROOT.'views/navAdmin.php');
 
     <div class="container">
         <br>
-        <label>Evento: <?php echo $event->getDescription()?> </label>
+        <label>Evento: <?php echo $_calendar['0']->getIdEvent()?> </label>
         <br>
         <label>Fecha: <?php echo $_calendar['0']->getDate() . " - " . $_calendar['0']->getTime()?> </label>
         <br>
-        <label>Lugar: <?php echo $location->getName()?> </label>
+        <label>Lugar: <?php echo $_calendar['0']->getLocation()?> </label>
         <br>
 
         <?php
             foreach ($eventSeats as $key => $value) {
-                foreach ($_seatsType as $_key => $_value) {
-                    if ($value->getSeatType() === $_value->getId())
-                    {
-                        $_seatTypeName = $_value->getName();
-                    }
-                }
+
         ?>
 
         <div class="element">
-            <h4><?php echo "Tipo de plaza: "  . $_seatTypeName ?></h4>
+            <h4><?php echo "Tipo de plaza: "  . $value->getSeatType() ?></h4>
             <h4><?php echo "Cantidad total: " . $value->getTotalQuantity()?></h4>
             <h4><?php echo "Precio: $ " . $value->getPrice()?></h4>
         </div>

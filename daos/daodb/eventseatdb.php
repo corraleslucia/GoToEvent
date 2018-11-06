@@ -83,7 +83,7 @@ class EventSeatDb extends singleton implements IDao
 
      public function readAllFromCalendar ($calendarId)
      {
-         $sql = "SELECT * FROM event_seats where id_calendar = :id_calendar";
+         $sql = "SELECT se_t.name as id_seat_type, ev_s.total_quantity as total_quantity, ev_s.price as price, ev_s.id_calendar as id_calendar, ev_s.remaning_quantity as remaning_quantity, ev_s.id_event_seat as id_event_seat FROM event_seats ev_s inner join seats_type se_t on ev_s.id_seat_Type = se_t.id_seats_type where ev_s.id_calendar = :id_calendar";
 
          $parameters['id_calendar'] = $calendarId;
 

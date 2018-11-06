@@ -23,12 +23,16 @@ include(ROOT.'views/navAdmin.php');
           <p> <?php echo $val; ?> </p>
       <?php }
       ?>
-    
+
     <form action="store" method="POST" class="form-admin form-med-size">
       <h2 class="form-title">Alta de lugar de evento:</h2>
       <div class="form-group">
         <label class="label-l">Nombre lugar: </label>
         <input class="input-s" type="text" name="loc-name" required>
+      </div>
+      <div class="form-group">
+        <label class="label-l">Capacidad Maxima: </label>
+        <input class="input-s" type="text" name="loc-capacity" required>
       </div>
 
       <div class="form-group">
@@ -43,7 +47,7 @@ include(ROOT.'views/navAdmin.php');
       <div class="div-form-button">
         <button type="submit" class ="form-button">Agregar lugar evento</button>
       </div>
-      
+
     </form>
 
   </section>

@@ -1,6 +1,5 @@
 <?php namespace controllers;
 
-//use daos\daoList\ArtistDao as Dao;
 use daos\daodb\LocationDb as Dao;
 use models\Location;
 
@@ -32,9 +31,9 @@ class LocationController
     }
 
 
-    public function store($name, $adress, $city)
+    public function store($name, $capacity, $adress, $city)
     {
-        $location = new Location($name, $adress, $city);
+        $location = new Location($name, $capacity, $adress, $city);
 
         $this->dao->create($location);
 

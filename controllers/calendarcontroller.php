@@ -10,9 +10,7 @@ use controllers\EventSeatController as C_EventSeat;
 
 use models\Calendar;
 use models\ArtistInCalendar;
-use models\Artist;
-use models\Location;
-use models\Event;
+
 
 
 
