@@ -78,7 +78,9 @@ class CalendarController
             $this->daoAC->create($_artistInCalendar);
         }
 
-        $this->eventSeatController->add($_calendar);
+        $_location = $this->daoLocation->readId($id_location);
+
+        $this->eventSeatController->add($_calendar, $_location);
 
     }
 

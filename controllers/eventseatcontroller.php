@@ -27,7 +27,7 @@ class EventSeatController
     {
     }
 
-    public function add ($_calendar)
+    public function add ($_calendar, $_location)
     {
         $val = null;
 
@@ -40,6 +40,11 @@ class EventSeatController
     public function _list ()
     {
 
+    }
+
+    public function checkCapacity ()
+    {
+        
     }
 
     public function store($calendar,$seatType,$totalQuantity,$price,$buttonAction)

@@ -38,7 +38,6 @@ use daos\daodb\Connection as Connection;
           }
 
 
-
           /**
            *
            */
