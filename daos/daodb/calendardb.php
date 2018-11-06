@@ -47,7 +47,7 @@ use daos\daodb\Connection as Connection;
                $date = $_readInfo['date'];
                $time = $_readInfo['time'];
 
-                $sql = "SELECT * FROM calendars where id_event = :id_event and calendar_date = '$date' and calendar_time = '$time'";
+                $sql = "SELECT c.calendar_date as calendar_date, c.calendar_time as calendar_time, l.name as id_location, e.description as id_event, c.id_calendar as id_calendar FROM calendars c inner join locations l on c.id_location = l.id_location inner join events e on c.id_event = e.id_event where e.id_event = :id_event and c.calendar_date = '$date' and c.calendar_time = '$time'";
 
 
                 $parameters['id_event'] = $_readInfo['id_event'];
@@ -73,7 +73,7 @@ use daos\daodb\Connection as Connection;
             public function readFromEvent($id_event)
             {
 
-                 $sql = "SELECT * FROM calendars where id_event = :id_event";
+                 $sql = "SELECT c.calendar_date as calendar_date, c.calendar_time as calendar_time, l.name as id_location, e.description as id_event, c.id_calendar as id_calendar FROM calendars c inner join locations l on c.id_location = l.id_location inner join events e on c.id_event = e.id_event where e.id_event = :id_event";
 
 
                  $parameters['id_event'] = $id_event;
@@ -127,7 +127,7 @@ use daos\daodb\Connection as Connection;
            *
            */
           public function readAll() {
-               $sql = "SELECT * FROM calendars";
+               $sql = "SELECT c.calendar_date as calendar_date, c.calendar_time as calendar_time, l.name as id_location, e.description as id_event, c.id_calendar as id_calendar FROM calendars c inner join locations l on c.id_location = l.id_location inner join events e on c.id_event = e.id_event FROM calendars";
 
                try {
                     $this->connection = Connection::getInstance();
@@ -149,7 +149,7 @@ use daos\daodb\Connection as Connection;
 
            public function readId($id) {
 
-                $sql = "SELECT * FROM calendars where id_calendar = :id_calendar";
+                $sql = "SELECT  c.calendar_date as calendar_date, c.calendar_time as calendar_time, l.name as id_location, e.description as id_event, c.id_calendar as id_calendar FROM calendars c inner join locations l on c.id_location = l.id_location inner join events e on c.id_event = e.id_event where c.id_calendar = :id_calendar";
 
                 $parameters['id_calendar'] = $id;
 

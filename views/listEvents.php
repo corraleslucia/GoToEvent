@@ -21,20 +21,15 @@ include(ROOT.'views/navAdmin.php');
     <div class="container">
         <?php
             foreach ($events as $key => $value) {
-                foreach ($categories as $_key => $_value) {
-                    if ($value->getCategory() === $_value->getId())
-                    {
-                        $_categoryName = $_value->getDescription();
-                    }
-                }
+
         ?>
         <div class="element">
             <a class="link-divs "href="<?= BASE ?>event/showEventDetails/<?php echo $value->getId()?>">
                 <div class="p-listev-art">
-                    <p style="font-size:22px"><b><?php echo $value->getDescription()?></b></p> 
+                    <p style="font-size:22px"><b><?php echo $value->getDescription()?></b></p>
                 </div>
                 <div class="p-listev-art">
-                    <p>Categoria: <?php echo $_categoryName?></p>
+                    <p>Categoria: <?php echo $value->getCategory()?></p>
                 </div>
             </a>
         </div>

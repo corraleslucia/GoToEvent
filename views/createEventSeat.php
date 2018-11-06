@@ -19,11 +19,11 @@ include(ROOT.'views/navAdmin.php');
 </head>
 <body>
   <section class="content">
-    
+
     <form action="<?php echo BASE ?>eventseat/store" method="POST" class="form-admin">
         <h2 class="form-title">Alta plaza evento:</h2>
         <div class="form-group">
-            <label>Calendario:  <?php echo $event->getDescription() . " - " .  $_calendar['0']->getDate() . " - " . $_calendar['0']->gettime() . " - " . $location->getName()?> </label>
+            <label>Calendario:  <?php echo $_calendar['0']->getIdEvent(). " - " .  $_calendar['0']->getDate() . " - " . $_calendar['0']->gettime() . " - " . $_calendar['0']->getLocation()?> </label>
 
             <input class="input" type="hidden" name="id_calendar" value="<?php echo $_calendar['0']->getId()?>" >
 

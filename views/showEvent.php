@@ -23,29 +23,29 @@ include(ROOT.'views/navAdmin.php');
 
         <div class="container">
             <h2>Evento: <?php echo $event->getDescription()?> </h2>
-            <p>Categoria: <b><?php echo $category->getDescription()?></b> </p>
+            <p>Categoria: <b><?php echo $event->getCategory()?></b> </p>
             <p><b>FECHAS:</b></p>
 
             <?php
-                foreach ($calendars as $cal_key => $cal_value)
+                foreach ($calendars as $key => $value)
                 { ?>
                     <div class="element event-elem">
-                        <div class="half">    
-                            <p style="font-size:20px"> <?php echo "Fecha: "  . $cal_value->getDate() ?></p>
-                        </div>  
-                        <div class="half">    
-                            <p style="font-size:20px"><?php echo "Hora: " . $cal_value->getTime()?></p>
-                        </div> 
+                        <div class="half">
+                            <p style="font-size:20px"> <?php echo "Fecha: "  . $value->getDate() ?></p>
+                        </div>
+                        <div class="half">
+                            <p style="font-size:20px"><?php echo "Hora: " . $value->getTime()?></p>
+                        </div>
                         <div class="full">
-                            <p><b>Lugar:</b> <?php echo $location->getname()?></p>
+                            <p><b>Lugar:</b> <?php echo $value->getLocation()?></p>
                         </div>
                         <div class="full">
                             <p><b>Artistas: </b></p>
                             <span style="font-size:18px">
                             <?php
-                            foreach ($cal_value->getArtists() as $key => $value)
+                            foreach ($value->getArtists() as $_key => $_value)
                             { ?>
-                                <?php echo $value['0']->getName() . " - "?> 
+                                <?php echo $_value->getIdArtist() . " - "?>
                             <?php
                             }
                             ?></span>
@@ -54,23 +54,16 @@ include(ROOT.'views/navAdmin.php');
                             <p style="font-size:20px"><b><?php echo "Plazas: " ?></b></p>
                         </div>
                         <?php
-                            foreach ($cal_value->getEventSeats() as $evS_key => $evS_value)
-                            {
-                                foreach ($_seatsType as $seT_key => $seT_value)
-                                {
-                                    if ($evS_value->getSeatType() === $seT_value->getId())
-                                    {
-                                        $_seatTypeName = $seT_value->getName();
-                                    }
-                                } ?>
+                            foreach ($value->getEventSeats() as $_key => $_value)
+                            { ?>
                                 <div class="half mini-box">
-                                    <p><?php echo "Tipo de Plaza: "  . $_seatTypeName ?> </p>
+                                    <p><?php echo "Tipo de Plaza: "  . $_value->getSeatType() ?> </p>
                                     <br>
-                                    <p><?php echo "Cantidad Total: " . $evS_value->getTotalQuantity()?> </p>
+                                    <p><?php echo "Cantidad Total: " . $_value->getTotalQuantity()?> </p>
                                     <br>
-                                    <p><?php echo "Precio: " . $evS_value->getPrice()?> </p>
+                                    <p><?php echo "Precio: " . $_value->getPrice()?> </p>
                                     <br>
-                                    <p><?php echo "Remanente: " . $evS_value->getRemaningQuantity() ?> </p>
+                                    <p><?php echo "Remanente: " . $_value->getRemaningQuantity() ?> </p>
                                 </div>
                     <?php } ?>
 

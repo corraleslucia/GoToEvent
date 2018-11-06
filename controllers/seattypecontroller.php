@@ -1,6 +1,6 @@
 <?php namespace controllers;
 
-//use daos\daoList\ArtistDao as Dao;
+
 use daos\daodb\SeatTypeDb as Dao;
 use models\SeatType;
 

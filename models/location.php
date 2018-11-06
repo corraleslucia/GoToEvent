@@ -4,12 +4,14 @@ class Location
 {
     private $id;
     private $name;
+    private $capacity;
     private $adress;
     private $city;
 
-    public function __construct($n,$a,$c, $id=""){
+    public function __construct($n,$cap,$a,$c, $id=""){
         $this->id = $id;
         $this->name=$n;
+        $this->capacity = $cap;
         $this->adress=$a;
         $this->city=$c;
     }
@@ -44,6 +46,14 @@ class Location
 
     public function setId($newId){
         $this->id = $newId;
+    }
+
+    public function getCapacity(){
+        return $this->capacity;
+    }
+
+    public function setCapacity($newCapacity){
+        $this->capacity = $newCapacity;
     }
 }
 
