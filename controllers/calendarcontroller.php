@@ -80,7 +80,7 @@ class CalendarController
 
         $_location = $this->daoLocation->readId($id_location);
 
-        $this->eventSeatController->add($_calendar, $_location);
+        $this->eventSeatController->add($_calendar, $_location->getCapacity());
 
     }
 

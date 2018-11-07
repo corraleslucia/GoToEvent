@@ -20,11 +20,12 @@ include(ROOT.'views/navAdmin.php');
 <body>
   <section class="content">
 
-    <form action="<?php echo BASE ?>eventseat/checkCapacity" method="POST" class="form-admin">
+    <form action="<?php echo BASE ?>eventseat/store" method="POST" class="form-admin">
         <h2 class="form-title">Alta plaza evento:</h2>
         <div class="form-group">
             <label>Calendario:  <?php echo $_calendar['0']->getIdEvent(). " - " .  $_calendar['0']->getDate() . " - " . $_calendar['0']->gettime() . " - " . $_calendar['0']->getLocation()?> </label>
 
+            <input class="input" type="hidden" name="locationCapacity" value="<?php echo $locationCapacity ?>" >
             <input class="input" type="hidden" name="id_calendar" value="<?php echo $_calendar['0']->getId()?>" >
 
         </div>
@@ -44,7 +45,7 @@ include(ROOT.'views/navAdmin.php');
 
         <div class="form-group">
             <label class="label">Cantidad total: </label>
-            <input class="input" id="ev-seat-cant" type="number" name="ev-seat-cant" max="1000" oninvalid="setCustomValidity('Plz enter on Alphabets ')"
+            <input class="input" id="ev-seat-cant" type="number" name="ev-seat-cant" max="<?php echo $availableCapacity ?>" oninvalid="setCustomValidity('La cantidad supera la capacidad del lugar.')"
     onkeydown="try{setCustomValidity('')}catch(e){}" required>
         </div>
 

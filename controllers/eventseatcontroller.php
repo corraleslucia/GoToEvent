@@ -15,11 +15,13 @@ class EventSeatController
     protected $daoSeatType;
 
 
+
     public function __construct()
     {
         $this->dao= Dao::getInstance();
         $this->daoCalendar= DaoCalendar::getInstance();
         $this->daoSeatType= DaoSeatType::getInstance();
+
 
     }
 
@@ -27,27 +29,49 @@ class EventSeatController
     {
     }
 
-    public function add ($_calendar, $_location)
+
+    /**
+     *
+     */
+    public function add ($_calendar, $locationCapacity)
     {
         $val = null;
 
         $seatsTypes = $this->daoSeatType->readAll();
 
+        $availableCapacity = $this->getAvailableCapacity ($locationCapacity, $_calendar['0']->getId());
+
         require(ROOT.'views/createEventSeat.php');
 
     }
 
+    /**
+     *
+     */
     public function _list ()
     {
 
     }
 
-    public function checkCapacity ()
+
+    /**
+     *
+     */
+    public function getAvailableCapacity ($totalCapacity, $id_calendar)
     {
-        
+        $usedCapacity = $this->dao->usedCapacityFromCalendar ($id_calendar);
+
+        $availableCapacity = $totalCapacity - $usedCapacity;
+
+        return $availableCapacity;
+
     }
 
-    public function store($calendar,$seatType,$totalQuantity,$price,$buttonAction)
+
+    /**
+     *
+     */
+    public function store($locationCapacity,$calendar,$seatType,$totalQuantity,$price,$buttonAction)
     {
         $eventSeat = new EventSeat($seatType,$totalQuantity,$price,$calendar);
 
@@ -59,7 +83,7 @@ class EventSeatController
         if ($buttonAction === "continue")
         {
 
-            $this->add($_calendar);
+            $this->add($_calendar, $locationCapacity );
 
         }
         else if ($buttonAction === "end")
