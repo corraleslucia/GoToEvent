@@ -1,7 +1,7 @@
 <?php namespace controllers;
 
 use daos\daodb\EventDb as Dao;
-use \daos\daodb\CategoryDb as DaoCategory;
+use daos\daodb\CategoryDb as DaoCategory;
 use daos\daodb\EventSeatDb as DaoEventSeat;
 use daos\daodb\CalendarDb as DaoCalendar;
 use daos\daodb\ArtistsXCalendarsDb as DaoArtistsXCalendars;
@@ -83,6 +83,7 @@ class EventController
         $event = new Event($description, $category);
 
         $this->dao->create($event);
+        
         $_event = $this->dao->read($description);
 
         $this->calendarController->add($_event);
