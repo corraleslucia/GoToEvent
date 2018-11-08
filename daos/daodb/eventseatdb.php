@@ -102,6 +102,24 @@ class EventSeatDb extends singleton implements IDao
 
      }
 
+     public function usedCapacityFromCalendar ($id_calendar)
+     {
+         $sql = "SELECT ifnull (sum(total_quantity),0) from event_seats where id_calendar = :id_calendar";
+
+         $parameters['id_calendar'] = $id_calendar;
+
+         try {
+              $this->connection = Connection::getInstance();
+              $resultSet = $this->connection->execute($sql, $parameters);
+
+         } catch(Exception $ex) {
+             throw $ex;
+         }
+
+         return $resultSet['0']['0'];
+
+
+     }
 
      /**
       *
