@@ -16,7 +16,7 @@ namespace views;
 <body>
   <section class="content">
 
-    
+
     <form action="User/login" method="POST" class="form-login">
     <h2 class="form-title">Login</h2>
       <div class="form-group">
@@ -28,7 +28,7 @@ namespace views;
           <label class="label">Contraseña: </label>
           <input class="input" type="password" name="pass">
       </div>
-    
+
       <div class="div-form-button">
         <button type="submit" class ="form-button">Iniciar Sesion</button>
       </div>

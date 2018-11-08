@@ -1,7 +1,7 @@
 <?php
 namespace views;
 include(ROOT.'views/headerAdmin.php');
-include(ROOT.'views/navUser.php');
+include(ROOT.'views/navAdmin.php');
  ?>
 
 <!DOCTYPE html>

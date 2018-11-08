@@ -52,7 +52,7 @@ class EventController
 
     }
 
-    public function selectEvent ()
+    public function selectEvent ($type)
     {
         $events = $this->dao->readAll();
         require(ROOT.'views/selectEvent.php');
@@ -83,7 +83,7 @@ class EventController
         $event = new Event($description, $category);
 
         $this->dao->create($event);
-        
+
         $_event = $this->dao->read($description);
 
         $this->calendarController->add($_event);

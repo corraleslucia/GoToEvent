@@ -16,7 +16,8 @@
                 <ul>
                     <li><a href="<?= BASE ?>event/_list">Ver Eventos</a></li>
                     <li><a href="<?= BASE ?>event/add">Agregar Eventos</a></li>
-                    <li><a href="<?= BASE ?>event/selectEvent">Agregar Fecha a Evento</a></li>
+                    <li><a href="<?= BASE ?>event/selectEvent/f">Agregar Fecha a Evento</a></li>
+                    <li><a href="<?= BASE ?>event/selectEvent/p">Agregar Plaza a Fecha</a></li>
                 </ul>
             </li>
             <li><a href="<?= BASE ?>home/index">Artistas</a>
