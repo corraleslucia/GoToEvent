@@ -87,7 +87,7 @@ class EventDb extends singleton implements IDao
       *
       */
      public function readAll() {
-          $sql = "SELECT e.description as description, c.description as id_category, e.id_event as id_event FROM events e inner join categories c on e.id_category = c.id_category";
+          $sql = "SELECT e.description as description, c.description as id_category, e.id_event as id_event FROM events e inner join categories c on e.id_category = c.id_category order by e.id_event";
 
           try {
                $this->connection = Connection::getInstance();
@@ -100,6 +100,82 @@ class EventDb extends singleton implements IDao
                return $this->mapear($resultSet);
           else
                return false;
+     }
+
+     /**
+      *
+      */
+     public function readAllAtoZ()
+     {
+         $sql = "SELECT e.description as description, c.description as id_category, e.id_event as id_event FROM events e inner join categories c on e.id_category = c.id_category order by e.description asc";
+
+         try {
+              $this->connection = Connection::getInstance();
+              $resultSet = $this->connection->execute($sql);
+         } catch(Exception $ex) {
+             throw $ex;
+         }
+
+         if(!empty($resultSet))
+              return $this->mapear($resultSet);
+         else
+              return false;
+     }
+
+
+     /**
+      *
+      */
+     public function readAllValid()
+     {
+         $sql = "SELECT e.description as description, c.description as id_category, e.id_event as id_event
+                 FROM events e inner join categories c on e.id_category = c.id_category
+                 inner join (select cal.id_event from calendars cal where calendar_date >= now()
+                 group by cal.id_event order by calendar_date asc) cal on cal.id_event = e.id_event";
+
+         try {
+              $this->connection = Connection::getInstance();
+              $resultSet = $this->connection->execute($sql);
+         } catch(Exception $ex) {
+             throw $ex;
+         }
+
+         if(!empty($resultSet))
+              return $this->mapear($resultSet);
+         else
+              return false;
+     }
+
+     public function readEventsFromArtist ($id_artist)
+     {
+         $sql = "SELECT e.id_event as id_event, e.description as description, e.id_category as id_category
+
+                FROM artists a left outer join artists_in_calendars ac on a.id_artist = ac.id_artist
+
+                left outer join calendars cal on cal.id_calendar = ac.id_calendar
+
+                left outer join events e on cal.id_event = e.id_event
+
+                left outer join locations l on cal.id_location = l.id_location
+
+                where a.id_artist = :id_artist
+
+                group by e.description";
+
+                $parameters['id_artist'] = $id_artist;
+
+         try {
+              $this->connection = Connection::getInstance();
+              $resultSet = $this->connection->execute($sql, $parameters);
+         } catch(Exception $ex) {
+             throw $ex;
+         }
+
+         if(!empty($resultSet))
+              return $this->mapear($resultSet);
+         else
+              return false;
+
      }
 
 

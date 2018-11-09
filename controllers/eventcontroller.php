@@ -5,6 +5,7 @@ use daos\daodb\CategoryDb as DaoCategory;
 use daos\daodb\EventSeatDb as DaoEventSeat;
 use daos\daodb\CalendarDb as DaoCalendar;
 use daos\daodb\ArtistsXCalendarsDb as DaoArtistsXCalendars;
+use daos\daodb\ArtistDb as DaoArtist;
 
 use models\Event;
 
@@ -17,6 +18,7 @@ class EventController
     protected $daoEventSeat;
     protected $daoCalendar;
     protected $daoArtistsXCalendars;
+    protected $daoArtist;
 
     protected $calendarController;
 
@@ -29,6 +31,7 @@ class EventController
         $this->daoEventSeat = DaoEventSeat::getInstance();
         $this->daoCalendar = DaoCalendar::getInstance();
         $this->daoArtistsXCalendars = DaoArtistsXCalendars::getInstance();
+        $this->daoArtist = DaoArtist::getInstance();
 
     }
 
@@ -44,12 +47,40 @@ class EventController
         require(ROOT.'views/createEvent.php');
     }
 
-    public function _list ()
+    public function _list ($showType ="")
     {
-        $events = $this->dao->readAll();
+        if ($showType === "all")
+        {
+            $events = $this->dao->readAllAtoZ();
+            require(ROOT.'views/listEvents.php');
+        }
+        else if ($showType === "valid")
+        {
+            $events = $this->dao->readAllValid();
+            require(ROOT.'views/listEvents.php');
+        }
+        else if (!$showType)
+        {
+            $events = $this->dao->readAll();
+            require(ROOT.'views/listEvents.php');
+        }
 
-        require(ROOT.'views/listEvents.php');
+    }
 
+    public function listForUser($listType)
+    {
+        if ($listType === "byArtist")
+        {
+            $artists = $this->daoArtist->readAll();
+
+            $eventsByArtists = array();
+
+            foreach ($artists as $key => $value)
+            {
+                $eventsByArtists [$value->getName()] = $this->dao->readEventsFromArtist($value->getId());
+            }
+            require(ROOT.'views/listEventsByForUsers.php');
+        }
     }
 
     public function selectEvent ($type)

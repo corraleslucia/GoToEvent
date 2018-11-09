@@ -14,10 +14,10 @@
         <ul class="nav">
             <li><a href="<?= BASE ?>home/index">Ver Eventos</a>
                 <ul>
-                    <li><a href="<?= BASE ?>event/_list">Ver ordenados por Fecha</a></li>
-                    <li><a href="<?= BASE ?>event/_list">Ver ordenados por Artista</a></li>
-                    <li><a href="<?= BASE ?>event/_list">Ver ordenados por Categoria</a></li>
-                    <li><a href="<?= BASE ?>event/_list">Ver ordenados por Ubicación</a></li>
+                    <li><a href="<?= BASE ?>event/listForUser/byDate">Por Fecha</a></li>
+                    <li><a href="<?= BASE ?>event/listForUser/byArtist">Por Artista</a></li>
+                    <li><a href="<?= BASE ?>event/listForUser/byCategory">Por Categoria</a></li>
+                    <li><a href="<?= BASE ?>event/listForUser/byLocation">Por Ubicación</a></li>
                 </ul>
             </li>
             <li><a href="<?= BASE ?>home/index">Buscar eventos</a>
@@ -38,7 +38,7 @@
                     <li><a href="<?= BASE ?>category/add">mas tickets</a></li> -->
                 </ul>
             </li>
-            
+
         </ul>
     </nav>
 </body>
