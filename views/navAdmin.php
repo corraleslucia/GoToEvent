@@ -52,8 +52,9 @@
             </li>
             <li><a href="<?= BASE ?>home/index">Informes</a>
                 <ul>
-                    <li><a href="">Ver Informes</a></li>
-                    <li><a href="">Agregar Informes</a></li>
+                    <li><a href="">Cantidades por evento</a></li>
+                    <li><a href="">Recaudaciones por evento</a></li>
+                    <li><a href="">Recaudaciones por categoria</a></li>
                 </ul>
             </li>
         </ul>
