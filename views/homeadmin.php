@@ -1,6 +1,6 @@
 <?php
 namespace views;
 
-include('header.php');
+include('headerAdmin.php');
 include('navAdmin.php');
  ?>

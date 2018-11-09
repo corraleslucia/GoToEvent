@@ -9,8 +9,8 @@ class HomeController
 
     public function index()
     {
-        //require(ROOT.'views/home.php');
-        require(ROOT.'views/login.php');
+        require(ROOT.'views/homeuser.php');
+
 
     }
 

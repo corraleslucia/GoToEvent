@@ -11,7 +11,7 @@ include(ROOT.'views/navAdmin.php');
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Agregar a Evento</title>
+  <title>Agregar a Fecha</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="<?php echo BASE ?>css/normalize.css">
   <link rel="stylesheet" type="text/css" media="screen" href="<?php echo BASE ?>css/style.css" />
@@ -19,26 +19,22 @@ include(ROOT.'views/navAdmin.php');
 </head>
 <body>
   <section class="content">
-    <?php if ($type === "f")
-    { ?>
-        <form action="<?php echo BASE ?>calendar/addMoreCalendars" method="POST" class="form-admin">
-    <?php }
-    else
-    { ?>
-        <form action="<?php echo BASE ?>calendar/addMoreEventSeats" method="POST" class="form-admin">
-    <?php }?>
-        <h2 class="form-title">Agregar a Evento</h2>
+
+        <form action="<?php echo BASE ?>eventSeat/addMoreEventSeats" method="POST" class="form-admin">
+        <h2 class="form-title">Agregar a fecha</h2>
         <div class="form-group">
-            <label>Evento: </label>
-            <select class="form-control" name="id_event" required>
-                <?php foreach ($events as $key => $value)
+            <label>Evento: <?php echo $calendars['0']->getIdEvent()?>  </label>
+            <label>Fecha: </label>
+            <select class="form-control" name="id_calendar" required>
+                <?php foreach ($calendars as $key => $value)
                 {
                     ?>
-                    <option value = "<?php echo $value->getId()?>"> <?php echo $value->getDescription()?> </option>
+                    <option value = "<?php echo $value->getId()?>"> <?php echo $value->getDate() . " - " . $value->gettime() . " - " . $value->getLocation() ?> </option>
 
                 <?php } ?>
             </select>
         </div>
+
       <div class="div-form-button">
         <button type="submit" class ="form-button">Seleccionar Evento</button>
       </div>

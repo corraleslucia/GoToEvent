@@ -48,10 +48,16 @@ class CalendarController
 
     }
 
-    public function readEvent ($id_event)
+    public function addMoreCalendars ($id_event)
     {
         $event = $this->daoEvent->readId($id_event);
         $this->add ($event);
+    }
+
+    public function addMoreEventSeats ($id_event)
+    {
+        $calendars = $this->dao->readFromEvent($id_event);
+        require(ROOT.'views/selectCalendar.php');
     }
 
 

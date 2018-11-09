@@ -3,6 +3,7 @@
 use daos\daodb\EventSeatDb as Dao;
 use daos\daodb\CalendarDb as DaoCalendar;
 use daos\daodb\SeatTypeDb as DaoSeatType;
+use daos\daodb\LocationDb as DaoLocation;
 
 use models\EventSeat;
 
@@ -13,6 +14,7 @@ class EventSeatController
     protected $dao;
     protected $daoCalendar;
     protected $daoSeatType;
+    protected $daoLocation;
 
 
 
@@ -21,7 +23,7 @@ class EventSeatController
         $this->dao= Dao::getInstance();
         $this->daoCalendar= DaoCalendar::getInstance();
         $this->daoSeatType= DaoSeatType::getInstance();
-
+        $this->daoLocation= DaoLocation::getInstance();
 
     }
 
@@ -44,6 +46,16 @@ class EventSeatController
         require(ROOT.'views/createEventSeat.php');
 
     }
+
+    public function addMoreEventSeats ($id_calendar)
+    {
+        $calendar = $this->daoCalendar->readId($id_calendar);
+
+        $location = $this->daoLocation->read($calendar['0']->getLocation());
+
+        $this->add ($calendar, $location->getCapacity());
+    }
+
 
     /**
      *
