@@ -230,21 +230,19 @@ class EventDb extends singleton implements IDao
 
      public function readEventsFromDate ($month,$year)
      {
-         $sql = " SELECT e1.id_event as id_event, e1.description as description, e1.id_category as id_category
-                  FROM (SELECT e.id_event as id_event, e.description as description, e.id_category as id_category, monthname(calendar_date),
-                  month(calendar_date), year(calendar_date)
-                  from calendars cal inner join events e on cal.id_event = e.id_event
-                  where year(calendar_date) = :year and month(calendar_date) = :month
-                  group by e.id_event, monthname(calendar_date)
-                  order by calendar_date
-                  ) e1";
+         $sql = " SELECT e1.id_event, e1.description, e1.id_category
+         from (SELECT e.id_event as id_event, e.description as description, e.id_category as id_category,
+              monthname(calendar_date), month(calendar_date) as month, year(calendar_date) as year
+              from calendars cal inner join events e on cal.id_event = e.id_event
+              where year(calendar_date) = $year and month(calendar_date) = $month
+              group by e.id_event, monthname(calendar_date)
+              order by calendar_date) e1";
 
-                $parameters['month'] = $month;
-                $parameters['year'] = $year;
 
          try {
               $this->connection = Connection::getInstance();
-              $resultSet = $this->connection->execute($sql, $parameters);
+              $resultSet = $this->connection->execute($sql);
+
          } catch(Exception $ex) {
              throw $ex;
          }

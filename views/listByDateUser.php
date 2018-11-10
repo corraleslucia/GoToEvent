@@ -4,7 +4,7 @@
         <div class="p-listev-art">
         <p style="font-size:22px"><b><?php echo $date ?></b></p>
         </div>
-    <?php var_dump ($events);
+    <?php 
         foreach ($events as $key => $value)
         { ?>
                 <div class="element">
