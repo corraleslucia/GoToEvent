@@ -166,6 +166,27 @@ use daos\daodb\Connection as Connection;
                      return false;
            }
 
+
+           public function readAllMonthYearFromCalendars ()
+           {
+               $sql = "SELECT month(calendar_date) as month, monthname(calendar_date) as monthName, year(calendar_date) as year
+                       from calendars cal inner join events e on cal.id_event = e.id_event group by monthname(calendar_date)
+                       order by calendar_date";
+
+               try {
+                    $this->connection = Connection::getInstance();
+                    $resultSet = $this->connection->execute($sql);
+               } catch(Exception $ex) {
+                   throw $ex;
+               }
+
+               if(!empty($resultSet))
+                    return $resultSet;
+               else
+                    return false;
+
+           }
+
           /**
            *
            */

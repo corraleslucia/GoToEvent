@@ -148,7 +148,7 @@ class EventDb extends singleton implements IDao
 
      public function readEventsFromArtist ($id_artist)
      {
-         $sql = "SELECT e.id_event as id_event, e.description as description, e.id_category as id_category
+         $sql = "SELECT ifnull(e.id_event,'0') as id_event, ifnull(e.description,'SIN EVENTOS') as description, ifnull(e.id_category, '0') as id_category
 
                 FROM artists a left outer join artists_in_calendars ac on a.id_artist = ac.id_artist
 
@@ -177,6 +177,86 @@ class EventDb extends singleton implements IDao
               return false;
 
      }
+
+     public function readEventsFromCategory ($id_category)
+     {
+         $sql = " SELECT  ifnull(e.description, 'SIN EVENTOS') as description, ifnull(e.id_event, '0') as id_event,
+         ifnull(e.id_category,'0') as id_category FROM categories c left outer join events e on c.id_category = e.id_category
+         WHERE c.id_category = :id_category";
+
+                $parameters['id_category'] = $id_category;
+
+         try {
+              $this->connection = Connection::getInstance();
+              $resultSet = $this->connection->execute($sql, $parameters);
+         } catch(Exception $ex) {
+             throw $ex;
+         }
+
+         if(!empty($resultSet))
+              return $this->mapear($resultSet);
+         else
+              return false;
+
+     }
+
+     public function readEventsFromLocation ($city)
+     {
+         $sql = " SELECT ifnull(e1.id_event, '0') as id_event, ifnull(e1.description,'SIN EVENTOS') as description,
+                    ifnull(e1.id_category,'0') as id_category
+                    FROM
+                        (SELECT l.id_location as id_location, l.city as city, ifnull(e.id_event, '0') as id_event,
+                        ifnull(e.description, 'SIN EVENTOS') as description, ifnull(e.id_category,'0') as id_category
+                        FROM locations l left outer join calendars cal on l.id_location = cal.id_location
+                        left outer join events e on cal.id_event = e.id_event
+                        where l.city = :city
+                        group by ifnull(e.description, 'SIN EVENTOS')) e1";
+
+                $parameters['city'] = $city;
+
+         try {
+              $this->connection = Connection::getInstance();
+              $resultSet = $this->connection->execute($sql, $parameters);
+         } catch(Exception $ex) {
+             throw $ex;
+         }
+
+         if(!empty($resultSet))
+              return $this->mapear($resultSet);
+         else
+              return false;
+
+     }
+
+     public function readEventsFromDate ($month,$year)
+     {
+         $sql = " SELECT e1.id_event as id_event, e1.description as description, e1.id_category as id_category
+                  FROM (SELECT e.id_event as id_event, e.description as description, e.id_category as id_category, monthname(calendar_date),
+                  month(calendar_date), year(calendar_date)
+                  from calendars cal inner join events e on cal.id_event = e.id_event
+                  where year(calendar_date) = :year and month(calendar_date) = :month
+                  group by e.id_event, monthname(calendar_date)
+                  order by calendar_date
+                  ) e1";
+
+                $parameters['month'] = $month;
+                $parameters['year'] = $year;
+
+         try {
+              $this->connection = Connection::getInstance();
+              $resultSet = $this->connection->execute($sql, $parameters);
+         } catch(Exception $ex) {
+             throw $ex;
+         }
+
+         if(!empty($resultSet))
+              return $this->mapear($resultSet);
+         else
+              return false;
+
+     }
+
+
 
 
      /**
@@ -244,7 +324,7 @@ class EventDb extends singleton implements IDao
            return new M_Event($p['description'], $p['id_category'], $p['id_event']);
        }, $value);
 
-          return count($resp) > 1 ? $resp : $resp['0'];
+          return count($resp) > 0 ? $resp : $resp['0'];
 
    }
 }

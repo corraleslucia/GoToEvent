@@ -27,7 +27,7 @@ include(ROOT.'views/navUser.php');
                 <input type="radio" id="showtype1" name="show" value="byArtist">
                 <label for="contactChoice1"> Por Artista (A-Z) </label>
 
-                <input type="radio" id="showtype2" name="show" value="bycategory">
+                <input type="radio" id="showtype2" name="show" value="byCategory">
                 <label for="contactChoice2"> Por Categoria </label>
 
                 <input type="radio" id="showtype3" name="show" value="byDate">
@@ -40,25 +40,23 @@ include(ROOT.'views/navUser.php');
                 </p>
             </div>
         </form>
-        <?php
-            foreach ($eventsByArtists as $artist => $events)
-            { ?>
-                <div class="p-listev-art">
-                <p style="font-size:22px"><b><?php echo $artist ?></b></p>
-                </div>
-            <?php
-                foreach ($events as $key => $value)
-                { ?>
-                        <div class="element">
-                        <a class="link-divs "href="<?= BASE ?>event/showEventDetails/<?php echo $value->getId()?>">
-                            <div class="p-listev-art">
-                                <p style="font-size:22px"><b><?php  echo $value->getDescription()?></b></p>
-                            </div>
-                        </a>
-                        </div>
-
-          <?php } ?>
-    <?php } ?>
+        <?php if ($listType === "byArtist")
+              {
+                  require(ROOT.'views/listByArtistUser.php');
+              }
+              else if ($listType === "byCategory")
+              {
+                  require(ROOT.'views/listByCategoryUser.php');
+              }
+              else if ($listType === "byDate")
+              {
+                  require(ROOT.'views/listByDateUser.php');
+              }
+              else if ($listType === "byLocation")
+              {
+                  require(ROOT.'views/listByLocationUser.php');
+              }
+          ?>
     </div>
 
   </section>

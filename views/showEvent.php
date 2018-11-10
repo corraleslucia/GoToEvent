@@ -22,8 +22,8 @@ include(ROOT.'views/navAdmin.php');
         <h3>EVENTO</h3>
 
         <div class="container">
-            <h2>Evento: <?php echo $event->getDescription()?> </h2>
-            <p>Categoria: <b><?php echo $event->getCategory()?></b> </p>
+            <h2>Evento: <?php echo $event['0']->getDescription()?> </h2>
+            <p>Categoria: <b><?php echo $event['0']->getCategory()?></b> </p>
             <p><b>FECHAS:</b></p>
 
             <?php

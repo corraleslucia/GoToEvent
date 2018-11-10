@@ -6,6 +6,8 @@ use daos\daodb\EventSeatDb as DaoEventSeat;
 use daos\daodb\CalendarDb as DaoCalendar;
 use daos\daodb\ArtistsXCalendarsDb as DaoArtistsXCalendars;
 use daos\daodb\ArtistDb as DaoArtist;
+use daos\daodb\LocationDb as DaoLocation;
+
 
 use models\Event;
 
@@ -19,6 +21,7 @@ class EventController
     protected $daoCalendar;
     protected $daoArtistsXCalendars;
     protected $daoArtist;
+    protected $daoLocation;
 
     protected $calendarController;
 
@@ -32,6 +35,7 @@ class EventController
         $this->daoCalendar = DaoCalendar::getInstance();
         $this->daoArtistsXCalendars = DaoArtistsXCalendars::getInstance();
         $this->daoArtist = DaoArtist::getInstance();
+        $this->daoLocation = DaoLocation::getInstance();
 
     }
 
@@ -79,8 +83,40 @@ class EventController
             {
                 $eventsByArtists [$value->getName()] = $this->dao->readEventsFromArtist($value->getId());
             }
-            require(ROOT.'views/listEventsByForUsers.php');
         }
+        else if ($listType === "byCategory")
+        {
+            $categories = $this->daoCategory->readAll();
+            $eventsByCategory = array();
+            foreach ($categories as $key => $value)
+            {
+                $eventsByCategory [$value->getDescription()] = $this->dao->readEventsFromCategory($value->getId());
+            }
+
+        }
+        else if ($listType === "byDate")
+        {
+            $dates = $this->daoCalendar->readAllMonthYearFromCalendars();
+            $eventsByDate = array();
+            foreach ($dates as $key => $value)
+            {
+                $eventsByDate [$value['monthName'].'-'.$value['year']] = $this->dao->readEventsFromDate($value['month'], $value['year']);
+            }
+
+
+        }
+        else if ($listType === "byLocation")
+        {
+            $locations = $this->daoLocation->readAll();
+            $eventsByLocation = array ();
+            foreach ($locations as $key => $value)
+            {
+                $eventsByLocation [$value->getCity()] = $this->dao->readEventsFromLocation($value->getCity());
+            }
+
+        }
+
+        require(ROOT.'views/listEventsByForUsers.php');
     }
 
     public function selectEvent ($type)
@@ -117,7 +153,7 @@ class EventController
 
         $_event = $this->dao->read($description);
 
-        $this->calendarController->add($_event);
+        $this->calendarController->add($_event['0']);
 
 
 

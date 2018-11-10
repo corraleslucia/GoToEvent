@@ -51,7 +51,7 @@ class CalendarController
     public function addMoreCalendars ($id_event)
     {
         $event = $this->daoEvent->readId($id_event);
-        $this->add ($event);
+        $this->add ($event['0']);
     }
 
     public function addMoreEventSeats ($id_event)
