@@ -20,6 +20,12 @@ include(ROOT.'views/navAdmin.php');
 <body>
   <section class="content">
 
+      <?php if ($val)
+      {?>
+          <p> <?php echo $val; ?> </p>
+      <?php }
+      ?>
+
     <form action="<?php echo BASE ?>eventseat/store" method="POST" class="form-admin">
         <h2 class="form-title">Alta plaza evento:</h2>
         <div class="form-group">

@@ -22,7 +22,7 @@ namespace views;
       <?php }
       ?>
 
-    
+
 
     <form action="store" method="POST" class="form-admin">
         <h2 class="form-title">Registrate</h2>
@@ -46,14 +46,16 @@ namespace views;
           <input class="input" type="text" name="us-lastname" required>
         </div>
 
+        <input class="input" type="hidden" name="type" value="2" >
+
         <div class="div-form-button">
           <button type="submit" class ="form-button">Agregar usuario</button>
         </div>
 
         <div style="text-align:center">
          <p>Ya estas resgitrado? <a href="../home">Logueate aquí</a></p>
-        </div>  
-          
+        </div>
+
     </form>
 
   </section>

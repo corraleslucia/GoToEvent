@@ -34,12 +34,21 @@ class LocationController
     public function store($name, $capacity, $adress, $city)
     {
         $location = new Location($name, $capacity, $adress, $city);
+        try
+        {
+            $this->dao->create($location);
 
-        $this->dao->create($location);
+            $val = "Lugar Creado";
 
-        $val = "Lugar Creado";
+            require(ROOT.'views/createLocation.php');
+        }
+        catch (\PDOException $ex)
+        {
+            $val = "Esa ubicacion ya existe en la base de datos.";
 
-        require(ROOT.'views/createLocation.php');
+            require(ROOT.'views/createLocation.php');
+        }
+
 
 
     }

@@ -19,7 +19,13 @@ include(ROOT.'views/navAdmin.php');
 </head>
 <body>
   <section class="content">
-    
+
+      <?php if ($val)
+      {?>
+          <p> <?php echo $val; ?> </p>
+      <?php }
+      ?>
+
     <form action="store" method="POST" class="form-admin">
         <h2 class="form-title">Alta de evento:</h2>
         <div class="form-group">
@@ -42,7 +48,7 @@ include(ROOT.'views/navAdmin.php');
       <div class="div-form-button">
         <button type="submit" class ="form-button">Agregar evento</button>
       </div>
-      
+
     </form>
 
   </section>

@@ -43,9 +43,8 @@ class EventController
     {
 
     }
-    public function add ()
+    public function add ($val="")
     {
-        $val = null;
 
         $categories = $this->daoCategory->readAll();
         require(ROOT.'views/createEvent.php');
@@ -149,11 +148,21 @@ class EventController
     {
         $event = new Event($description, $category);
 
-        $this->dao->create($event);
+        try
+        {
+            $this->dao->create($event);
 
-        $_event = $this->dao->read($description);
+            $_event = $this->dao->read($description);
 
-        $this->calendarController->add($_event['0']);
+            $this->calendarController->add($_event['0']);
+
+        } catch (\PDOException $ex)
+        {
+            $val = "El evento ya existe en la base de datos.";
+
+            $this->add($val);
+        }
+
 
 
 

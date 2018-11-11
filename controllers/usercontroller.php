@@ -37,15 +37,24 @@ class UserController
     }
 
 
-    public function store($mail, $pass, $name, $lastname)
+    public function store($mail, $pass, $name, $lastname, $type)
     {
-        $user = new User($mail, $pass, $name, $lastname);
+        $user = new User($mail, $pass, $name, $lastname, $type);
 
-        $this->dao->create($user);
+        try
+        {
+            $this->dao->create($user);
 
-        $val = "Usuario Creado";
+            $val = "Usuario Creado";
 
-        require(ROOT.'views/createUser.php');
+            require(ROOT.'views/createUserAdmin.php');
+        }
+        catch (\PDOException $ex)
+        {
+            $val = "Ya existe un usuario registrado con ese email.";
+            require(ROOT.'views/createUserAdmin.php');
+
+        }
 
     }
 
