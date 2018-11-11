@@ -36,11 +36,20 @@ class SeatTypeController
     {
         $seatType = new SeatType($name);
 
-        $this->dao->create($seatType);
+        try
+        {
+            $this->dao->create($seatType);
 
-        $val = "Tipo de plaza Creada.";
+            $val = "Tipo de plaza Creada.";
 
-        require(ROOT.'views/createSeatType.php');
+            require(ROOT.'views/createSeatType.php');
+        }
+        catch (\PDOException $ex)
+        {
+            $val = "Ya existe un tipo de plaza con ese nombre.";
+            require(ROOT.'views/createSeatType.php');
+        }
+
 
     }
 

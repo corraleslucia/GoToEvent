@@ -1,7 +1,7 @@
 <?php
 namespace views;
-include(ROOT.'views/headerAdmin.php');
-include(ROOT.'views/navAdmin.php');
+include(ROOT.'views/headerUser.php');
+include(ROOT.'views/navUser.php');
 
 
  ?>
@@ -30,6 +30,7 @@ include(ROOT.'views/navAdmin.php');
                 foreach ($calendars as $key => $value)
                 { ?>
                     <div class="element event-elem">
+
                         <div class="half">
                             <p style="font-size:20px"> <?php echo "Fecha: "  . $value->getDate() ?></p>
                         </div>
@@ -57,6 +58,7 @@ include(ROOT.'views/navAdmin.php');
                             foreach ($value->getEventSeats() as $_key => $_value)
                             { ?>
                                 <div class="half mini-box">
+                                    <a class="link-divs" href="<?= BASE ?>ticket/selectTicketOptions/<?php echo $value->getId()?>">
                                     <p><?php echo "Tipo de Plaza: "  . $_value->getSeatType() ?> </p>
                                     <br>
                                     <p><?php echo "Cantidad Total: " . $_value->getTotalQuantity()?> </p>
@@ -64,10 +66,13 @@ include(ROOT.'views/navAdmin.php');
                                     <p><?php echo "Precio: " . $_value->getPrice()?> </p>
                                     <br>
                                     <p><?php echo "Remanente: " . $_value->getRemaningQuantity() ?> </p>
+
+                                    </a>
                                 </div>
                     <?php } ?>
 
                     </div>
+
             <?php } ?>
 
         </div>

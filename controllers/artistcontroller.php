@@ -36,11 +36,17 @@ class ArtistController
     {
         $artist = new Artist($name);
 
-        $this->dao->create($artist);
-
-        $val = "Artista Creado";
-
-        require(ROOT.'views/createArtist.php');
+        try
+        {
+            $this->dao->create($artist);
+            $val = "Artista Creado";
+            require(ROOT.'views/createArtist.php');
+        }
+        catch (\PDOException $ex)
+        {
+            $val = "El artista ya existe en la base de datos.";
+            require(ROOT.'views/createArtist.php');
+        }
 
     }
 

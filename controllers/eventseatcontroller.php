@@ -35,9 +35,8 @@ class EventSeatController
     /**
      *
      */
-    public function add ($_calendar, $locationCapacity)
+    public function add ($_calendar, $locationCapacity, $val="")
     {
-        $val = null;
 
         $seatsTypes = $this->daoSeatType->readAll();
 
@@ -87,26 +86,38 @@ class EventSeatController
     {
         $eventSeat = new EventSeat($seatType,$totalQuantity,$price,$calendar);
 
-        $this->dao->create($eventSeat);
-
         $_calendar = $this->daoCalendar->readID($calendar);
 
-
-        if ($buttonAction === "continue")
+        try
         {
+            $this->dao->create($eventSeat);
 
-            $this->add($_calendar, $locationCapacity );
+
+
+            if ($buttonAction === "continue")
+            {
+
+                $this->add($_calendar, $locationCapacity );
+
+            }
+            else if ($buttonAction === "end")
+            {
+                $val = "Plaza Creada.";
+
+                $eventSeats = $this->dao->readAllFromCalendar($_calendar['0']->getId());
+
+
+                require(ROOT.'views/listEventSeatsForCalendar.php');
+            }
+
+        } catch (\PDOException $ex)
+        {
+            $val = "Ya existe esa plaza para esa fecha.";
+
+            $this->add($_calendar, $locationCapacity, $val );
 
         }
-        else if ($buttonAction === "end")
-        {
-            $val = "Plaza Creada.";
 
-            $eventSeats = $this->dao->readAllFromCalendar($_calendar['0']->getId());
-
-
-            require(ROOT.'views/listEventSeatsForCalendar.php');
-        }
     }
 }
 
