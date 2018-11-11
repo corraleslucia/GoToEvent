@@ -49,6 +49,7 @@ include(ROOT.'views/navAdmin.php');
         <button type="submit" class ="form-button">Agregar evento</button>
       </div>
 
+
     </form>
 
   </section>

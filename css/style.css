@@ -1,6 +1,6 @@
 /* Box sizing: Margin, borders and padding are drawn outside the set width of your content. */
-*, 
-*:before, 
+*,
+*:before,
 *:after {
   -moz-box-sizing: border-box;
   -webkit-box-sizing: border-box;
@@ -19,12 +19,12 @@ body{
     background-attachment: fixed;
 }
 
-section { 
+section {
     text-align: center;
     clear: both;
 }
 
-/* Forms */ 
+/* Forms */
 
 .form-title {
     margin-top: 5%;
@@ -96,7 +96,7 @@ section {
 
 .button-half {
     margin-top: 20px;
-    margin-bottom: 10px;  
+    margin-bottom: 10px;
 }
 
 
@@ -119,7 +119,7 @@ header.general{
 .column1{
     width: 70%;
     padding-top: 10px;
-    
+
 }
 
 .column2{
@@ -189,7 +189,7 @@ header.general{
     color: #FFF;
 }
 
-.column3-half:hover a{ 
+.column3-half:hover a{
     background-color: rgb(145, 143, 143);
     color: #272626;
 }
@@ -265,7 +265,7 @@ ul {
 
 .nav li:hover > ul {
     display:block;
-    
+
     text-align: center;
     padding:0;
     background-color:#434343bd;
@@ -347,7 +347,7 @@ a {
     display: inline-block;
     width: 50%;
     padding: 10px;
-    
+
 }
 
 .p-listev-art{
@@ -367,7 +367,7 @@ a {
 .p-listev-date {
     font-size: 18px;
     display: inline-block;
-    width: 49%; 
+    width: 49%;
     padding: 10px;
 }
 
@@ -381,7 +381,7 @@ a {
 
 .link-divs:hover {
     background-color: rgb(252, 179, 44);
-    
+
 }
 
 
@@ -390,7 +390,7 @@ a {
     display: inline-block;
     font-size: 18px;
     margin: 1%;
-    
+
 }
 
 .half.mini-box p,

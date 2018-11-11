@@ -142,6 +142,23 @@ class EventController
 
     }
 
+    public function showEventDetailsForUser ($id_event)
+    {
+        $event = $this->dao->readID($id_event);
+        $calendars = $this->daoCalendar->readFromEvent($id_event);
+
+
+        foreach ($calendars as $key => $value)
+        {
+            $value->setArtists($this->daoArtistsXCalendars->readAllArtistsFromCalendar($value->getId()));
+
+            $value->setEventSeats($this->daoEventSeat->readAllFromCalendar($value->getId()));
+        }
+
+        require(ROOT.'views/pickEventSeatUser.php');
+
+    }
+
 
 
     public function store($description,$category)
