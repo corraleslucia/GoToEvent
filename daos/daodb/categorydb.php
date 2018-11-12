@@ -153,10 +153,10 @@ use daos\daodb\Connection as Connection;
           }
 
           /**
-		* Transforma el listado de artistas en
-		* objetos de la clase Artista
+		* Transforma el listado de categorias en
+		* objetos de la clase Categoria
 		*
-		* @param  Array $gente Listado de artistas a transformar
+		* @param  Array $categorias Listado de categorias a transformar
 		*/
 		protected function mapear($value) {
 
@@ -166,7 +166,7 @@ use daos\daodb\Connection as Connection;
 				return new M_Category($p['description'], $p['id_category']);
 			}, $value);
 
-               return count($resp) > 1 ? $resp : $resp['0'];
+               return count($resp) > 0 ? $resp : $resp['0'];
 
 		}
      }

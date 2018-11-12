@@ -1,7 +1,6 @@
 <?php
 namespace views;
-include(ROOT.'views/headerAdmin.php');
-include(ROOT.'views/navAdmin.php');
+
  ?>
 
 <!DOCTYPE html>
@@ -25,9 +24,9 @@ include(ROOT.'views/navAdmin.php');
         ?>
 
         <div class="element">
-          <a class="link-divs" href="">
+          <!--a class="link-divs" href=""!-->
             <h4><?php echo $value->getName()?></h4>
-          </a>
+          <!--/a!-->
         </div>
 
 

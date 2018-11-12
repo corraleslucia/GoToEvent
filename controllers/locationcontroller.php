@@ -26,6 +26,10 @@ class LocationController
     public function _list ()
     {
         $locations = $this->dao->readAll();
+        if(!$locations)
+        {
+            $locations['0'] = new Location ("SIN UBICACIONES", "-","-","-", 0);
+        }
         require(ROOT.'views/listLocations.php');
 
     }

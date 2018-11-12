@@ -27,6 +27,10 @@ class SeatTypeController
     public function _list ()
     {
         $seatTypes = $this->dao->readAll();
+        if(!$seatTypes)
+        {
+            $seatTypes['0'] = new SeatType ("SIN TIPOS DE PLAZAS", 0);
+        }
         require(ROOT.'views/listSeatTypes.php');
 
     }

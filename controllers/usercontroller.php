@@ -32,6 +32,10 @@ class UserController
     public function _list ()
     {
         $users = $this->dao->readAll();
+        if(!$users)
+        {
+            $users['0'] = new User ("SIN USUARIOS", "", "-", "-", "", 0);
+        }
         require(ROOT.'views/listUsers.php');
 
     }

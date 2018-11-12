@@ -1,4 +1,6 @@
 <?php
+if ($artists)
+{
     foreach ($eventsByArtists as $artist => $events)
     { ?>
         <div class="p-listev-art">
@@ -17,6 +19,6 @@
                     </div>
                 </a>
                 </div>
-
-  <?php } ?>
-<?php } ?>
+  <?php }
+    }
+} ?>

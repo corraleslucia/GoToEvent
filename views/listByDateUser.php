@@ -1,4 +1,6 @@
 <?php
+if ($dates)
+{
     foreach ($eventsByDate as $date => $events)
     { ?>
         <div class="p-listev-art">
@@ -18,5 +20,6 @@
                 </a>
                 </div>
 
-  <?php } ?>
-<?php } ?>
+  <?php }
+    }
+} ?>

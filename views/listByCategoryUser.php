@@ -1,4 +1,6 @@
 <?php
+if ($categories)
+{
     foreach ($eventsByCategory as $category => $events)
     { ?>
         <div class="p-listev-art">
@@ -18,5 +20,6 @@
                 </a>
                 </div>
 
-  <?php } ?>
-<?php } ?>
+  <?php }
+    }
+} ?>

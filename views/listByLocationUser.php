@@ -1,4 +1,6 @@
 <?php
+if ($locations)
+{
     foreach ($eventsByLocation as $city => $events)
     { ?>
         <div class="p-listev-art">
@@ -18,5 +20,6 @@
                 </a>
                 </div>
 
-  <?php } ?>
-<?php } ?>
+  <?php }
+    }
+} ?>
