@@ -49,6 +49,26 @@ class UserController
 
     }
 
+    public function login($mail, $pass){
+        $user =$this->dao->read($mail);
+        
+        if ($user){
+            if($user[0]->getPass() === $pass){
+                $_SESSION['userLogged'] = $user[0];
+                require(ROOT.'views/homeUser.php');
+            } else{      
+                echo 'Los datos ingresados no son correctos.';
+                require(ROOT.'views/login.php');
+            }          
+        }
+        else{      
+            echo 'Los datos ingresados no son correctos.';
+            require(ROOT.'views/login.php');
+        } 
+       
+    }
 }
+
+
 
 ?>

@@ -17,7 +17,7 @@ namespace views;
   <section class="content">
 
 
-    <form action="User/login" method="POST" class="form-login">
+    <form action="<?php echo BASE ?>User/login" method="POST" class="form-login">
     <h2 class="form-title">Login</h2>
       <div class="form-group">
           <label class="label">E-mail: </label>
