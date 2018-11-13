@@ -52,7 +52,7 @@ class EventSeatController
 
         $location = $this->daoLocation->read($calendar['0']->getLocation());
 
-        $this->add ($calendar, $location->getCapacity());
+        $this->add ($calendar, $location['0']->getCapacity());
     }
 
 

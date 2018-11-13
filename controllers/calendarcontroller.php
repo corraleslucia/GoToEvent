@@ -46,14 +46,15 @@ class CalendarController
 
     }
 
-    public function addMoreCalendars ($id_event)
+    public function addMoreCalendars ($id_event, $val="")
     {
         $event = $this->daoEvent->readId($id_event);
-        $this->add ($event['0']);
+        $this->add ($event['0'], $val);
     }
 
     public function addMoreEventSeats ($id_event)
     {
+        $event = $this->daoEvent->readId($id_event);
         $calendars = $this->dao->readFromEvent($id_event);
         require(ROOT.'views/selectCalendar.php');
     }
@@ -64,35 +65,40 @@ class CalendarController
 
     }
 
-    public function store($date, $time, $id_event, $id_location, $_artists)
+    public function store($date, $time, $id_event, $id_location, $_artists="")
     {
-        $calendar = new Calendar($date, $time, $id_location, $_artists, $id_event);
-
-        try
+        if ($_artists)
         {
-            $this->dao->create($calendar);
+            $calendar = new Calendar($date, $time, $id_location, $_artists, $id_event);
 
-            $readInfo['date'] = $date;
-            $readInfo['time'] = $time;
-            $readInfo['id_event'] = $id_event;
-            $readInfo['id_location'] = $id_location;
-
-            $_calendar= $this->dao->read($readInfo);
-
-            foreach ($_artists as $key => $value)
+            try
             {
-                $_artistInCalendar = new ArtistInCalendar($value, $_calendar['0']->getId());
-                $this->daoAC->create($_artistInCalendar);
+                $this->dao->create($calendar);
+
+                $readInfo['date'] = $date;
+                $readInfo['time'] = $time;
+                $readInfo['id_event'] = $id_event;
+                $readInfo['id_location'] = $id_location;
+
+                $_calendar= $this->dao->read($readInfo);
+
+                foreach ($_artists as $key => $value)
+                {
+                    $_artistInCalendar = new ArtistInCalendar($value, $_calendar['0']->getId());
+                    $this->daoAC->create($_artistInCalendar);
+                }
+
+                $_location = $this->daoLocation->readId($id_location);
+
+                $this->eventSeatController->add($_calendar, $_location['0']->getCapacity());
+            } catch (\PDOException $ex)
+            {
+                $val = "Ya existe un evento en esa fecha, esa hora y ese lugar.";
+                $this->add($this->daoEvent->readId($id_event)['0'],$val);
             }
-
-            $_location = $this->daoLocation->readId($id_location);
-
-            $this->eventSeatController->add($_calendar, $_location->getCapacity());
-        } catch (\PDOException $ex)
-        {
-            $val = "Ya existe un evento en esa fecha, esa hora y ese lugar.";
-            $this->add($this->daoEvent->readId($id_event)['0'],$val);
         }
+        $val = "No ha seleccionado Artistas para la fecha. Vuelva a intentarlo.";
+        $this->addMoreCalendars($id_event, $val);
 
 
     }

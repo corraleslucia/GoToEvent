@@ -21,20 +21,20 @@ include(ROOT.'views/navUser.php');
 
 
     <div class="container">
-        <form action="listForUser" method="POST">
+        <form action="<?php echo BASE ?>event/listForUser" method="POST">
             <div>
                 <p>Mostar:
                 <input type="radio" id="showtype1" name="show" value="byArtist">
-                <label for="contactChoice1"> Por Artista (A-Z) </label>
+                <label for="showtype1"> Por Artista (A-Z) </label>
 
                 <input type="radio" id="showtype2" name="show" value="byCategory">
-                <label for="contactChoice2"> Por Categoria </label>
+                <label for="showtype2"> Por Categoria </label>
 
                 <input type="radio" id="showtype3" name="show" value="byDate">
-                <label for="contactChoice2"> Por Fecha </label>
+                <label for="showtype3"> Por Fecha </label>
 
                 <input type="radio" id="showtype4" name="show" value="byLocation">
-                <label for="contactChoice2"> Por Ciudad </label>
+                <label for="showtype4"> Por Ciudad </label>
 
                 <button type="submit" >Mostrar</button>
                 </p>

@@ -24,7 +24,7 @@ include(ROOT.'views/navAdmin.php');
       <?php }
       ?>
 
-    <form action="store" method="POST" class="form-admin form-med-size">
+    <form action="<?php echo BASE ?>location/store" method="POST" class="form-admin form-med-size">
       <h2 class="form-title">Alta de lugar de evento:</h2>
       <div class="form-group">
         <label class="label-l">Nombre lugar: </label>

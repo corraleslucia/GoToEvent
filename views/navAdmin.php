@@ -22,7 +22,7 @@
             </li>
             <li><a href="<?= BASE ?>home/index">Artistas</a>
                 <ul>
-                    <li><a href="<?= BASE ?>artist/_list">Ver Artistas</a></li>
+                    <li><a href="<?= BASE ?>artist/_list/1">Ver Artistas</a></li>
                     <li><a href="<?= BASE ?>artist/add">Agregar Artistas</a></li>
                 </ul>
             </li>

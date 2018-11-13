@@ -170,7 +170,7 @@ use daos\daodb\Connection as Connection;
 				return new M_Location($p['name'],$p['capacity'], $p['adress'], $p['city'], $p['id_location']);
 			}, $value);
 
-               return count($resp) > 1 ? $resp : $resp['0'];
+               return count($resp) > 0 ? $resp : $resp['0'];
 
 		}
      }

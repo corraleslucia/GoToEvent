@@ -26,7 +26,7 @@ include(ROOT.'views/navAdmin.php');
       <?php }
       ?>
 
-    <form action="store" method="POST" class="form-admin">
+    <form action="<?php echo BASE ?>event/store" method="POST" class="form-admin">
         <h2 class="form-title">Alta de evento:</h2>
         <div class="form-group">
         <label class="label" >Nombre: </label>

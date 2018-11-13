@@ -23,14 +23,14 @@ include(ROOT.'views/navAdmin.php');
           <p> <?php echo $val; ?> </p>
       <?php }
       ?>
-    
-    <form action="store" method="POST" class="form-admin">
+
+    <form action="<?php echo BASE ?>category/store" method="POST" class="form-admin">
       <h2 class="form-title">Alta de categoria:</h2>
       <div class="form-group">
         <label class="label-l" >Descripcion: </label>
         <input class="input-s" type="text" name="cat-name" required>
       </div>
-      
+
       <div class="div-form-button">
         <button type="submit" class ="form-button">Agregar categoria</button>
       </div>

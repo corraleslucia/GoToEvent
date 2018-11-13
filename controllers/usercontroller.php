@@ -1,15 +1,21 @@
 <?php namespace controllers;
 
 use daos\daodb\UserDb as Dao;
+
+use controllers\EventController as C_Event;
+
 use models\User;
 
 class UserController
 {
     protected $dao;
+    protected $eventController;
 
     public function __construct()
     {
         $this->dao= Dao::getInstance();
+        $this->eventController = new C_Event;
+
     }
 
     public function index()
@@ -17,21 +23,23 @@ class UserController
 
     }
 
-    public function add ()
+    public function add ($val="")
     {
-        $val = null;
         require(ROOT.'views/createUserAdmin.php');
     }
 
-    public function register ()
+    public function register ($val="")
     {
-        $val = null;
         require(ROOT.'views/createUser.php');
     }
 
     public function _list ()
     {
         $users = $this->dao->readAll();
+        if(!$users)
+        {
+            $users['0'] = new User ("SIN USUARIOS", "", "-", "-", "", 0);
+        }
         require(ROOT.'views/listUsers.php');
 
     }
@@ -47,12 +55,19 @@ class UserController
 
             $val = "Usuario Creado";
 
-            require(ROOT.'views/createUserAdmin.php');
+            require(ROOT.'views/login.php');
         }
         catch (\PDOException $ex)
         {
             $val = "Ya existe un usuario registrado con ese email.";
-            require(ROOT.'views/createUserAdmin.php');
+            if ($type === "1")
+            {
+                require(ROOT.'views/createUserAdmin.php');
+            }
+            else if ($type === "2")
+            {
+                require(ROOT.'views/createUser.php');
+            }
 
         }
 
@@ -60,26 +75,36 @@ class UserController
 
     public function login($mail, $pass){
         $user =$this->dao->read($mail);
-        
-        if ($user){
-            if($user[0]->getPass() === $pass){
-                $_SESSION['userLogged'] = $user[0];
-                require(ROOT.'views/listEventsByForUsers.php');
-            } else{      
+
+        if ($user['0'])
+        {
+            if($user[0]->getPass() === $pass)
+            {
+                $_SESSION['userLogged'] = $user['0'];
+                if ($user['0']->getType()==="1")
+                {
+                    require(ROOT.'views/listEvents.php');
+                }
+                else if ($user['0']->getType()==="2")
+                {
+                    $this->eventController->listForUser();
+                }
+            } else
+            {
                 echo 'Los datos ingresados no son correctos.';
                 require(ROOT.'views/login.php');
-            }          
+            }
         }
-        else{      
+        else{
             echo 'Los datos ingresados no son correctos.';
             require(ROOT.'views/login.php');
-        } 
-       
+        }
+
     }
 
 
     public function logOut(){
-        unset($_SESSION['userLogged']); 
+        unset($_SESSION['userLogged']);
         require(ROOT.'views/login.php');
     }
 }

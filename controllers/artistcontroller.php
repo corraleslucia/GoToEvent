@@ -24,17 +24,33 @@ class ArtistController
         require(ROOT.'views/createArtist.php');
     }
 
-    public function _list()
+    public function _list($user)
     {
-        if(isset($_SESSION['userLogged'])){
+
+        if(isset($_SESSION['userLogged']))
+        {
             $artists = $this->dao->readAll();
+            if(!$artists)
+            {
+                $artists['0'] = new Artist ("SIN ARTISTAS", 0);
+            }
+            if ($user === "1")
+            {
+                include(ROOT.'views/headerAdmin.php');
+                include(ROOT.'views/navAdmin.php');
+            }
+            else if ($user === "2")
+            {
+                include(ROOT.'views/headerUser.php');
+                include(ROOT.'views/navUser.php');
+            }
             require(ROOT.'views/listArtists.php');
         }
-        else{
+        else
+        {
             echo ('inicie sesion, no saltearas este paso');
             require(ROOT.'views/login.php');
         }
-        
 
     }
 

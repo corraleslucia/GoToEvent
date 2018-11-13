@@ -27,6 +27,10 @@ class CategoryController
     public function _list ()
     {
         $categories = $this->dao->readAll();
+        if(!$categories)
+        {
+            $categories['0'] = new Category ("SIN CATEGORIAS", 0);
+        }
         require(ROOT.'views/listCategories.php');
 
     }

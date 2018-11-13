@@ -34,7 +34,7 @@ namespace views;
       </div>
 
       <div style="text-align:center">
-        <p>No estas resgitrado? <a href="<?php echo BASE ?>user/register">Registrate aquí</a></p>
+        <p>No estas registrado? <a href="<?php echo BASE ?>user/register">Registrate aquí</a></p>
       </div>
     </form>
 
