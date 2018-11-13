@@ -58,6 +58,8 @@ include(ROOT.'views/navAdmin.php');
                                 <p style="font-size:20px"><b><?php echo "Plazas: " ?></b></p>
                             </div>
                             <?php
+                            if ($value->getEventSeats())
+                            {
                                 foreach ($value->getEventSeats() as $_key => $_value)
                                 { ?>
                                     <div class="half mini-box">
@@ -69,13 +71,20 @@ include(ROOT.'views/navAdmin.php');
                                         <br>
                                         <p><?php echo "Remanente: " . $_value->getRemaningQuantity() ?> </p>
                                     </div>
-                        <?php } ?>
-
                         </div>
-                <?php }
-                } ?>
-                <p>SIN FECHAS</p>
-        <?php } ?>
+                          <?php }
+                            }
+                            else
+                            { ?>
+                                <p>SIN PLAZAS</p>
+                      <?php }
+                    }
+                }
+                else
+                { ?>
+                    <p>SIN FECHAS</p>
+          <?php }
+         } ?>
 
 
         </div>

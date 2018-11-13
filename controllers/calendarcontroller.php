@@ -67,8 +67,6 @@ class CalendarController
 
     public function store($date, $time, $id_event, $id_location, $_artists="")
     {
-        if ($_artists)
-        {
             $calendar = new Calendar($date, $time, $id_location, $_artists, $id_event);
 
             try
@@ -96,9 +94,7 @@ class CalendarController
                 $val = "Ya existe un evento en esa fecha, esa hora y ese lugar.";
                 $this->add($this->daoEvent->readId($id_event)['0'],$val);
             }
-        }
-        $val = "No ha seleccionado Artistas para la fecha. Vuelva a intentarlo.";
-        $this->addMoreCalendars($id_event, $val);
+
 
 
     }
