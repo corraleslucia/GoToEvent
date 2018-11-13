@@ -82,9 +82,9 @@ class EventController
 
     }
 
-    public function listForUser($listType)
+    public function listForUser($listType="")
     {
-        if ($listType === "byArtist")
+        if ($listType === "byArtist" || !$listType )
         {
             $artists = $this->daoArtist->readAll();
             if ($artists)
@@ -182,16 +182,18 @@ class EventController
         $event = $this->dao->readID($id_event);
         $calendars = $this->daoCalendar->readFromEvent($id_event);
 
-
-        foreach ($calendars as $key => $value)
+        if ($calendars)
         {
-            $value->setArtists($this->daoArtistsXCalendars->readAllArtistsFromCalendar($value->getId()));
+            foreach ($calendars as $key => $value)
+            {
+                $value->setArtists($this->daoArtistsXCalendars->readAllArtistsFromCalendar($value->getId()));
 
-            $value->setEventSeats($this->daoEventSeat->readAllFromCalendar($value->getId()));
+                $value->setEventSeats($this->daoEventSeat->readAllFromCalendar($value->getId()));
+            }
+
         }
 
         require(ROOT.'views/pickEventSeatUser.php');
-
     }
 
 

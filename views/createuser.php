@@ -24,7 +24,7 @@ namespace views;
 
 
 
-    <form action="store" method="POST" class="form-admin">
+    <form action="<?php echo BASE ?>user/store" method="POST" class="form-admin">
         <h2 class="form-title">Registrate</h2>
         <div class="form-group">
           <label class="label">Mail:</label>
@@ -53,7 +53,7 @@ namespace views;
         </div>
 
         <div style="text-align:center">
-         <p>Ya estas resgitrado? <a href="../home">Logueate aquí</a></p>
+         <p>Ya estas registrado? <a href="<?php echo BASE ?>home/index">Logueate aquí</a></p>
         </div>
 
     </form>

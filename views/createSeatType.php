@@ -23,8 +23,8 @@ include(ROOT.'views/navAdmin.php');
           <p> <?php echo $val; ?> </p>
       <?php }
       ?>
-    
-    <form action="store" method="POST" class="form-admin">
+
+    <form action="<?php echo BASE ?>seatType/store" method="POST" class="form-admin">
       <h2 class="form-title">Alta de tipo plaza:</h2>
       <div class="form-group">
         <label class="label">Nombre: </label>
@@ -33,7 +33,7 @@ include(ROOT.'views/navAdmin.php');
       <div class="div-form-button">
         <button type="submit" class ="form-button">Agregar tipo plaza</button>
       </div>
-      
+
     </form>
 
   </section>

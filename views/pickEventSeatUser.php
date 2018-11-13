@@ -27,6 +27,8 @@ include(ROOT.'views/navUser.php');
             <p><b>FECHAS:</b></p>
 
             <?php
+            if($calendars)
+            {
                 foreach ($calendars as $key => $value)
                 { ?>
                     <div class="element event-elem">
@@ -43,37 +45,42 @@ include(ROOT.'views/navUser.php');
                         <div class="full">
                             <p><b>Artistas: </b></p>
                             <span style="font-size:18px">
+                                <?php
+                                foreach ($value->getArtists() as $_key => $_value)
+                                { ?>
+                                    <?php echo $_value->getIdArtist() . " - "?>
+                                    <?php
+                                }
+                                ?></span>
+                            </div>
+                            <div class="full">
+                                <p style="font-size:20px"><b><?php echo "Plazas: " ?></b></p>
+                            </div>
                             <?php
-                            foreach ($value->getArtists() as $_key => $_value)
-                            { ?>
-                                <?php echo $_value->getIdArtist() . " - "?>
-                            <?php
-                            }
-                            ?></span>
-                        </div>
-                        <div class="full">
-                            <p style="font-size:20px"><b><?php echo "Plazas: " ?></b></p>
-                        </div>
-                        <?php
                             foreach ($value->getEventSeats() as $_key => $_value)
                             { ?>
                                 <div class="half mini-box">
                                     <a class="link-divs" href="<?= BASE ?>ticket/selectTicketOptions/<?php echo $value->getId()?>">
-                                    <p><?php echo "Tipo de Plaza: "  . $_value->getSeatType() ?> </p>
-                                    <br>
-                                    <p><?php echo "Cantidad Total: " . $_value->getTotalQuantity()?> </p>
-                                    <br>
-                                    <p><?php echo "Precio: " . $_value->getPrice()?> </p>
-                                    <br>
-                                    <p><?php echo "Remanente: " . $_value->getRemaningQuantity() ?> </p>
+                                        <p><?php echo "Tipo de Plaza: "  . $_value->getSeatType() ?> </p>
+                                        <br>
+                                        <p><?php echo "Cantidad Total: " . $_value->getTotalQuantity()?> </p>
+                                        <br>
+                                        <p><?php echo "Precio: " . $_value->getPrice()?> </p>
+                                        <br>
+                                        <p><?php echo "Remanente: " . $_value->getRemaningQuantity() ?> </p>
 
                                     </a>
                                 </div>
-                    <?php } ?>
+                            <?php } ?>
 
-                    </div>
+                        </div>
 
-            <?php } ?>
+                    <?php }
+            }
+            else
+            { ?>
+                <p> SIN FECHAS </p>
+      <?php }?>
 
         </div>
 

@@ -24,7 +24,7 @@ include(ROOT.'views/navAdmin.php');
       <?php }
       ?>
 
-    <form action="store" method="POST" class="form-admin">
+    <form action="<?php echo BASE ?>user/store" method="POST" class="form-admin">
         <h2 class="form-title">Registrar Usuario</h2>
         <div class="form-group">
           <label class="label">Mail:</label>
@@ -45,21 +45,21 @@ include(ROOT.'views/navAdmin.php');
           <label class="label">Apellido: </label>
           <input class="input" type="text" name="us-lastname" required>
         </div>
-        
-        <div class="form-group">  
+
+        <div class="form-group">
             <label class="label">Tipo: </label>
 
             <input type="radio" id="client" name="user-type" value="2" checked>
             <label for="client">Cliente</label>
 
             <input type="radio" id="admin" name="user-type" value="1">
-            <label for="admin">Aministrador</label>   
+            <label for="admin">Aministrador</label>
         </div>
 
         <div class="div-form-button">
           <button type="submit" class ="form-button">Agregar usuario</button>
         </div>
-          
+
     </form>
 
   </section>
