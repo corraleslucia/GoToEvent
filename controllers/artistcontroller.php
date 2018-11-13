@@ -26,8 +26,15 @@ class ArtistController
 
     public function _list()
     {
-        $artists = $this->dao->readAll();
-        require(ROOT.'views/listArtists.php');
+        if(isset($_SESSION['userLogged'])){
+            $artists = $this->dao->readAll();
+            require(ROOT.'views/listArtists.php');
+        }
+        else{
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+        
 
     }
 

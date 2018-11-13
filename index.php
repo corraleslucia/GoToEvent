@@ -8,8 +8,8 @@
 
 	require_once "config/request.php";
 	require_once "config/router.php";
-    require_once "daos/daolist/singleton.php";
-
+	require_once "daos/daolist/singleton.php";
+	
     use config\autoload as Autoload;
 	use config\router 	as Router;
 	use config\request 	as Request;

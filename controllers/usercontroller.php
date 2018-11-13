@@ -76,8 +76,11 @@ class UserController
         } 
        
     }
+
+
+    public function logOut(){
+        unset($_SESSION['userLogged']); 
+        require(ROOT.'views/login.php');
+    }
 }
-
-
-
 ?>

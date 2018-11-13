@@ -28,7 +28,7 @@ namespace views;
                 <a href="" >Mi cuenta</a>
             </div>
             <div class="column3-half">
-                <a href="" >Cerrar sesion</a>
+                <a href="<?php echo BASE?>user/logOut" >Cerrar sesion</a>
             </div>
 
         </div>
