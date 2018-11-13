@@ -74,6 +74,7 @@ class UserController
     }
 
     public function login($mail, $pass){
+
         $user =$this->dao->read($mail);
 
         if ($user['0'])
@@ -83,7 +84,7 @@ class UserController
                 $_SESSION['userLogged'] = $user['0'];
                 if ($user['0']->getType()==="1")
                 {
-                    require(ROOT.'views/listEvents.php');
+                    $this->eventController->_list();
                 }
                 else if ($user['0']->getType()==="2")
                 {

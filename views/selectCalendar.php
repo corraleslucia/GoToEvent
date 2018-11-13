@@ -22,41 +22,31 @@ include(ROOT.'views/navAdmin.php');
 
         <form action="<?php echo BASE ?>eventSeat/addMoreEventSeats" method="POST" class="form-admin">
         <h2 class="form-title">Agregar a fecha</h2>
-        <div class="form-group">
-            <label>Evento: <?php echo $event['0']->getDescription()?>  </label>
-            <?php if ($calendars)
-            { ?>
-                <label>Fecha: </label>
-                <select class="form-control" name="id_calendar" required>
-                <?php foreach ($calendars as $key => $value)
-                {
-                    ?>
-                    <option value = "<?php echo $value->getId()?>"> <?php echo $value->getDate() . " - " . $value->gettime() . " - " . $value->getLocation() ?> </option>
+            <div class="form-group">
+                <label>Evento: <?php echo $event['0']->getDescription()?>  </label>
+                <?php if ($calendars)
+                      { ?>
+                            <label>Fecha: </label>
+                            <select class="form-control" name="id_calendar" required>
+                            <?php foreach ($calendars as $key => $value)
+                            {
+                                ?>
+                                <option value = "<?php echo $value->getId()?>"> <?php echo $value->getDate() . " - " . $value->gettime() . " - " . $value->getLocation() ?> </option>
 
-           <?php } ?>
-               </select>
+                       <?php } ?>
+                           </select>
+                           <button type="submit" class ="form-button">Seleccionar Fecha</button>
+                <?php }
+                      else
+                      { ?>
+                    <p> No hay fechas cargadas.
+                    <span>
+                        <a class ="form-secondary-button" href="<?php echo BASE ?>event/selectEvent/f">Nueva Fecha</a>
+                    </span>
 
-       <?php }
-            else
-            { ?>
-                <p> No hay fechas cargadas.
-
-      <?php }?>
-        </div>
-
-      <div class="div-form-button">
-    <?php if (!$calendars)
-          { ?>
-              <button type="button" class ="form-button"> <a href="<?= BASE ?>event/selectEvent/f">Agregar Fecha a Evento</a></button>
-    <?php }
-          else
-          { ?>
-              <button type="submit" class ="form-button">Seleccionar Fecha</button>
-    <?php } ?>
-      </div>
-
-    </form>
-
+                <?php }?>
+            </div>
+        </form>
   </section>
 </body>
 </html>

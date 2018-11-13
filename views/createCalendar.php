@@ -69,7 +69,9 @@ include(ROOT.'views/navAdmin.php');
         }
         else
         { ?>
-            <p> No hay artistas cargados. Cargue algun artista para continuar. </p>
+            <span>
+                  <a class ="form-secondary-button" href="<?php echo BASE ?>artist/add">Nuevo Artista</a>
+            </span>
   <?php } ?>
 
         </div>
@@ -85,12 +87,12 @@ include(ROOT.'views/navAdmin.php');
         var div = document.getElementById("checkbox-div");
         var checked = false;
         function handleButtonClick(e){
-            for (let i = 0; i < div.children.length; i++) {            
-                if(div.children[i].tagName === "INPUT"){      
+            for (let i = 0; i < div.children.length; i++) {
+                if(div.children[i].tagName === "INPUT"){
                     if(div.children[i].checked) {
                         checked = true;
                     }
-                }       
+                }
             }
             if(!checked) {
                 e.preventDefault();
@@ -99,7 +101,7 @@ include(ROOT.'views/navAdmin.php');
                 document.getElementById("content").insertBefore(p ,document.getElementById("form"));
             }
         }
-        
+
     </script>
 
 </body>

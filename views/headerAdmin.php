@@ -22,9 +22,9 @@ namespace views;
         </div>
         <div class="column3 admin">
             <h3>Administrador:  /*Nombre del admin */<?php    ?></h3>
-            
+
             <div class="column3-bot">
-                <a href="" >Cerrar sesion</a>
+                <a href="<?php echo BASE?>user/logOut" >Cerrar sesion</a>
             </div>
 
         </div>

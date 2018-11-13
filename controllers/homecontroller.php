@@ -17,7 +17,7 @@ class HomeController
         {
             if ($_SESSION['userLogged']->getType()==="1")
             {
-                require(ROOT.'views/listEvents.php');
+                $this->eventController->_list();
             }
             else if ($_SESSION['userLogged']->getType()==="2")
             {
