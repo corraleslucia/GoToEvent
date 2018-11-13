@@ -43,11 +43,16 @@ include(ROOT.'views/navAdmin.php');
 
                 <?php } ?>
             </select>
+            <span>
+                  <a class ="form-secondary-button" href="<?php echo BASE ?>category/add">Nueva categoria</a>
+            </span>
 
         </div>
-      <div class="div-form-button">
-        <button type="submit" class ="form-button">Agregar evento</button>
-      </div>
+
+
+        <div class="div-form-button">
+          <button type="submit" class ="form-button">Agregar evento</button>
+        </div>
 
 
     </form>

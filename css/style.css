@@ -72,6 +72,28 @@ section {
     transition-duration: .5s;
 }
 
+.form-secondary-button {
+    text-align: center;
+    float: right;
+    margin-right: 35px;
+    border-radius: 6px;
+    width: 30%;
+    font-family: Arial;
+    font-size: 14px;
+    padding: 3px;
+    text-decoration: none;
+    color: black;
+    border: 1px solid black;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2), 0 3px 10px 0 rgba(0,0,0,0.19);
+    background-color: lightgoldenrodyellow;
+}
+
+.form-secondary-button:hover {
+    background: rgb(252, 179, 44);
+    transition-property: background;
+    transition-duration: .5s;
+}
+
 .label {
     display: inline-block;
     width: 90px;

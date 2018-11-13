@@ -17,19 +17,19 @@ include(ROOT.'views/navAdmin.php');
 
 </head>
 <body>
-  <section class="content">
+  <section class="content" id="content">
 
       <?php if ($val)
       {?>
           <p> <?php echo $val; ?> </p>
       <?php }
       ?>
-
-    <form action="<?php echo BASE ?>calendar/store" method="POST" class="form-admin form-med-size">
+    <p id="msg"></p>
+    <form action="<?php echo BASE ?>calendar/store" method="POST" class="form-admin form-med-size" id="form">
         <h2 class="form-title">Alta de calendario:</h2>
         <div class="form-group">
             <label class="label">Fecha: </label>
-            <input type="date" name="cal-date" required>
+            <input type="date" name="cal-date" min=<?php $hoy=date("Y-m-d"); echo $hoy;?> required>
         </div>
 
         <div class="form-group">
@@ -56,22 +56,44 @@ include(ROOT.'views/navAdmin.php');
 
         </div>
 
-        <div class="form-group" >
+        <div class="form-group" id="checkbox-div">
             <label>Artista/s: </label><br>
             <?php foreach ($artists as $key => $value)
             {
                 ?>
-                <input type="checkbox" name="artists[]" value="<?php echo $value->getId()?>"><?php echo $value->getName()?><br>
+                <input id="input" type="checkbox" name="artists[]" value="<?php echo $value->getId()?>"><?php echo $value->getName()?><br>
 
             <?php } ?>
 
         </div>
 
         <div class="div-form-button">
-            <button type="submit" class ="form-button">Agregar calendario</button>
+            <button type="submit" class ="form-button" onClick="handleButtonClick(event)" id="btn">Agregar calendario</button>
         </div>
     </form>
 
-  </section>
+    </section>
+    <script>
+        console.log("script");
+        var div = document.getElementById("checkbox-div");
+        var checked = false;
+        function handleButtonClick(e){
+            for (let i = 0; i < div.children.length; i++) {            
+                if(div.children[i].tagName === "INPUT"){      
+                    if(div.children[i].checked) {
+                        checked = true;
+                    }
+                }       
+            }
+            if(!checked) {
+                e.preventDefault();
+                var p = document.getElementById("msg");
+                p.innerHTML = "Debe seleccionar un artista";
+                document.getElementById("content").insertBefore(p ,document.getElementById("form"));
+            }
+        }
+        
+    </script>
+
 </body>
 </html>
