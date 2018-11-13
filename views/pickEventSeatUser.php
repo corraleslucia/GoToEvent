@@ -60,16 +60,25 @@ include(ROOT.'views/navUser.php');
                             foreach ($value->getEventSeats() as $_key => $_value)
                             { ?>
                                 <div class="half mini-box">
-                                    <a class="link-divs" href="<?= BASE ?>ticket/selectTicketOptions/<?php echo $value->getId()?>">
+                                    <?php if ($_value->getRemaningQuantity() === "0")
+                                    { ?>
                                         <p><?php echo "Tipo de Plaza: "  . $_value->getSeatType() ?> </p>
                                         <br>
-                                        <p><?php echo "Cantidad Total: " . $_value->getTotalQuantity()?> </p>
-                                        <br>
-                                        <p><?php echo "Precio: " . $_value->getPrice()?> </p>
-                                        <br>
-                                        <p><?php echo "Remanente: " . $_value->getRemaningQuantity() ?> </p>
+                                        <p><?php echo "SIN DISPONIBILIDAD"?> </p>
+                              <?php }
+                                    else
+                                    { ?>
+                                        <a class="link-divs" href="<?= BASE ?>ticket/selectTicketOptions/<?php echo $value->getId()?>">
+                                            <p><?php echo "Tipo de Plaza: "  . $_value->getSeatType() ?> </p>
+                                            <br>
+                                            <p><?php echo "Cantidad Total: " . $_value->getTotalQuantity()?> </p>
+                                            <br>
+                                            <p><?php echo "Precio: " . $_value->getPrice()?> </p>
+                                            <br>
+                                            <p><?php echo "Remanente: " . $_value->getRemaningQuantity() ?> </p>
 
-                                    </a>
+                                        </a>
+                              <?php } ?>
                                 </div>
                             <?php } ?>
 

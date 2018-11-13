@@ -88,7 +88,7 @@ class UserController
                 }
                 else if ($user['0']->getType()==="2")
                 {
-                    $this->eventController->listForUser();
+                    $this->eventController->listForUser("byArtist");
                 }
             } else
             {
