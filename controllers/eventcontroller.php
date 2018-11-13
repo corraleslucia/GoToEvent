@@ -52,6 +52,7 @@ class EventController
 
     public function _list ($showType ="")
     {
+
         if ($showType === "all")
         {
             $events = $this->dao->readAllAtoZ();
