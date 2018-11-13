@@ -84,7 +84,7 @@ use daos\daodb\Connection as Connection;
            *
            */
           public function readAll() {
-               $sql = "SELECT * FROM artists";
+               $sql = "SELECT * FROM artists order by name asc";
 
                try {
                     $this->connection = Connection::getInstance();

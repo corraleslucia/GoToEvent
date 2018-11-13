@@ -18,7 +18,13 @@ include(ROOT.'views/navAdmin.php');
 </head>
 <body>
   <section class="content">
-    
+
+      <?php if ($val)
+      {?>
+          <p> <?php echo $val; ?> </p>
+      <?php }
+      ?>
+
     <form action="<?php echo BASE ?>calendar/store" method="POST" class="form-admin form-med-size">
         <h2 class="form-title">Alta de calendario:</h2>
         <div class="form-group">
@@ -61,9 +67,9 @@ include(ROOT.'views/navAdmin.php');
 
         </div>
 
-        <div class="div-form-button">             
+        <div class="div-form-button">
             <button type="submit" class ="form-button">Agregar calendario</button>
-        </div> 
+        </div>
     </form>
 
   </section>

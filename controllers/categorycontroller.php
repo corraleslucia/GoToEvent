@@ -35,11 +35,22 @@ class CategoryController
     {
         $category = new Category($description);
 
-        $this->dao->create($category);
+        try
+        {
+            $this->dao->create($category);
 
-        $val = "Categoria Creada";
+            $val = "Categoria Creada";
 
-        require(ROOT.'views/createCategory.php');
+            require(ROOT.'views/createCategory.php');
+
+        }
+        catch (\PDOException $ex)
+        {
+            $val = "La categoria ya existe en la base de datos";
+
+            require(ROOT.'views/createCategory.php');
+        }
+
 
     }
 

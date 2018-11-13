@@ -17,8 +17,23 @@ include(ROOT.'views/navAdmin.php');
 </head>
 <body>
   <section class="content">
-    <h3>PROXIMOS EVENTOS</h3>
+    <h3>EVENTOS</h3>
+
+
     <div class="container">
+        <form action="_list" method="POST">
+            <div>
+                <p>Mostar:
+                <input type="radio" id="showtype1" name="show" value="all">
+                <label for="contactChoice1"> Todos (A-Z) </label>
+
+                <input type="radio" id="showtype2" name="show" value="valid">
+                <label for="contactChoice2"> Vigentes </label>
+
+                <button type="submit" >Mostrar</button>
+                </p>
+            </div>
+        </form>
         <?php
             foreach ($events as $key => $value) {
 
