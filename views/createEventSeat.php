@@ -46,6 +46,11 @@ include(ROOT.'views/navAdmin.php');
 
                 <?php } ?>
             </select>
+
+            <span>
+                  <a class ="form-secondary-button " href="<?php echo BASE ?>seatType/add">Nuevo Tipo de Plaza</a>
+            </span>
+
         </div>
 
 
