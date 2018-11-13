@@ -64,7 +64,7 @@ class UserController
         if ($user){
             if($user[0]->getPass() === $pass){
                 $_SESSION['userLogged'] = $user[0];
-                require(ROOT.'views/homeUser.php');
+                require(ROOT.'views/listEventsByForUsers.php');
             } else{      
                 echo 'Los datos ingresados no son correctos.';
                 require(ROOT.'views/login.php');

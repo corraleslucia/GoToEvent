@@ -1,6 +1,5 @@
 <?php
 namespace views;
-<<<<<<< HEAD
 ?>
 
 <!DOCTYPE html>
@@ -24,9 +23,3 @@ namespace views;
   </section>
 </body>
 </html>
-=======
-
-include('headerUser.php');
-include('navUser.php');
- ?>
->>>>>>> a3e2a4c1dc7e373513aa3109efe28f6be08ff7eb
