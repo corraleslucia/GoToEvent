@@ -31,13 +31,16 @@ include(ROOT.'views/navUser.php');
                 <span style="font-size:18px">
                     <?php
                     foreach ($calendar['0']->getArtists() as $_key => $_value)
-                    { 
+                    {
                          echo $_value->getIdArtist() ?> <br>
-                        
+
                 <?php }
                 ?></span>
                 <div class="element event-elem">
-                    <form class="form-cart" action="" method="POST" >
+                    <form class="form-cart" action="<?php echo BASE ?>cart/addToCart" method="POST" >
+                        <input class="input" type="hidden" name="id_calendar" value="<?php $calendar['0']->getId() ?>" >
+                        <input class="input" type="hidden" name="seatType" value="<?php $eventSeat['0']->getSeatType()?>" >
+                        <input class="input" type="hidden" name="price" value="<?php $eventSeat['0']->getPrice()?>" >
                         <p><?php echo $eventSeat['0']->getSeatType()?>
                             <label class="label" >Cantidad: </label>
                             <input id="input-cant" class="input-xs" type="number" name="cant" required>
@@ -47,9 +50,9 @@ include(ROOT.'views/navUser.php');
                         </p>
                         <div style="text-align: center">
                             <button class="secondary-button" type="submit" >Agregar al carrito</button>
-                            <a class="secondary-button" href="<?php echo BASE ?>"">Volver</a>
+                            <a class="secondary-button" href="<?= BASE ?>event/showEventDetailsForUser/<?php echo $event['0']->getId()?>">Volver</a>
                         </div>
-                        
+
                     </form>
                 </div>
         </div>

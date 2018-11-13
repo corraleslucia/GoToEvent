@@ -20,11 +20,20 @@ class ArtistController
 
     public function add ()
     {
-        $val = null;
-        require(ROOT.'views/createArtist.php');
+        if(isset($_SESSION['userLogged']))
+        {
+            $val = null;
+            require(ROOT.'views/createArtist.php');
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+
     }
 
-    public function _list($user)
+    public function _list()
     {
 
         if(isset($_SESSION['userLogged']))
@@ -34,12 +43,12 @@ class ArtistController
             {
                 $artists['0'] = new Artist ("SIN ARTISTAS", 0);
             }
-            if ($user === "1")
+            if ($_SESSION['userLogged']->getType() === "1")
             {
                 include(ROOT.'views/headerAdmin.php');
                 include(ROOT.'views/navAdmin.php');
             }
-            else if ($user === "2")
+            else if ($_SESSION['userLogged']->getType() === "2")
             {
                 include(ROOT.'views/headerUser.php');
                 include(ROOT.'views/navUser.php');
@@ -57,20 +66,27 @@ class ArtistController
 
     public function store($name)
     {
-        $artist = new Artist($name);
-
-        try
+        if(isset($_SESSION['userLogged']))
         {
-            $this->dao->create($artist);
-            $val = "Artista Creado";
-            require(ROOT.'views/createArtist.php');
-        }
-        catch (\PDOException $ex)
-        {
-            $val = "El artista ya existe en la base de datos.";
-            require(ROOT.'views/createArtist.php');
-        }
+            $artist = new Artist($name);
 
+            try
+            {
+                $this->dao->create($artist);
+                $val = "Artista Creado";
+                require(ROOT.'views/createArtist.php');
+            }
+            catch (\PDOException $ex)
+            {
+                $val = "El artista ya existe en la base de datos.";
+                require(ROOT.'views/createArtist.php');
+            }
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
     }
 
 }

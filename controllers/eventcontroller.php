@@ -45,121 +45,185 @@ class EventController
     }
     public function add ($val="")
     {
-
-        $categories = $this->daoCategory->readAll();
-        require(ROOT.'views/createEvent.php');
+        if(isset($_SESSION['userLogged']))
+        {
+            $categories = $this->daoCategory->readAll();
+            require(ROOT.'views/createEvent.php');
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
     }
 
     public function _list ($showType ="")
     {
+        if(isset($_SESSION['userLogged']))
+        {
+            if ($showType === "all")
+            {
+                $events = $this->dao->readAllAtoZ();
+                if(!$events)
+                {
+                    $events['0'] = new Event ("SIN EVENTOS", "-");
+                }
+                require(ROOT.'views/listEvents.php');
+            }
+            else if ($showType === "valid")
+            {
+                $events = $this->dao->readAllValid();
+                if(!$events)
+                {
+                    $events['0'] = new Event ("SIN EVENTOS", "-");
+                }
+                require(ROOT.'views/listEvents.php');
+            }
+            else if (!$showType)
+            {
+                $events = $this->dao->readAll();
+                if(!$events)
+                {
+                    $events['0'] = new Event ("SIN EVENTOS", "-");
+                }
+                require(ROOT.'views/listEvents.php');
+            }
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+    }
 
-        if ($showType === "all")
+
+    public function listForUser($listType="", $val="")
+    {
+        var_dump($_SESSION);
+        if(isset($_SESSION['userLogged']))
         {
-            $events = $this->dao->readAllAtoZ();
-            if(!$events)
+            if ($listType === "byArtist" || !$listType )
             {
-                $events['0'] = new Event ("SIN EVENTOS", "-");
+                $artists = $this->daoArtist->readAll();
+                if ($artists)
+                {
+                    $eventsByArtists = array();
+
+                    foreach ($artists as $key => $value)
+                    {
+                        $eventsByArtists [$value->getName()] = $this->dao->readEventsFromArtist($value->getId());
+                    }
+                }
             }
-            require(ROOT.'views/listEvents.php');
+            else if ($listType === "byCategory")
+            {
+                $categories = $this->daoCategory->readAll();
+                if ($categories)
+                {
+                    $eventsByCategory = array();
+                    foreach ($categories as $key => $value)
+                    {
+                        $eventsByCategory [$value->getDescription()] = $this->dao->readEventsFromCategory($value->getId());
+                    }
+                }
+
+            }
+            else if ($listType === "byDate")
+            {
+                $dates = $this->daoCalendar->readAllMonthYearFromCalendars();
+                if ($dates)
+                {
+                    $eventsByDate = array();
+                    foreach ($dates as $key => $value)
+                    {
+                        $eventsByDate [$value['monthName'].'-'.$value['year']] = $this->dao->readEventsFromDate($value['month'], $value['year']);
+                    }
+                }
+
+
+            }
+            else if ($listType === "byLocation")
+            {
+                $locations = $this->daoLocation->readAll();
+                if ($locations)
+                {
+                    $eventsByLocation = array ();
+                    foreach ($locations as $key => $value)
+                    {
+                        $eventsByLocation [$value->getCity()] = $this->dao->readEventsFromLocation($value->getCity());
+                    }
+                }
+
+            }
+
+            require(ROOT.'views/listEventsByForUsers.php');
         }
-        else if ($showType === "valid")
+        else
         {
-            $events = $this->dao->readAllValid();
-            if(!$events)
-            {
-                $events['0'] = new Event ("SIN EVENTOS", "-");
-            }
-            require(ROOT.'views/listEvents.php');
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
         }
-        else if (!$showType)
+    }
+
+    public function selectEvent ($type="")
+    {
+        if(isset($_SESSION['userLogged']))
         {
             $events = $this->dao->readAll();
             if(!$events)
             {
-                $events['0'] = new Event ("SIN EVENTOS", "-");
+                $events['0'] = new Event ("SIN EVENTOS", 0);
             }
-            require(ROOT.'views/listEvents.php');
+            require(ROOT.'views/selectEvent.php');
         }
-
-    }
-
-    public function listForUser($listType="")
-    {
-        if ($listType === "byArtist" || !$listType )
+        else
         {
-            $artists = $this->daoArtist->readAll();
-            if ($artists)
-            {
-                $eventsByArtists = array();
-
-                foreach ($artists as $key => $value)
-                {
-                    $eventsByArtists [$value->getName()] = $this->dao->readEventsFromArtist($value->getId());
-                }
-            }
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
         }
-        else if ($listType === "byCategory")
-        {
-            $categories = $this->daoCategory->readAll();
-            if ($categories)
-            {
-                $eventsByCategory = array();
-                foreach ($categories as $key => $value)
-                {
-                    $eventsByCategory [$value->getDescription()] = $this->dao->readEventsFromCategory($value->getId());
-                }
-            }
-
-        }
-        else if ($listType === "byDate")
-        {
-            $dates = $this->daoCalendar->readAllMonthYearFromCalendars();
-            if ($dates)
-            {
-                $eventsByDate = array();
-                foreach ($dates as $key => $value)
-                {
-                    $eventsByDate [$value['monthName'].'-'.$value['year']] = $this->dao->readEventsFromDate($value['month'], $value['year']);
-                }
-            }
-
-
-        }
-        else if ($listType === "byLocation")
-        {
-            $locations = $this->daoLocation->readAll();
-            if ($locations)
-            {
-                $eventsByLocation = array ();
-                foreach ($locations as $key => $value)
-                {
-                    $eventsByLocation [$value->getCity()] = $this->dao->readEventsFromLocation($value->getCity());
-                }
-            }
-
-        }
-
-        require(ROOT.'views/listEventsByForUsers.php');
-    }
-
-    public function selectEvent ($type)
-    {
-        $events = $this->dao->readAll();
-        if(!$events)
-        {
-            $events['0'] = new Event ("SIN EVENTOS", 0);
-        }
-        require(ROOT.'views/selectEvent.php');
 
     }
 
     public function showEventDetails ($id_event = "")
     {
-        $calendars = null;
-        if ($id_event)
+        if(isset($_SESSION['userLogged']))
+        {
+            $calendars = null;
+            if ($id_event)
+            {
+                $event = $this->dao->readID($id_event);
+                $calendars = $this->daoCalendar->readFromEvent($id_event);
+                if ($calendars)
+                {
+                    foreach ($calendars as $key => $value)
+                    {
+                        $value->setArtists($this->daoArtistsXCalendars->readAllArtistsFromCalendar($value->getId()));
+
+                        $value->setEventSeats($this->daoEventSeat->readAllFromCalendar($value->getId()));
+                    }
+                }
+            }
+            else
+            {
+                $event['0'] = new Event ("SIN EVENTOS", "-");
+            }
+            require(ROOT.'views/showEvent.php');
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+
+    }
+
+    public function showEventDetailsForUser ($id_event="")
+    {
+        if(isset($_SESSION['userLogged']))
         {
             $event = $this->dao->readID($id_event);
             $calendars = $this->daoCalendar->readFromEvent($id_event);
+
             if ($calendars)
             {
                 foreach ($calendars as $key => $value)
@@ -168,60 +232,48 @@ class EventController
 
                     $value->setEventSeats($this->daoEventSeat->readAllFromCalendar($value->getId()));
                 }
+
+            }
+
+            require(ROOT.'views/pickEventSeatUser.php');
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+    }
+
+
+
+    public function store($description="",$category="")
+    {
+        if(isset($_SESSION['userLogged']))
+        {
+            $event = new Event($description, $category);
+
+            try
+            {
+                $this->dao->create($event);
+
+                $_event = $this->dao->read($description);
+
+                $this->calendarController->add($_event['0']);
+
+            } catch (\PDOException $ex)
+            {
+                $val = "El evento ya existe en la base de datos.";
+
+                $this->add($val);
             }
         }
         else
         {
-            $event['0'] = new Event ("SIN EVENTOS", "-");
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
         }
-        require(ROOT.'views/showEvent.php');
-
     }
 
-    public function showEventDetailsForUser ($id_event)
-    {
-        $event = $this->dao->readID($id_event);
-        $calendars = $this->daoCalendar->readFromEvent($id_event);
-
-        if ($calendars)
-        {
-            foreach ($calendars as $key => $value)
-            {
-                $value->setArtists($this->daoArtistsXCalendars->readAllArtistsFromCalendar($value->getId()));
-
-                $value->setEventSeats($this->daoEventSeat->readAllFromCalendar($value->getId()));
-            }
-
-        }
-
-        require(ROOT.'views/pickEventSeatUser.php');
-    }
-
-
-
-    public function store($description,$category)
-    {
-        $event = new Event($description, $category);
-
-        try
-        {
-            $this->dao->create($event);
-
-            $_event = $this->dao->read($description);
-
-            $this->calendarController->add($_event['0']);
-
-        } catch (\PDOException $ex)
-        {
-            $val = "El evento ya existe en la base de datos.";
-
-            $this->add($val);
-        }
-
-
-
-
-    }
 }
 
 ?>
