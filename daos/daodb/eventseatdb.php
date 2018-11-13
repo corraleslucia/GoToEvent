@@ -65,6 +65,30 @@ class EventSeatDb extends singleton implements IDao
      /**
       *
       */
+      public function readId($id) {
+
+          $sql = "SELECT st.name as id_seat_type, es.total_quantity as total_quantity, es.price as price, es.id_calendar as id_calendar, es.remaning_quantity as remaning_quantity, es.id_event_seat as id_event_seat FROM event_seats es inner join seats_type st on es.id_seat_type = st.id_seats_type  where id_event_seat = :id_event_seat";
+
+          $parameters['id_event_seat'] = $id;
+
+          try {
+               $this->connection = Connection::getInstance();
+               $resultSet = $this->connection->execute($sql, $parameters);
+          } catch(Exception $ex) {
+              throw $ex;
+          }
+
+
+          if(!empty($resultSet))
+               return $this->mapear($resultSet);
+          else
+               return false;
+     }
+
+
+     /**
+      *
+      */
      public function readAll() {
           $sql = "SELECT * FROM event_seats";
 
