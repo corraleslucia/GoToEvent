@@ -38,12 +38,8 @@ class Ticket
         return $this->seatType;
     }
 
-<<<<<<< HEAD
-    public function getQuantity(){
-=======
     public function getQuantity()
     {
->>>>>>> f684931bafa6e65711090be51e00dd5ec547ad5d
         return $this->quantity;
     }
     public function getPrice()

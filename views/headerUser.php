@@ -17,9 +17,19 @@ namespace views;
             <h2>GoToEvent</h2>
             <img src="" alt="">
         </div>
+        <?php
+        if(isset($_SESSION['cart']['0'])){  ?>
+        <div class="column2 column2-cart-add">
+            <a href=""><img src="<?= BASE ?>media/carrito.png" alt=""> </a>
+        </div>
+        <?php
+        }else { ?>
         <div class="column2">
             <a href=""><img src="<?= BASE ?>media/carrito.png" alt=""> </a>
         </div>
+        <?php
+        } ?>
+        
         <div class="column3">
             <h3>
                 Logueado como: <?php    ?>

@@ -208,6 +208,10 @@ header.general{
     background-color: rgb(145, 143, 143);
 }
 
+.column2-cart-add a{
+    background-color: rgb(252, 179, 44);
+}
+
 
 .column3{
     width: 30%;
