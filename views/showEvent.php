@@ -71,18 +71,20 @@ include(ROOT.'views/navAdmin.php');
                                         <br>
                                         <p><?php echo "Remanente: " . $_value->getRemaningQuantity() ?> </p>
                                     </div>
-                        </div>
                           <?php }
+                          ?>
+                        </div>
+                        <?php
                             }
                             else
                             { ?>
-                                <p>SIN PLAZAS</p>
+                                <div class="half mini-box"><p>SIN PLAZAS</p></div>
                       <?php }
                     }
                 }
                 else
                 { ?>
-                    <p>SIN FECHAS</p>
+                    <div class="half mini-box"><p>SIN FECHAS</p></div>
           <?php }
          } ?>
 

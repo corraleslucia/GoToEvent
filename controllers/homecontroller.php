@@ -21,7 +21,7 @@ class HomeController
             }
             else if ($_SESSION['userLogged']->getType()==="2")
             {
-                $this->eventController->listForUser();
+                $this->eventController->listForUser("byArtist");
             }
         }
         else

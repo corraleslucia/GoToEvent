@@ -28,7 +28,7 @@
             </li>
             <li><a href="<?= BASE ?>home/index">Ver Artistas</a>
                 <ul>
-                    <li><a href="<?= BASE ?>artist/_list/2">Ver Artistas</a></li>
+                    <li><a href="<?= BASE ?>artist/_list">Ver Artistas</a></li>
                 </ul>
             </li>
             <li><a href="<?= BASE ?>home/index">Mis Tickets</a>

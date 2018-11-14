@@ -37,32 +37,39 @@ class EventSeatController
      */
     public function add ($_calendar, $locationCapacity, $val="")
     {
+        if(isset($_SESSION['userLogged']))
+        {
+            $seatsTypes = $this->daoSeatType->readAll();
 
-        $seatsTypes = $this->daoSeatType->readAll();
+            $availableCapacity = $this->getAvailableCapacity ($locationCapacity, $_calendar['0']->getId());
 
-        $availableCapacity = $this->getAvailableCapacity ($locationCapacity, $_calendar['0']->getId());
-
-        require(ROOT.'views/createEventSeat.php');
+            require(ROOT.'views/createEventSeat.php');
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
 
     }
 
     public function addMoreEventSeats ($id_calendar)
     {
-        $calendar = $this->daoCalendar->readId($id_calendar);
+        if(isset($_SESSION['userLogged']))
+        {
+            $calendar = $this->daoCalendar->readId($id_calendar);
 
-        $location = $this->daoLocation->read($calendar['0']->getLocation());
+            $location = $this->daoLocation->read($calendar['0']->getLocation());
 
-        $this->add ($calendar, $location['0']->getCapacity());
+            $this->add ($calendar, $location['0']->getCapacity());
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
     }
 
-
-    /**
-     *
-     */
-    public function _list ()
-    {
-
-    }
 
 
     /**
@@ -70,11 +77,19 @@ class EventSeatController
      */
     public function getAvailableCapacity ($totalCapacity, $id_calendar)
     {
-        $usedCapacity = $this->dao->usedCapacityFromCalendar ($id_calendar);
+        if(isset($_SESSION['userLogged']))
+        {
+            $usedCapacity = $this->dao->usedCapacityFromCalendar ($id_calendar);
 
-        $availableCapacity = $totalCapacity - $usedCapacity;
+            $availableCapacity = $totalCapacity - $usedCapacity;
 
-        return $availableCapacity;
+            return $availableCapacity;
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
 
     }
 
@@ -84,40 +99,47 @@ class EventSeatController
      */
     public function store($locationCapacity,$calendar,$seatType,$totalQuantity,$price,$buttonAction)
     {
-        $eventSeat = new EventSeat($seatType,$totalQuantity,$price,$calendar);
-
-        $_calendar = $this->daoCalendar->readID($calendar);
-
-        try
+        if(isset($_SESSION['userLogged']))
         {
-            $this->dao->create($eventSeat);
+            $eventSeat = new EventSeat($seatType,$totalQuantity,$price,$calendar);
 
+            $_calendar = $this->daoCalendar->readID($calendar);
 
-
-            if ($buttonAction === "continue")
+            try
             {
+                $this->dao->create($eventSeat);
 
-                $this->add($_calendar, $locationCapacity );
+
+
+                if ($buttonAction === "continue")
+                {
+
+                    $this->add($_calendar, $locationCapacity );
+
+                }
+                else if ($buttonAction === "end")
+                {
+                    $val = "Plaza Creada.";
+
+                    $eventSeats = $this->dao->readAllFromCalendar($_calendar['0']->getId());
+
+
+                    require(ROOT.'views/listEventSeatsForCalendar.php');
+                }
+
+            } catch (\PDOException $ex)
+            {
+                $val = "Ya existe esa plaza para esa fecha.";
+
+                $this->add($_calendar, $locationCapacity, $val );
 
             }
-            else if ($buttonAction === "end")
-            {
-                $val = "Plaza Creada.";
-
-                $eventSeats = $this->dao->readAllFromCalendar($_calendar['0']->getId());
-
-
-                require(ROOT.'views/listEventSeatsForCalendar.php');
-            }
-
-        } catch (\PDOException $ex)
-        {
-            $val = "Ya existe esa plaza para esa fecha.";
-
-            $this->add($_calendar, $locationCapacity, $val );
-
         }
-
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
     }
 }
 
