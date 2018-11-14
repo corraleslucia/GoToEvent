@@ -38,12 +38,14 @@ include(ROOT.'views/navUser.php');
                 ?></span>
                 <div class="element event-elem">
                     <form class="form-cart" action="<?php echo BASE ?>cart/addToCart" method="POST" >
-                        <input class="input" type="hidden" name="id_calendar" value="<?php $calendar['0']->getId() ?>" >
-                        <input class="input" type="hidden" name="seatType" value="<?php $eventSeat['0']->getSeatType()?>" >
-                        <input class="input" type="hidden" name="price" value="<?php $eventSeat['0']->getPrice()?>" >
+                        <input class="input" type="hidden" name="id_calendar" value="<?php echo $calendar['0']->getId() ?>" >
+                        <input class="input" type="hidden" name="seatType" value="<?php echo $eventSeat['0']->getSeatType()?>" >
+                        <input class="input" type="hidden" name="price" value="<?php echo $eventSeat['0']->getPrice()?>" >
                         <p><?php echo $eventSeat['0']->getSeatType()?>
                             <label class="label" >Cantidad: </label>
-                            <input id="input-cant" class="input-xs" type="number" name="cant" required>
+                            <input id="input-cant" class="input-xs" type="number" name="cant" max="<?php echo $eventSeat['0']->getRemaningQuantity()?>"
+                            oninvalid="setCustomValidity('La cantidad supera la disponibilidad. Máximo disponible <?php echo $eventSeat['0']->getRemaningQuantity()?> ')"
+                            onkeydown="try{setCustomValidity('')}catch(e){}" required>
                             <?php echo '$' . $eventSeat['0']->getPrice() . '  -  ' ?>
                             <span id="totalprice">Total: $0</span>
                             <button class="form-secondary-button" type="button" onClick="getTotal()">Calcular total</button>

@@ -99,7 +99,6 @@ class EventController
 
     public function listForUser($listType="", $val="")
     {
-        var_dump($_SESSION);
         if(isset($_SESSION['userLogged']))
         {
             if ($listType === "byArtist" || !$listType )
