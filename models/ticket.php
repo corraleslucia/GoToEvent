@@ -26,7 +26,7 @@ class Ticket
         return $this->id_calendar;
     }
 
-    public fuction getQuantity(){
+    public function getQuantity(){
         return $this->quantity;
     }
     public function getTotal(){
