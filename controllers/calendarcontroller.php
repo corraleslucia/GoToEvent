@@ -40,33 +40,55 @@ class CalendarController
 
     public function add ($event, $val="")
     {
-        $artists = $this->daoArtist->readAll();
-        $locations = $this->daoLocation->readAll();
-        require(ROOT.'views/createCalendar.php');
+        if(isset($_SESSION['userLogged']))
+        {
+            $artists = $this->daoArtist->readAll();
+            $locations = $this->daoLocation->readAll();
+            require(ROOT.'views/createCalendar.php');
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+
 
     }
 
     public function addMoreCalendars ($id_event, $val="")
     {
-        $event = $this->daoEvent->readId($id_event);
-        $this->add ($event['0'], $val);
+        if(isset($_SESSION['userLogged']))
+        {
+            $event = $this->daoEvent->readId($id_event);
+            $this->add ($event['0'], $val);
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
     }
 
     public function addMoreEventSeats ($id_event)
     {
-        $event = $this->daoEvent->readId($id_event);
-        $calendars = $this->dao->readFromEvent($id_event);
-        require(ROOT.'views/selectCalendar.php');
+        if(isset($_SESSION['userLogged']))
+        {
+            $event = $this->daoEvent->readId($id_event);
+            $calendars = $this->dao->readFromEvent($id_event);
+            require(ROOT.'views/selectCalendar.php');
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
     }
 
-
-    public function _list ()
-    {
-
-    }
 
     public function store($date, $time, $id_event, $id_location, $_artists="")
     {
+        if(isset($_SESSION['userLogged']))
+        {
             $calendar = new Calendar($date, $time, $id_location, $_artists, $id_event);
 
             try
@@ -94,9 +116,12 @@ class CalendarController
                 $val = "Ya existe un evento en esa fecha, esa hora y ese lugar.";
                 $this->add($this->daoEvent->readId($id_event)['0'],$val);
             }
-
-
-
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
     }
 
 }

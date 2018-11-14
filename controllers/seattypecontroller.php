@@ -20,41 +20,63 @@ class SeatTypeController
 
     public function add ()
     {
-        $val = null;
-        require(ROOT.'views/createSeatType.php');
+        if(isset($_SESSION['userLogged']))
+        {
+            $val = null;
+            require(ROOT.'views/createSeatType.php');
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
     }
 
     public function _list ()
     {
-        $seatTypes = $this->dao->readAll();
-        if(!$seatTypes)
+        if(isset($_SESSION['userLogged']))
         {
-            $seatTypes['0'] = new SeatType ("SIN TIPOS DE PLAZAS", 0);
+            $seatTypes = $this->dao->readAll();
+            if(!$seatTypes)
+            {
+                $seatTypes['0'] = new SeatType ("SIN TIPOS DE PLAZAS", 0);
+            }
+            require(ROOT.'views/listSeatTypes.php');
         }
-        require(ROOT.'views/listSeatTypes.php');
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
 
     }
 
 
     public function store($name)
     {
-        $seatType = new SeatType($name);
-
-        try
+        if(isset($_SESSION['userLogged']))
         {
-            $this->dao->create($seatType);
+            $seatType = new SeatType($name);
 
-            $val = "Tipo de plaza Creada.";
+            try
+            {
+                $this->dao->create($seatType);
 
-            require(ROOT.'views/createSeatType.php');
+                $val = "Tipo de plaza Creada.";
+
+                require(ROOT.'views/createSeatType.php');
+            }
+            catch (\PDOException $ex)
+            {
+                $val = "Ya existe un tipo de plaza con ese nombre.";
+                require(ROOT.'views/createSeatType.php');
+            }
         }
-        catch (\PDOException $ex)
+        else
         {
-            $val = "Ya existe un tipo de plaza con ese nombre.";
-            require(ROOT.'views/createSeatType.php');
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
         }
-
-
     }
 
 }

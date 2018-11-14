@@ -57,40 +57,46 @@ include(ROOT.'views/navUser.php');
                                 <p style="font-size:20px"><b><?php echo "Plazas: " ?></b></p>
                             </div>
                             <?php
-                            foreach ($value->getEventSeats() as $_key => $_value)
-                            { ?>
-                                <div class="half mini-box">
-                                    <?php if ($_value->getRemaningQuantity() === "0")
-                                    { ?>
-                                        <p><?php echo "Tipo de Plaza: "  . $_value->getSeatType() ?> </p>
-                                        <br>
-                                        <p><?php echo "SIN DISPONIBILIDAD"?> </p>
-                              <?php }
-                                    else
-                                    { ?>
-                                        <a class="link-divs" href="<?= BASE ?>cart/selectTicketOptions/<?php echo $value->getId()?>/<?php echo $_value->getId()?>/<?php echo $event['0']->getId()?>">
+                            if ($value->getEventSeats())
+                            {
+                                foreach ($value->getEventSeats() as $_key => $_value)
+                                { ?>
+                                    <div class="half mini-box">
+                                        <?php if ($_value->getRemaningQuantity() === "0")
+                                        { ?>
                                             <p><?php echo "Tipo de Plaza: "  . $_value->getSeatType() ?> </p>
                                             <br>
-                                            <p><?php echo "Cantidad Total: " . $_value->getTotalQuantity()?> </p>
-                                            <br>
-                                            <p><?php echo "Precio: " . $_value->getPrice()?> </p>
-                                            <br>
-                                            <p><?php echo "Remanente: " . $_value->getRemaningQuantity() ?> </p>
-
-                                        </a>
-                              <?php } ?>
-                                </div>
-                            <?php } ?>
-
-                        </div>
-
-                    <?php }
+                                            <p><?php echo "SIN DISPONIBILIDAD"?> </p>
+                                        <?php }
+                                        else
+                                        { ?>
+                                            <a class="link-divs" href="<?= BASE ?>cart/selectTicketOptions/<?php echo $value->getId()?>/<?php echo $_value->getId()?>/<?php echo $event['0']->getId()?>">
+                                                <p><?php echo "Tipo de Plaza: "  . $_value->getSeatType() ?> </p>
+                                                <br>
+                                                <p><?php echo "Precio: " . $_value->getPrice()?> </p>
+                                            </a>
+                                  <?php } ?>
+                                    </div>
+                          <?php } ?>
+                    </div>
+                         <?php
+                             }
+                             else
+                             { ?>
+                                 <div class="half mini-box"><p>SIN PLAZAS</p></div>
+                       <?php }
+                }
             }
             else
             { ?>
-                <p> SIN FECHAS </p>
+                <div class="half mini-box"><p>SIN FECHAS</p></div>
       <?php }?>
 
+            <div style="text-align: center">
+                <a class="secondary-button" href="<?= BASE ?>event/listForUser/byArtist">Volver</a>
+                <br>
+            </div>
+            <br>
         </div>
 
     </section>
