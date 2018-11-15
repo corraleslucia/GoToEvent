@@ -19,9 +19,10 @@ use daos\daodb\Connection as Connection;
           public function create($_artist) {
 
                // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
-			$sql = "INSERT INTO artists (name) VALUES (:name)";
+			$sql = "INSERT INTO artists (name, img) VALUES (:name, :img)";
 
                $parameters['name'] = $_artist->getName();
+               $parameters['img'] = $_artist->getAvatar()['artist']['name'];
 
                try {
                     // creo la instancia connection
@@ -148,7 +149,7 @@ use daos\daodb\Connection as Connection;
 			$value = is_array($value) ? $value : [];
 
 			$resp = array_map(function($p){
-				return new M_Artist($p['name'], $p['id_artist']);
+				return new M_Artist($p['name'], $p['img'], $p['id_artist']);
 			}, $value);
 
                return count($resp) > 0 ? $resp : $resp['0'];

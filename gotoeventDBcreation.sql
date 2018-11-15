@@ -1,6 +1,10 @@
+create database gotoevent;
+use gotoevent;
+
 create table artists (
 id_artist int unsigned auto_increment,
 name varchar (50),
+img varchar (255),
 constraint pk_artists primary key(id_artist),
 constraint unq_artists_name unique (name)
 );
@@ -80,6 +84,7 @@ create table users(
     name varchar(50),
     last_name varchar(50),
     user_type tinyint unsigned not null,
+    img varchar (255),
     constraint pk_users primary key (id_user),
     constraint unq_users unique (mail)
 );
@@ -100,5 +105,3 @@ create table tickets(
     constraint fk_tickets_event_seats foreign key (id_event_seat) references event_seats(id_event_seat),
     constraint fk_tickets_seats_type foreign key (id_seats_type) references seats_type(id_seats_type)
 );
-
-insert into users (mail, pass, name, last_name, user_type) values ("admin@admin", "admin", "Admin", "Admin", 1);

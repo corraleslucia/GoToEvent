@@ -18,6 +18,9 @@ namespace views;
             <img src="" alt="">
         </div>
         <div class="column2 admin">
+            <img src="<?= IMG_UPLOADS . '/avatar/' . $_SESSION['userLogged']->getAvatar() ?>"  />
+        </div>
+        <div class="column2 admin">
             <img src="<?= BASE ?>media/admin.png" alt="">
         </div>
         <div class="column3 admin">

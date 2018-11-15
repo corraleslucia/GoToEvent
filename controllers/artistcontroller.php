@@ -4,13 +4,17 @@
 use daos\daodb\ArtistDb as Dao;
 use models\Artist;
 
+use controllers\FileController as C_File;
+
 class ArtistController
 {
     private $dao;
+    private $fileController;
 
     public function __construct()
     {
         $this->dao= Dao::getInstance();
+        $this->fileController= new C_File;
     }
 
     public function index()
@@ -50,10 +54,7 @@ class ArtistController
         if(isset($_SESSION['userLogged']))
         {
             $artists = $this->dao->readAll();
-            if(!$artists)
-            {
-                $artists['0'] = new Artist ("SIN ARTISTAS", 0);
-            }
+
             if ($_SESSION['userLogged']->getType() === "1")
             {
                 include(ROOT.'views/headerAdmin.php');
@@ -75,21 +76,29 @@ class ArtistController
     }
 
 
-    public function store($name)
+    public function store($name, $file)
     {
         if(isset($_SESSION['userLogged']))
         {
-            $artist = new Artist($name);
+            $artist = new Artist($name, $file);
 
-            try
+            if($this->fileController->upload($artist->getAvatar(), 'artist'))
             {
-                $this->dao->create($artist);
-                $val = "Artista Creado";
-                require(ROOT.'views/createArtist.php');
+                try
+                {
+                    $this->dao->create($artist);
+                    $val = "Artista Creado";
+                    require(ROOT.'views/createArtist.php');
+                }
+                catch (\PDOException $ex)
+                {
+                    $val = "El artista ya existe en la base de datos.";
+                    require(ROOT.'views/createArtist.php');
+                }
             }
-            catch (\PDOException $ex)
+            else
             {
-                $val = "El artista ya existe en la base de datos.";
+                $val = "La imagen no pudo ser cargada. Intente nuevamente.";
                 require(ROOT.'views/createArtist.php');
             }
         }

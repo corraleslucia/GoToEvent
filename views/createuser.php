@@ -24,7 +24,7 @@ namespace views;
 
 
 
-    <form action="<?php echo BASE ?>user/store" method="POST" class="form-admin">
+    <form action="<?php echo BASE ?>user/store" method="POST" enctype="multipart/form-data" class="form-admin">
         <h2 class="form-title">Registrate</h2>
         <div class="form-group">
           <label class="label">Mail:</label>
@@ -47,6 +47,11 @@ namespace views;
         </div>
 
         <input class="input" type="hidden" name="type" value="2" >
+
+        <div class="form-group">
+          <label class="label" >Imagen: </label>
+          <input type="file" name="avatar" required>
+        </div>
 
         <div class="div-form-button">
           <button type="submit" class ="form-button">Agregar usuario</button>
