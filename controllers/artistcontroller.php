@@ -6,7 +6,7 @@ use models\Artist;
 
 class ArtistController
 {
-    protected $dao;
+    private $dao;
 
     public function __construct()
     {
@@ -15,6 +15,17 @@ class ArtistController
 
     public function index()
     {
+        if(isset($_SESSION['userLogged']))
+        {
+            $this->_list();
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+
+
 
     }
 

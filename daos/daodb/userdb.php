@@ -84,65 +84,27 @@ use daos\daodb\Connection as Connection;
           /**
            *
            */
-          public function edit($_user) {
-               $sql = "UPDATE users SET mail = :mail, pass = :pass, name = :name, last_name = :last_name, user_type = :user_type";
+          public function update($value, $newValue)
+          {
 
-               $parameters['mail'] = $_user->getMail();
-               $parameters['pass'] = $_user->getPass();
-               $parameters['name'] = $_user->getName();
-               $parameters['last_name'] = $_user->getLastName();
-               $parameters['user_type'] = $_user->getType();
-
-
-               try {
-                    // creo la instancia connection
-     			$this->connection = Connection::getInstance();
-				// Ejecuto la sentencia.
-				return $this->connection->ExecuteNonQuery($sql, $parameters);
-			} catch(\PDOException $ex) {
-                   throw $ex;
-              }
           }
+
 
           /**
            *
            */
-          public function update($value, $newValue) {
+          public function delete($_mail)
+          {
 
-          }
-          /**
-           *
-           */
-          public function delete($_mail) {
-               /*$sql = "DELETE FROM usuarios WHERE email = :email";
-
-               $obj_pdo = new Conexion();
-
-               try {
-                    $conexion = $obj_pdo->conectar();
-
-				// Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
-				$sentencia = $conexion->prepare($sql);
-
-                    $sentencia->bindParam(":email", $email);
-
-                    $sentencia->execute();
-
-
-               } catch(PDOException $Exception) {
-
-				throw new MyDatabaseException( $Exception->getMessage( ) , $Exception->getCode( ) );
-
-			}*/
           }
 
           /**
-		* Transforma el listado de artistas en
-		* objetos de la clase Artista
+		* Transforma el listado de usuarios en
+		* objetos de la clase User
 		*
-		* @param  Array $gente Listado de artistas a transformar
+		* @param  Array $gente Listado de usuarios a transformar
 		*/
-		protected function mapear($value) {
+		private function mapear($value) {
 
 			$value = is_array($value) ? $value : [];
 

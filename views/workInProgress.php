@@ -7,31 +7,23 @@ namespace views;
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Artistas</title>
+  <title>Proximamente</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="<?php echo BASE ?>css/normalize.css">
   <link rel="stylesheet" type="text/css" media="screen" href="<?php echo BASE ?>css/style.css" />
 
 </head>
 <body>
-  <section class="content">
-    <h3>ARTISTAS</h3>
-    <div class="container">
-        <?php
-            foreach ($artists as $key => $value) {
+    <section class="content">
+        <h3>PROXIMAMENTE</h3>
 
-        ?>
+        <div class="container">
 
-        <div class="element">
-          <!--a class="link-divs" href=""!-->
-            <h4><?php echo $value->getName()?></h4>
-          <!--/a!-->
+            <div class= "full">
+            <a class="secondary-button" href="<?= BASE ?>home/index">Volver</a>
+            </div>
         </div>
 
-
-    <?php } ?>
-    </div>
-
-  </section>
+    </section>
 </body>
 </html>

@@ -64,7 +64,8 @@ use daos\daodb\Connection as Connection;
           /**
            *
            */
-          public function read($_info) {
+          public function read($_info)
+          {
 
 
           }
@@ -73,7 +74,8 @@ use daos\daodb\Connection as Connection;
           /**
            *
            */
-          public function readAll() {
+          public function readAll()
+          {
                $sql = "SELECT * FROM artists_in_calendars";
 
                try {
@@ -90,64 +92,29 @@ use daos\daodb\Connection as Connection;
           }
 
 
-          /**
-           *
-           */
-          public function edit($_artist) {
-               $sql = "UPDATE artists SET name = :name";
-
-               $parameters['name'] = $_artist->getName();
-
-
-               try {
-                    // creo la instancia connection
-     			$this->connection = Connection::getInstance();
-				// Ejecuto la sentencia.
-				return $this->connection->ExecuteNonQuery($sql, $parameters);
-			} catch(\PDOException $ex) {
-                   throw $ex;
-              }
-          }
 
           /**
            *
            */
-          public function update($value, $newValue) {
+          public function update($value, $newValue)
+          {
 
           }
           /**
            *
            */
-          public function delete($_name) {
-               /*$sql = "DELETE FROM usuarios WHERE email = :email";
+          public function delete($_name)
+          {
 
-               $obj_pdo = new Conexion();
-
-               try {
-                    $conexion = $obj_pdo->conectar();
-
-				// Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
-				$sentencia = $conexion->prepare($sql);
-
-                    $sentencia->bindParam(":email", $email);
-
-                    $sentencia->execute();
-
-
-               } catch(PDOException $Exception) {
-
-				throw new MyDatabaseException( $Exception->getMessage( ) , $Exception->getCode( ) );
-
-			}*/
           }
 
           /**
-		* Transforma el listado de artistas en
-		* objetos de la clase Artista
+		* Transforma el listado de id_artistas_id_calendarios en
+		* objetos de la clase ArtistInCalendar
 		*
-		* @param  Array $gente Listado de artistas a transformar
+		* @param  Array $_artistsxcalendars Listado a transformar
 		*/
-		protected function mapear($value) {
+		private function mapear($value) {
 
 			$value = is_array($value) ? $value : [];
 

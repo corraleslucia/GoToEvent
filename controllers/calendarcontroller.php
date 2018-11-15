@@ -16,12 +16,12 @@ use models\ArtistInCalendar;
 
 class CalendarController
 {
-    protected $dao;
-    protected $daoAC;
-    protected $daoArtist;
-    protected $daoLocation;
-    protected $eventSeatController;
-    protected $daoEvent;
+    private $dao;
+    private $daoAC;
+    private $daoArtist;
+    private $daoLocation;
+    private $eventSeatController;
+    private $daoEvent;
 
     public function __construct()
     {
@@ -35,6 +35,7 @@ class CalendarController
 
     public function index()
     {
+        
 
     }
 

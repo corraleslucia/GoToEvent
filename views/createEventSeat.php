@@ -56,7 +56,7 @@ include(ROOT.'views/navAdmin.php');
 
         <div class="form-group">
             <label class="label">Cantidad total: </label>
-            <input class="input" id="ev-seat-cant" type="number" name="ev-seat-cant" max="<?php echo $availableCapacity ?>" oninvalid="setCustomValidity('La cantidad supera la capacidad del lugar. Máximo disponible <?php echo $availableCapacity ?>')"
+            <input class="input" id="ev-seat-cant" type="number" name="ev-seat-cant" min="1" max="<?php echo $availableCapacity ?>" oninvalid="setCustomValidity('La cantidad supera la capacidad del lugar. Máximo disponible <?php echo $availableCapacity ?>')"
     onkeydown="try{setCustomValidity('')}catch(e){}" required>
         </div>
 
