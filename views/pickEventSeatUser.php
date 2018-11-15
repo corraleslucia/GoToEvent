@@ -30,7 +30,7 @@ include(ROOT.'views/navUser.php');
             if($calendars)
             {
                 foreach ($calendars as $key => $value)
-                { ?>
+                {  ?>
                     <div class="element event-elem">
 
                         <div class="half">
@@ -70,7 +70,7 @@ include(ROOT.'views/navUser.php');
                                         <?php }
                                         else
                                         { ?>
-                                            <a class="link-divs" href="<?= BASE ?>cart/selectTicketOptions/<?php echo $value->getId()?>/<?php echo $_value->getId()?>/<?php echo $event['0']->getId()?>">
+                                            <a class="link-divs" href="<?= BASE ?>ticket/selectTicketOptions/<?php echo $value->getId()?>/<?php echo $_value->getId()?>/<?php echo $event['0']->getId()?>">
                                                 <p><?php echo "Tipo de Plaza: "  . $_value->getSeatType() ?> </p>
                                                 <br>
                                                 <p><?php echo "Precio: " . $_value->getPrice()?> </p>

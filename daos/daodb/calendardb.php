@@ -93,34 +93,6 @@ use daos\daodb\Connection as Connection;
             }
 
 
-         /* public function read($_readInfo) {
-
-               $calendar_date = $_readInfo['date'];
-               $id_event = $_readInfo['id_event'];
-
-               $sql = "SELECT * FROM calendars where calendar_date = :calendar_date and id_event = :id_event";
-
-               //$sql = "SELECT * FROM calendars where calendar_date = :calendar_date and id_event = :id_event";
-               //$parameters['calendar_date'] = $_readInfo['date'];
-               $parameters['id_event'] =  $id_event;
-               $parameters['calendar_date'] =  $calendar_date;
-
-               var_dump($parameters);
-
-               try {
-                    $this->connection = Connection::getInstance();
-                    $resultSet = $this->connection->execute($sql, $parameters);
-
-               } catch(Exception $ex) {
-                   throw $ex;
-               }
-
-
-               if(!empty($resultSet))
-                    return $this->mapear($resultSet);
-               else
-                    return false;
-          }*/
 
           /**
            *
@@ -187,65 +159,27 @@ use daos\daodb\Connection as Connection;
 
            }
 
-          /**
-           *
-           */
-          public function edit($_calendar) {
-               $sql = "UPDATE calendars SET calendar_date = :calendar_date, id_location = :id_location, id_event = :id_event";
-
-               $parameters['calendar_date'] = $_calendar->getDate();
-               $parameters['id_location'] = $_calendar->getLocation();
-               $parameters['id_event'] = $_calendar->getIdEvent();
-
-
-
-               try {
-                    // creo la instancia connection
-     			$this->connection = Connection::getInstance();
-				// Ejecuto la sentencia.
-				return $this->connection->ExecuteNonQuery($sql, $parameters);
-			} catch(\PDOException $ex) {
-                   throw $ex;
-              }
-          }
 
           /**
            *
            */
-          public function update($value, $newValue) {
+          public function update($value, $newValue)
+          {
 
           }
           /**
            *
            */
-          public function delete($_name) {
-               /*$sql = "DELETE FROM usuarios WHERE email = :email";
+          public function delete($_name)
+          {
 
-               $obj_pdo = new Conexion();
-
-               try {
-                    $conexion = $obj_pdo->conectar();
-
-				// Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
-				$sentencia = $conexion->prepare($sql);
-
-                    $sentencia->bindParam(":email", $email);
-
-                    $sentencia->execute();
-
-
-               } catch(PDOException $Exception) {
-
-				throw new MyDatabaseException( $Exception->getMessage( ) , $Exception->getCode( ) );
-
-			}*/
           }
 
           /**
-		* Transforma el listado de artistas en
-		* objetos de la clase Artista
+		* Transforma el listado de calendarios en
+		* objetos de la clase Calendar
 		*
-		* @param  Array $gente Listado de artistas a transformar
+		* @param  Array $calendars Listado de calendarios a transformar
 		*/
 		protected function mapear($value) {
 

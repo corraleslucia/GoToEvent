@@ -42,24 +42,9 @@ class EventSeatDb extends singleton implements IDao
      /**
       *
       */
-     public function read($_name) {
+     public function read($_name)
+     {
 
-          $sql = "SELECT * FROM artists where name = :name";
-
-          $parameters['name'] = $_name;
-
-          try {
-               $this->connection = Connection::getInstance();
-               $resultSet = $this->connection->execute($sql, $parameters);
-          } catch(Exception $ex) {
-              throw $ex;
-          }
-
-
-          if(!empty($resultSet))
-               return $this->mapear($resultSet);
-          else
-               return false;
      }
 
      /**
@@ -145,62 +130,62 @@ class EventSeatDb extends singleton implements IDao
 
      }
 
-     /**
-      *
-      */
-     public function edit($_artist) {
-          $sql = "UPDATE artists SET name = :name";
+     public function checkRemaningQuantity ($id_eventSeat)
+     {
+         $sql = "SELECT remaning_quantity from event_seats where id_event_seat = :id_event_seat";
 
-          $parameters['name'] = $_artist->getName();
+         $parameters['id_event_seat'] = $id_eventSeat;
 
+         try {
+              $this->connection = Connection::getInstance();
+              $resultSet = $this->connection->execute($sql, $parameters);
 
-          try {
-               // creo la instancia connection
-           $this->connection = Connection::getInstance();
-           // Ejecuto la sentencia.
-           return $this->connection->ExecuteNonQuery($sql, $parameters);
-       } catch(\PDOException $ex) {
-              throw $ex;
+         } catch(Exception $ex) {
+             throw $ex;
          }
+
+         return $resultSet['0']['0'];
+
      }
+
+
 
      /**
       *
       */
-     public function update($value, $newValue) {
+     public function update($id_eventSeat, $remaningQuantity)
+     {
+         $sql = "UPDATE event_seats SET remaning_quantity = :remaning_quantity where id_event_seat = :id_event_seat";
+
+         $parameters['remaning_quantity'] = $remaningQuantity;
+         $parameters['id_event_seat'] = $id_eventSeat;
+
+
+         try
+         {
+              // creo la instancia connection
+          $this->connection = Connection::getInstance();
+          // Ejecuto la sentencia.
+          return $this->connection->ExecuteNonQuery($sql, $parameters);
+         } catch(\PDOException $ex)
+         {
+             throw $ex;
+        }
 
      }
      /**
       *
       */
-     public function delete($_name) {
-          /*$sql = "DELETE FROM usuarios WHERE email = :email";
+     public function delete($_name)
+     {
 
-          $obj_pdo = new Conexion();
-
-          try {
-               $conexion = $obj_pdo->conectar();
-
-           // Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
-           $sentencia = $conexion->prepare($sql);
-
-               $sentencia->bindParam(":email", $email);
-
-               $sentencia->execute();
-
-
-          } catch(PDOException $Exception) {
-
-           throw new MyDatabaseException( $Exception->getMessage( ) , $Exception->getCode( ) );
-
-       }*/
      }
 
      /**
-   * Transforma el listado de artistas en
-   * objetos de la clase Artista
+   * Transforma el listado de plazas en
+   * objetos de la clase EventSeat
    *
-   * @param  Array $gente Listado de artistas a transformar
+   * @param  Array $gente Listado de plazas a transformar
    */
    protected function mapear($value) {
 

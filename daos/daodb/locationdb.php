@@ -106,61 +106,24 @@ use daos\daodb\Connection as Connection;
           /**
            *
            */
-          public function edit($_location) {
-               $sql = "UPDATE artists SET name = :name, adress = :adress , city = :city";
+          public function update($value, $newValue)
+          {
 
-               $parameters['name'] = $_location->getName();
-               $parameters['adress'] = $_location->getAdress();
-               $parameters['city'] = $_location->getCity();
-
-
-               try {
-                    // creo la instancia connection
-     			$this->connection = Connection::getInstance();
-				// Ejecuto la sentencia.
-				return $this->connection->ExecuteNonQuery($sql, $parameters);
-			} catch(\PDOException $ex) {
-                   throw $ex;
-              }
           }
 
           /**
            *
            */
-          public function update($value, $newValue) {
+          public function delete($_name)
+          {
 
-          }
-          /**
-           *
-           */
-          public function delete($_name) {
-               /*$sql = "DELETE FROM usuarios WHERE email = :email";
-
-               $obj_pdo = new Conexion();
-
-               try {
-                    $conexion = $obj_pdo->conectar();
-
-				// Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
-				$sentencia = $conexion->prepare($sql);
-
-                    $sentencia->bindParam(":email", $email);
-
-                    $sentencia->execute();
-
-
-               } catch(PDOException $Exception) {
-
-				throw new MyDatabaseException( $Exception->getMessage( ) , $Exception->getCode( ) );
-
-			}*/
           }
 
           /**
-		* Transforma el listado de artistas en
-		* objetos de la clase Artista
+		* Transforma el listado de locations en
+		* objetos de la clase Location
 		*
-		* @param  Array $gente Listado de artistas a transformar
+		* @param  Array $gente Listado de locations a transformar
 		*/
 		protected function mapear($value) {
 

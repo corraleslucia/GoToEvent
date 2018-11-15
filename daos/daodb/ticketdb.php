@@ -1,14 +1,13 @@
 <?php namespace daos\daodb;
 use daos\IDao as IDao;
 
-use \models\ArtistInCalendar as M_ArtistInCalendar;
+use \models\Ticket as M_Ticket;
 use daos\daodb\Connection as Connection;
-
 
      /**
       *
       */
-     class ArtistsXCalendarsDb extends singleton implements IDao
+     class TicketDb extends singleton implements IDao
      {
           private $connection;
 
@@ -17,13 +16,18 @@ use daos\daodb\Connection as Connection;
           /**
            *
            */
-          public function create($_artistsxcalendars) {
+          public function create($_ticket) {
 
                // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
-			$sql = "INSERT INTO artists_in_calendars (id_artist,id_calendar) VALUES (:id_artist,:id_calendar)";
+			$sql = "INSERT INTO tickets (id_user, id_calendar, id_event_seat, id_seats_type, quantity, price, total) VALUES (:id_user, :id_calendar, :id_event_seat, :id_seatType, :quantity, :price, :total)";
 
-               $parameters['id_artist'] = $_artistsxcalendars->getIdArtist();
-               $parameters['id_calendar'] = $_artistsxcalendars->getIdCalendar();
+               $parameters['id_user'] = $_ticket->getIdUser();
+               $parameters['id_calendar'] = $_ticket->getCalendar();
+               $parameters['id_event_seat'] = $_ticket->getEventSeat();
+               $parameters['id_seatType'] = $_ticket->getSeatType();
+               $parameters['quantity'] = $_ticket->getQuantity();
+               $parameters['price'] = $_ticket->getPrice();
+               $parameters['total'] = $_ticket->getTotal();
 
                try {
                     // creo la instancia connection
@@ -39,13 +43,11 @@ use daos\daodb\Connection as Connection;
           /**
            *
            */
-          public function readAllArtistsFromCalendar($id_calendar) {
+          public function read($id)
+          {
+              $sql = "SELECT * FROM tickets where id_ticket = :id_ticket";
 
-              $sql = "SELECT id_calendar, a.name as id_artist FROM artists_in_calendars aic inner join artists a on aic.id_artist = a.id_artist  where id_calendar = :id_calendar";
-
-
-              $parameters['id_calendar'] = $id_calendar;
-
+              $parameters['id_ticket'] = $id;
 
               try {
                    $this->connection = Connection::getInstance();
@@ -59,24 +61,15 @@ use daos\daodb\Connection as Connection;
                    return $this->mapear($resultSet);
               else
                    return false;
+
+
           }
 
           /**
            *
            */
-          public function read($_info)
-          {
-
-
-          }
-
-
-          /**
-           *
-           */
-          public function readAll()
-          {
-               $sql = "SELECT * FROM artists_in_calendars";
+          public function readAll() {
+               $sql = "SELECT * FROM tickets";
 
                try {
                     $this->connection = Connection::getInstance();
@@ -91,8 +84,6 @@ use daos\daodb\Connection as Connection;
                     return false;
           }
 
-
-
           /**
            *
            */
@@ -100,26 +91,29 @@ use daos\daodb\Connection as Connection;
           {
 
           }
+
+
           /**
            *
            */
-          public function delete($_name)
+          public function delete($_description)
           {
 
           }
 
+
           /**
-		* Transforma el listado de id_artistas_id_calendarios en
-		* objetos de la clase ArtistInCalendar
+		* Transforma el listado de tickets en
+		* objetos de la clase Ticket
 		*
-		* @param  Array $_artistsxcalendars Listado a transformar
+		* @param  Array $tickets Listado de tickets a transformar
 		*/
 		protected function mapear($value) {
 
 			$value = is_array($value) ? $value : [];
 
 			$resp = array_map(function($p){
-				return new M_ArtistInCalendar($p['id_artist'], $p['id_calendar']);
+				return new M_Ticket($p['id_user'], $p['id_calendar'], $p['id_event_seat'], $p['id_seats_type'], $p['quantity'], $p['price'], $p['total'], $p['id_ticket']);
 			}, $value);
 
                return count($resp) > 0 ? $resp : $resp['0'];

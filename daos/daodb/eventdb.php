@@ -255,64 +255,26 @@ class EventDb extends singleton implements IDao
      }
 
 
-
-
      /**
       *
       */
-     public function edit($_event) {
-          $sql = "UPDATE events SET description = :description";
-
-          $parameters['description'] = $_event->getDescription();
-
-
-          try {
-               // creo la instancia connection
-           $this->connection = Connection::getInstance();
-           // Ejecuto la sentencia.
-           return $this->connection->ExecuteNonQuery($sql, $parameters);
-       } catch(\PDOException $ex) {
-              throw $ex;
-         }
-     }
-
-     /**
-      *
-      */
-     public function update($value, $newValue) {
+     public function update($value, $newValue)
+     {
 
      }
      /**
       *
       */
-     public function delete($_name) {
-          /*$sql = "DELETE FROM usuarios WHERE email = :email";
+     public function delete($_name)
+     {
 
-          $obj_pdo = new Conexion();
-
-          try {
-               $conexion = $obj_pdo->conectar();
-
-           // Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
-           $sentencia = $conexion->prepare($sql);
-
-               $sentencia->bindParam(":email", $email);
-
-               $sentencia->execute();
-
-
-          } catch(PDOException $Exception) {
-
-           throw new MyDatabaseException( $Exception->getMessage( ) , $Exception->getCode( ) );
-
-       }*/
      }
 
      /**
-   * Transforma el listado de artistas en
-   * objetos de la clase Artista
+   * Transforma el listado de eventos en
+   * objetos de la clase Event
    *
-   * @param  Array $gente Listado de artistas a transformar
+   * @param  Array $events Listado de eventos a transformar
    */
    protected function mapear($value) {
 

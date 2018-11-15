@@ -76,8 +76,6 @@ class UserController
 
     public function store($mail, $pass, $name, $lastname, $type)
     {
-        if(isset($_SESSION['userLogged']))
-        {
             $user = new User($mail, $pass, $name, $lastname, $type);
 
             try
@@ -100,12 +98,6 @@ class UserController
                     require(ROOT.'views/createUser.php');
                 }
             }
-        }
-        else
-        {
-            echo ('inicie sesion, no saltearas este paso');
-            require(ROOT.'views/login.php');
-        }
     }
 
     public function login($mail, $pass)
@@ -118,6 +110,7 @@ class UserController
             {
                 $_SESSION['userLogged'] = $user['0'];
                 $_SESSION['cart'] = array();
+                $_SESSION['discardTickets'] = array();
                 if ($user['0']->getType()==="1")
                 {
                     $this->eventController->_list();
@@ -138,9 +131,8 @@ class UserController
         }
 
     }
-
-
-    public function logOut(){
+    public function logOut()
+    {
         session_destroy();
         require(ROOT.'views/login.php');
     }

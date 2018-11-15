@@ -82,9 +82,9 @@ use daos\daodb\Connection as Connection;
 
            public function readId($id) {
 
-                $sql = "SELECT * FROM seats_type where id_event = :id_event";
+                $sql = "SELECT * FROM seats_type where id_seats_type = :id_seats_type";
 
-                $parameters['id_event'] = $id;
+                $parameters['id_seats_type'] = $id;
 
                 try {
                      $this->connection = Connection::getInstance();
@@ -101,55 +101,21 @@ use daos\daodb\Connection as Connection;
            }
 
 
+
           /**
            *
            */
-          public function edit($_seatType) {
-               $sql = "UPDATE seats_type SET name = :name";
+          public function update($value, $newValue)
+          {
 
-               $parameters['name'] = $_seatType->getName();
-
-
-               try {
-                    // creo la instancia connection
-     			$this->connection = Connection::getInstance();
-				// Ejecuto la sentencia.
-				return $this->connection->ExecuteNonQuery($sql, $parameters);
-			} catch(\PDOException $ex) {
-                   throw $ex;
-              }
           }
 
           /**
            *
            */
-          public function update($value, $newValue) {
-
-          }
-          /**
-           *
-           */
-          public function delete($_name) {
-               /*$sql = "DELETE FROM usuarios WHERE email = :email";
-
-               $obj_pdo = new Conexion();
-
-               try {
-                    $conexion = $obj_pdo->conectar();
-
-				// Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
-				$sentencia = $conexion->prepare($sql);
-
-                    $sentencia->bindParam(":email", $email);
-
-                    $sentencia->execute();
-
-
-               } catch(PDOException $Exception) {
-
-				throw new MyDatabaseException( $Exception->getMessage( ) , $Exception->getCode( ) );
-
-			}*/
+          public function delete($_name)
+          {
+               
           }
 
           /**

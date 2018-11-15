@@ -101,55 +101,21 @@ use daos\daodb\Connection as Connection;
 
 
 
-          /**
-           *
-           */
-          public function edit($_category) {
-               $sql = "UPDATE categories SET description = :description";
 
-               $parameters['description'] = $_description->getDescription();
-
-
-               try {
-                    // creo la instancia connection
-     			$this->connection = Connection::getInstance();
-				// Ejecuto la sentencia.
-				return $this->connection->ExecuteNonQuery($sql, $parameters);
-			} catch(\PDOException $ex) {
-                   throw $ex;
-              }
-          }
 
           /**
            *
            */
-          public function update($value, $newValue) {
+          public function update($value, $newValue)
+          {
 
           }
           /**
            *
            */
-          public function delete($_description) {
-               /*$sql = "DELETE FROM usuarios WHERE email = :email";
-
-               $obj_pdo = new Conexion();
-
-               try {
-                    $conexion = $obj_pdo->conectar();
-
-				// Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
-				$sentencia = $conexion->prepare($sql);
-
-                    $sentencia->bindParam(":email", $email);
-
-                    $sentencia->execute();
-
-
-               } catch(PDOException $Exception) {
-
-				throw new MyDatabaseException( $Exception->getMessage( ) , $Exception->getCode( ) );
-
-			}*/
+          public function delete($_description)
+          {
+              
           }
 
           /**
