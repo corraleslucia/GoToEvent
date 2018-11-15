@@ -14,8 +14,7 @@ class EventSeat
         $this->seatType=$st;
         $this->totalQuantity=$tq;
         $this->price=$p;
-        $this->remaningQuantity=$rq;
-
+        $this->remaningQuantity=$rq; 
         $this->id_calendar = $c;
     }
 
