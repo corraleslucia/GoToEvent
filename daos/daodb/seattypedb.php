@@ -124,7 +124,7 @@ use daos\daodb\Connection as Connection;
 		*
 		* @param  Array  Listado de seats_Type a transformar
 		*/
-		protected function mapear($value) {
+		private function mapear($value) {
 
 			$value = is_array($value) ? $value : [];
 

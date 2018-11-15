@@ -15,15 +15,15 @@ use controllers\CalendarController as C_Calendar;
 
 class EventController
 {
-    protected $dao;
-    protected $daoCategory;
-    protected $daoEventSeat;
-    protected $daoCalendar;
-    protected $daoArtistsXCalendars;
-    protected $daoArtist;
-    protected $daoLocation;
+    private $dao;
+    private $daoCategory;
+    private $daoEventSeat;
+    private $daoCalendar;
+    private $daoArtistsXCalendars;
+    private $daoArtist;
+    private $daoLocation;
 
-    protected $calendarController;
+    private $calendarController;
 
 
     public function __construct()
@@ -41,8 +41,25 @@ class EventController
 
     public function index()
     {
+        if(isset($_SESSION['userLogged']))
+        {
+            if ($_SESSION['userLogged']->getType()==="1")
+            {
+                $this->_list();
+            }
+            else if ($_SESSION['userLogged']->getType()==="2")
+            {
+                $this->listForUser("byArtist");
+            }
+        }
+        else
+        {
+            require(ROOT.'views/login.php');
+        }
 
     }
+
+
     public function add ($val="")
     {
         if(isset($_SESSION['userLogged']))

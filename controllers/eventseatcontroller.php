@@ -11,10 +11,10 @@ use models\EventSeat;
 
 class EventSeatController
 {
-    protected $dao;
-    protected $daoCalendar;
-    protected $daoSeatType;
-    protected $daoLocation;
+    private $dao;
+    private $daoCalendar;
+    private $daoSeatType;
+    private $daoLocation;
 
 
 

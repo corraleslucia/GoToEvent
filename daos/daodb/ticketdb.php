@@ -87,6 +87,31 @@ use daos\daodb\Connection as Connection;
           /**
            *
            */
+          public function readAllForUser($id_user) {
+               $sql = "SELECT * FROM tickets where id_user = :id_user";
+
+               $parameters['id_user'] = $id_user;
+
+               try {
+                    $this->connection = Connection::getInstance();
+                    $resultSet = $this->connection->execute($sql, $parameters);
+               } catch(Exception $ex) {
+                   throw $ex;
+               }
+
+
+               if(!empty($resultSet))
+                    return $this->mapear($resultSet);
+               else
+                    return false;
+          }
+
+
+
+
+          /**
+           *
+           */
           public function update($value, $newValue)
           {
 
@@ -108,7 +133,7 @@ use daos\daodb\Connection as Connection;
 		*
 		* @param  Array $tickets Listado de tickets a transformar
 		*/
-		protected function mapear($value) {
+		private function mapear($value) {
 
 			$value = is_array($value) ? $value : [];
 

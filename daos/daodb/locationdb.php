@@ -125,7 +125,7 @@ use daos\daodb\Connection as Connection;
 		*
 		* @param  Array $gente Listado de locations a transformar
 		*/
-		protected function mapear($value) {
+		private function mapear($value) {
 
 			$value = is_array($value) ? $value : [];
 

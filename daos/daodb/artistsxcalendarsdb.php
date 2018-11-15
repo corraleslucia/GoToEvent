@@ -114,7 +114,7 @@ use daos\daodb\Connection as Connection;
 		*
 		* @param  Array $_artistsxcalendars Listado a transformar
 		*/
-		protected function mapear($value) {
+		private function mapear($value) {
 
 			$value = is_array($value) ? $value : [];
 

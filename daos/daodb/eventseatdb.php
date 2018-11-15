@@ -187,7 +187,7 @@ class EventSeatDb extends singleton implements IDao
    *
    * @param  Array $gente Listado de plazas a transformar
    */
-   protected function mapear($value) {
+   private function mapear($value) {
 
        $value = is_array($value) ? $value : [];
 

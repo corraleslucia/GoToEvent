@@ -276,7 +276,7 @@ class EventDb extends singleton implements IDao
    *
    * @param  Array $events Listado de eventos a transformar
    */
-   protected function mapear($value) {
+   private function mapear($value) {
 
        $value = is_array($value) ? $value : [];
 

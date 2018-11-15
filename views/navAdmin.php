@@ -12,7 +12,7 @@
 <body>
     <nav class="nav-bar-admin">
         <ul class="nav">
-            <li><a href="<?= BASE ?>home/index">Eventos</a>
+            <li><a href="<?= BASE ?>event/index">Eventos</a>
                 <ul>
                     <li><a href="<?= BASE ?>event/_list">Ver Eventos</a></li>
                     <li><a href="<?= BASE ?>event/add">Agregar Eventos</a></li>
@@ -20,41 +20,41 @@
                     <li><a href="<?= BASE ?>event/selectEvent/p">Agregar Plaza a Fecha</a></li>
                 </ul>
             </li>
-            <li><a href="<?= BASE ?>home/index">Artistas</a>
+            <li><a href="<?= BASE ?>artist/index">Artistas</a>
                 <ul>
                     <li><a href="<?= BASE ?>artist/_list">Ver Artistas</a></li>
                     <li><a href="<?= BASE ?>artist/add">Agregar Artistas</a></li>
                 </ul>
             </li>
-            <li><a href="<?= BASE ?>home/index">Tipos de plaza</a>
+            <li><a href="<?= BASE ?>seatType/index">Tipos de plaza</a>
                 <ul>
                     <li><a href="<?= BASE ?>seatType/_list">Ver Tipos de plaza</a></li>
                     <li><a href="<?= BASE ?>seatType/add">Agregar Tipos de plaza</a></li>
                 </ul>
             </li>
-            <li><a href="<?= BASE ?>home/index">Categorias</a>
+            <li><a href="<?= BASE ?>category/index">Categorias</a>
                 <ul>
                     <li><a href="<?= BASE ?>category/_list">Ver Categorias</a></li>
                     <li><a href="<?= BASE ?>category/add">Agregar Categorias</a></li>
                 </ul>
             </li>
-            <li><a href="<?= BASE ?>home/index">Lugares</a>
+            <li><a href="<?= BASE ?>location/index">Lugares</a>
                 <ul>
                     <li><a href="<?= BASE ?>location/_list">Ver Lugares</a></li>
                     <li><a href="<?= BASE ?>location/add">Agregar Lugares</a></li>
                 </ul>
             </li>
-            <li><a href="<?= BASE ?>home/index">Usuarios</a>
+            <li><a href="<?= BASE ?>user/index">Usuarios</a>
                 <ul>
                     <li><a href="<?= BASE ?>user/_list">Ver Usuarios</a></li>
                     <li><a href="<?= BASE ?>user/add">Agregar Usuarios</a></li>
                 </ul>
             </li>
-            <li><a href="<?= BASE ?>home/index">Informes</a>
+            <li><a href="<?= BASE ?>home/inProgress">Informes</a>
                 <ul>
-                    <li><a href="">Cantidades por evento</a></li>
-                    <li><a href="">Recaudaciones por evento</a></li>
-                    <li><a href="">Recaudaciones por categoria</a></li>
+                    <li><a href="<?= BASE ?>home/inProgress">Cantidades por evento</a></li>
+                    <li><a href="<?= BASE ?>home/inProgress">Recaudaciones por evento</a></li>
+                    <li><a href="<?= BASE ?>home/inProgress">Recaudaciones por categoria</a></li>
                 </ul>
             </li>
         </ul>

@@ -21,7 +21,7 @@ namespace views;
             <img src="<?= BASE ?>media/admin.png" alt="">
         </div>
         <div class="column3 admin">
-            <h3>Administrador:  /*Nombre del admin */<?php    ?></h3>
+            <h3>Administrador:  <?php echo $_SESSION['userLogged']->getLastName() .",". $_SESSION['userLogged']->getName() ?></h3>
 
             <div class="column3-bot">
                 <a href="<?php echo BASE?>user/logOut" >Cerrar sesion</a>

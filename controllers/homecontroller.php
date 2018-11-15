@@ -4,7 +4,7 @@ use controllers\EventController as C_Event;
 
 class HomeController
 {
-    protected $eventController;
+    private $eventController;
 
     public function __construct()
     {
@@ -29,6 +29,29 @@ class HomeController
             require(ROOT.'views/login.php');
         }
 
+    }
+
+    public function inProgress ()
+    {
+        if(isset($_SESSION['userLogged']))
+        {
+            if ($_SESSION['userLogged']->getType() === "1")
+            {
+                include(ROOT.'views/headerAdmin.php');
+                include(ROOT.'views/navAdmin.php');
+            }
+            else if ($_SESSION['userLogged']->getType() === "2")
+            {
+                include(ROOT.'views/headerUser.php');
+                include(ROOT.'views/navUser.php');
+            }
+            require(ROOT.'views/workInProgress.php');
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
     }
 
 }

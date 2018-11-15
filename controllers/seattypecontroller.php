@@ -6,7 +6,7 @@ use models\SeatType;
 
 class SeatTypeController
 {
-    protected $dao;
+    private $dao;
 
     public function __construct()
     {
@@ -15,6 +15,22 @@ class SeatTypeController
 
     public function index()
     {
+        if(isset($_SESSION['userLogged']))
+        {
+            if ($_SESSION['userLogged']->getType()==="1")
+            {
+                $this->_list();
+            }
+            else if ($_SESSION['userLogged']->getType()==="2")
+            {
+                require(ROOT.'views/login.php');
+            }
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
 
     }
 
