@@ -101,7 +101,7 @@ class EventSeatController
     {
         if(isset($_SESSION['userLogged']))
         {
-            $eventSeat = new EventSeat($seatType,$totalQuantity,$price,$calendar);
+            $eventSeat = new EventSeat($seatType,$totalQuantity,$price,$calendar, $totalQuantity);
 
             $_calendar = $this->daoCalendar->readID($calendar);
 
