@@ -17,6 +17,11 @@ namespace views;
             <h2>GoToEvent</h2>
             <img src="" alt="">
         </div>
+
+        <div class="column2 admin">
+            <img src="<?= IMG_UPLOADS . '/avatar/' . $_SESSION['userLogged']->getAvatar() ?>"  />
+        </div>
+        
         <?php
         if(count($_SESSION['cart'])!=0){  ?>
         <div class="column2 column2-cart-add">

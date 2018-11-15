@@ -17,19 +17,29 @@ namespace views;
   <section class="content">
     <h3>ARTISTAS</h3>
     <div class="container">
-        <?php
-            foreach ($artists as $key => $value) {
+    <?php
+    if ($artists)
+    {
+        foreach ($artists as $key => $value)
+        { ?>
+            <div class="element event-elem">
 
-        ?>
+                <h4><?php echo $value->getName() ?></h4>
+                <img src="<?= IMG_UPLOADS . '/artist/' . $value->getAvatar() ?>" height="200" />
 
-        <div class="element">
-          <!--a class="link-divs" href=""!-->
-            <h4><?php echo $value->getName()?></h4>
-          <!--/a!-->
+            </div>
+    <?php
+        }
+    }
+    else
+    { ?>
+        <div class="element event-elem">
+            <h4> SIN ARTISTAS</h4>
         </div>
+<?php
+    }
+    ?>
 
-
-    <?php } ?>
     </div>
 
   </section>

@@ -15,4 +15,9 @@ $base=explode($_SERVER['DOCUMENT_ROOT'],ROOT);
 
 
 
+define('IMG_UPLOADS_PATH', ROOT . '/media/uploads/img');
+
+define('IMG_UPLOADS', BASE . '/media/uploads/img');
+
+
 ?>

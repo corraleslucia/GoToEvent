@@ -24,12 +24,19 @@ include(ROOT.'views/navAdmin.php');
       ?>
 
 
-    <form action="<?php echo BASE ?>artist/store" method="POST" class="form-admin">
+    <form action="<?php echo BASE ?>artist/store" method="POST" enctype="multipart/form-data" class="form-admin">
       <h2 class="form-title">Alta de artista:</h2>
+
       <div class="form-group">
         <label class="label" >Nombre: </label>
         <input class="input" type="text" name="art-name" required>
       </div>
+
+      <div class="form-group">
+        <label class="label" >Imagen: </label>
+        <input type="file" name="artist" required>
+      </div>
+
       <div class="div-form-button">
         <button type="submit" class ="form-button">Agregar artista</button>
       </div>

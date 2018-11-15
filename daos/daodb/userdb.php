@@ -19,13 +19,14 @@ use daos\daodb\Connection as Connection;
           public function create($_user) {
 
                // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
-			$sql = "INSERT INTO users (mail, pass, name, last_name, user_type) VALUES (:mail, :pass, :name, :last_name, :user_type)";
+			$sql = "INSERT INTO users (mail, pass, name, last_name, user_type, img) VALUES (:mail, :pass, :name, :last_name, :user_type, :img)";
 
                $parameters['mail'] = $_user->getMail();
                $parameters['pass'] = $_user->getPass();
                $parameters['name'] = $_user->getName();
                $parameters['last_name'] = $_user->getLastName();
                $parameters['user_type'] = $_user->getType();
+               $parameters['img'] = $_user->getAvatar()['avatar']['name'];
 
                try {
                     // creo la instancia connection
@@ -109,7 +110,7 @@ use daos\daodb\Connection as Connection;
 			$value = is_array($value) ? $value : [];
 
 			$resp = array_map(function($p){
-				return new M_User($p['mail'], $p['pass'], $p['name'], $p['last_name'], $p['user_type'], $p['id_user']);
+				return new M_User($p['mail'], $p['pass'], $p['name'], $p['last_name'], $p['user_type'], $p['img'], $p['id_user']);
 			}, $value);
 
                return count($resp) > 0 ? $resp : $resp['0'];

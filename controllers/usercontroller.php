@@ -3,6 +3,7 @@
 use daos\daodb\UserDb as Dao;
 
 use controllers\EventController as C_Event;
+use controllers\FileController as C_File;
 
 use models\User;
 
@@ -10,11 +11,13 @@ class UserController
 {
     private $dao;
     private $eventController;
+    private $fileController;
 
     public function __construct()
     {
         $this->dao= Dao::getInstance();
         $this->eventController = new C_Event;
+        $this->fileController= new C_File;
 
     }
 
@@ -89,29 +92,37 @@ class UserController
     }
 
 
-    public function store($mail, $pass, $name, $lastname, $type)
+    public function store($mail, $pass, $name, $lastname, $type, $file)
     {
-            $user = new User($mail, $pass, $name, $lastname, $type);
+            $user = new User($mail, $pass, $name, $lastname, $type, $file);
 
-            try
+            if($this->fileController->upload($user->getAvatar(), 'avatar'))
             {
-                $this->dao->create($user);
+                try
+                {
+                    $this->dao->create($user);
 
-                $val = "Usuario Creado";
+                    $val = "Usuario Creado";
 
-                require(ROOT.'views/login.php');
+                    require(ROOT.'views/login.php');
+                }
+                catch (\PDOException $ex)
+                {
+                    $val = "Ya existe un usuario registrado con ese email.";
+                    if ($type === "1")
+                    {
+                        require(ROOT.'views/createUserAdmin.php');
+                    }
+                    else if ($type === "2")
+                    {
+                        require(ROOT.'views/createUser.php');
+                    }
+                }
             }
-            catch (\PDOException $ex)
+            else
             {
-                $val = "Ya existe un usuario registrado con ese email.";
-                if ($type === "1")
-                {
-                    require(ROOT.'views/createUserAdmin.php');
-                }
-                else if ($type === "2")
-                {
-                    require(ROOT.'views/createUser.php');
-                }
+                $val = "La imagen no pudo ser cargada. Intente nuevamente.";
+                require(ROOT.'views/createUser.php');
             }
     }
 
