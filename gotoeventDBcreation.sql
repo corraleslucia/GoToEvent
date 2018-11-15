@@ -84,6 +84,7 @@ create table users(
     constraint unq_users unique (mail)
 );
 
+
 create table tickets(
     id_ticket int unsigned auto_increment,
     id_user int unsigned,
@@ -99,3 +100,5 @@ create table tickets(
     constraint fk_tickets_event_seats foreign key (id_event_seat) references event_seats(id_event_seat),
     constraint fk_tickets_seats_type foreign key (id_seats_type) references seats_type(id_seats_type)
 );
+
+insert into users (mail, pass, name, last_name, user_type) values ("admin@admin", "admin", "Admin", "Admin", 1);
