@@ -133,7 +133,7 @@ section {
     display: inline-block;
     width: 20%;
     border-radius: 6px;
-    
+
 }
 
 .input-s {
@@ -198,6 +198,15 @@ header.general{
     display: inline-block;
     margin: 4px 10px;
 }
+
+.column2.avatar img {
+    width: 65%;
+    border-radius: 50%;
+    margin: 0px 12px;
+
+
+}
+
 .column2 a{
     width: 100%;
     display: inline-block;
@@ -395,6 +404,34 @@ a {
 
 .element.event-elem {
     margin-top: 5%;
+}
+
+.element.event-elem img{
+    margin-top: 2%;
+    border-radius: 50%;
+    width: 200px;
+    height: 200px;
+    position: static;
+}
+
+.artist-container{
+    border: 1px solid black;
+    margin: 1%;
+    position: static;
+    width: 98%;
+    height: 100%;
+    //text-align: left;
+}
+
+.artist-image img {
+    margin-bottom: 2%;
+    border-radius: 50%;
+    height: 200px;
+    width: 200px;
+}
+
+.artist-name h4{
+    font-size: 24px;
 }
 
 .element p,

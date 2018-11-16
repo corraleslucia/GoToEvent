@@ -95,9 +95,9 @@ class UserController
     public function store($mail, $pass, $name, $lastname, $type, $file)
     {
             $user = new User($mail, $pass, $name, $lastname, $type, $file);
-
-            if($this->fileController->upload($user->getAvatar(), 'avatar'))
+            try
             {
+                $this->fileController->upload($user->getAvatar(), 'avatar');
                 try
                 {
                     $this->dao->create($user);
@@ -118,12 +118,13 @@ class UserController
                         require(ROOT.'views/createUser.php');
                     }
                 }
-            }
-            else
+
+            } catch (\Exception $e)
             {
-                $val = "La imagen no pudo ser cargada. Intente nuevamente.";
+                $val = $e->getMessage();
                 require(ROOT.'views/createUser.php');
             }
+
     }
 
     public function login($mail, $pass)

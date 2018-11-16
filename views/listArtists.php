@@ -22,11 +22,13 @@ namespace views;
     {
         foreach ($artists as $key => $value)
         { ?>
-            <div class="element event-elem">
-
-                <h4><?php echo $value->getName() ?></h4>
-                <img src="<?= IMG_UPLOADS . '/artist/' . $value->getAvatar() ?>" height="200" />
-
+            <div class="artist-container">
+                <div class="artist-name">
+                    <h4><?php echo $value->getName() ?></h4>
+                </div>
+                <div class="artist-image">
+                    <img src="<?= IMG_UPLOADS . '/artist/' . $value->getAvatar() ?>" height="200" />
+                </div>
             </div>
     <?php
         }

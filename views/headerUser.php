@@ -18,10 +18,10 @@ namespace views;
             <img src="" alt="">
         </div>
 
-        <div class="column2 admin">
+        <div class="column2 avatar">
             <img src="<?= IMG_UPLOADS . '/avatar/' . $_SESSION['userLogged']->getAvatar() ?>"  />
         </div>
-        
+
         <?php
         if(count($_SESSION['cart'])!=0){  ?>
         <div class="column2 column2-cart-add">
