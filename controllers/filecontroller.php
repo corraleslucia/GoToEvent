@@ -55,20 +55,31 @@ class FileController
           //Obtenemos la extensión del archivo. No sirve para comprobar el verdadero tipo del archivo
           $fileExtension = pathinfo($fileName, PATHINFO_EXTENSION);
 
-          if(in_array($fileExtension, $this->allowedExtensions) ) {
+          if(in_array($fileExtension, $this->allowedExtensions) )
+          {
 
-               if(!file_exists($fileLocation)) {
+               if(!file_exists($fileLocation))
+               {
 
+                    if($fileAvatar->getSize() < $this->maxSize)
+                    { //Menor a 5 MB
 
-                    if($fileAvatar->getSize() < $this->maxSize) { //Menor a 5 MB
-
-                         if (move_uploaded_file( $fileAvatar->getTempName(), $fileLocation)){	//guarda el archivo subido en el directorio 'images/' tomando true si lo subio, y false si no lo hizo
+                         if (move_uploaded_file( $fileAvatar->getTempName(), $fileLocation))
+                         {	//guarda el archivo subido en el directorio 'images/' tomando true si lo subio, y false si no lo hizo
                               //$alerta = 'el archivo '. $nombreArchivo .' fue subido correctamente.';
                               return true;
                          }
+                         throw new \Exception("No se ha podido cargar la imagen.", 1);
+
                     }
+                    throw new \Exception("No se ha podido cargar la imagen. Supera tamaño maximo.", 1);
+
                }
+               throw new \Exception("No se ha podido cargar la imagen. Cambie el nombre del archivo. ", 1);
+
+
           }
-          return false;
+          throw new \Exception("No se ha podido cargar la imagen. Formato no permitido.", 1);
+
      }
 }

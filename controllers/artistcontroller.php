@@ -81,9 +81,9 @@ class ArtistController
         if(isset($_SESSION['userLogged']))
         {
             $artist = new Artist($name, $file);
-
-            if($this->fileController->upload($artist->getAvatar(), 'artist'))
+            try
             {
+                $this->fileController->upload($artist->getAvatar(), 'artist');
                 try
                 {
                     $this->dao->create($artist);
@@ -95,11 +95,12 @@ class ArtistController
                     $val = "El artista ya existe en la base de datos.";
                     require(ROOT.'views/createArtist.php');
                 }
-            }
-            else
+
+            } catch (\Exception $e)
             {
-                $val = "La imagen no pudo ser cargada. Intente nuevamente.";
+                $val = $e->getMessage();
                 require(ROOT.'views/createArtist.php');
+
             }
         }
         else
