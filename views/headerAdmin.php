@@ -17,7 +17,7 @@ namespace views;
             <h2>GoToEvent</h2>
             <img src="" alt="">
         </div>
-        <div class="column2 admin">
+            <div class="column2 avatar">
             <img src="<?= IMG_UPLOADS . '/avatar/' . $_SESSION['userLogged']->getAvatar() ?>"  />
         </div>
         <div class="column2 admin">
