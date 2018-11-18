@@ -28,40 +28,32 @@ include(ROOT.'views/navUser.php');
         }
         else
         { ?>
-                <?php foreach ($tickets as $key => $ticket)
+                <?php foreach ($purchases as $key => $purchase)
                   { ?>
                       <div class="element event-elem">
-                          <div style="text-align: center">
-                          <h2>Evento: <?php echo $ticket->getCalendar()->getIdEvent()?> </h2>
-                          <p>Fecha: <b><?php echo $ticket->getCalendar()->getDate() ?></b></p>
-                          <p>Hora: <b><?php echo $ticket->getCalendar()->getTime()?></b></p>
-                          <p>Lugar: <b><?php echo $ticket->getCalendar()->getLocation()?></b></p>
-                          <p><b>Artistas: </b></p>
-                          <span style="font-size:18px">
-                          <?php
-                          foreach  ($ticket->getCalendar()->getArtists() as $_key => $_value)
-                          {
-                              echo $_value->getIdArtist() ?> <br>
-
-                          <?php
-                          }
-                          ?></span>
-                          </div>
-                          <div class="element event-elem">
-                              <div style="text-align: center">
-                                  <div class= "full">
-                                  <p><?php echo $ticket->getSeatType()->getName() . " - Cantidad: " . $ticket->getQuantity() . " - $ " . $ticket->getPrice() . " - Total: $" . $ticket->getTotal() ?>
-                                  </p>
-                                  </div>
+                          <h2>Fecha de compra: <?php echo $purchase->getDate()?> </h2>
+                          <p><b>DETALLE </b></p>
+                          <?php foreach ($purchase->getPurchaseLines() as $key => $purchaseLine)
+                          { ?>
+                              <div class="element event-elem">
+                                  <p>Evento: <?php echo $purchaseLine->getEventSeat()->getIdCalendar()->getIdEvent()?> </p>
+                                  <p>Fecha: <b><?php echo $purchaseLine->getEventSeat()->getIdCalendar()->getDate() ?></b></p>
+                                  <p>Hora: <b><?php echo $purchaseLine->getEventSeat()->getIdCalendar()->getTime()?></b></p>
+                                  <p>Lugar: <b><?php echo $purchaseLine->getEventSeat()->getIdCalendar()->getLocation()?></b></p>
+                                  <p>Tipo de Plaza: <b><?php echo $purchaseLine->getEventSeat()->getSeatType()?></b></p>
+                                  <p>Cantidad: <b><?php echo $purchaseLine->getQuantity()?></b></p>
+                                  <p>Precio: $ <b><?php echo $purchaseLine->getPrice()?></b></p>
+                                  <p>Total: $ <b><?php echo intval($purchaseLine->getPrice()) * intval($purchaseLine->getQuantity())?></b></p>
                               </div>
-                          </div>
-                      </div>
-                <?php
-                  } 
+                        <?php
+                          } ?>
+                    </div>
+              <?php
+                  }
         } ?>
-            <div class= "full">
-            <a class="secondary-button" href="<?= BASE ?>event/listForUser/byArtist">Ver Mas Eventos</a>
-            </div>
+        <div class= "full">
+        <a class="secondary-button" href="<?= BASE ?>event/listForUser/byArtist">Ver Mas Eventos</a>
+        </div>
         </div>
 
     </section>

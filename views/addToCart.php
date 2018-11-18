@@ -37,10 +37,10 @@ include(ROOT.'views/navUser.php');
                 <?php }
                 ?></span>
                 <div class="element event-elem">
-                    <form class="form-cart" action="<?php echo BASE ?>ticket/addToCart" method="POST" >
+                    <form class="form-cart" action="<?php echo BASE ?>purchaseline/addToCart" method="POST" >
 
                         <input class="input" type="hidden" name="id_calendar" value="<?php echo $calendar['0']->getId() ?>" >
-                        <input class="input" type="hidden" name="eventSeat" value="<?php echo $eventSeat['0']->getId()?>" >
+                        <input class="input" type="hidden" name="id_eventSeat" value="<?php echo $eventSeat['0']->getId()?>" >
                         <input class="input" type="hidden" name="seatType" value="<?php echo $eventSeat['0']->getSeatType()?>" >
                         <input class="input" type="hidden" name="price" value="<?php echo $eventSeat['0']->getPrice()?>" >
 

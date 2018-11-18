@@ -89,19 +89,29 @@ create table users(
     constraint unq_users unique (mail)
 );
 
+create table purchases (
+    id_purchase int unsigned auto_increment,
+    purchase_date date,
+    total int unsigned,
+    id_user int unsigned,
+    constraint pk_purchases primary key (id_purchase),
+    constraint fk_purchases_users foreign key (id_user) references users (id_user)
+);
 
+create table purchase_lines (
+    id_purchase_line int unsigned auto_increment,
+    id_event_seat int unsigned,
+    quantity int unsigned,
+    price float,
+    id_purchase int unsigned,
+    constraint pk_purchase_lines primary key (id_purchase_line),
+    constraint fk_purchase_lines_purchases foreign key (id_purchase) references purchases (id_purchase)
+);
 create table tickets(
     id_ticket int unsigned auto_increment,
-    id_user int unsigned,
-    id_calendar int unsigned,
-    id_event_seat int unsigned,
-    id_seats_type int unsigned,
-    quantity int unsigned not null,
-    price float unsigned not null,
-    total float unsigned not null,
+    ticket_number int unsigned,
+    qr varchar(255),
+    id_purchase_line int unsigned,
     constraint pk_tickets primary key (id_ticket),
-    constraint fk_tickets_users foreign key (id_user) references users(id_user),
-    constraint fk_tickets_calendars foreign key (id_calendar) references calendars(id_calendar),
-    constraint fk_tickets_event_seats foreign key (id_event_seat) references event_seats(id_event_seat),
-    constraint fk_tickets_seats_type foreign key (id_seats_type) references seats_type(id_seats_type)
+    constraint fk_tickets_purchase_lines foreign key (id_purchase_line) references purchase_lines (id_purchase_line)
 );

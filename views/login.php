@@ -16,7 +16,6 @@ namespace views;
 <body>
   <section class="content">
 
-
     <form action="<?php echo BASE ?>User/login" method="POST" class="form-login">
     <h2 class="form-title">Login</h2>
       <div class="form-group">

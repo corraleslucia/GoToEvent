@@ -1,13 +1,13 @@
 <?php namespace daos\daodb;
 use daos\IDao as IDao;
 
-use \models\Ticket as M_Ticket;
+use \models\PurchaseLine as M_PurchaseLine;
 use daos\daodb\Connection as Connection;
 
      /**
       *
       */
-     class TicketDb extends singleton implements IDao
+     class PurchaseLineDb extends singleton implements IDao
      {
           private $connection;
 
@@ -16,21 +16,38 @@ use daos\daodb\Connection as Connection;
           /**
            *
            */
-          public function create($_ticket) {
+          public function create($_purchase_line) {
 
                // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
-			$sql = "INSERT INTO tickets (ticket_number, id_purchase_line) VALUES (:ticket_number, :id_purchase_line)";
-               $parameters['ticket_number'] = intval($_ticket->getNumber());
-               $parameters['id_purchase_line'] = $_ticket->getIdPurchaseLine();
+			$sql = "INSERT INTO purchase_lines (id_event_seat, quantity, price, id_purchase) VALUES (:id_event_seat, :quantity, :price, :id_purchase)";
+
+               $parameters['id_event_seat'] = $_purchase_line->getEventSeat();
+               $parameters['quantity'] = $_purchase_line->getQuantity();
+               $parameters['price'] = $_purchase_line->getPrice();
+               $parameters['id_purchase'] = $_purchase_line->getIdPurchase();
 
                try {
                     // creo la instancia connection
      			$this->connection = Connection::getInstance();
 				// Ejecuto la sentencia.
-				return $this->connection->ExecuteNonQuery($sql, $parameters);
+				$this->connection->ExecuteNonQuery($sql, $parameters);
 			} catch(\PDOException $ex) {
                    throw $ex;
               }
+
+              $sql = "SELECT * FROM purchase_lines where id_purchase_line = last_insert_id()";
+
+              try {
+                   $this->connection = Connection::getInstance();
+                   $resultSet = $this->connection->execute($sql);
+              } catch(Exception $ex) {
+                  throw $ex;
+              }
+
+              if(!empty($resultSet))
+                   return $this->mapear($resultSet);
+              else
+                   return false;
           }
 
 
@@ -39,9 +56,9 @@ use daos\daodb\Connection as Connection;
            */
           public function read($id)
           {
-              $sql = "SELECT * FROM tickets where id_ticket = :id_ticket";
+              $sql = "SELECT * FROM purchase_lines where id_purchase_line = :id_purchase_line";
 
-              $parameters['id_ticket'] = $id;
+              $parameters['id_purchase_line'] = $id;
 
               try {
                    $this->connection = Connection::getInstance();
@@ -63,7 +80,7 @@ use daos\daodb\Connection as Connection;
            *
            */
           public function readAll() {
-               $sql = "SELECT * FROM tickets";
+               $sql = "SELECT * FROM purchase_lines";
 
                try {
                     $this->connection = Connection::getInstance();
@@ -81,10 +98,10 @@ use daos\daodb\Connection as Connection;
           /**
            *
            */
-          public function readAllFromPurchaseLine($id_purchase_line) {
-               $sql = "SELECT * FROM tickets where id_purchase_line = :id_purchase_line";
+          public function readAllFromPurchase($id_purchase) {
+               $sql = "SELECT * FROM purchase_lines where id_purchase = :id_purchase";
 
-               $parameters['id_purchase_line'] = $id_purchase_line;
+               $parameters['id_purchase'] = $id_purchase;
 
                try {
                     $this->connection = Connection::getInstance();
@@ -122,17 +139,17 @@ use daos\daodb\Connection as Connection;
 
 
           /**
-		* Transforma el listado de tickets en
-		* objetos de la clase Ticket
+		* Transforma el listado de purchaseLines en
+		* objetos de la clase Purchaseline
 		*
-		* @param  Array $tickets Listado de tickets a transformar
+		* @param  Array $purchaseLines Listado de purchaseLines a transformar
 		*/
 		private function mapear($value) {
 
 			$value = is_array($value) ? $value : [];
 
 			$resp = array_map(function($p){
-				return new M_Ticket($p['ticket_number'], "",  $p['id_purchase_line'], $p['id_ticket']);
+				return new M_PurchaseLine($p['id_event_seat'], $p['quantity'], $p['price'], $p['id_purchase'], $p['id_purchase_line']);
 			}, $value);
 
                return count($resp) > 0 ? $resp : $resp['0'];
