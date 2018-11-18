@@ -32,18 +32,18 @@ include(ROOT.'views/navUser.php');
             <div class="element event-elem">
                 <div style="text-align: center">
                     <p> Estos tickets no han podido ser adquieridos por falta de disponibilidad. </p>
-                    <?php foreach ($_SESSION['discardTickets'] as $key => $ticket)
+                    <?php foreach ($_SESSION['discardTickets'] as $key => $disPurchaseLine)
                       { ?>
                           <div class="element event-elem">
                               <div style="text-align: center">
-                              <h2>Evento: <?php echo $ticket->getCalendar()->getIdEvent()?> </h2>
-                              <p>Fecha: <b><?php echo $ticket->getCalendar()->getDate() ?></b></p>
-                              <p>Hora: <b><?php echo $ticket->getCalendar()->getTime()?></b></p>
-                              <p>Lugar: <b><?php echo $ticket->getCalendar()->getLocation()?></b></p>
+                              <h2>Evento: <?php echo $disPurchaseLine->getCalendar()->getIdEvent()?> </h2>
+                              <p>Fecha: <b><?php echo $disPurchaseLine->getCalendar()->getDate() ?></b></p>
+                              <p>Hora: <b><?php echo $disPurchaseLine->getCalendar()->getTime()?></b></p>
+                              <p>Lugar: <b><?php echo $disPurchaseLine->getCalendar()->getLocation()?></b></p>
                               <p><b>Artistas: </b></p>
                               <span style="font-size:18px">
                               <?php
-                              foreach  ($ticket->getCalendar()->getArtists() as $_key => $_value)
+                              foreach  ($disPurchaseLine->getCalendar()->getArtists() as $_key => $_value)
                               {
                                   echo $_value->getIdArtist() ?> <br>
 
@@ -54,7 +54,7 @@ include(ROOT.'views/navUser.php');
                               <div class="element event-elem">
                                   <div style="text-align: center">
                                       <div class= "full">
-                                      <p><?php echo $ticket->getSeatType() . " - Cantidad: " . $ticket->getQuantity() . " - $ " . $ticket->getPrice() . " - Total: $" . $ticket->getTotal() ?>
+                                      <p><?php echo $disPurchaseLine->getSeatType()->getName() . " - Cantidad: " . $disPurchaseLine->getQuantity() . " - $ " . $disPurchaseLine->getPrice() . " - Total: $" . intval($disPurchaseLine->getQuantity()) * intval($disPurchaseLine->getPrice())?>
                                       </p>
                                       </div>
                                   </div>
@@ -68,7 +68,7 @@ include(ROOT.'views/navUser.php');
         } ?>
             <div class= "full">
             <a class="secondary-button" href="<?= BASE ?>event/listForUser/byArtist">Ver Mas Eventos</a>
-            <a class="secondary-button" href="<?= BASE ?>ticket/listTicketsByUser">Ver Mis Tickets</a>
+            <a class="secondary-button" href="<?= BASE ?>purchase/listPurchasesByUser">Ver Mis Tickets</a>
             </div>
         </div>
 

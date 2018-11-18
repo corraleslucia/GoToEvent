@@ -1,13 +1,13 @@
 <?php namespace daos\daodb;
 use daos\IDao as IDao;
 
-use \models\Ticket as M_Ticket;
+use \models\Purchase as M_Purchase;
 use daos\daodb\Connection as Connection;
 
      /**
       *
       */
-     class TicketDb extends singleton implements IDao
+     class PurchaseDb extends singleton implements IDao
      {
           private $connection;
 
@@ -16,21 +16,37 @@ use daos\daodb\Connection as Connection;
           /**
            *
            */
-          public function create($_ticket) {
+          public function create($_purchase) {
 
                // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
-			$sql = "INSERT INTO tickets (ticket_number, id_purchase_line) VALUES (:ticket_number, :id_purchase_line)";
-               $parameters['ticket_number'] = intval($_ticket->getNumber());
-               $parameters['id_purchase_line'] = $_ticket->getIdPurchaseLine();
+			$sql = "INSERT INTO purchases (purchase_date, id_user, total) VALUES (curdate(), :id_user, :total)";
+
+               $parameters['id_user'] = $_purchase->getIdUser();
+               $parameters['total'] = intval($_purchase->getTotal());
+
 
                try {
                     // creo la instancia connection
      			$this->connection = Connection::getInstance();
 				// Ejecuto la sentencia.
-				return $this->connection->ExecuteNonQuery($sql, $parameters);
+				$this->connection->ExecuteNonQuery($sql, $parameters);
 			} catch(\PDOException $ex) {
                    throw $ex;
               }
+
+              $sql = "SELECT * FROM purchases where id_purchase = last_insert_id()";
+
+              try {
+                   $this->connection = Connection::getInstance();
+                   $resultSet = $this->connection->execute($sql);
+              } catch(Exception $ex) {
+                  throw $ex;
+              }
+
+              if(!empty($resultSet))
+                   return $this->mapear($resultSet);
+              else
+                   return false;
           }
 
 
@@ -39,9 +55,9 @@ use daos\daodb\Connection as Connection;
            */
           public function read($id)
           {
-              $sql = "SELECT * FROM tickets where id_ticket = :id_ticket";
+              $sql = "SELECT * FROM purchases where id_purchase = :id_purchase";
 
-              $parameters['id_ticket'] = $id;
+              $parameters['id_purchase'] = $id;
 
               try {
                    $this->connection = Connection::getInstance();
@@ -63,7 +79,7 @@ use daos\daodb\Connection as Connection;
            *
            */
           public function readAll() {
-               $sql = "SELECT * FROM tickets";
+               $sql = "SELECT * FROM purchases";
 
                try {
                     $this->connection = Connection::getInstance();
@@ -81,10 +97,10 @@ use daos\daodb\Connection as Connection;
           /**
            *
            */
-          public function readAllFromPurchaseLine($id_purchase_line) {
-               $sql = "SELECT * FROM tickets where id_purchase_line = :id_purchase_line";
+          public function readAllFromUser($id_user) {
+               $sql = "SELECT * FROM purchases where id_user = :id_user";
 
-               $parameters['id_purchase_line'] = $id_purchase_line;
+               $parameters['id_user'] = $id_user;
 
                try {
                     $this->connection = Connection::getInstance();
@@ -106,8 +122,25 @@ use daos\daodb\Connection as Connection;
           /**
            *
            */
-          public function update($value, $newValue)
+          public function update($id_purchase, $newTotal)
           {
+              $sql = "UPDATE purchases SET total = :total where id_purchase = :id_purchase";
+
+              $parameters['total'] = $newTotal;
+              $parameters['id_purchase'] = $id_purchase;
+
+
+              try
+              {
+                   // creo la instancia connection
+               $this->connection = Connection::getInstance();
+               // Ejecuto la sentencia.
+               return $this->connection->ExecuteNonQuery($sql, $parameters);
+              } catch(\PDOException $ex)
+              {
+                  throw $ex;
+             }
+
 
           }
 
@@ -122,17 +155,17 @@ use daos\daodb\Connection as Connection;
 
 
           /**
-		* Transforma el listado de tickets en
-		* objetos de la clase Ticket
+		* Transforma el listado de purchases en
+		* objetos de la clase Purchase
 		*
-		* @param  Array $tickets Listado de tickets a transformar
+		* @param  Array $purchases Listado de purchases a transformar
 		*/
 		private function mapear($value) {
 
 			$value = is_array($value) ? $value : [];
 
 			$resp = array_map(function($p){
-				return new M_Ticket($p['ticket_number'], "",  $p['id_purchase_line'], $p['id_ticket']);
+				return new M_Purchase($p['id_user'], $p['purchase_date'], $p['total'], $p['id_purchase']);
 			}, $value);
 
                return count($resp) > 0 ? $resp : $resp['0'];
