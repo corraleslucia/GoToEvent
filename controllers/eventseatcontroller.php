@@ -11,10 +11,10 @@ use models\EventSeat;
 
 class EventSeatController
 {
-    protected $dao;
-    protected $daoCalendar;
-    protected $daoSeatType;
-    protected $daoLocation;
+    private $dao;
+    private $daoCalendar;
+    private $daoSeatType;
+    private $daoLocation;
 
 
 
@@ -101,7 +101,7 @@ class EventSeatController
     {
         if(isset($_SESSION['userLogged']))
         {
-            $eventSeat = new EventSeat($seatType,$totalQuantity,$price,$calendar);
+            $eventSeat = new EventSeat($seatType,$totalQuantity,$price,$calendar, $totalQuantity);
 
             $_calendar = $this->daoCalendar->readID($calendar);
 

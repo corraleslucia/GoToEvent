@@ -10,14 +10,16 @@ class User
     private $name;
     private $lastName;
     private $type;
+    private $avatar;
 
-    function __construct($m, $p, $n, $ln, $t, $id=""){
+    function __construct($m, $p, $n, $ln, $t, $files, $id=""){
         $this->id = $id;
         $this->mail = $m;
         $this->pass = $p;
         $this->name = $n;
         $this->lastName = $ln;
         $this->type = $t;
+        $this->avatar = $files;
     }
 
     public function getMail(){
@@ -38,6 +40,10 @@ class User
 
     public function getType(){
         return $this->type;
+    }
+
+    public function getAvatar() {
+         return $this->avatar;
     }
 
     public function getId(){

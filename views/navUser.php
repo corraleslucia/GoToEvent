@@ -12,7 +12,7 @@
 <body>
     <nav class="nav-bar-user">
         <ul class="nav">
-            <li><a href="<?= BASE ?>home/index">Ver Eventos</a>
+            <li><a href="<?= BASE ?>event/listForUser/byArtist">Ver Eventos</a>
                 <ul>
                     <li><a href="<?= BASE ?>event/listForUser/byDate">Por Fecha</a></li>
                     <li><a href="<?= BASE ?>event/listForUser/byArtist">Por Artista</a></li>
@@ -20,22 +20,15 @@
                     <li><a href="<?= BASE ?>event/listForUser/byLocation">Por Ubicación</a></li>
                 </ul>
             </li>
-            <li><a href="<?= BASE ?>home/index">Buscar eventos</a>
+            <li><a href="<?= BASE ?>home/inProgress">Buscar eventos</a>
                 <ul>
                     <!-- <li><a href="<?= BASE ?>artist/_list">buscar x</a></li>
                     <li><a href="<?= BASE ?>artist/add">buscar x</a></li> -->
                 </ul>
             </li>
-            <li><a href="<?= BASE ?>home/index">Ver Artistas</a>
-                <ul>
-                    <li><a href="<?= BASE ?>artist/_list">Ver Artistas</a></li>
-                </ul>
+            <li><a href="<?= BASE ?>artist/_list">Ver Artistas</a>
             </li>
-            <li><a href="<?= BASE ?>home/index">Mis Tickets</a>
-                <ul>
-                    <!-- <li><a href="<?= BASE ?>category/_list">tickets</a></li>
-                    <li><a href="<?= BASE ?>category/add">mas tickets</a></li> -->
-                </ul>
+            <li><a href="<?= BASE ?>ticket/listTicketsByUser">Mis Tickets</a>
             </li>
 
         </ul>

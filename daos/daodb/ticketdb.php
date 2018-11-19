@@ -1,13 +1,13 @@
 <?php namespace daos\daodb;
 use daos\IDao as IDao;
 
-use \models\Category as M_Category;
+use \models\Ticket as M_Ticket;
 use daos\daodb\Connection as Connection;
 
      /**
       *
       */
-     class CategoryDb extends singleton implements IDao
+     class TicketDb extends singleton implements IDao
      {
           private $connection;
 
@@ -16,12 +16,18 @@ use daos\daodb\Connection as Connection;
           /**
            *
            */
-          public function create($_category) {
+          public function create($_ticket) {
 
                // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
-			$sql = "INSERT INTO categories (description) VALUES (:description)";
+			$sql = "INSERT INTO tickets (id_user, id_calendar, id_event_seat, id_seats_type, quantity, price, total) VALUES (:id_user, :id_calendar, :id_event_seat, :id_seatType, :quantity, :price, :total)";
 
-               $parameters['description'] = $_category->getDescription();
+               $parameters['id_user'] = $_ticket->getIdUser();
+               $parameters['id_calendar'] = $_ticket->getCalendar();
+               $parameters['id_event_seat'] = $_ticket->getEventSeat();
+               $parameters['id_seatType'] = $_ticket->getSeatType();
+               $parameters['quantity'] = $_ticket->getQuantity();
+               $parameters['price'] = $_ticket->getPrice();
+               $parameters['total'] = $_ticket->getTotal();
 
                try {
                     // creo la instancia connection
@@ -37,31 +43,33 @@ use daos\daodb\Connection as Connection;
           /**
            *
            */
-          public function read($_description) {
+          public function read($id)
+          {
+              $sql = "SELECT * FROM tickets where id_ticket = :id_ticket";
 
-               $sql = "SELECT * FROM categories where description = :description";
+              $parameters['id_ticket'] = $id;
 
-               $parameters['description'] = $_description;
-
-               try {
-                    $this->connection = Connection::getInstance();
-                    $resultSet = $this->connection->execute($sql, $parameters);
-               } catch(Exception $ex) {
-                   throw $ex;
-               }
+              try {
+                   $this->connection = Connection::getInstance();
+                   $resultSet = $this->connection->execute($sql, $parameters);
+              } catch(Exception $ex) {
+                  throw $ex;
+              }
 
 
-               if(!empty($resultSet))
-                    return $this->mapear($resultSet);
-               else
-                    return false;
+              if(!empty($resultSet))
+                   return $this->mapear($resultSet);
+              else
+                   return false;
+
+
           }
 
           /**
            *
            */
           public function readAll() {
-               $sql = "SELECT * FROM categories";
+               $sql = "SELECT * FROM tickets";
 
                try {
                     $this->connection = Connection::getInstance();
@@ -79,11 +87,10 @@ use daos\daodb\Connection as Connection;
           /**
            *
            */
-          public function readId($id) {
+          public function readAllForUser($id_user) {
+               $sql = "SELECT * FROM tickets where id_user = :id_user";
 
-               $sql = "SELECT * FROM categories where id_category = :id_category";
-
-               $parameters['id_category'] = $id;
+               $parameters['id_user'] = $id_user;
 
                try {
                     $this->connection = Connection::getInstance();
@@ -102,7 +109,6 @@ use daos\daodb\Connection as Connection;
 
 
 
-
           /**
            *
            */
@@ -110,26 +116,29 @@ use daos\daodb\Connection as Connection;
           {
 
           }
+
+
           /**
            *
            */
           public function delete($_description)
           {
-              
+
           }
 
+
           /**
-		* Transforma el listado de categorias en
-		* objetos de la clase Categoria
+		* Transforma el listado de tickets en
+		* objetos de la clase Ticket
 		*
-		* @param  Array $categorias Listado de categorias a transformar
+		* @param  Array $tickets Listado de tickets a transformar
 		*/
 		private function mapear($value) {
 
 			$value = is_array($value) ? $value : [];
 
 			$resp = array_map(function($p){
-				return new M_Category($p['description'], $p['id_category']);
+				return new M_Ticket($p['id_user'], $p['id_calendar'], $p['id_event_seat'], $p['id_seats_type'], $p['quantity'], $p['price'], $p['total'], $p['id_ticket']);
 			}, $value);
 
                return count($resp) > 0 ? $resp : $resp['0'];

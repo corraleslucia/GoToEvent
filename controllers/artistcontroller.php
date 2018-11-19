@@ -4,17 +4,32 @@
 use daos\daodb\ArtistDb as Dao;
 use models\Artist;
 
+use controllers\FileController as C_File;
+
 class ArtistController
 {
-    protected $dao;
+    private $dao;
+    private $fileController;
 
     public function __construct()
     {
         $this->dao= Dao::getInstance();
+        $this->fileController= new C_File;
     }
 
     public function index()
     {
+        if(isset($_SESSION['userLogged']))
+        {
+            $this->_list();
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+
+
 
     }
 
@@ -39,10 +54,7 @@ class ArtistController
         if(isset($_SESSION['userLogged']))
         {
             $artists = $this->dao->readAll();
-            if(!$artists)
-            {
-                $artists['0'] = new Artist ("SIN ARTISTAS", 0);
-            }
+
             if ($_SESSION['userLogged']->getType() === "1")
             {
                 include(ROOT.'views/headerAdmin.php');
@@ -64,22 +76,31 @@ class ArtistController
     }
 
 
-    public function store($name)
+    public function store($name, $file)
     {
         if(isset($_SESSION['userLogged']))
         {
-            $artist = new Artist($name);
-
+            $artist = new Artist($name, $file);
             try
             {
-                $this->dao->create($artist);
-                $val = "Artista Creado";
-                require(ROOT.'views/createArtist.php');
-            }
-            catch (\PDOException $ex)
+                $this->fileController->upload($artist->getAvatar(), 'artist');
+                try
+                {
+                    $this->dao->create($artist);
+                    $val = "Artista Creado";
+                    require(ROOT.'views/createArtist.php');
+                }
+                catch (\PDOException $ex)
+                {
+                    $val = "El artista ya existe en la base de datos.";
+                    require(ROOT.'views/createArtist.php');
+                }
+
+            } catch (\Exception $e)
             {
-                $val = "El artista ya existe en la base de datos.";
+                $val = $e->getMessage();
                 require(ROOT.'views/createArtist.php');
+
             }
         }
         else

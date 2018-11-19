@@ -17,11 +17,14 @@ namespace views;
             <h2>GoToEvent</h2>
             <img src="" alt="">
         </div>
+            <div class="column2 avatar">
+            <img src="<?= IMG_UPLOADS . '/avatar/' . $_SESSION['userLogged']->getAvatar() ?>"  />
+        </div>
         <div class="column2 admin">
             <img src="<?= BASE ?>media/admin.png" alt="">
         </div>
         <div class="column3 admin">
-            <h3>Administrador:  /*Nombre del admin */<?php    ?></h3>
+            <h3>Administrador:  <?php echo $_SESSION['userLogged']->getLastName() .",". $_SESSION['userLogged']->getName() ?></h3>
 
             <div class="column3-bot">
                 <a href="<?php echo BASE?>user/logOut" >Cerrar sesion</a>

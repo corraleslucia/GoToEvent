@@ -17,22 +17,27 @@ namespace views;
             <h2>GoToEvent</h2>
             <img src="" alt="">
         </div>
+
+        <div class="column2 avatar">
+            <img src="<?= IMG_UPLOADS . '/avatar/' . $_SESSION['userLogged']->getAvatar() ?>"  />
+        </div>
+
         <?php
-        if(isset($_SESSION['cart']['0'])){  ?>
+        if(count($_SESSION['cart'])!=0){  ?>
         <div class="column2 column2-cart-add">
-            <a href=""><img src="<?= BASE ?>media/carrito.png" alt=""> </a>
+            <a href="<?php echo BASE ?>ticket/viewCart"><img src="<?= BASE ?>media/carrito.png" alt=""> </a>
         </div>
         <?php
         }else { ?>
         <div class="column2">
-            <a href=""><img src="<?= BASE ?>media/carrito.png" alt=""> </a>
+            <a href="<?php echo BASE ?>ticket/viewCart"><img src="<?= BASE ?>media/carrito.png" alt=""> </a>
         </div>
         <?php
         } ?>
-        
+
         <div class="column3">
             <h3>
-                Logueado como: <?php    ?>
+                Logueado como: <?php echo $_SESSION['userLogged']->getLastName() .",". $_SESSION['userLogged']->getName() ?>
             </h3>
             <div class="column3-half">
                 <a href="" >Mi cuenta</a>

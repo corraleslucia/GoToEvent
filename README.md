@@ -1,2 +1,9 @@
 # GoToEvent #
-prueba merge2
+
+Autores:
+
+Carrizo, Santiago
+Corrales, Lucia
+Lazcano, Gaston
+
+ 

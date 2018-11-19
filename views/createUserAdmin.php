@@ -24,7 +24,7 @@ include(ROOT.'views/navAdmin.php');
       <?php }
       ?>
 
-    <form action="<?php echo BASE ?>user/store" method="POST" class="form-admin">
+    <form action="<?php echo BASE ?>user/store" method="POST"  enctype="multipart/form-data" class="form-admin">
         <h2 class="form-title">Registrar Usuario</h2>
         <div class="form-group">
           <label class="label">Mail:</label>
@@ -54,6 +54,11 @@ include(ROOT.'views/navAdmin.php');
 
             <input type="radio" id="admin" name="user-type" value="1">
             <label for="admin">Aministrador</label>
+        </div>
+
+        <div class="form-group">
+          <label class="label" >Imagen: </label>
+          <input type="file" name="avatar" required>
         </div>
 
         <div class="div-form-button">

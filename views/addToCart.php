@@ -37,19 +37,27 @@ include(ROOT.'views/navUser.php');
                 <?php }
                 ?></span>
                 <div class="element event-elem">
-                    <form class="form-cart" action="<?php echo BASE ?>cart/addToCart" method="POST" >
+                    <form class="form-cart" action="<?php echo BASE ?>ticket/addToCart" method="POST" >
+
                         <input class="input" type="hidden" name="id_calendar" value="<?php echo $calendar['0']->getId() ?>" >
+                        <input class="input" type="hidden" name="eventSeat" value="<?php echo $eventSeat['0']->getId()?>" >
                         <input class="input" type="hidden" name="seatType" value="<?php echo $eventSeat['0']->getSeatType()?>" >
                         <input class="input" type="hidden" name="price" value="<?php echo $eventSeat['0']->getPrice()?>" >
+
                         <p><?php echo $eventSeat['0']->getSeatType()?>
+
                             <label class="label" >Cantidad: </label>
-                            <input id="input-cant" class="input-xs" type="number" name="cant" max="<?php echo $eventSeat['0']->getRemaningQuantity()?>"
-                            oninvalid="setCustomValidity('La cantidad supera la disponibilidad. Máximo disponible <?php echo $eventSeat['0']->getRemaningQuantity()?> ')"
+                            <input id="input-cant" class="input-xs" type="number" name="cant" min="1" max="<?php echo $eventSeat['0']->getRemaningQuantity()?>"
+                            oninvalid="setCustomValidity('Inválido. Minimo a comprar: 1 - Máximo disponible <?php echo $eventSeat['0']->getRemaningQuantity()?> ')"
                             onkeydown="try{setCustomValidity('')}catch(e){}" required>
+
                             <?php echo '$' . $eventSeat['0']->getPrice() . '  -  ' ?>
+
                             <span id="totalprice">Total: $0</span>
+
                             <button class="form-secondary-button" type="button" onClick="getTotal()">Calcular total</button>
                         </p>
+
                         <div style="text-align: center">
                             <button class="secondary-button" type="submit" >Agregar al carrito</button>
                             <a class="secondary-button" href="<?= BASE ?>event/showEventDetailsForUser/<?php echo $event['0']->getId()?>">Volver</a>

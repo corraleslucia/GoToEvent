@@ -19,9 +19,10 @@ use daos\daodb\Connection as Connection;
           public function create($_artist) {
 
                // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
-			$sql = "INSERT INTO artists (name) VALUES (:name)";
+			$sql = "INSERT INTO artists (name, img) VALUES (:name, :img)";
 
                $parameters['name'] = $_artist->getName();
+               $parameters['img'] = $_artist->getAvatar()['artist']['name'];
 
                try {
                     // creo la instancia connection
@@ -104,52 +105,38 @@ use daos\daodb\Connection as Connection;
            *
            */
           public function edit($_artist) {
-               $sql = "UPDATE artists SET name = :name";
 
-               $parameters['name'] = $_artist->getName();
-
-
-               try {
-                    // creo la instancia connection
-     			$this->connection = Connection::getInstance();
-				// Ejecuto la sentencia.
-				return $this->connection->ExecuteNonQuery($sql, $parameters);
-			} catch(\PDOException $ex) {
-                   throw $ex;
-              }
           }
 
           /**
            *
            */
-          public function update($value, $newValue) {
+          public function update($id_artist, $newName)
+          {
+              $sql = "UPDATE artists SET name = :name where id_artist = :id_artist";
+
+              $parameters['name'] = $newName;
+              $parameters['id_artist'] = $id_artist;
+
+
+              try {
+                   // creo la instancia connection
+               $this->connection = Connection::getInstance();
+               // Ejecuto la sentencia.
+               return $this->connection->ExecuteNonQuery($sql, $parameters);
+           } catch(\PDOException $ex) {
+                  throw $ex;
+             }
 
           }
           /**
            *
            */
-          public function delete($_name) {
-               /*$sql = "DELETE FROM usuarios WHERE email = :email";
+          public function delete($_name)
+          {
 
-               $obj_pdo = new Conexion();
-
-               try {
-                    $conexion = $obj_pdo->conectar();
-
-				// Creo una sentencia llamando a prepare. Esto devuelve un objeto statement
-				$sentencia = $conexion->prepare($sql);
-
-                    $sentencia->bindParam(":email", $email);
-
-                    $sentencia->execute();
-
-
-               } catch(PDOException $Exception) {
-
-				throw new MyDatabaseException( $Exception->getMessage( ) , $Exception->getCode( ) );
-
-			}*/
           }
+
 
           /**
 		* Transforma el listado de artistas en
@@ -157,20 +144,17 @@ use daos\daodb\Connection as Connection;
 		*
 		* @param  Array $gente Listado de artistas a transformar
 		*/
-		protected function mapear($value) {
+		private function mapear($value) {
 
 			$value = is_array($value) ? $value : [];
 
 			$resp = array_map(function($p){
-				return new M_Artist($p['name'], $p['id_artist']);
+				return new M_Artist($p['name'], $p['img'], $p['id_artist']);
 			}, $value);
 
                return count($resp) > 0 ? $resp : $resp['0'];
 
 		}
      }
-
-
-
 
  ?>

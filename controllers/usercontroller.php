@@ -3,23 +3,41 @@
 use daos\daodb\UserDb as Dao;
 
 use controllers\EventController as C_Event;
+use controllers\FileController as C_File;
 
 use models\User;
 
 class UserController
 {
-    protected $dao;
-    protected $eventController;
+    private $dao;
+    private $eventController;
+    private $fileController;
 
     public function __construct()
     {
         $this->dao= Dao::getInstance();
         $this->eventController = new C_Event;
+        $this->fileController= new C_File;
 
     }
 
     public function index()
     {
+        if(isset($_SESSION['userLogged']))
+        {
+            if ($_SESSION['userLogged']->getType()==="1")
+            {
+                $this->_list();
+            }
+            else if ($_SESSION['userLogged']->getType()==="2")
+            {
+                $this->eventController->listForUser("byArtist");
+            }
+        }
+        else
+        {
+            require(ROOT.'views/login.php');
+        }
 
     }
 
@@ -74,38 +92,39 @@ class UserController
     }
 
 
-    public function store($mail, $pass, $name, $lastname, $type)
+    public function store($mail, $pass, $name, $lastname, $type, $file)
     {
-        if(isset($_SESSION['userLogged']))
-        {
-            $user = new User($mail, $pass, $name, $lastname, $type);
-
+            $user = new User($mail, $pass, $name, $lastname, $type, $file);
             try
             {
-                $this->dao->create($user);
+                $this->fileController->upload($user->getAvatar(), 'avatar');
+                try
+                {
+                    $this->dao->create($user);
 
-                $val = "Usuario Creado";
+                    $val = "Usuario Creado";
 
-                require(ROOT.'views/login.php');
-            }
-            catch (\PDOException $ex)
+                    require(ROOT.'views/login.php');
+                }
+                catch (\PDOException $ex)
+                {
+                    $val = "Ya existe un usuario registrado con ese email.";
+                    if ($type === "1")
+                    {
+                        require(ROOT.'views/createUserAdmin.php');
+                    }
+                    else if ($type === "2")
+                    {
+                        require(ROOT.'views/createUser.php');
+                    }
+                }
+
+            } catch (\Exception $e)
             {
-                $val = "Ya existe un usuario registrado con ese email.";
-                if ($type === "1")
-                {
-                    require(ROOT.'views/createUserAdmin.php');
-                }
-                else if ($type === "2")
-                {
-                    require(ROOT.'views/createUser.php');
-                }
+                $val = $e->getMessage();
+                require(ROOT.'views/createUser.php');
             }
-        }
-        else
-        {
-            echo ('inicie sesion, no saltearas este paso');
-            require(ROOT.'views/login.php');
-        }
+
     }
 
     public function login($mail, $pass)
@@ -118,6 +137,7 @@ class UserController
             {
                 $_SESSION['userLogged'] = $user['0'];
                 $_SESSION['cart'] = array();
+                $_SESSION['discardTickets'] = array();
                 if ($user['0']->getType()==="1")
                 {
                     $this->eventController->_list();
@@ -138,9 +158,8 @@ class UserController
         }
 
     }
-
-
-    public function logOut(){
+    public function logOut()
+    {
         session_destroy();
         require(ROOT.'views/login.php');
     }

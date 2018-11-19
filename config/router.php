@@ -21,9 +21,16 @@ class Router
         $object = "controllers\\" . $controller;
         $controller = new $object();
 
-        if (!isset($parameters)) {
+        if($_FILES)
+        {
+             $parameters[] = $_FILES;
+        }
+
+        if (!isset($parameters))
+        {
             call_user_func(array($controller, $method));
-        } else {
+        } else
+        {
             call_user_func_array(array($controller, $method), $parameters);
         }
     }

@@ -9,20 +9,12 @@ class EventSeat
     private $remaningQuantity;
     private $id_calendar;
 
-    public function __construct($st, $tq, $p, $c, $rq= "", $id=""){
+    public function __construct($st, $tq, $p, $c, $rq, $id=""){
         $this->id = $id;
         $this->seatType=$st;
         $this->totalQuantity=$tq;
         $this->price=$p;
-        if ($rq)
-        {
-            $this->remaningQuantity=$rq;
-        }
-        else
-        {
-            $this->remaningQuantity=$tq;
-        }
-
+        $this->remaningQuantity=$rq; 
         $this->id_calendar = $c;
     }
 
