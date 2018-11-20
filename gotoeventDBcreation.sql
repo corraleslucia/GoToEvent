@@ -105,7 +105,8 @@ create table purchase_lines (
     price float,
     id_purchase int unsigned,
     constraint pk_purchase_lines primary key (id_purchase_line),
-    constraint fk_purchase_lines_purchases foreign key (id_purchase) references purchases (id_purchase)
+    constraint fk_purchase_lines_purchases foreign key (id_purchase) references purchases (id_purchase),
+    constraint fk_purchases_event_seats foreign key (id_event_seat) references event_seats (id_event_seat)
 );
 create table tickets(
     id_ticket int unsigned auto_increment,

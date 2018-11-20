@@ -54,6 +54,25 @@ class TicketController
 
     }
 
+    public function showTicketsByPurchaseLine($id_purchaseLine)
+    {
+        if(isset($_SESSION['userLogged']))
+        {
+            $tickets = $this->dao->readAllFromPurchaseLine($id_purchaseLine);
+            foreach ($tickets as $key => $ticket)
+            {
+                $ticket->setIdPurchaseLine()
+            }
+
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+
+    }
+
 
 
 

@@ -41,10 +41,10 @@ class Purchase
     {
         return $this->purchaseLines;
     }
-    
+
     public function setPurchaseLines($purchaseLines)
     {
-        $this->purchaseLines = $purchaseLine;
+        $this->purchaseLines = $purchaseLines;
     }
 }
 

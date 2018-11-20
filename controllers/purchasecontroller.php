@@ -97,7 +97,7 @@ class PurchaseController
                     $_SESSION['discardTickets'][] = $purchaseLine;
                     unset($_SESSION['cart'][$key]);
                 }
-                $this->dao->update($lastPurchaseLine['0']->getId(), $total);
+                $this->dao->update($lastPurchase['0']->getId(), $total);
             }
             require(ROOT.'views/endShopping.php');
 
@@ -126,8 +126,9 @@ class PurchaseController
                         $purchaseLine->setEventSeat($this->daoEventSeat->readId($purchaseLine->getEventSeat())['0']);
                         $purchaseLine->getEventSeat()->setIdCalendar($this->daoCalendar->readId($purchaseLine->getEventSeat()->getIdCalendar())['0']);
 
-                        $tickets = $this->daoTicket->readAllFromPurchaseLine($purchaseLine->getId());
+                        $purchaseLine->setTickets($this->daoTicket->readAllFromPurchaseLine($purchaseLine->getId()));
                     }
+                    $purchase->setPurchaseLines($purchaseLines);
                 }
             }
             require(ROOT.'views/myTickets.php');
