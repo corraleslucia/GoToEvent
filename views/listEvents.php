@@ -50,7 +50,7 @@ include(ROOT.'views/navAdmin.php');
         </div>
     <?php } ?>
     </div>
-
+    
   </section>
 </body>
 </html>

@@ -1,5 +1,8 @@
 <?php namespace controllers;
 
+require "vendor/autoload.php";
+use Endroid\QrCode\QrCode;
+
 use daos\daodb\PurchaseDb as Dao;
 use daos\daodb\PurchaseLineDb as DaoPurchaseLine;
 use daos\daodb\TicketDb as DaoTicket;
@@ -85,7 +88,16 @@ class PurchaseController
 
                     for ($i=0; $i < $purchaseLine->getQuantity() ; $i++)
                     {
-                        $_ticket = New Ticket (intval(rand(1000, 9999)), $lastPurchaseLine['0']->getId());
+                        $tnumberRand = intval(rand(1000, 9999));
+
+                        $qrCode = new QrCode ("Ticket # " . $tnumberRand . "- Id_user : " . $_purchase->getIdUser() .
+                                            " - Evento: " . $purchaseLine->getEventSeat()->getIdCalendar()->getIdEvent() .
+                                            " - Fecha: " . $purchaseLine->getEventSeat()->getIdCalendar()->getDate() .
+                                            " - Hora: " . $purchaseLine->getEventSeat()->getIdCalendar()->getTime() .
+                                            " - Plaza: " . $purchaseLine->getEventSeat()->getSeatType()->getName());
+                        $qrCode->writeFile(IMG_UPLOADS_PATH . '/qr/qr'. $tnumberRand . '.png');
+
+                        $_ticket = New Ticket ($tnumberRand, $lastPurchaseLine['0']->getId(), $tnumberRand . '.png');
                         $this->daoTicket->create($_ticket);
                     }
 
@@ -97,7 +109,7 @@ class PurchaseController
                     $_SESSION['discardTickets'][] = $purchaseLine;
                     unset($_SESSION['cart'][$key]);
                 }
-                $this->dao->update($lastPurchaseLine['0']->getId(), $total);
+                $this->dao->update($lastPurchase['0']->getId(), $total);
             }
             require(ROOT.'views/endShopping.php');
 
@@ -120,17 +132,21 @@ class PurchaseController
                 foreach ($purchases as $key => $purchase)
                 {
                     $purchaseLines = $this->daoPurchaseLine->readAllFromPurchase($purchase->getId());
-
-                    foreach ($purchaseLines as $key => $purchaseLine)
+                    if ($purchaseLines)
                     {
-                        $purchaseLine->setEventSeat($this->daoEventSeat->readId($purchaseLine->getEventSeat())['0']);
-                        $purchaseLine->getEventSeat()->setIdCalendar($this->daoCalendar->readId($purchaseLine->getEventSeat()->getIdCalendar())['0']);
+                        foreach ($purchaseLines as $key => $purchaseLine)
+                        {
+                            $purchaseLine->setEventSeat($this->daoEventSeat->readId($purchaseLine->getEventSeat())['0']);
+                            $purchaseLine->getEventSeat()->setIdCalendar($this->daoCalendar->readId($purchaseLine->getEventSeat()->getIdCalendar())['0']);
 
-                        $tickets = $this->daoTicket->readAllFromPurchaseLine($purchaseLine->getId());
+                            $purchaseLine->setTickets($this->daoTicket->readAllFromPurchaseLine($purchaseLine->getId()));
+                        }
+                        $purchase->setPurchaseLines($purchaseLines);
                     }
+
                 }
             }
-            require(ROOT.'views/myTickets.php');
+            require(ROOT.'views/myPurchases.php');
 
         }
         else

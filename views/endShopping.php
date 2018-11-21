@@ -68,7 +68,7 @@ include(ROOT.'views/navUser.php');
         } ?>
             <div class= "full">
             <a class="secondary-button" href="<?= BASE ?>event/listForUser/byArtist">Ver Mas Eventos</a>
-            <a class="secondary-button" href="<?= BASE ?>purchase/listPurchasesByUser">Ver Mis Tickets</a>
+            <a class="secondary-button" href="<?= BASE ?>purchase/listPurchasesByUser">Ver Mis Compras</a>
             </div>
         </div>
 

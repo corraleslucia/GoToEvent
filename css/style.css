@@ -414,6 +414,17 @@ a {
     position: static;
 }
 
+.element.qr-elem {
+    margin-top: 5%;
+}
+.element.qr-elem  img{
+
+    
+
+}
+
+
+
 .artist-container{
     border: 1px solid black;
     margin: 1%;
@@ -496,6 +507,7 @@ a {
 .half p {
     text-align: center;
 }
+
 
 .full {
     width: 98%;

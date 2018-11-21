@@ -28,7 +28,7 @@
             </li>
             <li><a href="<?= BASE ?>artist/_list">Ver Artistas</a>
             </li>
-            <li><a href="<?= BASE ?>purchase/listPurchasesByUser">Mis Tickets</a>
+            <li><a href="<?= BASE ?>purchase/listPurchasesByUser">Mis Compras</a>
             </li>
 
         </ul>
