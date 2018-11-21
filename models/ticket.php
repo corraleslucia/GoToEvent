@@ -31,6 +31,11 @@ class Ticket
         return $this->qr;
     }
 
+    public function setQr($newQr)
+    {
+        $this->qr = $newQr;
+    }
+
     public function getIdPurchaseLine()
     {
         return $this->id_purchase_line;

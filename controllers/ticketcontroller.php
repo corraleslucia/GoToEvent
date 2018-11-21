@@ -1,35 +1,28 @@
 <?php namespace controllers;
 
+
+
 use daos\daodb\TicketDb as Dao;
+use daos\daodb\PurchaseLineDb as DaoPurchaseLine;
+use daos\daodb\eventSeatDb as DaoEventSeat;
+use daos\daodb\CalendarDb as DaoCalendar;
+
 use models\Ticket;
 
-use daos\daodb\calendarDb as DaoCalendar;
-use daos\daodb\eventSeatDb as DaoEventSeat;
-use daos\daodb\seatTypeDb as DaoSeatType;
-use daos\daodb\eventDb as DaoEvent;
-use daos\daodb\artistsxCalendarsDb as DaoArtistsXCalendars;
-
-use controllers\EventController as C_Event;
 
 class TicketController
 {
     private $dao;
-    private $daoCalendar;
+    private $daoPurchaseLine;
     private $daoEventSeat;
-    private $daoSeatType;
-    private $daoEvent;
-    private $daoArtistsXCalendars;
-    private $eventController;
+    private $daoCalendar;
 
     public function __construct()
     {
         $this->dao= Dao::getInstance();
-        $this->daoCalendar= DaoCalendar::getInstance();
-        $this->daoEventSeat= DaoEventSeat::getInstance();
-        $this->daoSeatType= DaoSeatType::getInstance();
-        $this->daoEvent= DaoEvent::getInstance();
-        $this->daoArtistsXCalendars= DaoArtistsXCalendars::getInstance();
-        $this->eventController = new C_Event;
+        $this->daoPurchaseLine = DaoPurchaseLine::getInstance();
+        $this->daoCalendar = DaoCalendar::getInstance();
+        $this->daoEventSeat = DaoEventSeat::getInstance();
     }
 
     public function index()
@@ -59,11 +52,11 @@ class TicketController
         if(isset($_SESSION['userLogged']))
         {
             $tickets = $this->dao->readAllFromPurchaseLine($id_purchaseLine);
-            foreach ($tickets as $key => $ticket)
-            {
-                $ticket->setIdPurchaseLine()
-            }
+            $purchaseLine = $this->daoPurchaseLine->read($id_purchaseLine)['0'];
+            $purchaseLine->setEventSeat($this->daoEventSeat->readId($purchaseLine->getEventSeat())['0']);
+            $purchaseLine->getEventSeat()->setIdCalendar($this->daoCalendar->readId($purchaseLine->getEventSeat()->getIdCalendar())['0']);
 
+            require(ROOT.'views/showTickets.php');
         }
         else
         {

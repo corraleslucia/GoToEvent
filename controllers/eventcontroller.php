@@ -290,6 +290,141 @@ class EventController
         }
     }
 
+    public function eventSoldQuantity ()
+    {
+        if(isset($_SESSION['userLogged']))
+        {
+            $totalsSoldQuantity = array();
+
+            $events = $this->dao->readAll();
+            if ($events)
+            {
+                foreach ($events as $key => $event)
+                {
+                    $soldQuantity = 0;
+                    $event->setCalendar($this->daoCalendar->readFromEvent($event->getId()));
+                    if($event->getCalendar())
+                    {
+                        foreach ($event->getCalendar() as $key => $calendar)
+                        {
+                            $calendar->setEventSeats($this->daoEventSeat->readAllFromCalendar($calendar->getId()));
+                            if ($calendar->getEventSeats())
+                            {
+                                foreach ($calendar->getEventSeats() as $key => $eventSeat)
+                                {
+                                    $soldQuantity = $soldQuantity + (intval($eventSeat->getTotalQuantity()) - intval($eventSeat->getRemaningQuantity()));
+                                }
+                            }
+                        }
+
+                    }
+                    $totalsSoldQuantity[$event->getId()] = $soldQuantity;
+                }
+            }
+
+
+            require(ROOT.'views/eventSoldQuantityReport.php');
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+    }
+
+    public function eventSoldMoney ()
+    {
+        if(isset($_SESSION['userLogged']))
+        {
+            $totalsSoldMoney = array();
+
+            $events = $this->dao->readAll();
+            if ($events)
+            {
+                foreach ($events as $key => $event)
+                {
+                    $soldMoney = 0;
+                    $event->setCalendar($this->daoCalendar->readFromEvent($event->getId()));
+                    if($event->getCalendar())
+                    {
+                        foreach ($event->getCalendar() as $key => $calendar)
+                        {
+                            $calendar->setEventSeats($this->daoEventSeat->readAllFromCalendar($calendar->getId()));
+                            if ($calendar->getEventSeats())
+                            {
+                                foreach ($calendar->getEventSeats() as $key => $eventSeat)
+                                {
+                                    $soldMoney = $soldMoney + ( (intval($eventSeat->getTotalQuantity()) - intval($eventSeat->getRemaningQuantity())) * intval($eventSeat->getPrice()));
+                                }
+                            }
+                        }
+
+                    }
+                    $totalsSoldMoney[$event->getId()] = $soldMoney;
+                }
+            }
+
+            require(ROOT.'views/eventSoldMoneyReport.php');
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+    }
+
+    public function categorySoldMoney ()
+    {
+        if(isset($_SESSION['userLogged']))
+        {
+            $totalsSoldMoney = array();
+
+            $categories = $this->daoCategory->readAll();
+            if ($categories)
+            {
+                foreach ($categories as $key => $category)
+                {
+                    $soldMoney = 0;
+                    $events = $this->dao->readEventsFromCategory($category->getId());
+                    if ($events)
+                    {
+                        foreach ($events as $key => $event)
+                        {
+                            $event->setCalendar($this->daoCalendar->readFromEvent($event->getId()));
+                            if($event->getCalendar())
+                            {
+                                foreach ($event->getCalendar() as $key => $calendar)
+                                {
+                                    $calendar->setEventSeats($this->daoEventSeat->readAllFromCalendar($calendar->getId()));
+                                    if ($calendar->getEventSeats())
+                                    {
+                                        foreach ($calendar->getEventSeats() as $key => $eventSeat)
+                                        {
+                                            $soldMoney = $soldMoney + ( (intval($eventSeat->getTotalQuantity()) - intval($eventSeat->getRemaningQuantity())) * intval($eventSeat->getPrice()));
+                                        }
+                                    }
+                                 }
+                             }
+                         }
+                     }
+                     $totalsSoldMoney[$category->getId()] = $soldMoney;
+                }
+
+            }
+
+
+
+            require(ROOT.'views/categorySoldMoneyReport.php');
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+    }
+
+
+
 }
 
 ?>

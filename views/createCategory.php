@@ -35,6 +35,11 @@ include(ROOT.'views/navAdmin.php');
         <button type="submit" class ="form-button">Agregar categoria</button>
       </div>
     </form>
+    <div style="text-align: center">
+        <a class="secondary-button" href="<?= BASE ?>event/index">Volver</a>
+        <br>
+    </div>
+    <br>
 
   </section>
 </body>

@@ -23,21 +23,21 @@ include(ROOT.'views/navUser.php');
         <div class="container">
             <?php foreach ($tickets as $key => $ticket)
               { ?>
-                  <div class="element event-elem">
+                  <div class="element qr-elem">
                       <h2>TICKET # <b><?php echo $ticket->getNumber()?></b> </h2>
-                      <p>Evento: <b><?php echo $ticket->getIdPurchaseLine()->getEventSeat()->getIdCalendar()->getIdEvent()?> </b></p>
+                      <p>Evento: <b><?php echo $purchaseLine->getEventSeat()->getIdCalendar()->getIdEvent()?> </b></p>
                       <br>
-                      <p>Fecha: <b><?php echo $ticket->getIdPurchaseLine()->getEventSeat()->getIdCalendar()->getDate() ?></b></p>
+                      <p>Fecha: <b><?php echo$purchaseLine->getEventSeat()->getIdCalendar()->getDate() ?></b></p>
                       <br>
-                      <p>Hora: <b><?php echo $ticket->getIdPurchaseLine()->getEventSeat()->getIdCalendar()->getTime()?></b></p>
+                      <p>Hora: <b><?php echo $purchaseLine->getEventSeat()->getIdCalendar()->getTime()?></b></p>
                       <br>
-                      <p>Lugar: <b><?php echo $ticket->getIdPurchaseLine()->getEventSeat()->getIdCalendar()->getLocation()?></b></p>
+                      <p>Lugar: <b><?php echo $purchaseLine->getEventSeat()->getIdCalendar()->getLocation()?></b></p>
                       <br>
-                      <p>Tipo de Plaza: <b><?php echo $ticket->getIdPurchaseLine()->getEventSeat()->getSeatType()?></b></p>
+                      <p>Tipo de Plaza: <b><?php echo $purchaseLine->getEventSeat()->getSeatType()?></b></p>
                       <br>
                       <h2><b>QR</b></h2>
                       <div class="half mini-box">
-                          <p>aca va el QR</p>
+                          <img src="<?= IMG_UPLOADS . '/qr/qr' . $ticket->getQr() ?>" />
                       </div>
                   </div>
           <?php
@@ -47,6 +47,7 @@ include(ROOT.'views/navUser.php');
         <div class= "full">
             <a class="secondary-button" href="<?= BASE ?>purchase/listPurchasesByUser">Volver</a>
         </div>
+        <br>
     </section>
 </body>
 </html>

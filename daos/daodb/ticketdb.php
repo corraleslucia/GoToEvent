@@ -19,9 +19,10 @@ use daos\daodb\Connection as Connection;
           public function create($_ticket) {
 
                // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
-			$sql = "INSERT INTO tickets (ticket_number, id_purchase_line) VALUES (:ticket_number, :id_purchase_line)";
+			$sql = "INSERT INTO tickets (ticket_number, id_purchase_line, qr) VALUES (:ticket_number, :id_purchase_line, :qr)";
                $parameters['ticket_number'] = intval($_ticket->getNumber());
                $parameters['id_purchase_line'] = $_ticket->getIdPurchaseLine();
+               $parameters['qr'] = $_ticket->getQr();
 
                try {
                     // creo la instancia connection
@@ -132,7 +133,7 @@ use daos\daodb\Connection as Connection;
 			$value = is_array($value) ? $value : [];
 
 			$resp = array_map(function($p){
-				return new M_Ticket($p['ticket_number'], "",  $p['id_purchase_line'], $p['id_ticket']);
+				return new M_Ticket($p['ticket_number'], $p['id_purchase_line'], $p['qr'], $p['id_ticket']);
 			}, $value);
 
                return count($resp) > 0 ? $resp : $resp['0'];

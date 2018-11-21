@@ -53,26 +53,24 @@ include(ROOT.'views/navAdmin.php');
 
                 <?php } ?>
             </select>
+            <span>
+                  <a class ="form-secondary-button" href="<?php echo BASE ?>location/add">Nuevo Lugar</a>
+            </span>
 
         </div>
 
         <div class="form-group" id="checkbox-div">
             <label>Artista/s: </label><br>
-        <?php if ($artists)
-        {
+        <?php
             foreach ($artists as $key => $value)
             {
                 ?>
                 <input id="input" type="checkbox" name="artists[]" value="<?php echo $value->getId()?>"><?php echo $value->getName()?><br>
 
-      <?php }
-        }
-        else
-        { ?>
-            <span>
-                  <a class ="form-secondary-button" href="<?php echo BASE ?>artist/add">Nuevo Artista</a>
-            </span>
-  <?php } ?>
+      <?php } ?>
+             <span>
+             <a class ="form-secondary-button" href="<?php echo BASE ?>artist/add">Nuevo Artista</a>
+             </span>
 
         </div>
 

@@ -91,6 +91,11 @@ include(ROOT.'views/navAdmin.php');
 
         </div>
 
+        <div style="text-align: center">
+            <a class="secondary-button" href="<?= BASE ?>event/index">Volver</a>
+            <br>
+        </div>
+        <br>
     </section>
 </body>
 </html>
