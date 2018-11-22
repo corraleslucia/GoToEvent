@@ -22,8 +22,8 @@
             </li>
             <li><a href="<?= BASE ?>home/inProgress">Buscar eventos</a>
                 <ul>
-                    <!-- <li><a href="<?= BASE ?>artist/_list">buscar x</a></li>
-                    <li><a href="<?= BASE ?>artist/add">buscar x</a></li> -->
+                    <li><a href="<?= BASE ?>event/searchByArtist">buscar por Artista</a></li>
+
                 </ul>
             </li>
             <li><a href="<?= BASE ?>artist/_list">Ver Artistas</a>

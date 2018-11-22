@@ -423,6 +423,22 @@ class EventController
         }
     }
 
+    public function searchByArtist ($artistName = "")
+    {
+        $val = "";
+        $events = "";
+
+        if ($artistName)
+        {
+            $events = $this->dao->searchEventsByArtist($artistName);
+            if (!$events)
+            {
+                $val = "No se encontraron eventos con ese artista.";
+            }
+        }
+        require(ROOT.'views/searchByArtist.php');
+    }
+
 
 
 }

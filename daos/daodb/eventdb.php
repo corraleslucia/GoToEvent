@@ -254,6 +254,33 @@ class EventDb extends singleton implements IDao
 
      }
 
+     public function searchEventsByArtist ($artist)
+     {
+         $sql = " SELECT e.id_event as id_event, e.description as description, cat.description as id_category from artists a
+                    inner join artists_in_calendars ac on a.id_artist = ac.id_artist
+                    inner join calendars c on ac.id_calendar = c.id_calendar
+                    inner join events e on c.id_event = e.id_event
+                    inner join categories cat on e.id_category = cat.id_category
+                    where a.name like :artistname
+                    group by e.description";
+
+                $parameters['artistname'] = "%".$artist."%";
+
+         try {
+              $this->connection = Connection::getInstance();
+              $resultSet = $this->connection->execute($sql, $parameters);
+         } catch(Exception $ex) {
+             throw $ex;
+         }
+
+         if(!empty($resultSet))
+              return $this->mapear($resultSet);
+         else
+              return false;
+
+     }
+
+
 
      /**
       *
