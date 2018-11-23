@@ -53,10 +53,7 @@ class LocationController
         if(isset($_SESSION['userLogged']))
         {
             $locations = $this->dao->readAll();
-            if(!$locations)
-            {
-                $locations['0'] = new Location ("SIN UBICACIONES", "-","-","-", 0);
-            }
+            
             require(ROOT.'views/listLocations.php');
         }
         else

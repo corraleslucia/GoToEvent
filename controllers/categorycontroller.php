@@ -53,10 +53,7 @@ class CategoryController
         if(isset($_SESSION['userLogged']))
         {
             $categories = $this->dao->readAll();
-            if(!$categories)
-            {
-                $categories['0'] = new Category ("SIN CATEGORIAS", 0);
-            }
+            
             require(ROOT.'views/listCategories.php');
         }
         else

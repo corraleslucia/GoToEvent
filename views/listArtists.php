@@ -35,9 +35,8 @@ namespace views;
     }
     else
     { ?>
-        <div class="element event-elem">
-            <h4> SIN ARTISTAS</h4>
-        </div>
+        <p>SIN ARTISTAS</p>
+
 <?php
     }
     ?>

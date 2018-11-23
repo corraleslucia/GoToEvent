@@ -20,16 +20,22 @@ include(ROOT.'views/navAdmin.php');
     <h3>Tipos de Plazas</h3>
     <div class="container">
         <?php
-            foreach ($seatTypes as $key => $value) {
+        if ($seatTypes)
+        {
+            foreach ($seatTypes as $key => $value)
+            { ?>
 
-        ?>
-
-        <div class="element">
-            <h4><?php echo $value->getName()?></h4>
-        </div>
-
-
-    <?php } ?>
+                <div class="element">
+                    <h4><?php echo $value->getName()?></h4>
+                </div>
+      <?php }
+        }
+        else
+        { ?>
+            <p>SIN TIPOS DE PLAZAS</p>
+   <?php
+        }
+   ?>
     </div>
     <div style="text-align: center">
         <a class="secondary-button" href="<?= BASE ?>event/index">Volver</a>

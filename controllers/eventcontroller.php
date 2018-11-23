@@ -81,30 +81,16 @@ class EventController
             if ($showType === "all")
             {
                 $events = $this->dao->readAllAtoZ();
-                if(!$events)
-                {
-                    $events['0'] = new Event ("SIN EVENTOS", "-");
-                }
-                require(ROOT.'views/listEvents.php');
             }
             else if ($showType === "valid")
             {
                 $events = $this->dao->readAllValid();
-                if(!$events)
-                {
-                    $events['0'] = new Event ("SIN EVENTOS", "-");
-                }
-                require(ROOT.'views/listEvents.php');
             }
             else if (!$showType)
             {
                 $events = $this->dao->readAll();
-                if(!$events)
-                {
-                    $events['0'] = new Event ("SIN EVENTOS", "-");
-                }
-                require(ROOT.'views/listEvents.php');
             }
+            require(ROOT.'views/listEvents.php');
         }
         else
         {
@@ -423,20 +409,20 @@ class EventController
         }
     }
 
-    public function searchByArtist ($artistName = "")
+    public function searchByEvent ($eventName = "")
     {
         $val = "";
         $events = "";
 
-        if ($artistName)
+        if ($eventName)
         {
-            $events = $this->dao->searchEventsByArtist($artistName);
+            $events = $this->dao->searchEventsByEvent($eventName);
             if (!$events)
             {
-                $val = "No se encontraron eventos con ese artista.";
+                $val = "No se encontraron eventos con ese nombre.";
             }
         }
-        require(ROOT.'views/searchByArtist.php');
+        require(ROOT.'views/searchByEvent.php');
     }
 
 

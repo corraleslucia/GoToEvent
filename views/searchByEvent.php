@@ -43,15 +43,15 @@ include(ROOT.'views/navUser.php');
       }
       else if ($val)
       { ?>
-          <p> No hay eventos con ese artista. </p>
+          <p> <?php echo $val ?> </p>
 <?php
       }
        ?>
 
-    <form action="<?php echo BASE ?>event/searchByArtist" method="POST" class="form-admin">
+    <form action="<?php echo BASE ?>event/searchByEvent" method="POST" class="form-admin">
       <h2 class="form-title">BUSCAR EVENTOS:</h2>
       <div class="form-group">
-        <label class="label-l" >Artista: </label>
+        <label class="label-l" >Evento: </label>
         <input class="input-s" type="text" name="art-name" required>
       </div>
 
@@ -59,7 +59,7 @@ include(ROOT.'views/navUser.php');
         <button type="submit" class ="form-button">Buscar Eventos</button>
       </div>
     </form>
-    
+
     <div style="text-align: center">
         <a class="secondary-button" href="<?= BASE ?>event/index">Volver</a>
         <br>
