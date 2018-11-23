@@ -21,7 +21,7 @@ include(ROOT.'views/navAdmin.php');
 
 
     <div class="container">
-        <form action="_list" method="POST">
+        <form action="<?= BASE ?>event/_list" method="POST">
             <div>
                 <p>Mostar:
                 <input type="radio" id="showtype1" name="show" value="all">
@@ -56,7 +56,7 @@ include(ROOT.'views/navAdmin.php');
         { ?>
             <p>SIN EVENTOS</p>
     <?php
-        }  ?> 
+        }  ?>
     </div>
 
   </section>

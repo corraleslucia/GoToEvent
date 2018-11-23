@@ -49,7 +49,7 @@ include(ROOT.'views/navAdmin.php');
                                 <?php
                                 foreach ($value->getArtists() as $_key => $_value)
                                 { ?>
-                                    <?php echo $_value->getIdArtist() . " - "?>
+                                    <?php echo $_value->getName() . " - "?>
                                 <?php
                                 }
                                 ?></span>
