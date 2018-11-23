@@ -210,7 +210,8 @@ class EventDb extends singleton implements IDao
                         FROM locations l left outer join calendars cal on l.id_location = cal.id_location
                         left outer join events e on cal.id_event = e.id_event
                         where l.city = :city
-                        group by ifnull(e.description, 'SIN EVENTOS')) e1";
+                        group by ifnull(e.description, 'SIN EVENTOS')) e1
+                        where e1.id_event>0";
 
                 $parameters['city'] = $city;
 
@@ -312,7 +313,6 @@ class EventDb extends singleton implements IDao
 
    }
 }
-
 
 
 

@@ -28,7 +28,7 @@ include(ROOT.'views/navUser.php');
               {
               ?>
               <div class="element">
-                  <a class="link-divs "href="<?= BASE ?>event/showEventDetails/<?php echo $value->getId()?>">
+                  <a class="link-divs "href="<?= BASE ?>event/showEventDetailsForUser/<?php echo $value->getId()?>">
                       <div class="p-listev-art">
                           <p style="font-size:22px"><b><?php echo $value->getDescription()?></b></p>
                       </div>
