@@ -20,19 +20,24 @@ include(ROOT.'views/navAdmin.php');
     <h3>LUGARES</h3>
     <div class="container">
         <?php
-            foreach ($locations as $key => $value) {
-
-        ?>
-
-        <div class="element">
-            <h4><?php echo $value->getName()?></h4>
-            <div class="p-listev-art"><p>Capacidad Maxima: <?php echo $value->getCapacity()?> </p></div>
-            <div class="p-listev-art"><p>Direccion: <?php echo $value->getAdress()?> </p></div>
-            <div class="p-listev-plc"><p>Ciudad: <?php echo $value->getCity()?> </p></div>
-        </div>
-
-
-    <?php } ?>
+        if ($locations)
+        {
+            foreach ($locations as $key => $value)
+            { ?>
+                <div class="element">
+                    <h4><?php echo $value->getName()?></h4>
+                    <div class="p-listev-art"><p>Capacidad Maxima: <?php echo $value->getCapacity()?> </p></div>
+                    <div class="p-listev-art"><p>Direccion: <?php echo $value->getAdress()?> </p></div>
+                    <div class="p-listev-plc"><p>Ciudad: <?php echo $value->getCity()?> </p></div>
+                </div>
+        <?php
+            }
+        }
+        else
+        { ?>
+            <p>SIN UBICACIONES</p>
+    <?php
+        } ?>
     </div>
     <div style="text-align: center">
         <a class="secondary-button" href="<?= BASE ?>event/index">Volver</a>

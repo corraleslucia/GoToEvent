@@ -20,16 +20,22 @@ include(ROOT.'views/navAdmin.php');
     <h3>CATEGORIAS</h3>
     <div class="container">
         <?php
-            foreach ($categories as $key => $value) {
+        if ($categories)
+        {
+            foreach ($categories as $key => $value)
+            { ?>
+                <div class="element">
+                <h4><?php echo $value->getDescription()?></h4>
+                </div>
+        <?php
+            }
+        }
+        else
+        { ?>
+            <p>SIN CATEGORIAS</p>
+    <?php
+        }?>
 
-        ?>
-
-        <div class="element">
-            <h4><?php echo $value->getDescription()?></h4>
-        </div>
-
-
-    <?php } ?>
     </div>
 
     <div style="text-align: center">

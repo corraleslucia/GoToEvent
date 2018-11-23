@@ -35,7 +35,7 @@ class CalendarController
 
     public function index()
     {
-        
+
 
     }
 

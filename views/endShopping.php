@@ -36,14 +36,14 @@ include(ROOT.'views/navUser.php');
                       { ?>
                           <div class="element event-elem">
                               <div style="text-align: center">
-                              <h2>Evento: <?php echo $disPurchaseLine->getCalendar()->getIdEvent()?> </h2>
-                              <p>Fecha: <b><?php echo $disPurchaseLine->getCalendar()->getDate() ?></b></p>
-                              <p>Hora: <b><?php echo $disPurchaseLine->getCalendar()->getTime()?></b></p>
-                              <p>Lugar: <b><?php echo $disPurchaseLine->getCalendar()->getLocation()?></b></p>
+                              <h2>Evento: <?php echo $disPurchaseLine->getEventSeat()->getIdCalendar()->getIdEvent()?> </h2>
+                              <p>Fecha: <b><?php echo $disPurchaseLine->getEventSeat()->getIdCalendar()->getDate() ?></b></p>
+                              <p>Hora: <b><?php echo $disPurchaseLine->getEventSeat()->getIdCalendar()->getTime()?></b></p>
+                              <p>Lugar: <b><?php echo $disPurchaseLine->getEventSeat()->getIdCalendar()->getLocation()?></b></p>
                               <p><b>Artistas: </b></p>
                               <span style="font-size:18px">
                               <?php
-                              foreach  ($disPurchaseLine->getCalendar()->getArtists() as $_key => $_value)
+                              foreach  ($disPurchaseLine->getEventSeat()->getIdCalendar()->getArtists() as $_key => $_value)
                               {
                                   echo $_value->getIdArtist() ?> <br>
 
@@ -54,7 +54,7 @@ include(ROOT.'views/navUser.php');
                               <div class="element event-elem">
                                   <div style="text-align: center">
                                       <div class= "full">
-                                      <p><?php echo $disPurchaseLine->getSeatType()->getName() . " - Cantidad: " . $disPurchaseLine->getQuantity() . " - $ " . $disPurchaseLine->getPrice() . " - Total: $" . intval($disPurchaseLine->getQuantity()) * intval($disPurchaseLine->getPrice())?>
+                                      <p><?php echo $disPurchaseLine->getEventSeat()->getSeatType()->getName() . " - Cantidad: " . $disPurchaseLine->getQuantity() . " - $ " . $disPurchaseLine->getPrice() . " - Total: $" . intval($disPurchaseLine->getQuantity()) * intval($disPurchaseLine->getPrice())?>
                                       </p>
                                       </div>
                                   </div>

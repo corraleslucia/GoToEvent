@@ -81,30 +81,16 @@ class EventController
             if ($showType === "all")
             {
                 $events = $this->dao->readAllAtoZ();
-                if(!$events)
-                {
-                    $events['0'] = new Event ("SIN EVENTOS", "-");
-                }
-                require(ROOT.'views/listEvents.php');
             }
             else if ($showType === "valid")
             {
                 $events = $this->dao->readAllValid();
-                if(!$events)
-                {
-                    $events['0'] = new Event ("SIN EVENTOS", "-");
-                }
-                require(ROOT.'views/listEvents.php');
             }
             else if (!$showType)
             {
                 $events = $this->dao->readAll();
-                if(!$events)
-                {
-                    $events['0'] = new Event ("SIN EVENTOS", "-");
-                }
-                require(ROOT.'views/listEvents.php');
             }
+            require(ROOT.'views/listEvents.php');
         }
         else
         {
@@ -421,6 +407,22 @@ class EventController
             echo ('inicie sesion, no saltearas este paso');
             require(ROOT.'views/login.php');
         }
+    }
+
+    public function searchByEvent ($eventName = "")
+    {
+        $val = "";
+        $events = "";
+
+        if ($eventName)
+        {
+            $events = $this->dao->searchEventsByEvent($eventName);
+            if (!$events)
+            {
+                $val = "No se encontraron eventos con ese nombre.";
+            }
+        }
+        require(ROOT.'views/searchByEvent.php');
     }
 
 

@@ -53,10 +53,7 @@ class SeatTypeController
         if(isset($_SESSION['userLogged']))
         {
             $seatTypes = $this->dao->readAll();
-            if(!$seatTypes)
-            {
-                $seatTypes['0'] = new SeatType ("SIN TIPOS DE PLAZAS", 0);
-            }
+            
             require(ROOT.'views/listSeatTypes.php');
         }
         else

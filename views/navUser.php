@@ -20,10 +20,10 @@
                     <li><a href="<?= BASE ?>event/listForUser/byLocation">Por Ubicación</a></li>
                 </ul>
             </li>
-            <li><a href="<?= BASE ?>home/inProgress">Buscar eventos</a>
+            <li><a href="<?= BASE ?>event/searchByEvent">Buscar eventos</a>
                 <ul>
-                    <!-- <li><a href="<?= BASE ?>artist/_list">buscar x</a></li>
-                    <li><a href="<?= BASE ?>artist/add">buscar x</a></li> -->
+                    <li><a href="<?= BASE ?>event/searchByEvent">buscar por Evento</a></li>
+
                 </ul>
             </li>
             <li><a href="<?= BASE ?>artist/_list">Ver Artistas</a>

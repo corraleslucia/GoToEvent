@@ -35,22 +35,30 @@ include(ROOT.'views/navAdmin.php');
             </div>
         </form>
         <?php
-            foreach ($events as $key => $value) {
+        if ($events)
+        {
+            foreach ($events as $key => $value)
+            { ?>
 
-        ?>
-        <div class="element">
-            <a class="link-divs "href="<?= BASE ?>event/showEventDetails/<?php echo $value->getId()?>">
-                <div class="p-listev-art">
-                    <p style="font-size:22px"><b><?php echo $value->getDescription()?></b></p>
+                <div class="element">
+                    <a class="link-divs "href="<?= BASE ?>event/showEventDetails/<?php echo $value->getId()?>">
+                        <div class="p-listev-art">
+                            <p style="font-size:22px"><b><?php echo $value->getDescription()?></b></p>
+                        </div>
+                        <div class="p-listev-art">
+                            <p>Categoria: <?php echo $value->getCategory()?></p>
+                        </div>
+                    </a>
                 </div>
-                <div class="p-listev-art">
-                    <p>Categoria: <?php echo $value->getCategory()?></p>
-                </div>
-            </a>
-        </div>
-    <?php } ?>
+      <?php }
+        }
+        else
+        { ?>
+            <p>SIN EVENTOS</p>
+    <?php
+        }  ?> 
     </div>
-    
+
   </section>
 </body>
 </html>
