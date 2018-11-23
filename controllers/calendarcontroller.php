@@ -9,7 +9,7 @@ use \daos\daodb\EventDb as DaoEvent;
 use controllers\EventSeatController as C_EventSeat;
 
 use models\Calendar;
-use models\ArtistInCalendar;
+
 
 
 
@@ -105,7 +105,8 @@ class CalendarController
 
                 foreach ($_artists as $key => $value)
                 {
-                    $_artistInCalendar = new ArtistInCalendar($value, $_calendar['0']->getId());
+                    $_artistInCalendar['id_artist'] = $value;
+                    $_artistInCalendar['id_calendar'] = $_calendar['0']->getId();
                     $this->daoAC->create($_artistInCalendar);
                 }
 

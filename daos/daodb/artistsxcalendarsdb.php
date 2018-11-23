@@ -1,7 +1,7 @@
 <?php namespace daos\daodb;
 use daos\IDao as IDao;
 
-use \models\ArtistInCalendar as M_ArtistInCalendar;
+use \models\Artist as M_Artist;
 use daos\daodb\Connection as Connection;
 
 
@@ -22,8 +22,8 @@ use daos\daodb\Connection as Connection;
                // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
 			$sql = "INSERT INTO artists_in_calendars (id_artist,id_calendar) VALUES (:id_artist,:id_calendar)";
 
-               $parameters['id_artist'] = $_artistsxcalendars->getIdArtist();
-               $parameters['id_calendar'] = $_artistsxcalendars->getIdCalendar();
+               $parameters['id_artist'] = $_artistsxcalendars['id_artist'];
+               $parameters['id_calendar'] = $_artistsxcalendars['id_calendar'];
 
                try {
                     // creo la instancia connection
@@ -41,7 +41,7 @@ use daos\daodb\Connection as Connection;
            */
           public function readAllArtistsFromCalendar($id_calendar) {
 
-              $sql = "SELECT id_calendar, a.name as id_artist FROM artists_in_calendars aic inner join artists a on aic.id_artist = a.id_artist  where id_calendar = :id_calendar";
+              $sql = "SELECT a.name as name, a.id_artist as id_artist, a.img as img FROM artists_in_calendars aic inner join artists a on aic.id_artist = a.id_artist  where id_calendar = :id_calendar";
 
 
               $parameters['id_calendar'] = $id_calendar;
@@ -119,7 +119,7 @@ use daos\daodb\Connection as Connection;
 			$value = is_array($value) ? $value : [];
 
 			$resp = array_map(function($p){
-				return new M_ArtistInCalendar($p['id_artist'], $p['id_calendar']);
+				return new M_Artist($p['name'],$p['img'], $p['id_artist']);
 			}, $value);
 
                return count($resp) > 0 ? $resp : $resp['0'];

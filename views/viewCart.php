@@ -50,7 +50,7 @@ include(ROOT.'views/navUser.php');
                         <?php
                         foreach  ($purchaseLine->getEventSeat()->getIdCalendar()->getArtists() as $_key => $_value)
                         {
-                            echo $_value->getIdArtist() ?> <br>
+                            echo $_value->getName() ?> <br>
 
                         <?php
                         }
