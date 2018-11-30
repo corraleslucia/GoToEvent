@@ -34,7 +34,7 @@ class LocationController
 
     }
 
-    public function add ()
+    public function add ($fromEvent="")
     {
         if(isset($_SESSION['userLogged']))
         {
@@ -53,7 +53,7 @@ class LocationController
         if(isset($_SESSION['userLogged']))
         {
             $locations = $this->dao->readAll();
-            
+
             require(ROOT.'views/listLocations.php');
         }
         else

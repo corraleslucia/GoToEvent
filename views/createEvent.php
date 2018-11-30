@@ -26,7 +26,7 @@ include(ROOT.'views/navAdmin.php');
       <?php }
       ?>
 
-    <form action="<?php echo BASE ?>event/store" method="POST" class="form-admin">
+    <form action="<?php echo BASE ?>event/store" method="POST" enctype="multipart/form-data" class="form-admin">
         <h2 class="form-title">Alta de evento:</h2>
         <div class="form-group">
         <label class="label" >Nombre: </label>
@@ -44,8 +44,13 @@ include(ROOT.'views/navAdmin.php');
                 <?php } ?>
             </select>
             <span>
-                  <a class ="form-secondary-button" href="<?php echo BASE ?>category/add">Nueva categoria</a>
+                  <a class ="form-secondary-button" href="<?php echo BASE ?>category/add/1">Nueva categoria</a>
             </span>
+
+            <div class="form-group">
+              <label class="label" >Imagen: </label>
+              <input type="file" name="event" required>
+            </div>
 
         </div>
 

@@ -54,7 +54,7 @@ include(ROOT.'views/navAdmin.php');
                 <?php } ?>
             </select>
             <span>
-                  <a class ="form-secondary-button" href="<?php echo BASE ?>location/add">Nuevo Lugar</a>
+                  <a class ="form-secondary-button" href="<?php echo BASE ?>location/add/<?php echo $event->getId()?>">Nuevo Lugar</a>
             </span>
 
         </div>
@@ -69,7 +69,7 @@ include(ROOT.'views/navAdmin.php');
 
       <?php } ?>
              <span>
-             <a class ="form-secondary-button" href="<?php echo BASE ?>artist/add">Nuevo Artista</a>
+             <a class ="form-secondary-button" href="<?php echo BASE ?>artist/add/<?php echo $event->getId()?>">Nuevo Artista</a>
              </span>
 
         </div>

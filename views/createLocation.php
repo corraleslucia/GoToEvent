@@ -51,8 +51,17 @@ include(ROOT.'views/navAdmin.php');
     </form>
 
     <div style="text-align: center">
-        <a class="secondary-button" href="<?= BASE ?>event/index">Volver</a>
-        <br>
+        <?php
+        if ($fromEvent)
+        {  ?>
+            <a class="secondary-button" href="<?= BASE ?>calendar/add/<?php echo $fromEvent ?>">Volver</a>
+    <?php
+        }
+        else
+        { ?>
+            <a class="secondary-button" href="<?= BASE ?>event/index">Volver</a>
+    <?php
+        } ?>
     </div>
     <br>
   </section>

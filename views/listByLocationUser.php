@@ -15,6 +15,9 @@ if ($locations)
                         <a class="link-divs "href="<?= BASE ?>event/showEventDetailsForUser/<?php echo $value->getId()?>">
               <?php } ?>
                     <div class="p-listev-art">
+                        <div class="">
+                        <img src="<?= IMG_UPLOADS . '/event/' . $value->getPoster() ?>" height="200" />
+                        </div>
                         <p style="font-size:22px"><b><?php  echo $value->getDescription()?></b></p>
                     </div>
                 </a>
