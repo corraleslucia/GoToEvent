@@ -25,6 +25,17 @@ include(ROOT.'views/navAdmin.php');
       ?>
 
     <form action="<?php echo BASE ?>location/store" method="POST" class="form-admin form-med-size">
+        <?php
+        if ($fromEvent)
+        {  ?>
+            <input class="input" type="hidden" name="fromEvent" value="<?php echo $fromEvent ?>" >
+            <?php
+        }
+        else
+        { ?>
+            <input class="input" type="hidden" name="none" value="">
+      <?php
+        } ?>
       <h2 class="form-title">Alta de lugar de evento:</h2>
       <div class="form-group">
         <label class="label-l">Nombre lugar: </label>

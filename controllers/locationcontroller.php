@@ -65,7 +65,7 @@ class LocationController
     }
 
 
-    public function store($name, $capacity, $adress, $city)
+    public function store($fromEvent, $name, $capacity, $adress, $city)
     {
         if(isset($_SESSION['userLogged']))
         {
