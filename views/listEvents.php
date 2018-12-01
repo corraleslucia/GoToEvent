@@ -41,6 +41,9 @@ include(ROOT.'views/navAdmin.php');
             { ?>
 
                 <div class="element">
+                    <div class="">
+                    <img src="<?= IMG_UPLOADS . '/event/' . $value->getPoster() ?>" height="200" />
+                    </div>
                     <a class="link-divs "href="<?= BASE ?>event/showEventDetails/<?php echo $value->getId()?>">
                         <div class="p-listev-art">
                             <p style="font-size:22px"><b><?php echo $value->getDescription()?></b></p>

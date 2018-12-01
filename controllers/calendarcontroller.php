@@ -43,6 +43,10 @@ class CalendarController
     {
         if(isset($_SESSION['userLogged']))
         {
+            if(is_string($event))
+            {
+                $event= $this->daoEvent->readId($event)['0'];
+            }
             $artists = $this->daoArtist->readAll();
             $locations = $this->daoLocation->readAll();
             require(ROOT.'views/createCalendar.php');

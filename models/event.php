@@ -7,12 +7,14 @@ class Event
     private $id;
     private $description;
     private $category;
+    private $poster;
     private $calendars;
 
-    function __construct($d, $cat, $id="", $cal=""){
+    function __construct($d, $cat, $files, $id="", $cal=""){
         $this->id = $id;
         $this->description = $d;
         $this->category = $cat;
+        $this->poster = $files;
         $this->calendars = $cal;
     }
 
@@ -22,6 +24,10 @@ class Event
 
     public function getCategory(){
         return $this->category;
+    }
+
+    public function getPoster() {
+         return $this->poster;
     }
 
     public function getCalendar(){

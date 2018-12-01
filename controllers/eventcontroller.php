@@ -12,6 +12,7 @@ use daos\daodb\LocationDb as DaoLocation;
 use models\Event;
 
 use controllers\CalendarController as C_Calendar;
+use controllers\FileController as C_File;
 
 class EventController
 {
@@ -24,11 +25,13 @@ class EventController
     private $daoLocation;
 
     private $calendarController;
+    private $fileController;
 
 
     public function __construct()
     {
         $this->calendarController = new C_Calendar;
+        $this->fileController = new C_File;
         $this->dao= Dao::getInstance();
         $this->daoCategory = DaoCategory::getInstance();
         $this->daoEventSeat = DaoEventSeat::getInstance();
@@ -248,26 +251,35 @@ class EventController
 
 
 
-    public function store($description="",$category="")
+    public function store($description="",$category="", $file="")
     {
         if(isset($_SESSION['userLogged']))
         {
-            $event = new Event($description, $category);
-
+            $event = new Event($description, $category, $file);
             try
             {
-                $this->dao->create($event);
+                $this->fileController->upload($event->getPoster(), 'event');
+                try
+                {
+                    $this->dao->create($event);
 
-                $_event = $this->dao->read($description);
+                    $_event = $this->dao->read($description);
 
-                $this->calendarController->add($_event['0']);
+                    $this->calendarController->add($_event['0']);
 
-            } catch (\PDOException $ex)
+                } catch (\PDOException $ex)
+                {
+                    $val = "El evento ya existe en la base de datos.";
+
+                    $this->add($val);
+                }
+            }catch (\Exception $e)
             {
-                $val = "El evento ya existe en la base de datos.";
-
+                $val = $e->getMessage();
                 $this->add($val);
+
             }
+
         }
         else
         {

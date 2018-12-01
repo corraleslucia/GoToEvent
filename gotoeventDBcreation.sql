@@ -38,6 +38,7 @@ create table events(
     id_event int unsigned auto_increment,
     description varchar (50),
     id_category int unsigned,
+    img varchar (255),
     constraint pk_events primary key (id_event),
     constraint fk_events_categories_id_category foreign key (id_category) references categories (id_category),
     constraint unq_events_description unique (description)

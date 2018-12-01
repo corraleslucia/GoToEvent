@@ -31,12 +31,31 @@ include(ROOT.'views/navAdmin.php');
         <input class="input-s" type="text" name="cat-name" required>
       </div>
 
+      <?php
+      if ($from)
+      {  ?>
+          <input class="input" type="hidden" name="from" value="<?php echo $from ?>" >
+          <?php
+      }?>
+
+
       <div class="div-form-button">
         <button type="submit" class ="form-button">Agregar categoria</button>
       </div>
     </form>
     <div style="text-align: center">
-        <a class="secondary-button" href="<?= BASE ?>event/index">Volver</a>
+        <?php
+        if ($from)
+        {  ?>
+            <a class="secondary-button" href="<?= BASE ?>event/add">Volver</a>
+    <?php
+        }
+        else
+        { ?>
+            <a class="secondary-button" href="<?= BASE ?>event/index">Volver</a>
+    <?php
+        } ?>
+
         <br>
     </div>
     <br>

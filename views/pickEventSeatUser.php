@@ -22,6 +22,9 @@ include(ROOT.'views/navUser.php');
         <h3>EVENTO</h3>
 
         <div class="container">
+            <div class="">
+            <img src="<?= IMG_UPLOADS . '/event/' . $event['0']->getPoster() ?>" height="200" />
+            </div>
             <h2>Evento: <?php echo $event['0']->getDescription()?> </h2>
             <p>Categoria: <b><?php echo $event['0']->getCategory()?></b> </p>
             <p><b>FECHAS:</b></p>
