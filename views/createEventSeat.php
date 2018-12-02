@@ -48,7 +48,7 @@ include(ROOT.'views/navAdmin.php');
             </select>
 
             <span>
-                  <a class ="form-secondary-button " href="<?php echo BASE ?>seatType/add">Nuevo Tipo de Plaza</a>
+                  <a class ="form-secondary-button " href="<?php echo BASE ?>seatType/add/<?php echo $_calendar['0']->getId()?>">Nuevo Tipo de Plaza</a>
             </span>
 
         </div>

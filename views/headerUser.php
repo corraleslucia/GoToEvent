@@ -25,12 +25,12 @@ namespace views;
         <?php
         if(count($_SESSION['cart'])!=0){  ?>
         <div class="column2 column2-cart-add">
-            <a href="<?php echo BASE ?>ticket/viewCart"><img src="<?= BASE ?>media/carrito.png" alt=""> </a>
+            <a href="<?php echo BASE ?>purchaseline/viewCart"><img src="<?= BASE ?>media/carrito.png" alt=""> </a>
         </div>
         <?php
         }else { ?>
         <div class="column2">
-            <a href="<?php echo BASE ?>ticket/viewCart"><img src="<?= BASE ?>media/carrito.png" alt=""> </a>
+            <a href="<?php echo BASE ?>purchaseline/viewCart"><img src="<?= BASE ?>media/carrito.png" alt=""> </a>
         </div>
         <?php
         } ?>

@@ -19,15 +19,10 @@ use daos\daodb\Connection as Connection;
           public function create($_ticket) {
 
                // Guardo como string la consulta sql utilizando como values, marcadores de parámetros con nombre (:name) o signos de interrogación (?) por los cuales los valores reales serán sustituidos cuando la sentencia sea ejecutada
-			$sql = "INSERT INTO tickets (id_user, id_calendar, id_event_seat, id_seats_type, quantity, price, total) VALUES (:id_user, :id_calendar, :id_event_seat, :id_seatType, :quantity, :price, :total)";
-
-               $parameters['id_user'] = $_ticket->getIdUser();
-               $parameters['id_calendar'] = $_ticket->getCalendar();
-               $parameters['id_event_seat'] = $_ticket->getEventSeat();
-               $parameters['id_seatType'] = $_ticket->getSeatType();
-               $parameters['quantity'] = $_ticket->getQuantity();
-               $parameters['price'] = $_ticket->getPrice();
-               $parameters['total'] = $_ticket->getTotal();
+			$sql = "INSERT INTO tickets (ticket_number, id_purchase_line, qr) VALUES (:ticket_number, :id_purchase_line, :qr)";
+               $parameters['ticket_number'] = intval($_ticket->getNumber());
+               $parameters['id_purchase_line'] = $_ticket->getIdPurchaseLine();
+               $parameters['qr'] = $_ticket->getQr();
 
                try {
                     // creo la instancia connection
@@ -87,10 +82,10 @@ use daos\daodb\Connection as Connection;
           /**
            *
            */
-          public function readAllForUser($id_user) {
-               $sql = "SELECT * FROM tickets where id_user = :id_user";
+          public function readAllFromPurchaseLine($id_purchase_line) {
+               $sql = "SELECT * FROM tickets where id_purchase_line = :id_purchase_line";
 
-               $parameters['id_user'] = $id_user;
+               $parameters['id_purchase_line'] = $id_purchase_line;
 
                try {
                     $this->connection = Connection::getInstance();
@@ -138,7 +133,7 @@ use daos\daodb\Connection as Connection;
 			$value = is_array($value) ? $value : [];
 
 			$resp = array_map(function($p){
-				return new M_Ticket($p['id_user'], $p['id_calendar'], $p['id_event_seat'], $p['id_seats_type'], $p['quantity'], $p['price'], $p['total'], $p['id_ticket']);
+				return new M_Ticket($p['ticket_number'], $p['id_purchase_line'], $p['qr'], $p['id_ticket']);
 			}, $value);
 
                return count($resp) > 0 ? $resp : $resp['0'];

@@ -33,7 +33,7 @@ class ArtistController
 
     }
 
-    public function add ()
+    public function add ($fromEvent="")
     {
         if(isset($_SESSION['userLogged']))
         {
@@ -76,7 +76,7 @@ class ArtistController
     }
 
 
-    public function store($name, $file)
+    public function store($fromEvent, $name, $file )
     {
         if(isset($_SESSION['userLogged']))
         {

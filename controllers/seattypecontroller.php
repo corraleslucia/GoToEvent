@@ -34,7 +34,7 @@ class SeatTypeController
 
     }
 
-    public function add ()
+    public function add ($fromEventSeat="")
     {
         if(isset($_SESSION['userLogged']))
         {
@@ -53,10 +53,7 @@ class SeatTypeController
         if(isset($_SESSION['userLogged']))
         {
             $seatTypes = $this->dao->readAll();
-            if(!$seatTypes)
-            {
-                $seatTypes['0'] = new SeatType ("SIN TIPOS DE PLAZAS", 0);
-            }
+
             require(ROOT.'views/listSeatTypes.php');
         }
         else
@@ -68,7 +65,7 @@ class SeatTypeController
     }
 
 
-    public function store($name)
+    public function store($fromEventSeat, $name)
     {
         if(isset($_SESSION['userLogged']))
         {

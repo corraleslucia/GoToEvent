@@ -50,11 +50,11 @@
                     <li><a href="<?= BASE ?>user/add">Agregar Usuarios</a></li>
                 </ul>
             </li>
-            <li><a href="<?= BASE ?>home/inProgress">Informes</a>
+            <li><a href="<?= BASE ?>event/eventSoldQuantity">Informes</a>
                 <ul>
-                    <li><a href="<?= BASE ?>home/inProgress">Cantidades por evento</a></li>
-                    <li><a href="<?= BASE ?>home/inProgress">Recaudaciones por evento</a></li>
-                    <li><a href="<?= BASE ?>home/inProgress">Recaudaciones por categoria</a></li>
+                    <li><a href="<?= BASE ?>event/eventSoldQuantity">Cantidades por evento</a></li>
+                    <li><a href="<?= BASE ?>event/eventSoldMoney">Recaudaciones por evento</a></li>
+                    <li><a href="<?= BASE ?>event/categorySoldMoney">Recaudaciones por categoria</a></li>
                 </ul>
             </li>
         </ul>

@@ -142,7 +142,9 @@ use daos\daodb\Connection as Connection;
            public function readAllMonthYearFromCalendars ()
            {
                $sql = "SELECT month(calendar_date) as month, monthname(calendar_date) as monthName, year(calendar_date) as year
-                       from calendars cal inner join events e on cal.id_event = e.id_event group by monthname(calendar_date)
+                       from calendars cal inner join events e on cal.id_event = e.id_event
+                       where cal.calendar_date >= now()
+                       group by monthname(calendar_date)
                        order by calendar_date";
 
                try {

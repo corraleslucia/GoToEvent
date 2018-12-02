@@ -22,6 +22,9 @@ include(ROOT.'views/navUser.php');
         <h3>EVENTO</h3>
 
         <div class="container">
+            <div class="">
+            <img src="<?= IMG_UPLOADS . '/event/' . $event['0']->getPoster() ?>" height="200" />
+            </div>
             <h2>Evento: <?php echo $event['0']->getDescription()?> </h2>
             <p>Categoria: <b><?php echo $event['0']->getCategory()?></b> </p>
             <p><b>FECHAS:</b></p>
@@ -48,7 +51,7 @@ include(ROOT.'views/navUser.php');
                                 <?php
                                 foreach ($value->getArtists() as $_key => $_value)
                                 { ?>
-                                    <?php echo $_value->getIdArtist() . " - "?>
+                                    <?php echo $_value->getName() . " - "?>
                                     <?php
                                 }
                                 ?></span>
@@ -70,7 +73,7 @@ include(ROOT.'views/navUser.php');
                                         <?php }
                                         else
                                         { ?>
-                                            <a class="link-divs" href="<?= BASE ?>ticket/selectTicketOptions/<?php echo $value->getId()?>/<?php echo $_value->getId()?>/<?php echo $event['0']->getId()?>">
+                                            <a class="link-divs" href="<?= BASE ?>purchaseline/selectTicketOptions/<?php echo $value->getId()?>/<?php echo $_value->getId()?>/<?php echo $event['0']->getId()?>">
                                                 <p><?php echo "Tipo de Plaza: "  . $_value->getSeatType() ?> </p>
                                                 <br>
                                                 <p><?php echo "Precio: " . $_value->getPrice()?> </p>

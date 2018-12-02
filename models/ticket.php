@@ -3,24 +3,17 @@
 class Ticket
 {
     private $id;
-    private $id_user;
-    private $id_calendar;
-    private $id_eventSeat;
-    private $seatType;
-    private $quantity;
-    private $price;
-    private $total;
+    private $number;
+    private $qr;
+    private $id_purchase_line;
 
-    public function __construct($id_user, $id_cal, $id_evS, $st, $q, $p, $t="", $id="")
+
+    public function __construct($n, $id_pl, $qr="", $id="")
     {
         $this->id=$id;
-	    $this->id_user=$id_user;
-        $this->id_calendar=$id_cal;
-        $this->id_eventSeat=$id_evS;
-        $this->seatType = $st;
-        $this->quantity=$q;
-        $this->price = $p;
-        $this->total= $t;
+	    $this->number=$n;
+        $this->qr=$qr;
+        $this->id_purchase_line=$id_pl;
     }
 
     public function getId()
@@ -28,55 +21,27 @@ class Ticket
         return $this->id;
     }
 
-    public function getIdUser()
+    public function getNumber()
     {
-        return $this->id_user;
+        return $this->number;
     }
 
-    public function getCalendar()
+    public function getQr()
     {
-        return $this->id_calendar;
+        return $this->qr;
     }
 
-    public function setCalendar($calendar)
+    public function setQr($newQr)
     {
-        $this->id_calendar = $calendar;
+        $this->qr = $newQr;
     }
 
-    public function getEventSeat()
+    public function getIdPurchaseLine()
     {
-        return $this->id_eventSeat;
+        return $this->id_purchase_line;
     }
 
-    public function setEventSeat ($eventSeat)
-    {
-        $this->id_eventSeat = $eventSeat;
-    }
 
-    public function getSeatType()
-    {
-        return $this->seatType;
-    }
-
-    public function setSeatType ($seatType)
-    {
-        $this->seatType = $seatType;
-    }
-
-    public function getQuantity()
-    {
-        return $this->quantity;
-    }
-
-    public function getPrice()
-    {
-        return $this->price;
-    }
-
-    public function getTotal()
-    {
-        return $this->total;
-    }
 }
 
 ?>

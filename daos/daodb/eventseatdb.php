@@ -171,8 +171,8 @@ class EventSeatDb extends singleton implements IDao
          {
              throw $ex;
         }
-
      }
+
      /**
       *
       */

@@ -35,15 +35,18 @@ namespace views;
     }
     else
     { ?>
-        <div class="element event-elem">
-            <h4> SIN ARTISTAS</h4>
-        </div>
+        <p>SIN ARTISTAS</p>
+
 <?php
     }
     ?>
 
     </div>
-
+    <div style="text-align: center">
+        <a class="secondary-button" href="<?= BASE ?>event/index">Volver</a>
+        <br>
+    </div>
+    <br>
   </section>
 </body>
 </html>

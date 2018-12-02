@@ -12,6 +12,7 @@ use daos\daodb\LocationDb as DaoLocation;
 use models\Event;
 
 use controllers\CalendarController as C_Calendar;
+use controllers\FileController as C_File;
 
 class EventController
 {
@@ -24,11 +25,13 @@ class EventController
     private $daoLocation;
 
     private $calendarController;
+    private $fileController;
 
 
     public function __construct()
     {
         $this->calendarController = new C_Calendar;
+        $this->fileController = new C_File;
         $this->dao= Dao::getInstance();
         $this->daoCategory = DaoCategory::getInstance();
         $this->daoEventSeat = DaoEventSeat::getInstance();
@@ -81,30 +84,16 @@ class EventController
             if ($showType === "all")
             {
                 $events = $this->dao->readAllAtoZ();
-                if(!$events)
-                {
-                    $events['0'] = new Event ("SIN EVENTOS", "-");
-                }
-                require(ROOT.'views/listEvents.php');
             }
             else if ($showType === "valid")
             {
                 $events = $this->dao->readAllValid();
-                if(!$events)
-                {
-                    $events['0'] = new Event ("SIN EVENTOS", "-");
-                }
-                require(ROOT.'views/listEvents.php');
             }
             else if (!$showType)
             {
                 $events = $this->dao->readAll();
-                if(!$events)
-                {
-                    $events['0'] = new Event ("SIN EVENTOS", "-");
-                }
-                require(ROOT.'views/listEvents.php');
             }
+            require(ROOT.'views/listEvents.php');
         }
         else
         {
@@ -262,26 +251,35 @@ class EventController
 
 
 
-    public function store($description="",$category="")
+    public function store($description="",$category="", $file="")
     {
         if(isset($_SESSION['userLogged']))
         {
-            $event = new Event($description, $category);
-
+            $event = new Event($description, $category, $file);
             try
             {
-                $this->dao->create($event);
+                $this->fileController->upload($event->getPoster(), 'event');
+                try
+                {
+                    $this->dao->create($event);
 
-                $_event = $this->dao->read($description);
+                    $_event = $this->dao->read($description);
 
-                $this->calendarController->add($_event['0']);
+                    $this->calendarController->add($_event['0']);
 
-            } catch (\PDOException $ex)
+                } catch (\PDOException $ex)
+                {
+                    $val = "El evento ya existe en la base de datos.";
+
+                    $this->add($val);
+                }
+            }catch (\Exception $e)
             {
-                $val = "El evento ya existe en la base de datos.";
-
+                $val = $e->getMessage();
                 $this->add($val);
+
             }
+
         }
         else
         {
@@ -289,6 +287,157 @@ class EventController
             require(ROOT.'views/login.php');
         }
     }
+
+    public function eventSoldQuantity ()
+    {
+        if(isset($_SESSION['userLogged']))
+        {
+            $totalsSoldQuantity = array();
+
+            $events = $this->dao->readAll();
+            if ($events)
+            {
+                foreach ($events as $key => $event)
+                {
+                    $soldQuantity = 0;
+                    $event->setCalendar($this->daoCalendar->readFromEvent($event->getId()));
+                    if($event->getCalendar())
+                    {
+                        foreach ($event->getCalendar() as $key => $calendar)
+                        {
+                            $calendar->setEventSeats($this->daoEventSeat->readAllFromCalendar($calendar->getId()));
+                            if ($calendar->getEventSeats())
+                            {
+                                foreach ($calendar->getEventSeats() as $key => $eventSeat)
+                                {
+                                    $soldQuantity = $soldQuantity + (intval($eventSeat->getTotalQuantity()) - intval($eventSeat->getRemaningQuantity()));
+                                }
+                            }
+                        }
+
+                    }
+                    $totalsSoldQuantity[$event->getId()] = $soldQuantity;
+                }
+            }
+
+
+            require(ROOT.'views/eventSoldQuantityReport.php');
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+    }
+
+    public function eventSoldMoney ()
+    {
+        if(isset($_SESSION['userLogged']))
+        {
+            $totalsSoldMoney = array();
+
+            $events = $this->dao->readAll();
+            if ($events)
+            {
+                foreach ($events as $key => $event)
+                {
+                    $soldMoney = 0;
+                    $event->setCalendar($this->daoCalendar->readFromEvent($event->getId()));
+                    if($event->getCalendar())
+                    {
+                        foreach ($event->getCalendar() as $key => $calendar)
+                        {
+                            $calendar->setEventSeats($this->daoEventSeat->readAllFromCalendar($calendar->getId()));
+                            if ($calendar->getEventSeats())
+                            {
+                                foreach ($calendar->getEventSeats() as $key => $eventSeat)
+                                {
+                                    $soldMoney = $soldMoney + ( (intval($eventSeat->getTotalQuantity()) - intval($eventSeat->getRemaningQuantity())) * intval($eventSeat->getPrice()));
+                                }
+                            }
+                        }
+
+                    }
+                    $totalsSoldMoney[$event->getId()] = $soldMoney;
+                }
+            }
+
+            require(ROOT.'views/eventSoldMoneyReport.php');
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+    }
+
+    public function categorySoldMoney ()
+    {
+        if(isset($_SESSION['userLogged']))
+        {
+            $totalsSoldMoney = array();
+
+            $categories = $this->daoCategory->readAll();
+            if ($categories)
+            {
+                foreach ($categories as $key => $category)
+                {
+                    $soldMoney = 0;
+                    $events = $this->dao->readEventsFromCategory($category->getId());
+                    if ($events)
+                    {
+                        foreach ($events as $key => $event)
+                        {
+                            $event->setCalendar($this->daoCalendar->readFromEvent($event->getId()));
+                            if($event->getCalendar())
+                            {
+                                foreach ($event->getCalendar() as $key => $calendar)
+                                {
+                                    $calendar->setEventSeats($this->daoEventSeat->readAllFromCalendar($calendar->getId()));
+                                    if ($calendar->getEventSeats())
+                                    {
+                                        foreach ($calendar->getEventSeats() as $key => $eventSeat)
+                                        {
+                                            $soldMoney = $soldMoney + ( (intval($eventSeat->getTotalQuantity()) - intval($eventSeat->getRemaningQuantity())) * intval($eventSeat->getPrice()));
+                                        }
+                                    }
+                                 }
+                             }
+                         }
+                     }
+                     $totalsSoldMoney[$category->getId()] = $soldMoney;
+                }
+
+            }
+
+
+
+            require(ROOT.'views/categorySoldMoneyReport.php');
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+    }
+
+    public function searchByEvent ($eventName = "")
+    {
+        $val = "";
+        $events = "";
+
+        if ($eventName)
+        {
+            $events = $this->dao->searchEventsByEvent($eventName);
+            if (!$events)
+            {
+                $val = "No se encontraron eventos con ese nombre.";
+            }
+        }
+        require(ROOT.'views/searchByEvent.php');
+    }
+
+
 
 }
 
