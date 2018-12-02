@@ -67,7 +67,7 @@ include(ROOT.'views/navAdmin.php');
 
     </form>
     <div style="text-align: center">
-        <a class="secondary-button" href="<?= BASE ?>event/index">Volver</a>
+        <a class="secondary-button margin-0" href="<?= BASE ?>event/index">Volver</a>
         <br>
     </div>
     <br>

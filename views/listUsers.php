@@ -25,9 +25,9 @@ include(ROOT.'views/navAdmin.php');
         ?>
 
         <div class="element">
-            <h4> EMAIL: <?php echo$value->getMail()?></h4>
-            <h4> NOMBRE: <?php echo $value->getName()?></h4>
-            <h4> APELLIDO: <?php echo $value->getLastName()?></h4>
+            <p class="list-users" style="font-size: 20px"><b> EMAIL: </b><?php echo$value->getMail()?></p>
+            <p class="list-users" style="font-size: 20px"><b> NOMBRE: </b><?php echo $value->getName()?></p>
+            <p class="list-users" style="font-size: 20px"><b> APELLIDO: </b><?php echo $value->getLastName()?></p>
         </div>
 
 

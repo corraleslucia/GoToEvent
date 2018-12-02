@@ -26,8 +26,8 @@ include(ROOT.'views/navAdmin.php');
             { ?>
                 <div class="element">
                     <h4><?php echo $value->getName()?></h4>
-                    <div class="p-listev-art"><p>Capacidad Maxima: <?php echo $value->getCapacity()?> </p></div>
-                    <div class="p-listev-art"><p>Direccion: <?php echo $value->getAdress()?> </p></div>
+                    <div class="p-listev-plc"><p>Capacidad Maxima: <?php echo $value->getCapacity()?> </p></div>
+                    <div class="p-listev-plc"><p>Direccion: <?php echo $value->getAdress()?> </p></div>
                     <div class="p-listev-plc"><p>Ciudad: <?php echo $value->getCity()?> </p></div>
                 </div>
         <?php

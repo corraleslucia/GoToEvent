@@ -32,7 +32,7 @@ section {
 
 .form-admin,
 .form-login {
-    margin: 6% 32%;
+    margin: 4% 30% 5%;
     padding-top: 1%;
     background-color: rgba(255, 255, 255, 0.616);
     border-radius: 20px;
@@ -184,6 +184,7 @@ header.general{
     width: 5%;
     border-left: 1px solid rgba(150, 139, 139, 0.7);
     border-right: 1px solid rgba(150, 139, 139, 0.7);
+    text-align: center;
 }
 .column2 img{
     width: 85%;
@@ -200,10 +201,12 @@ header.general{
 }
 
 .column2.avatar img {
-    width: 65%;
+    width: 50px;
     border-radius: 50%;
-    margin: 0px 12px;
-
+    height: 50px;
+    display: inline-block;
+    border-radius: 50%;
+    background-color: #ccc;
 
 }
 
@@ -418,12 +421,19 @@ a {
     margin-top: 5%;
 }
 .element.qr-elem  img{
-
-    
-
 }
 
+.align-center {
+    text-align: center;
+}
 
+.list-users {
+    padding: 1%;
+}
+
+.margin-0 {
+    margin: 0;
+}
 
 .artist-container{
     border: 1px solid black;
@@ -431,7 +441,7 @@ a {
     position: static;
     width: 98%;
     height: 100%;
-    //text-align: left;
+    /* text-align: left; */
 }
 
 .artist-image img {
@@ -462,9 +472,12 @@ a {
 
 .p-listev-art{
     font-size: 20px;
-    display: inline-block;
-    width: 49%;
-    padding: 10px;
+    float: right;
+    width: 55%;
+    height: 50%;
+    padding-top: 40px;
+    margin-right: 11%;
+    text-align: center;
 }
 
 .p-listev-plc{
@@ -520,4 +533,39 @@ a {
     border: 1px solid black;
     padding-left: 10%;
     padding: 2%;
+}
+
+.div-img {
+    width: 33%;
+    float: left;
+    height: 100%;
+}
+
+.img-list-event {
+    height: 200px;
+    max-width: 100%;
+    display: inline-block;
+    border-radius: 15px;
+    padding: 1%;
+}
+
+.alert {
+    display: inline-block;
+    width: 40%;
+    border: 2px solid black;
+    border-radius: 20px;
+    padding: 1%;
+    margin-top: 2%;
+    margin-bottom: 0;
+    background-color: rgba(255, 0, 0, 0.8);
+    color: #FFF;
+}
+
+.subtitle {
+    display: inline-block;
+    clear: both;
+    width: 90%;
+    background-color: rgba(252, 179, 44, 0.7);
+    margin-top: 20px;
+    padding: .5%;
 }

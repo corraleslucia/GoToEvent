@@ -22,15 +22,15 @@ include(ROOT.'views/navAdmin.php');
 
       <?php if ($val)
       {?>
-          <p> <?php echo $val; ?> </p>
+          <p class="alert"> <?php echo $val; ?> </p>
       <?php }
       ?>
 
     <form action="<?php echo BASE ?>event/store" method="POST" enctype="multipart/form-data" class="form-admin">
         <h2 class="form-title">Alta de evento:</h2>
         <div class="form-group">
-        <label class="label" >Nombre: </label>
-        <input class="input" type="text" name="ev-name" required>
+            <label class="label" >Nombre: </label>
+            <input class="input" type="text" name="ev-name" required>
         </div>
 
         <div class="form-group">
@@ -46,12 +46,10 @@ include(ROOT.'views/navAdmin.php');
             <span>
                   <a class ="form-secondary-button" href="<?php echo BASE ?>category/add/1">Nueva categoria</a>
             </span>
-
-            <div class="form-group">
-              <label class="label" >Imagen: </label>
-              <input type="file" name="event" required>
-            </div>
-
+        </div>
+        <div class="form-group">
+            <label class="label" >Imagen: </label>
+            <input type="file" name="event" required>
         </div>
 
 
@@ -59,8 +57,8 @@ include(ROOT.'views/navAdmin.php');
           <button type="submit" class ="form-button">Agregar evento</button>
         </div>
     </form>
-    <div style="text-align: center">
-        <a class="secondary-button" href="<?= BASE ?>event/index">Volver</a>
+    <div class="align-center" >
+        <a class="secondary-button margin-0" href="<?= BASE ?>event/index">Volver</a>
         <br>
     </div>
     <br>

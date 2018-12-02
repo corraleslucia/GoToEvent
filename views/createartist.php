@@ -63,12 +63,12 @@ include(ROOT.'views/navAdmin.php');
         }
         else
         { ?>
-            <a class="secondary-button" href="<?= BASE ?>event/index">Volver</a>
+            <a class="secondary-button margin-0" href="<?= BASE ?>event/index">Volver</a>
     <?php
         } ?>
         <br>
     </div>
-    <br>
+    
   </section>
 </body>
 </html>

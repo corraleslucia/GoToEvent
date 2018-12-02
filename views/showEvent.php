@@ -24,13 +24,15 @@ include(ROOT.'views/navAdmin.php');
         <div class="container">
       <?php if ($event)
             { ?>
-                <div class="">
-                <img src="<?= IMG_UPLOADS . '/event/' . $event['0']->getPoster() ?>" height="200" />
+                <div class="div-img" style="padding-top: 5%">
+                    <img class="img-list-event" src="<?= IMG_UPLOADS . '/event/' . $event['0']->getPoster() ?>" height="200" />
                 </div>
-                <h2>Evento: <?php echo $event['0']->getDescription()?> </h2>
+                <h2 style="padding-top: 5%">Evento: <?php echo $event['0']->getDescription()?> </h2>
                 <p>Categoria: <b><?php echo $event['0']->getCategory()?></b> </p>
-
-                <p><b>FECHAS:</b></p>
+                <div class="subtitle">
+                    <p class="margin-0"><b>FECHAS:</b></p>
+                </div>
+                
 
           <?php if ($calendars)
                 {

@@ -24,11 +24,11 @@ include(ROOT.'views/navAdmin.php');
         {
             foreach ($events as $key => $event)
             { ?>
-                <div class="element event-elem">
-                    <h2>Evento: <b><?php echo $event->getDescription()?></b></h2>
-                    <p>Categoria: <b><?php echo $event->getCategory()?></b> </p>
+                <div class="element event-elem align-center">
+                    <h2 style="padding: 1%">Evento: <b><?php echo $event->getDescription()?></b></h2>
+                    <p style="padding: 1%">Categoria: <b><?php echo $event->getCategory()?></b> </p>
                     <br>
-                    <p>Cantidad de entradas vendidas:<b><?php echo $totalsSoldQuantity[$event->getId()] ?></b></p>
+                    <p style="padding: 1%">Cantidad de entradas vendidas:<b><?php echo $totalsSoldQuantity[$event->getId()] ?></b></p>
                 </div>
                 <?php
             }

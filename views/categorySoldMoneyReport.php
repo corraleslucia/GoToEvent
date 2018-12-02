@@ -24,10 +24,10 @@ include(ROOT.'views/navAdmin.php');
         {
             foreach ($categories as $key => $category)
             { ?>
-                <div class="element event-elem">
+                <div class="element event-elem align-center">
                     <h2>Categoria: <b><?php echo $category->getDescription()?></b></h2>
                     <br>
-                    <p>Facturacion:<b><?php echo " $ " . $totalsSoldMoney[$category->getId()] ?></b></p>
+                    <p style="padding: 1%">Facturacion:<b><?php echo " $ " . $totalsSoldMoney[$category->getId()] ?></b></p>
                 </div>
         <?php
             }
