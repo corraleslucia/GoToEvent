@@ -37,18 +37,18 @@ include(ROOT.'views/navUser.php');
         }
         else
         { ?>
-                <?php foreach ($_SESSION['cart'] as $key => $purchaseLine)
+                <?php foreach ($_SESSION['cart'] as $key => $ticket)
                   { ?>
                     <div class="element event-elem">
                         <div style="text-align: center">
-                        <h2>Evento: <?php echo $purchaseLine->getEventSeat()->getIdCalendar()->getIdEvent()?> </h2>
-                        <p>Fecha: <b><?php echo $purchaseLine->getEventSeat()->getIdCalendar()->getDate() ?></b></p>
-                        <p>Hora: <b><?php echo $purchaseLine->getEventSeat()->getIdCalendar()->getTime()?></b></p>
-                        <p>Lugar: <b><?php echo$purchaseLine->getEventSeat()->getIdCalendar()->getLocation()?></b></p>
+                        <h2>Evento: <?php echo $ticket->getCalendar()->getIdEvent()?> </h2>
+                        <p>Fecha: <b><?php echo $ticket->getCalendar()->getDate() ?></b></p>
+                        <p>Hora: <b><?php echo $ticket->getCalendar()->getTime()?></b></p>
+                        <p>Lugar: <b><?php echo $ticket->getCalendar()->getLocation()?></b></p>
                         <p><b>Artistas: </b></p>
                         <span style="font-size:18px">
                         <?php
-                        foreach  ($purchaseLine->getEventSeat()->getIdCalendar()->getArtists() as $_key => $_value)
+                        foreach  ($ticket->getCalendar()->getArtists() as $_key => $_value)
                         {
                             echo $_value->getIdArtist() ?> <br>
 
@@ -59,9 +59,9 @@ include(ROOT.'views/navUser.php');
                         <div class="element event-elem">
                             <div style="text-align: center">
                                 <div class= "full">
-                                <p><?php echo $purchaseLine->getEventSeat()->getSeatType()->getName() . " - Cantidad: " . $purchaseLine->getQuantity() . " - $ " . $purchaseLine->getPrice() . " - Total: $" . intval($purchaseLine->getPrice()) * intval($purchaseLine->getQuantity()) ?>
+                                <p><?php echo $ticket->getSeatType() . " - Cantidad: " . $ticket->getQuantity() . " - $ " . $ticket->getPrice() . " - Total: $" . $ticket->getTotal() ?>
                                 </p>
-                                    <a class="secondary-button" href="<?= BASE ?>purchaseline/deleteFromCart/<?php echo $key?>">Borrar</a>
+                                    <a class="secondary-button" href="<?= BASE ?>ticket/deleteFromCart/<?php echo $key?>">Borrar</a>
                                 </div>
                             </div>
                         </div>
@@ -70,7 +70,7 @@ include(ROOT.'views/navUser.php');
                   } ?>
 
                   <div class= "full">
-                  <a class="secondary-button" href="<?= BASE ?>purchase/buyTickets">COMPRAR</a>
+                  <a class="secondary-button" href="<?= BASE ?>ticket/buyTickets">COMPRAR</a>
                   </div>
     <?php
         } ?>
