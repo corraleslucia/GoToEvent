@@ -38,6 +38,7 @@ create table events(
     id_event int unsigned auto_increment,
     description varchar (50),
     id_category int unsigned,
+    img varchar (255),
     constraint pk_events primary key (id_event),
     constraint fk_events_categories_id_category foreign key (id_category) references categories (id_category),
     constraint unq_events_description unique (description)
@@ -105,7 +106,8 @@ create table purchase_lines (
     price float,
     id_purchase int unsigned,
     constraint pk_purchase_lines primary key (id_purchase_line),
-    constraint fk_purchase_lines_purchases foreign key (id_purchase) references purchases (id_purchase)
+    constraint fk_purchase_lines_purchases foreign key (id_purchase) references purchases (id_purchase),
+    constraint fk_purchases_event_seats foreign key (id_event_seat) references event_seats (id_event_seat)
 );
 create table tickets(
     id_ticket int unsigned auto_increment,

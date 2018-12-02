@@ -32,7 +32,7 @@ include(ROOT.'views/navUser.php');
                     <?php
                     foreach ($calendar['0']->getArtists() as $_key => $_value)
                     {
-                         echo $_value->getIdArtist() ?> <br>
+                         echo $_value->getName() ?> <br>
 
                 <?php }
                 ?></span>

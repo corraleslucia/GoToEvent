@@ -23,10 +23,12 @@ include(ROOT.'views/navAdmin.php');
     { ?>
         <form action="<?php echo BASE ?>calendar/addMoreCalendars" method="POST" class="form-admin">
     <?php }
-    else
+    else if ($type === "p")
     { ?>
         <form action="<?php echo BASE ?>calendar/addMoreEventSeats" method="POST" class="form-admin">
-    <?php }?>
+    <?php
+    } ?>
+
         <h2 class="form-title">Agregar a Evento</h2>
         <div class="form-group">
             <label>Evento: </label>
@@ -45,6 +47,11 @@ include(ROOT.'views/navAdmin.php');
 
     </form>
 
+    <div style="text-align: center">
+        <a class="secondary-button" href="<?= BASE ?>event/index">Volver</a>
+        <br>
+    </div>
+    <br>
   </section>
 </body>
 </html>

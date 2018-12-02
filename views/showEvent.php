@@ -24,6 +24,9 @@ include(ROOT.'views/navAdmin.php');
         <div class="container">
       <?php if ($event)
             { ?>
+                <div class="">
+                <img src="<?= IMG_UPLOADS . '/event/' . $event['0']->getPoster() ?>" height="200" />
+                </div>
                 <h2>Evento: <?php echo $event['0']->getDescription()?> </h2>
                 <p>Categoria: <b><?php echo $event['0']->getCategory()?></b> </p>
 
@@ -49,7 +52,7 @@ include(ROOT.'views/navAdmin.php');
                                 <?php
                                 foreach ($value->getArtists() as $_key => $_value)
                                 { ?>
-                                    <?php echo $_value->getIdArtist() . " - "?>
+                                    <?php echo $_value->getName() . " - "?>
                                 <?php
                                 }
                                 ?></span>
@@ -91,6 +94,11 @@ include(ROOT.'views/navAdmin.php');
 
         </div>
 
+        <div style="text-align: center">
+            <a class="secondary-button" href="<?= BASE ?>event/index">Volver</a>
+            <br>
+        </div>
+        <br>
     </section>
 </body>
 </html>

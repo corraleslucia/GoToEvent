@@ -50,7 +50,7 @@ include(ROOT.'views/navUser.php');
                         <?php
                         foreach  ($ticket->getCalendar()->getArtists() as $_key => $_value)
                         {
-                            echo $_value->getIdArtist() ?> <br>
+                            echo $_value->getName() ?> <br>
 
                         <?php
                         }
@@ -76,6 +76,11 @@ include(ROOT.'views/navUser.php');
         } ?>
         </div>
 
+        <div style="text-align: center">
+            <a class="secondary-button" href="<?= BASE ?>event/index">Volver</a>
+            <br>
+        </div>
+        <br>
     </section>
 </body>
 </html>

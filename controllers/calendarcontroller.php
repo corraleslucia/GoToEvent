@@ -9,7 +9,7 @@ use \daos\daodb\EventDb as DaoEvent;
 use controllers\EventSeatController as C_EventSeat;
 
 use models\Calendar;
-use models\ArtistInCalendar;
+
 
 
 
@@ -35,7 +35,7 @@ class CalendarController
 
     public function index()
     {
-        
+
 
     }
 
@@ -43,6 +43,10 @@ class CalendarController
     {
         if(isset($_SESSION['userLogged']))
         {
+            if(is_string($event))
+            {
+                $event= $this->daoEvent->readId($event)['0'];
+            }
             $artists = $this->daoArtist->readAll();
             $locations = $this->daoLocation->readAll();
             require(ROOT.'views/createCalendar.php');
@@ -105,7 +109,8 @@ class CalendarController
 
                 foreach ($_artists as $key => $value)
                 {
-                    $_artistInCalendar = new ArtistInCalendar($value, $_calendar['0']->getId());
+                    $_artistInCalendar['id_artist'] = $value;
+                    $_artistInCalendar['id_calendar'] = $_calendar['0']->getId();
                     $this->daoAC->create($_artistInCalendar);
                 }
 

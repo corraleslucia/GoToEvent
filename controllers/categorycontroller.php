@@ -34,7 +34,7 @@ class CategoryController
     }
 
 
-    public function add ()
+    public function add ($from="")
     {
         if(isset($_SESSION['userLogged']))
         {
@@ -53,10 +53,7 @@ class CategoryController
         if(isset($_SESSION['userLogged']))
         {
             $categories = $this->dao->readAll();
-            if(!$categories)
-            {
-                $categories['0'] = new Category ("SIN CATEGORIAS", 0);
-            }
+
             require(ROOT.'views/listCategories.php');
         }
         else
@@ -66,7 +63,7 @@ class CategoryController
         }
     }
 
-    public function store($description)
+    public function store($description, $from="")
     {
         if(isset($_SESSION['userLogged']))
         {

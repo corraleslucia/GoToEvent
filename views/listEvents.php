@@ -21,7 +21,7 @@ include(ROOT.'views/navAdmin.php');
 
 
     <div class="container">
-        <form action="_list" method="POST">
+        <form action="<?= BASE ?>event/_list" method="POST">
             <div>
                 <p>Mostar:
                 <input type="radio" id="showtype1" name="show" value="all">
@@ -35,20 +35,31 @@ include(ROOT.'views/navAdmin.php');
             </div>
         </form>
         <?php
-            foreach ($events as $key => $value) {
+        if ($events)
+        {
+            foreach ($events as $key => $value)
+            { ?>
 
-        ?>
-        <div class="element">
-            <a class="link-divs "href="<?= BASE ?>event/showEventDetails/<?php echo $value->getId()?>">
-                <div class="p-listev-art">
-                    <p style="font-size:22px"><b><?php echo $value->getDescription()?></b></p>
+                <div class="element">
+                    <div class="">
+                    <img src="<?= IMG_UPLOADS . '/event/' . $value->getPoster() ?>" height="200" />
+                    </div>
+                    <a class="link-divs "href="<?= BASE ?>event/showEventDetails/<?php echo $value->getId()?>">
+                        <div class="p-listev-art">
+                            <p style="font-size:22px"><b><?php echo $value->getDescription()?></b></p>
+                        </div>
+                        <div class="p-listev-art">
+                            <p>Categoria: <?php echo $value->getCategory()?></p>
+                        </div>
+                    </a>
                 </div>
-                <div class="p-listev-art">
-                    <p>Categoria: <?php echo $value->getCategory()?></p>
-                </div>
-            </a>
-        </div>
-    <?php } ?>
+      <?php }
+        }
+        else
+        { ?>
+            <p>SIN EVENTOS</p>
+    <?php
+        }  ?>
     </div>
 
   </section>
