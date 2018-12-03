@@ -494,6 +494,15 @@ a {
     padding: 10px;
 }
 
+.link-divs-nd {
+    display: inline-block;
+    position: relative;
+    color: black;
+    text-decoration: none;
+    width: 100%;
+    box-shadow: 10px;
+}
+
 .link-divs {
     display: inline-block;
     position: relative;
@@ -511,19 +520,7 @@ a {
     background-color: rgb(252, 179, 44);
 }
 
-/* .link-divs-user {
-    display: inline-block;
-    position: relative;
-    color: black;
-    text-decoration: none;
-    width: 100%;
-    
-}
 
-.link-divs-user:hover {
-    background-color: rgb(252, 179, 44);
-
-} */
 
 .mini-box-title {
     display: inline-block;
@@ -533,6 +530,11 @@ a {
     padding-top: 2%;
 }
 
+.link-divs-nd > .mini-box-title {
+    background-color: rgb(57, 57, 66);
+    color: white;
+}
+
 .mini-box-price {
     display: inline-block;
     height: 40px;
@@ -540,6 +542,8 @@ a {
     padding-top: 2%;
     background-color:white;
 }
+
+
 
 
 .half {
@@ -617,4 +621,9 @@ a {
     background-color: rgb(252, 179, 44);
     padding: .5%;
     text-align: center;
+}
+
+
+.ev-elem-clr {  
+    background-color: rgba(255, 255, 255, 0.596);
 }

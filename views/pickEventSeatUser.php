@@ -40,7 +40,7 @@ include(ROOT.'views/navUser.php');
             {
                 foreach ($calendars as $key => $value)
                 {  ?>
-                    <div class="element event-elem">
+                    <div class="element event-elem ev-elem-clr">
             
                         <div class="half subtitle-ev-detail-half">
                             <p style="font-size:20px"> <?php echo "Fecha: "  . $value->getDate() ?></p>
@@ -89,8 +89,11 @@ include(ROOT.'views/navUser.php');
                                     <div class="half mini-box" style="padding: 0">
                                         <?php if ($_value->getRemaningQuantity() === "0")
                                         { ?>
-                                            <p><?php echo $_value->getSeatType() ?> </p>
-                                            <p><?php echo "SIN DISPONIBILIDAD"?> </p>
+                                        <div class="link-divs-nd">
+                                            <p class="mini-box-title"><?php echo $_value->getSeatType() ?> </p>
+                                            <p class="mini-box-price"><?php echo "SIN DISPONIBILIDAD"?> </p>
+                                        </div>
+                                            
                                         <?php }
                                         else
                                         { ?>
