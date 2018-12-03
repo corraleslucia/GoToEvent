@@ -111,11 +111,12 @@ use daos\daodb\Connection as Connection;
           /**
            *
            */
-          public function update($id_artist, $newName)
+          public function update($id_artist, $artist)
           {
-              $sql = "UPDATE artists SET name = :name where id_artist = :id_artist";
+              $sql = "UPDATE artists SET name = :name, img = :img  where id_artist = :id_artist";
 
-              $parameters['name'] = $newName;
+              $parameters['name'] = $artist->getName();
+              $parameters['img'] = $artist->getAvatar()['artist']['name'];
               $parameters['id_artist'] = $id_artist;
 
 
@@ -132,8 +133,20 @@ use daos\daodb\Connection as Connection;
           /**
            *
            */
-          public function delete($_name)
+          public function delete($id_artist)
           {
+              $sql = "DELETE from artists where id_artist = :id_artist";
+
+              $parameters['id_artist'] = $id_artist;
+              
+              try {
+                   // creo la instancia connection
+               $this->connection = Connection::getInstance();
+               // Ejecuto la sentencia.
+               return $this->connection->ExecuteNonQuery($sql, $parameters);
+           } catch(\PDOException $ex) {
+                  throw $ex;
+             }
 
           }
 
