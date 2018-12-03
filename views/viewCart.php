@@ -1,13 +1,7 @@
 <?php
 namespace views;
-<<<<<<< HEAD
 include(ROOT.'views/headerAdmin.php');
 include(ROOT.'views/navAdmin.php');
-=======
-include(ROOT.'views/headerUser.php');
-include(ROOT.'views/navUser.php');
-
->>>>>>> 4d431f935619084d0a6c5e1c01512c07307f1514
  ?>
 
 <!DOCTYPE html>
