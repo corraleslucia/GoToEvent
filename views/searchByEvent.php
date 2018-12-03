@@ -29,12 +29,20 @@ include(ROOT.'views/navUser.php');
               ?>
               <div class="element">
                   <a class="link-divs "href="<?= BASE ?>event/showEventDetailsForUser/<?php echo $value->getId()?>">
-                      <div class="p-listev-art">
+                  <div class="div-img">
+                        <?php
+                        if ($value->getPoster() != '0')
+                        { ?>
+                            <img src="<?= IMG_UPLOADS . '/event/' . $value->getPoster() ?>" class="img-list-event" />
+                        <?php
+                        }?>
+                    </div>    
+                    <div class="p-listev-art">
                           <p style="font-size:22px"><b><?php echo $value->getDescription()?></b></p>
-                      </div>
-                      <div class="p-listev-art">
-                          <p>Categoria: <?php echo $value->getCategory()?></p>
-                      </div>
+                    </div>
+                    <div class="p-listev-art">
+                        <p>Categoria: <?php echo $value->getCategory()?></p>
+                    </div>
                   </a>
               </div>
         <?php } ?>
@@ -43,7 +51,7 @@ include(ROOT.'views/navUser.php');
       }
       else if ($val)
       { ?>
-          <p> <?php echo $val ?> </p>
+          <p class="alert"> <?php echo $val ?> </p>
 <?php
       }
        ?>

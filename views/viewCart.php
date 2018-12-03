@@ -1,13 +1,8 @@
 <?php
 namespace views;
-<<<<<<< HEAD
-include(ROOT.'views/headerAdmin.php');
-include(ROOT.'views/navAdmin.php');
-=======
 include(ROOT.'views/headerUser.php');
 include(ROOT.'views/navUser.php');
 
->>>>>>> 4d431f935619084d0a6c5e1c01512c07307f1514
  ?>
 
 <!DOCTYPE html>
@@ -15,33 +10,6 @@ include(ROOT.'views/navUser.php');
 <head>
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<<<<<<< HEAD
-  <title>Eventos</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" type="text/css" media="screen" href= "<?php echo BASE ?>/css/normalize.css">
-  <link rel="stylesheet" type="text/css" media="screen" href="<?php echo BASE ?>/css/style.css" />
-
-</head>
-<body>
-  <section class="content">
-    <h3>EVENTOS</h3>
-
-
-    <div class="container">
-        <div class="element">  
-                <div class="p-listev-art">
-                    <p style="font-size:22px"><b>Description</b></p>
-                </div>
-                <div class="p-listev-art">
-                    <p>Mas cosas</p>
-                </div>
-                <button>Eliminar del carrito</button>
-                <button>Comprar</button>
-        </div>
-    </div>
-
-  </section>
-=======
   <title>Carrito</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" media="screen" href="<?php echo BASE ?>css/normalize.css">
@@ -114,6 +82,5 @@ include(ROOT.'views/navUser.php');
         </div>
         <br>
     </section>
->>>>>>> 4d431f935619084d0a6c5e1c01512c07307f1514
 </body>
 </html>

@@ -3,8 +3,8 @@ if ($artists)
 {
     foreach ($eventsByArtists as $artist => $events)
     { ?>
-        <div class="p-listev-art">
-        <p style="font-size:22px"><b><?php echo $artist ?></b></p>
+        <div class="p-listev-plc" style="width: 100%">
+            <p class="subtitle""><b><?php echo $artist ?></b></p>
         </div>
     <?php
         if ($events)
@@ -16,16 +16,15 @@ if ($artists)
                     { ?>
                         <a class="link-divs "href="<?= BASE ?>event/showEventDetailsForUser/<?php echo $value->getId()?>">
                         <?php } ?>
-                        <div class="p-listev-art">
-                            <div class="">
+                        <div class="div-img">
+                            <?php
+                            if ($value->getPoster() != '0')
+                            { ?>
+                                <img src="<?= IMG_UPLOADS . '/event/' . $value->getPoster() ?>" class="img-list-event" />
                                 <?php
-                                if ($value->getPoster() != '0')
-                                { ?>
-                                    <img src="<?= IMG_UPLOADS . '/event/' . $value->getPoster() ?>" height="200" />
-                                    <?php
-                                }?>
-
-                            </div>
+                            }?>
+                        </div>
+                        <div class="p-listev-art">
                             <p style="font-size:22px"><b><?php  echo $value->getDescription()?></b></p>
                         </div>
                     </a>
@@ -35,7 +34,7 @@ if ($artists)
         else
         { ?>
             <div class="element">
-                <div class="p-listev-art">
+                <div class="p-listev-plc">
                     <p style="font-size:22px"><b>SIN EVENTOS</b></p>
                 </div>
             </div>
