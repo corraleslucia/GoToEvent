@@ -77,7 +77,7 @@ class EventController
         }
     }
 
-    public function _list ($showType ="")
+    public function _list ($showType ="", $val = "")
     {
         if(isset($_SESSION['userLogged']))
         {
@@ -437,6 +437,78 @@ class EventController
         require(ROOT.'views/searchByEvent.php');
     }
 
+    public function inputUpdateData ($id_event)
+    {
+        if(isset($_SESSION['userLogged']))
+        {
+            $val = null;
+            $event = $this->dao->readId($id_event)['0'];
+            $categories = $this->daoCategory->readAll();
+
+            require(ROOT.'views/updateEvent.php');
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+    }
+
+    public function updateEvent ($id_event, $description, $category, $file)
+    {
+        if(isset($_SESSION['userLogged']))
+        {
+            $event = new Event($description, $category, $file);
+            try
+            {
+                $this->fileController->upload($event->getPoster(), 'event');
+                try
+                {
+                    $this->dao->update($id_event, $event);
+                    $val = "Evento Modificado";
+                    $this->_list("", $val);
+                }
+                catch (\PDOException $ex)
+                {
+                    $val = "No se ha podido modificar el evento.";
+                    $this->inputUpdateData($id_event);
+                }
+
+            } catch (\Exception $e)
+            {
+                $val = $e->getMessage();
+                $this->inputUpdateData($id_event);
+
+            }
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+    }
+
+    public function deleteEvent ($id_event)
+    {
+        if(isset($_SESSION['userLogged']))
+        {
+            if ($this->dao->checkSoldTicketsFromEvent($id_event))
+            {
+                $val = "No se ha podido eliminar el Evento. Cuenta con entradas ya vendidas.";
+            }
+            else
+            {
+                $this->dao->delete($id_event);
+                $val = "Evento Eliminado";
+            }
+            $this->_list("", $val);
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+    }
 
 
 }

@@ -284,20 +284,66 @@ class EventDb extends singleton implements IDao
 
      }
 
-
-
      /**
       *
       */
-     public function update($value, $newValue)
+     public function update($id_event, $event)
      {
+         $sql = "UPDATE events SET description = :description, id_category = :id_category, img = :img  where id_event = :id_event";
 
+         $parameters['description'] = $event->getDescription();
+         $parameters['id_category'] = $event->getCategory();
+         $parameters['img'] = $event->getPoster()['event']['name'];
+         $parameters['id_event'] = $id_event;
+
+
+         try {
+              // creo la instancia connection
+          $this->connection = Connection::getInstance();
+          // Ejecuto la sentencia.
+          return $this->connection->ExecuteNonQuery($sql, $parameters);
+      } catch(\PDOException $ex) {
+             throw $ex;
+        }
      }
+
+     public function checkSoldTicketsFromEvent ($id_event)
+     {
+         $sql = "SELECT *
+                 FROM purchase_lines pl inner join event_seats evs on pl.id_event_seat = evs.id_event_seat
+                    inner join calendars cal on evs.id_calendar = cal.id_calendar
+                    inner join events e on cal.id_event = e.id_event
+                 WHERE e.id_event = :id_event";
+
+         $parameters['id_event'] = $id_event;
+
+         try {
+              // creo la instancia connection
+          $this->connection = Connection::getInstance();
+          // Ejecuto la sentencia.
+          return $this->connection->ExecuteNonQuery($sql, $parameters);
+      } catch(\PDOException $ex) {
+             throw $ex;
+        }
+     }
+
      /**
       *
       */
-     public function delete($_name)
+     public function delete($id_event)
      {
+         $sql = "DELETE from events where id_event = :id_event";
+
+         $parameters['id_event'] = $id_event;
+
+         try {
+              // creo la instancia connection
+          $this->connection = Connection::getInstance();
+          // Ejecuto la sentencia.
+          return $this->connection->ExecuteNonQuery($sql, $parameters);
+      } catch(\PDOException $ex) {
+             throw $ex;
+        }
 
      }
 
