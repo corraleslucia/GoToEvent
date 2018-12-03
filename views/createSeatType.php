@@ -53,12 +53,7 @@ include(ROOT.'views/navAdmin.php');
         {  ?>
             <a class="secondary-button margin-0"href="<?= BASE ?>eventSeat/addMoreEventSeats/<?php echo $fromEventSeat ?>">Volver</a>
     <?php
-        }
-        else
-        { ?>
-            <a class="secondary-button margin-0" href="<?= BASE ?>event/index">Volver</a>
-    <?php
-        } ?>
+        }?>
         <br>
     </div>
     <br>

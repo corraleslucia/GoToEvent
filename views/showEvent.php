@@ -29,10 +29,18 @@ include(ROOT.'views/navAdmin.php');
                 </div>
                 <h2 style="padding-top: 5%">Evento: <?php echo $event['0']->getDescription()?> </h2>
                 <p>Categoria: <b><?php echo $event['0']->getCategory()?></b> </p>
+
+                <div style="text-align: center">
+                    <a class="secondary-button" href="<?= BASE ?>event/inputUpdateData/<?php echo $event['0']->getId()?>">Modificar</a>
+                    <a class="secondary-button" href="<?= BASE ?>event/deleteEvent/<?php echo $event['0']->getId()?>">Eliminar</a>
+                </div>
+                <br>
+
+
                 <div class="subtitle">
                     <p class="margin-0"><b>FECHAS:</b></p>
                 </div>
-                
+
 
           <?php if ($calendars)
                 {

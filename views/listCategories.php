@@ -17,6 +17,11 @@ include(ROOT.'views/navAdmin.php');
 </head>
 <body>
   <section class="content">
+      <?php if ($val)
+      {?>
+          <p> <?php echo $val; ?> </p>
+      <?php }
+      ?>
     <h3>CATEGORIAS</h3>
     <div class="container">
         <?php
@@ -26,6 +31,11 @@ include(ROOT.'views/navAdmin.php');
             { ?>
                 <div class="element">
                 <h4><?php echo $value->getDescription()?></h4>
+                    <div style="text-align: center">
+                        <a class="secondary-button" href="<?= BASE ?>category/inputUpdateData/<?php echo $value->getId()?>">Modificar</a>
+                        <a class="secondary-button" href="<?= BASE ?>category/deleteCategory/<?php echo $value->getId()?>">Eliminar</a>
+                    </div>
+                    <br>
                 </div>
         <?php
             }
@@ -38,11 +48,7 @@ include(ROOT.'views/navAdmin.php');
 
     </div>
 
-    <div style="text-align: center">
-        <a class="secondary-button" href="<?= BASE ?>event/index">Volver</a>
-        <br>
-    </div>
-    <br>
+
   </section>
 </body>
 </html>

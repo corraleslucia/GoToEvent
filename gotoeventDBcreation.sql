@@ -52,8 +52,8 @@ create table calendars (
     id_event int unsigned,
     constraint pk_calendars primary key (id_calendar),
     constraint unq_calendars unique (calendar_date, calendar_time, id_location),
-    constraint fk_calendars_locations_id_location foreign key (id_location) references locations (id_location),
-    constraint fk_calendars_events_id_event foreign key (id_event) references events (id_event)
+    constraint fk_calendars_locations_id_location foreign key (id_location) references locations (id_location) ,
+    constraint fk_calendars_events_id_event foreign key (id_event) references events (id_event) on delete cascade
 );
 
 create table artists_in_calendars (
@@ -61,7 +61,7 @@ create table artists_in_calendars (
     id_calendar int unsigned,
     constraint pk_artists_in_calendars primary key (id_artist,id_calendar),
     constraint fk_artists_in_calendars_id_artist foreign key (id_artist) references artists (id_artist),
-    constraint fk_artists_in_calendars_id_calendar foreign key (id_calendar) references calendars (id_calendar)
+    constraint fk_artists_in_calendars_id_calendar foreign key (id_calendar) references calendars (id_calendar) on delete cascade
 );
 
 create table event_seats (
@@ -73,7 +73,7 @@ remaning_quantity int unsigned not null,
 id_calendar int unsigned,
 constraint pk_event_seats primary key (id_event_seat),
 constraint fk_event_seats_seats_type_id_seat_type foreign key (id_seat_type) references seats_type (id_seats_type),
-constraint fk_event_seats_calendars_id_calendar foreign key (id_calendar) references calendars (id_calendar),
+constraint fk_event_seats_calendars_id_calendar foreign key (id_calendar) references calendars (id_calendar) on delete cascade,
 constraint unq_event_seats unique (id_calendar,id_seat_type)
 );
 
@@ -107,7 +107,7 @@ create table purchase_lines (
     id_purchase int unsigned,
     constraint pk_purchase_lines primary key (id_purchase_line),
     constraint fk_purchase_lines_purchases foreign key (id_purchase) references purchases (id_purchase),
-    constraint fk_purchases_event_seats foreign key (id_event_seat) references event_seats (id_event_seat)
+    constraint fk_purchases_event_seats foreign key (id_event_seat) references event_seats (id_event_seat) on delete cascade
 );
 create table tickets(
     id_ticket int unsigned auto_increment,
@@ -115,5 +115,5 @@ create table tickets(
     qr varchar(255),
     id_purchase_line int unsigned,
     constraint pk_tickets primary key (id_ticket),
-    constraint fk_tickets_purchase_lines foreign key (id_purchase_line) references purchase_lines (id_purchase_line)
+    constraint fk_tickets_purchase_lines foreign key (id_purchase_line) references purchase_lines (id_purchase_line) on delete cascade
 );

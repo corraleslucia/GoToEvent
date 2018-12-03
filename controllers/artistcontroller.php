@@ -48,7 +48,7 @@ class ArtistController
 
     }
 
-    public function _list()
+    public function _list($val = "")
     {
 
         if(isset($_SESSION['userLogged']))
@@ -102,6 +102,81 @@ class ArtistController
                 require(ROOT.'views/createArtist.php');
 
             }
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+    }
+
+
+    public function inputUpdateData ($id_artist)
+    {
+        if(isset($_SESSION['userLogged']))
+        {
+            $val = null;
+            $artist = $this->dao->readId($id_artist)['0'];
+
+            require(ROOT.'views/updateArtist.php');
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+    }
+
+    public function updateArtist ($id_artist, $name, $file)
+    {
+        if(isset($_SESSION['userLogged']))
+        {
+            $artist = new Artist($name, $file);
+            try
+            {
+                $this->fileController->upload($artist->getAvatar(), 'artist');
+                try
+                {
+                    $this->dao->update($id_artist, $artist);
+                    $val = "Artista Modificado";
+                    $this->_list();
+                }
+                catch (\PDOException $ex)
+                {
+                    $val = "No se ha podido modificar el artista.";
+                    require(ROOT.'views/updateArtist.php');
+                }
+
+            } catch (\Exception $e)
+            {
+                $val = $e->getMessage();
+                require(ROOT.'views/updateArtist.php');
+
+            }
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+    }
+
+    public function deleteArtist ($id_artist)
+    {
+        if(isset($_SESSION['userLogged']))
+        {
+            try
+            {
+                $this->dao->delete($id_artist);
+                $val = "Artista Eliminado";
+                $this->_list($val);
+            }
+            catch (\PDOException $ex)
+            {
+                $val = "No se ha podido eliminar el artista. Se encuentra asociado a un Evento.";
+                $this->_list($val);
+            }
+
         }
         else
         {

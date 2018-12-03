@@ -106,16 +106,44 @@ use daos\daodb\Connection as Connection;
           /**
            *
            */
-          public function update($value, $newValue)
+          public function update($id_location, $location)
           {
+              $sql = "UPDATE locations SET name = :name, capacity = :capacity, adress = :adress , city = :city  where id_location = :id_location";
+
+              $parameters['name'] = $location->getName();
+              $parameters['capacity'] = $location->getCapacity();
+              $parameters['adress'] = $location->getAdress();
+              $parameters['city'] = $location->getCity();
+              $parameters['id_location'] = $id_location;
+
+
+              try {
+                   // creo la instancia connection
+               $this->connection = Connection::getInstance();
+               // Ejecuto la sentencia.
+               return $this->connection->ExecuteNonQuery($sql, $parameters);
+           } catch(\PDOException $ex) {
+                  throw $ex;
+             }
 
           }
-
           /**
            *
            */
-          public function delete($_name)
+          public function delete($id_location)
           {
+              $sql = "DELETE from categories where id_location = :id_location";
+
+              $parameters['id_category'] = $id_location;
+
+              try {
+                   // creo la instancia connection
+               $this->connection = Connection::getInstance();
+               // Ejecuto la sentencia.
+               return $this->connection->ExecuteNonQuery($sql, $parameters);
+           } catch(\PDOException $ex) {
+                  throw $ex;
+             }
 
           }
 

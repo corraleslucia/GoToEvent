@@ -17,6 +17,11 @@ include(ROOT.'views/navAdmin.php');
 </head>
 <body>
   <section class="content">
+      <?php if ($val)
+      {?>
+          <p> <?php echo $val; ?> </p>
+      <?php }
+      ?>
     <h3>LUGARES</h3>
     <div class="container">
         <?php
@@ -29,6 +34,11 @@ include(ROOT.'views/navAdmin.php');
                     <div class="p-listev-plc"><p>Capacidad Maxima: <?php echo $value->getCapacity()?> </p></div>
                     <div class="p-listev-plc"><p>Direccion: <?php echo $value->getAdress()?> </p></div>
                     <div class="p-listev-plc"><p>Ciudad: <?php echo $value->getCity()?> </p></div>
+                    <div style="text-align: center">
+                        <a class="secondary-button" href="<?= BASE ?>location/inputUpdateData/<?php echo $value->getId()?>">Modificar</a>
+                        <a class="secondary-button" href="<?= BASE ?>location/deleteLocation/<?php echo $value->getId()?>">Eliminar</a>
+                    </div>
+                    <br>
                 </div>
         <?php
             }
@@ -39,11 +49,6 @@ include(ROOT.'views/navAdmin.php');
     <?php
         } ?>
     </div>
-    <div style="text-align: center">
-        <a class="secondary-button" href="<?= BASE ?>event/index">Volver</a>
-        <br>
-    </div>
-    <br>
 
   </section>
 </body>
