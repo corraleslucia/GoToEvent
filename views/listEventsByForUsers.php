@@ -63,11 +63,7 @@ include(ROOT.'views/navUser.php');
               }
           ?>
     </div>
-    <div style="text-align: center">
-        <a class="secondary-button" href="<?= BASE ?>event/index">Volver</a>
-        <br>
-    </div>
-    <br>
+
 
   </section>
 </body>

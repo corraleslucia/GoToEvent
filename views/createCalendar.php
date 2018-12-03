@@ -62,12 +62,16 @@ include(ROOT.'views/navAdmin.php');
         <div class="form-group" id="checkbox-div">
             <label>Artista/s: </label><br>
         <?php
+        if ($artists)
+        {
             foreach ($artists as $key => $value)
             {
                 ?>
                 <input id="input" type="checkbox" name="artists[]" value="<?php echo $value->getId()?>"><?php echo $value->getName()?><br>
 
-      <?php } ?>
+            <?php }
+
+        } ?>
              <span>
              <a class ="form-secondary-button" href="<?php echo BASE ?>artist/add/<?php echo $event->getId()?>">Nuevo Artista</a>
              </span>

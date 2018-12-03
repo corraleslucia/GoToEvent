@@ -177,7 +177,7 @@ class EventController
             $events = $this->dao->readAll();
             if(!$events)
             {
-                $events['0'] = new Event ("SIN EVENTOS", 0);
+                $events['0'] = new Event ("SIN EVENTOS", 0, "");
             }
             require(ROOT.'views/selectEvent.php');
         }

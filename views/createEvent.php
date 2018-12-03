@@ -57,11 +57,7 @@ include(ROOT.'views/navAdmin.php');
           <button type="submit" class ="form-button">Agregar evento</button>
         </div>
     </form>
-    <div class="align-center" >
-        <a class="secondary-button margin-0" href="<?= BASE ?>event/index">Volver</a>
-        <br>
-    </div>
-    <br>
+
 
   </section>
 </body>

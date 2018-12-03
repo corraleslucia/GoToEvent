@@ -48,7 +48,7 @@ class LocationController
         }
     }
 
-    public function _list ()
+    public function _list ($val = "")
     {
         if(isset($_SESSION['userLogged']))
         {
@@ -84,6 +84,71 @@ class LocationController
 
                 require(ROOT.'views/createLocation.php');
             }
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+    }
+
+    public function inputUpdateData ($id_location)
+    {
+        if(isset($_SESSION['userLogged']))
+        {
+            $val = null;
+            $location = $this->dao->readId($id_location)['0'];
+
+            require(ROOT.'views/updateLocation.php');
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+    }
+
+    public function updateLocation ($id_location, $name, $capacity, $adress, $city)
+    {
+        if(isset($_SESSION['userLogged']))
+        {
+            $location = new Location($name, $capacity, $adress, $city);
+            try
+            {
+                $this->dao->update($id_location, $location);
+                $val = "Lugar Modificado";
+                $this->_list($val);
+            }
+            catch (\PDOException $ex)
+            {
+                $val = "No se ha podido modificar el lugar.";
+                require(ROOT.'views/updateLocation.php');
+            }
+
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+    }
+
+    public function deleteLocation ($id_location)
+    {
+        if(isset($_SESSION['userLogged']))
+        {
+            try
+            {
+                $this->dao->delete($id_location);
+                $val = "Lugar Eliminado";
+                $this->_list($val);
+            }
+            catch (\PDOException $ex)
+            {
+                $val = "No se ha podido eliminar el lugar. Se encuentra asociado a un Evento.";
+                $this->_list($val);
+            }
+
         }
         else
         {

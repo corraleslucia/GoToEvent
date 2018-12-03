@@ -48,7 +48,7 @@ class CategoryController
         }
     }
 
-    public function _list ()
+    public function _list ($val = "")
     {
         if(isset($_SESSION['userLogged']))
         {
@@ -84,6 +84,71 @@ class CategoryController
 
                 require(ROOT.'views/createCategory.php');
             }
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+    }
+
+    public function inputUpdateData ($id_category)
+    {
+        if(isset($_SESSION['userLogged']))
+        {
+            $val = null;
+            $category = $this->dao->readId($id_category)['0'];
+
+            require(ROOT.'views/updateCategory.php');
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+    }
+
+    public function updateCategory ($id_category, $description)
+    {
+        if(isset($_SESSION['userLogged']))
+        {
+            $category = new Category($description);
+            try
+            {
+                $this->dao->update($id_category, $category);
+                $val = "Categoria Modificada";
+                $this->_list($val);
+            }
+            catch (\PDOException $ex)
+            {
+                $val = "No se ha podido modificar la categoria.";
+                require(ROOT.'views/updateCategory.php');
+            }
+
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+    }
+
+    public function deleteCategory ($id_category)
+    {
+        if(isset($_SESSION['userLogged']))
+        {
+            try
+            {
+                $this->dao->delete($id_category);
+                $val = "Categoria Eliminada";
+                $this->_list($val);
+            }
+            catch (\PDOException $ex)
+            {
+                $val = "No se ha podido eliminar la categoria. Se encuentra asociada a un Evento.";
+                $this->_list($val);
+            }
+
         }
         else
         {

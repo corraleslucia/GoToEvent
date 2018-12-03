@@ -48,7 +48,7 @@ class SeatTypeController
         }
     }
 
-    public function _list ()
+    public function _list ($val = "")
     {
         if(isset($_SESSION['userLogged']))
         {
@@ -84,6 +84,71 @@ class SeatTypeController
                 $val = "Ya existe un tipo de plaza con ese nombre.";
                 require(ROOT.'views/createSeatType.php');
             }
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+    }
+
+    public function inputUpdateData ($id_seatType)
+    {
+        if(isset($_SESSION['userLogged']))
+        {
+            $val = null;
+            $seatType = $this->dao->readId($id_seatType)['0'];
+
+            require(ROOT.'views/updateSeatType.php');
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+    }
+
+    public function updateSeatType ($id_seatType, $name)
+    {
+        if(isset($_SESSION['userLogged']))
+        {
+            $seatType = new SeatType($name);
+            try
+            {
+                $this->dao->update($id_seatType, $seatType);
+                $val = "Tipo de Plaza Modificada";
+                $this->_list($val);
+            }
+            catch (\PDOException $ex)
+            {
+                $val = "No se ha podido modificar el tipo de plaza.";
+                require(ROOT.'views/updateSeatType.php');
+            }
+
+        }
+        else
+        {
+            echo ('inicie sesion, no saltearas este paso');
+            require(ROOT.'views/login.php');
+        }
+    }
+
+    public function deleteSeatType ($id_seatType)
+    {
+        if(isset($_SESSION['userLogged']))
+        {
+            try
+            {
+                $this->dao->delete($id_seatType);
+                $val = "Tipo de plaza Eliminada";
+                $this->_list($val);
+            }
+            catch (\PDOException $ex)
+            {
+                $val = "No se ha podido eliminar el tipo de plaza. Se encuentra asociado a un Evento.";
+                $this->_list($val);
+            }
+
         }
         else
         {

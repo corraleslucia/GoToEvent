@@ -102,21 +102,46 @@ use daos\daodb\Connection as Connection;
 
 
 
-          /**
-           *
-           */
-          public function update($value, $newValue)
-          {
+           /**
+            *
+            */
+           public function update($id_seatType, $seatType)
+           {
+               $sql = "UPDATE seats_type SET name = :name  where id_seats_type = :id_seats_type";
 
-          }
+               $parameters['name'] = $seatType->getName();
+               $parameters['id_seats_type'] = $id_seatType;
 
-          /**
-           *
-           */
-          public function delete($_name)
-          {
-               
-          }
+
+               try {
+                    // creo la instancia connection
+                $this->connection = Connection::getInstance();
+                // Ejecuto la sentencia.
+                return $this->connection->ExecuteNonQuery($sql, $parameters);
+            } catch(\PDOException $ex) {
+                   throw $ex;
+              }
+
+           }
+           /**
+            *
+            */
+           public function delete($id_seatType)
+           {
+               $sql = "DELETE from seats_type where id_seats_type = :id_seats_type";
+
+               $parameters['id_seats_type'] = $id_seatType;
+
+               try {
+                    // creo la instancia connection
+                $this->connection = Connection::getInstance();
+                // Ejecuto la sentencia.
+                return $this->connection->ExecuteNonQuery($sql, $parameters);
+            } catch(\PDOException $ex) {
+                   throw $ex;
+              }
+
+           }
 
           /**
 		* Transforma el listado de seats_type en
