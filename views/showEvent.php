@@ -19,13 +19,13 @@ include(ROOT.'views/navAdmin.php');
 </head>
 <body>
     <section class="content">
-        <h3>EVENTO</h3>
+        <h3>EVENTO:</h3>
 
         <div class="container">
       <?php if ($event)
             { ?>
                 <div class="div-img" style="padding-top: 5%">
-                    <img class="img-list-event" src="<?= IMG_UPLOADS . '/event/' . $event['0']->getPoster() ?>" height="200" />
+                    <img class="img-list-event" src="<?= IMG_UPLOADS . '/event/' . $event['0']->getPoster() ?>" class="img-list-event" />
                 </div>
                 <h2 style="padding-top: 5%">Evento: <?php echo $event['0']->getDescription()?> </h2>
                 <p>Categoria: <b><?php echo $event['0']->getCategory()?></b> </p>
