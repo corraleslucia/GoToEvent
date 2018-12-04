@@ -23,7 +23,7 @@ include(ROOT.'views/navUser.php');
         <div class="container">
         <?php if (count($_SESSION['discardTickets'])===0)
         { ?>
-            <h2> Compra finalizada con exito </h2>
+            <h2 class="alert"> Compra finalizada con exito </h2>
     <?php
         }
         else
@@ -31,7 +31,7 @@ include(ROOT.'views/navUser.php');
             <h2> Compra finalizada </h2>
             <div class="element event-elem">
                 <div style="text-align: center">
-                    <p> Estos tickets no han podido ser adquieridos por falta de disponibilidad. </p>
+                    <p class="alert"> Estos tickets no han podido ser adquieridos por falta de disponibilidad. </p>
                     <?php foreach ($_SESSION['discardTickets'] as $key => $disPurchaseLine)
                       { ?>
                           <div class="element event-elem">

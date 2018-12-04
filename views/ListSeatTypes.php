@@ -17,7 +17,12 @@ include(ROOT.'views/navAdmin.php');
 </head>
 <body>
   <section class="content">
-    <h3>Tipos de Plazas</h3>
+      <?php if ($val)
+      {?>
+          <p class="alert"> <?php echo $val; ?> </p>
+      <?php }
+      ?>
+    <h3>TIPOS DE PLAZAS</h3>
     <div class="container">
         <?php
         if ($seatTypes)
@@ -26,7 +31,13 @@ include(ROOT.'views/navAdmin.php');
             { ?>
 
                 <div class="element">
-                    <h4><?php echo $value->getName()?></h4>
+                    <div>
+                        <h4><?php echo $value->getName()?></h4>
+                        <a class="secondary-button margin-0" href="<?= BASE ?>seatType/inputUpdateData/<?php echo $value->getId()?>">Modificar</a>
+                        <h4></h4>
+                        <a class="secondary-button margin-0" href="<?= BASE ?>seatType/deleteSeatType/<?php echo $value->getId()?>">Eliminar</a>
+                    </div>
+                    <br>
                 </div>
       <?php }
         }
@@ -37,11 +48,7 @@ include(ROOT.'views/navAdmin.php');
         }
    ?>
     </div>
-    <div style="text-align: center">
-        <a class="secondary-button" href="<?= BASE ?>event/index">Volver</a>
-        <br>
-    </div>
-    <br>
+
 
   </section>
 </body>

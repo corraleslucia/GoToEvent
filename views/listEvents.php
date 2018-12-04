@@ -17,6 +17,11 @@ include(ROOT.'views/navAdmin.php');
 </head>
 <body>
   <section class="content">
+      <?php if ($val)
+      {?>
+          <p class="alert"> <?php echo $val; ?> </p>
+      <?php }
+      ?>
     <h3>EVENTOS</h3>
 
 

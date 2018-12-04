@@ -15,6 +15,11 @@ namespace views;
 </head>
 <body>
   <section class="content">
+      <?php if ($val)
+      {?>
+          <p class="alert"> <?php echo $val; ?> </p>
+      <?php }
+      ?>
     <h3>ARTISTAS</h3>
     <div class="container">
     <?php
@@ -29,6 +34,12 @@ namespace views;
                 <div class="artist-image">
                     <img src="<?= IMG_UPLOADS . '/artist/' . $value->getAvatar() ?>" height="200" />
                 </div>
+
+                <div style="text-align: center">
+                    <a class="secondary-button margin-0" href="<?= BASE ?>artist/inputUpdateData/<?php echo $value->getId()?>">Modificar</a>
+                    <a class="secondary-button margin-0" href="<?= BASE ?>artist/deleteArtist/<?php echo $value->getId()?>">Eliminar</a>
+                </div>
+                <br>
             </div>
     <?php
         }
@@ -41,12 +52,9 @@ namespace views;
     }
     ?>
 
+
     </div>
-    <div style="text-align: center">
-        <a class="secondary-button" href="<?= BASE ?>event/index">Volver</a>
-        <br>
-    </div>
-    <br>
+
   </section>
 </body>
 </html>
