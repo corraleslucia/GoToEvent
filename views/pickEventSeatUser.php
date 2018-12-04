@@ -27,10 +27,10 @@ include(ROOT.'views/navUser.php');
             </div>
             <div class="p-listev-art">
                 <h2><?php echo $event['0']->getDescription()?></h2>
-            </div>  
+            </div>
             <div class="p-listev-art">
                 <p>Categoria: <b><?php echo $event['0']->getCategory()?></b> </p>
-            </div>  
+            </div>
             <div class="subtitle">
                 <p class="margin-0"><b>FECHAS:</b></p>
             </div>
@@ -41,14 +41,14 @@ include(ROOT.'views/navUser.php');
                 foreach ($calendars as $key => $value)
                 {  ?>
                     <div class="element event-elem ev-elem-clr">
-            
+
                         <div class="half subtitle-ev-detail-half">
                             <p style="font-size:20px"> <?php echo "Fecha: "  . $value->getDate() ?></p>
                         </div>
                         <div class="half subtitle-ev-detail-half">
                             <p style="font-size:20px"><?php echo "Hora: " . $value->getTime()?></p>
                         </div>
-                
+
                         <div class="full subtitle-ev-detail">
                             <p><b>Lugar:</b> <?php echo $value->getLocation()?></p>
                         </div>
@@ -57,7 +57,7 @@ include(ROOT.'views/navUser.php');
                                 <p><b>Artistas: </b>
                                 <span style="font-size:18px">
                                     <?php
-                                
+
 
                                     foreach ($value->getArtists() as $_key => $_value)
                                     { ?>
@@ -80,7 +80,7 @@ include(ROOT.'views/navUser.php');
                                 </span></p>
                                 <?php } ?>
                             </div>
-    
+
                             <?php
                             if ($value->getEventSeats())
                             {
@@ -93,7 +93,7 @@ include(ROOT.'views/navUser.php');
                                             <p class="mini-box-title"><?php echo $_value->getSeatType() ?> </p>
                                             <p class="mini-box-price"><?php echo "SIN DISPONIBILIDAD"?> </p>
                                         </div>
-                                            
+
                                         <?php }
                                         else
                                         { ?>

@@ -23,6 +23,7 @@ class UserController
 
     public function index()
     {
+        $val="";
         if(isset($_SESSION['userLogged']))
         {
             if ($_SESSION['userLogged']->getType()==="1")
@@ -92,7 +93,7 @@ class UserController
     }
 
 
-    public function store($mail, $pass, $name, $lastname, $type, $file)
+    public function store($typeFrom, $mail, $pass, $name, $lastname, $type, $file)
     {
             $user = new User($mail, $pass, $name, $lastname, $type, $file);
             try
@@ -104,7 +105,16 @@ class UserController
 
                     $val = "Usuario Creado";
 
-                    require(ROOT.'views/login.php');
+                    if ($typeFrom === "1")
+                    {
+                        $this->_list();
+                    }
+                    else if ($typeFrom === "2")
+                    {
+                        require(ROOT.'views/login.php');
+                    }
+
+
                 }
                 catch (\PDOException $ex)
                 {
@@ -148,12 +158,12 @@ class UserController
                 }
             } else
             {
-                echo 'Los datos ingresados no son correctos.';
+                $val = "Los datos ingresados no son correctos.";
                 require(ROOT.'views/login.php');
             }
         }
         else{
-            echo 'Los datos ingresados no son correctos.';
+            $val = "Los datos ingresados no son correctos.";
             require(ROOT.'views/login.php');
         }
 
@@ -161,6 +171,7 @@ class UserController
     public function logOut()
     {
         session_destroy();
+        $val = "Sesion finalizada.";
         require(ROOT.'views/login.php');
     }
 }

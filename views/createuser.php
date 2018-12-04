@@ -27,6 +27,9 @@ namespace views;
     <form action="<?php echo BASE ?>user/store" method="POST" enctype="multipart/form-data" class="form-admin">
         <h2 class="form-title">Registrate</h2>
         <div class="form-group">
+
+          <input class="input" type="hidden" name="typeFrm" value="2" >
+
           <label class="label">Mail:</label>
           <input class="input" type="email" name="us_mail" required>
         </div>

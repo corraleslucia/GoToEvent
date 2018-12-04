@@ -37,52 +37,67 @@ include(ROOT.'views/navAdmin.php');
                 <br>
 
 
-                <div class="subtitle">
-                    <p class="margin-0"><b>FECHAS:</b></p>
+                <div class="full subtitle-ev-detail">
+                    <p class="margin-0"><b>FECHAS</b></p>
                 </div>
 
 
           <?php if ($calendars)
                 {
                     foreach ($calendars as $key => $value)
-                    { ?>
-                        <div class="element event-elem">
-                            <div class="half">
+                    {  ?>
+                        <div class="element event-elem ev-elem-clr">
+
+                            <div class="half subtitle-ev-detail-half">
                                 <p style="font-size:20px"> <?php echo "Fecha: "  . $value->getDate() ?></p>
                             </div>
-                            <div class="half">
+                            <div class="half subtitle-ev-detail-half">
                                 <p style="font-size:20px"><?php echo "Hora: " . $value->getTime()?></p>
                             </div>
-                            <div class="full">
+
+                            <div class="full subtitle-ev-detail">
                                 <p><b>Lugar:</b> <?php echo $value->getLocation()?></p>
                             </div>
-                            <div class="full">
-                                <p><b>Artistas: </b></p>
-                                <span style="font-size:18px">
-                                <?php
-                                foreach ($value->getArtists() as $_key => $_value)
-                                { ?>
-                                    <?php echo $_value->getName() . " - "?>
-                                <?php
-                                }
-                                ?></span>
-                            </div>
-                            <div class="full">
-                                <p style="font-size:20px"><b><?php echo "Plazas: " ?></b></p>
-                            </div>
+                            <div class="full subtitle-ev-detail">
+                                <?php if(sizeof($value->getArtists()) > 1) { ?>
+                                    <p><b>Artistas: </b>
+                                    <span style="font-size:18px">
+                                        <?php
+
+
+                                        foreach ($value->getArtists() as $_key => $_value)
+                                        { ?>
+                                            <?php echo $_value->getName() . " - "?>
+                                            <?php
+                                        }
+                                        ?>
+                                    </span></p>
+                                    <?php
+                                    } else { ?>
+                                    <p><b>Artista: </b>
+                                    <span style="font-size:18px">
+                                        <?php
+                                        foreach ($value->getArtists() as $_key => $_value)
+                                        { ?>
+                                            <?php echo $_value->getName()?>
+                                            <?php
+                                        }
+                                        ?>
+                                    </span></p>
+                                    <?php } ?>
+                                </div>
                             <?php
                             if ($value->getEventSeats())
                             {
                                 foreach ($value->getEventSeats() as $_key => $_value)
                                 { ?>
-                                    <div class="half mini-box">
-                                        <p><?php echo "Tipo de Plaza: "  . $_value->getSeatType() ?> </p>
-                                        <br>
-                                        <p><?php echo "Cantidad Total: " . $_value->getTotalQuantity()?> </p>
-                                        <br>
-                                        <p><?php echo "Precio: " . $_value->getPrice()?> </p>
-                                        <br>
-                                        <p><?php echo "Remanente: " . $_value->getRemaningQuantity() ?> </p>
+                                    <div class="half mini-box" style="padding: 0">
+                                        <div class="link-divs-nd">
+                                            <p class="mini-box-title"><?php echo $_value->getSeatType() ?> </p>
+                                            <p class="mini-box-price"><?php echo "Cantidad Total: " . $_value->getTotalQuantity()?> </p>
+                                            <p class="mini-box-price"><?php echo "Precio: " . $_value->getPrice()?> </p>
+                                            <p class="mini-box-price"><?php echo "Remanente: " . $_value->getRemaningQuantity()?> </p>
+                                        </div>
                                     </div>
                           <?php }
                           ?>

@@ -27,6 +27,7 @@ include(ROOT.'views/navAdmin.php');
     <form action="<?php echo BASE ?>user/store" method="POST"  enctype="multipart/form-data" class="form-admin">
         <h2 class="form-title">Registrar Usuario</h2>
         <div class="form-group">
+          <input class="input" type="hidden" name="typeFrm" value="1" >
           <label class="label">Mail:</label>
           <input class="input" type="email" name="us_mail" required>
         </div>
@@ -66,7 +67,7 @@ include(ROOT.'views/navAdmin.php');
         </div>
 
     </form>
-    
+
 
   </section>
 </body>

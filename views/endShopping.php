@@ -31,6 +31,7 @@ include(ROOT.'views/navUser.php');
             <h2> Compra finalizada </h2>
             <div class="element event-elem">
                 <div style="text-align: center">
+                    <br>
                     <p class="alert"> Estos tickets no han podido ser adquieridos por falta de disponibilidad. </p>
                     <?php foreach ($_SESSION['discardTickets'] as $key => $disPurchaseLine)
                       { ?>
@@ -45,7 +46,7 @@ include(ROOT.'views/navUser.php');
                               <?php
                               foreach  ($disPurchaseLine->getEventSeat()->getIdCalendar()->getArtists() as $_key => $_value)
                               {
-                                  echo $_value->getIdArtist() ?> <br>
+                                  echo $_value->getName() ?> <br>
 
                               <?php
                               }
@@ -69,8 +70,11 @@ include(ROOT.'views/navUser.php');
             <div class= "full">
             <a class="secondary-button" href="<?= BASE ?>event/listForUser/byArtist">Ver Mas Eventos</a>
             <a class="secondary-button" href="<?= BASE ?>purchase/listPurchasesByUser">Ver Mis Compras</a>
+            <br>
+            <br>
             </div>
         </div>
+        <br>
 
     </section>
 </body>
