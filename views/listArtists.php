@@ -34,12 +34,16 @@ namespace views;
                 <div class="artist-image">
                     <img src="<?= IMG_UPLOADS . '/artist/' . $value->getAvatar() ?>" height="200" />
                 </div>
-
+                <?php
+                if ($_SESSION['userLogged']->getType() === "1")
+                { ?>
                 <div style="text-align: center">
                     <a class="secondary-button" href="<?= BASE ?>artist/inputUpdateData/<?php echo $value->getId()?>">Modificar</a>
                     <a class="secondary-button" href="<?= BASE ?>artist/deleteArtist/<?php echo $value->getId()?>">Eliminar</a>
                 </div>
                 <br>
+                <?php
+                } ?>
             </div>
     <?php
         }
