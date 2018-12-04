@@ -15,6 +15,11 @@ namespace views;
 </head>
 <body>
   <section class="content">
+      <?php if ($val)
+      {?>
+          <p class="alert"> <?php echo $val; ?> </p>
+      <?php }
+      ?>
 
     <form action="<?php echo BASE ?>User/login" method="POST" class="form-login">
     <h2 class="form-title">Login</h2>
