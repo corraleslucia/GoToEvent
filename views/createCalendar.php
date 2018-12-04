@@ -21,7 +21,7 @@ include(ROOT.'views/navAdmin.php');
 
       <?php if ($val)
       {?>
-          <p> <?php echo $val; ?> </p>
+          <p class="alert"> <?php echo $val; ?> </p>
       <?php }
       ?>
     <p id="msg"></p>

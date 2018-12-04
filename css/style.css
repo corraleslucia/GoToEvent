@@ -494,18 +494,56 @@ a {
     padding: 10px;
 }
 
+.link-divs-nd {
+    display: inline-block;
+    position: relative;
+    color: black;
+    text-decoration: none;
+    width: 100%;
+    box-shadow: 10px;
+}
+
 .link-divs {
     display: inline-block;
     position: relative;
     color: black;
     text-decoration: none;
     width: 100%;
+    box-shadow: 10px;
 }
 
 .link-divs:hover {
     background-color: rgb(252, 179, 44);
-
 }
+
+.link-divs:hover > .mini-box-price{
+    background-color: rgb(252, 179, 44);
+}
+
+
+
+.mini-box-title {
+    display: inline-block;
+    height: 40px;
+    width: 100%;
+    background-color: rgba(252, 179, 44, 0.7);
+    padding-top: 2%;
+}
+
+.link-divs-nd > .mini-box-title {
+    background-color: rgb(57, 57, 66);
+    color: white;
+}
+
+.mini-box-price {
+    display: inline-block;
+    height: 40px;
+    width: 100%;
+    padding-top: 2%;
+    background-color:white;
+}
+
+
 
 
 .half {
@@ -552,13 +590,13 @@ a {
 .alert {
     display: inline-block;
     width: 40%;
-    border: 2px solid black;
+    border: 2px solid rgb(252, 179, 44);
     border-radius: 20px;
     padding: 1%;
     margin-top: 2%;
     margin-bottom: 0;
-    background-color: rgba(255, 0, 0, 0.8);
-    color: #FFF;
+    background-color: rgba(255, 255, 255, 0.616);
+    
 }
 
 .subtitle {
@@ -568,4 +606,24 @@ a {
     background-color: rgba(252, 179, 44, 0.7);
     margin-top: 20px;
     padding: .5%;
+}
+
+.subtitle-ev-detail-half {
+    margin: 10px 1%;
+    width: 47.5%;
+    background-color: rgb(252, 179, 44);
+    padding: .5%;
+}
+
+.subtitle-ev-detail {
+    margin: 10px 1%;
+    width: 97.5%;
+    background-color: rgb(252, 179, 44);
+    padding: .5%;
+    text-align: center;
+}
+
+
+.ev-elem-clr {  
+    background-color: rgba(255, 255, 255, 0.596);
 }

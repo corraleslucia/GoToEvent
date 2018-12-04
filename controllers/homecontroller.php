@@ -13,6 +13,7 @@ class HomeController
 
     public function index()
     {
+        $val="";
         if(isset($_SESSION['userLogged']))
         {
             if ($_SESSION['userLogged']->getType()==="1")
@@ -49,7 +50,7 @@ class HomeController
         }
         else
         {
-            echo ('inicie sesion, no saltearas este paso');
+            $val= "inicie sesion, no saltearas este paso";
             require(ROOT.'views/login.php');
         }
     }

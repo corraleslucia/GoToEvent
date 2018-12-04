@@ -21,10 +21,13 @@ include(ROOT.'views/navUser.php');
 
         <?php if ($val)
         {?>
-            <p> <?php echo $val; ?> </p>
+            <p class="alert"> <?php echo $val; ?>  </p>
+
         <?php }
         ?>
-
+        <br>
+        <br>
+        <br>
         <div class="container">
         <?php if (count($_SESSION['cart'])===0)
         { ?>

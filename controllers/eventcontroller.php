@@ -72,7 +72,7 @@ class EventController
         }
         else
         {
-            echo ('inicie sesion, no saltearas este paso');
+            $val= "Inicie sesion, no saltearas este paso";
             require(ROOT.'views/login.php');
         }
     }
@@ -97,7 +97,7 @@ class EventController
         }
         else
         {
-            echo ('inicie sesion, no saltearas este paso');
+            $val= "Inicie sesion, no saltearas este paso";
             require(ROOT.'views/login.php');
         }
     }
@@ -165,7 +165,7 @@ class EventController
         }
         else
         {
-            echo ('inicie sesion, no saltearas este paso');
+            $val= "Inicie sesion, no saltearas este paso";
             require(ROOT.'views/login.php');
         }
     }
@@ -183,7 +183,7 @@ class EventController
         }
         else
         {
-            echo ('inicie sesion, no saltearas este paso');
+            $val= "Inicie sesion, no saltearas este paso";
             require(ROOT.'views/login.php');
         }
 
@@ -216,7 +216,7 @@ class EventController
         }
         else
         {
-            echo ('inicie sesion, no saltearas este paso');
+            $val= "Inicie sesion, no saltearas este paso";
             require(ROOT.'views/login.php');
         }
 
@@ -244,7 +244,7 @@ class EventController
         }
         else
         {
-            echo ('inicie sesion, no saltearas este paso');
+            $val= "Inicie sesion, no saltearas este paso";
             require(ROOT.'views/login.php');
         }
     }
@@ -283,7 +283,7 @@ class EventController
         }
         else
         {
-            echo ('inicie sesion, no saltearas este paso');
+            $val= "Inicie sesion, no saltearas este paso";
             require(ROOT.'views/login.php');
         }
     }
@@ -325,7 +325,7 @@ class EventController
         }
         else
         {
-            echo ('inicie sesion, no saltearas este paso');
+            $val= "Inicie sesion, no saltearas este paso";
             require(ROOT.'views/login.php');
         }
     }
@@ -366,7 +366,7 @@ class EventController
         }
         else
         {
-            echo ('inicie sesion, no saltearas este paso');
+            $val= "Inicie sesion, no saltearas este paso";
             require(ROOT.'views/login.php');
         }
     }
@@ -416,7 +416,7 @@ class EventController
         }
         else
         {
-            echo ('inicie sesion, no saltearas este paso');
+            $val= "Inicie sesion, no saltearas este paso";
             require(ROOT.'views/login.php');
         }
     }
@@ -449,7 +449,7 @@ class EventController
         }
         else
         {
-            echo ('inicie sesion, no saltearas este paso');
+            $val= "Inicie sesion, no saltearas este paso";
             require(ROOT.'views/login.php');
         }
     }
@@ -483,7 +483,7 @@ class EventController
         }
         else
         {
-            echo ('inicie sesion, no saltearas este paso');
+            $val= "Inicie sesion, no saltearas este paso";
             require(ROOT.'views/login.php');
         }
     }
@@ -505,7 +505,7 @@ class EventController
         }
         else
         {
-            echo ('inicie sesion, no saltearas este paso');
+            $val= "Inicie sesion, no saltearas este paso";
             require(ROOT.'views/login.php');
         }
     }
