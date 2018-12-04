@@ -19,7 +19,7 @@ include(ROOT.'views/navUser.php');
   <section class="content">
       <?php if ($val)
       {?>
-          <p> <?php echo $val; ?> </p>
+          <p class="alert"> <?php echo $val; ?> </p>
       <?php }
       ?>
     <h3>EVENTOS</h3>

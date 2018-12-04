@@ -86,7 +86,7 @@ class UserController
         }
         else
         {
-            echo ('inicie sesion, no saltearas este paso');
+            $val = "Inicie sesión para continuar";
             require(ROOT.'views/login.php');
         }
     }

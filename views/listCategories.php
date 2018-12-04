@@ -19,7 +19,7 @@ include(ROOT.'views/navAdmin.php');
   <section class="content">
       <?php if ($val)
       {?>
-          <p> <?php echo $val; ?> </p>
+          <p class="alert"> <?php echo $val; ?> </p>
       <?php }
       ?>
     <h3>CATEGORIAS</h3>
@@ -30,10 +30,11 @@ include(ROOT.'views/navAdmin.php');
             foreach ($categories as $key => $value)
             { ?>
                 <div class="element">
-                <h4><?php echo $value->getDescription()?></h4>
-                    <div style="text-align: center">
-                        <a class="secondary-button" href="<?= BASE ?>category/inputUpdateData/<?php echo $value->getId()?>">Modificar</a>
-                        <a class="secondary-button" href="<?= BASE ?>category/deleteCategory/<?php echo $value->getId()?>">Eliminar</a>
+                    <div>
+                        <h4><?php echo $value->getDescription()?></h4>
+                        <a class="secondary-button margin-0" href="<?= BASE ?>category/inputUpdateData/<?php echo $value->getId()?>">Modificar</a>
+                        <h4></h4>
+                        <a class="secondary-button margin-0" href="<?= BASE ?>category/deleteCategory/<?php echo $value->getId()?>">Eliminar</a>
                     </div>
                     <br>
                 </div>

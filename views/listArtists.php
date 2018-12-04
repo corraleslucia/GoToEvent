@@ -17,7 +17,7 @@ namespace views;
   <section class="content">
       <?php if ($val)
       {?>
-          <p> <?php echo $val; ?> </p>
+          <p class="alert"> <?php echo $val; ?> </p>
       <?php }
       ?>
     <h3>ARTISTAS</h3>
@@ -36,8 +36,8 @@ namespace views;
                 </div>
 
                 <div style="text-align: center">
-                    <a class="secondary-button" href="<?= BASE ?>artist/inputUpdateData/<?php echo $value->getId()?>">Modificar</a>
-                    <a class="secondary-button" href="<?= BASE ?>artist/deleteArtist/<?php echo $value->getId()?>">Eliminar</a>
+                    <a class="secondary-button margin-0" href="<?= BASE ?>artist/inputUpdateData/<?php echo $value->getId()?>">Modificar</a>
+                    <a class="secondary-button margin-0" href="<?= BASE ?>artist/deleteArtist/<?php echo $value->getId()?>">Eliminar</a>
                 </div>
                 <br>
             </div>

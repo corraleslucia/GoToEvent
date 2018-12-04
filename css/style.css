@@ -590,13 +590,13 @@ a {
 .alert {
     display: inline-block;
     width: 40%;
-    border: 2px solid black;
+    border: 2px solid rgb(252, 179, 44);
     border-radius: 20px;
     padding: 1%;
     margin-top: 2%;
     margin-bottom: 0;
-    background-color: rgba(255, 0, 0, 0.8);
-    color: #FFF;
+    background-color: rgba(255, 255, 255, 0.616);
+    
 }
 
 .subtitle {
