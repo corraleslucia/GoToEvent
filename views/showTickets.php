@@ -21,27 +21,31 @@ include(ROOT.'views/navUser.php');
         <h3>TICKETS</h3>
 
         <div class="container">
+            <div class="element event-elem ev-elem-clr">
             <?php foreach ($tickets as $key => $ticket)
               { ?>
-                  <div class="element qr-elem">
-                      <h2>TICKET # <b><?php echo $ticket->getNumber()?></b> </h2>
-                      <p>Evento: <b><?php echo $purchaseLine->getEventSeat()->getIdCalendar()->getIdEvent()?> </b></p>
-                      <br>
-                      <p>Fecha: <b><?php echo$purchaseLine->getEventSeat()->getIdCalendar()->getDate() ?></b></p>
-                      <br>
-                      <p>Hora: <b><?php echo $purchaseLine->getEventSeat()->getIdCalendar()->getTime()?></b></p>
-                      <br>
-                      <p>Lugar: <b><?php echo $purchaseLine->getEventSeat()->getIdCalendar()->getLocation()?></b></p>
-                      <br>
-                      <p>Tipo de Plaza: <b><?php echo $purchaseLine->getEventSeat()->getSeatType()?></b></p>
-                      <br>
-                      <h2><b>QR</b></h2>
-                      <div class="half mini-box">
-                          <img src="<?= IMG_UPLOADS . '/qr/qr' . $ticket->getQr() ?>" />
+                      <div class="half mini-box" style="padding: 0">
+                          <p class="mini-box-title">TICKET # <b><?php echo $ticket->getNumber()?></b> </p>
+                          <p class="mini-box-price">Evento: <b><?php echo $purchaseLine->getEventSeat()->getIdCalendar()->getIdEvent()?> </b></p>
+                          <br>
+                          <p class="mini-box-price">Fecha: <b><?php echo$purchaseLine->getEventSeat()->getIdCalendar()->getDate() ?></b></p>
+                          <br>
+                          <p class="mini-box-price">Hora: <b><?php echo $purchaseLine->getEventSeat()->getIdCalendar()->getTime()?></b></p>
+                          <br>
+                          <p class="mini-box-price">Lugar: <b><?php echo $purchaseLine->getEventSeat()->getIdCalendar()->getLocation()?></b></p>
+                          <br>
+                          <p class="mini-box-price">Tipo de Plaza: <b><?php echo $purchaseLine->getEventSeat()->getSeatType()?></b></p>
+                          <br>
+                          <p class="mini-box-title"> QR </p>
+                          <div class="qr-elem">
+                              <img src="<?= IMG_UPLOADS . '/qr/qr' . $ticket->getQr() ?>" />
+                          </div>
+
+
                       </div>
-                  </div>
           <?php
                } ?>
+           </div>
         </div>
 
         <div class= "full">

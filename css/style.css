@@ -417,12 +417,6 @@ a {
     position: static;
 }
 
-.element.qr-elem {
-    margin-top: 5%;
-}
-.element.qr-elem  img{
-}
-
 .align-center {
     text-align: center;
 }
@@ -596,7 +590,7 @@ a {
     margin-top: 2%;
     margin-bottom: 0;
     background-color: rgba(255, 255, 255, 0.616);
-    
+
 }
 
 .subtitle {
@@ -624,6 +618,6 @@ a {
 }
 
 
-.ev-elem-clr {  
+.ev-elem-clr {
     background-color: rgba(255, 255, 255, 0.596);
 }
