@@ -38,7 +38,7 @@ include(ROOT.'views/navUser.php');
                           <br>
                           <p class="mini-box-title"> QR </p>
                           <div class="qr-elem">
-                              <img src="<?= IMG_UPLOADS . '/qr/qr' . $ticket->getQr() ?>" />
+                              <img style="border-radius: 0" src="<?= IMG_UPLOADS . '/qr/qr' . $ticket->getQr() ?>" /> 
                           </div>
 
 

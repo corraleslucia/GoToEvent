@@ -30,33 +30,29 @@ include(ROOT.'views/navUser.php');
         { ?>
                 <?php foreach ($purchases as $key => $purchase)
                   { ?>
-                      <div class="element event-elem">
-                          <h2>COMPRA # <b><?php echo $purchase->getId()?></b> </h2>
-                          <h2>FECHA: <b> <?php echo $purchase->getDate()?></b> </h2>
-                          <div class="element event-elem">
-                          <h2><b>DETALLES </b></h2>
+                      <div class="">
+                          <div class="subtitle">
+                            <h2 class="margin-0" style="float: left">COMPRA # <b><?php echo $purchase->getId()?></b> </h2>
+                            <h2 class="margin-0" style="float: right"><b> <?php echo $purchase->getDate()?></b> </h2>
+                          </div>
+                          <div class="">
+                          <h4 class="subtitle-half margin-0" ><b>DETALLES </b></h4>
+                          <h4></h4>
                           <?php foreach ($purchase->getPurchaseLines() as $key => $purchaseLine)
                           { ?>
-                                  <div class="half mini-box">
+                                  <div class="half purchase">
 
-                                  <p>Evento: <b><?php echo $purchaseLine->getEventSeat()->getIdCalendar()->getIdEvent()?> </b></p>
-                                  <br>
-                                  <p>Fecha: <b><?php echo $purchaseLine->getEventSeat()->getIdCalendar()->getDate() ?></b></p>
-                                  <br>
-                                  <p>Hora: <b><?php echo $purchaseLine->getEventSeat()->getIdCalendar()->getTime()?></b></p>
-                                  <br>
-                                  <p>Lugar: <b><?php echo $purchaseLine->getEventSeat()->getIdCalendar()->getLocation()?></b></p>
-                                  <br>
-                                  <p>Tipo de Plaza: <b><?php echo $purchaseLine->getEventSeat()->getSeatType()?></b></p>
-                                  <br>
-                                  <p>Cantidad: <b><?php echo $purchaseLine->getQuantity()?></b></p>
-                                  <br>
-                                  <p>Precio: $ <b><?php echo $purchaseLine->getPrice()?></b></p>
-                                  <br>
-                                  <p>Subtotal: $ <b><?php echo intval($purchaseLine->getPrice()) * intval($purchaseLine->getQuantity())?></b></p>
-                                  <div class= "full">
-                                      <a class="secondary-button" href="<?= BASE ?>ticket/showTicketsByPurchaseLine/<?php echo $purchaseLine->getId()?>">Ver Tickets</a>
-                                  </div>
+                                    <p class="mini-box-title margin-0" style="border-bottom: 2px solid black"><b><?php echo $purchaseLine->getEventSeat()->getIdCalendar()->getIdEvent()?> </b></p>
+                                    <p><b><?php echo $purchaseLine->getEventSeat()->getIdCalendar()->getDate() ?></b></p>
+                                    <p><b><?php echo $purchaseLine->getEventSeat()->getIdCalendar()->getTime()?></b></p>
+                                    <p><b><?php echo $purchaseLine->getEventSeat()->getIdCalendar()->getLocation()?></b></p>
+                                    <p>Tipo: <b><?php echo $purchaseLine->getEventSeat()->getSeatType()?></b></p>
+                                    <p>Cantidad: <b><?php echo $purchaseLine->getQuantity()?></b></p>
+                                    <p>Precio: $ <b><?php echo $purchaseLine->getPrice()?></b></p>
+                                    <p>Subtotal: $ <b><?php echo intval($purchaseLine->getPrice()) * intval($purchaseLine->getQuantity())?></b></p>
+                                    <div class= "full">
+                                        <a class="secondary-button margin-0" href="<?= BASE ?>ticket/showTicketsByPurchaseLine/<?php echo $purchaseLine->getId()?>">Ver Tickets</a>
+                                    </div>
                                   </div>
 
                         <?php
