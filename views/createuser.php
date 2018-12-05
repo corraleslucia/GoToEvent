@@ -1,5 +1,6 @@
 <?php
 namespace views;
+include(ROOT.'views/headerBase.php');
 ?>
 
 <!DOCTYPE html>
