@@ -187,7 +187,8 @@ class EventDb extends singleton implements IDao
                     ifnull(e.id_category,'0') as id_category, ifnull(e.img,'0') as img
                   FROM categories c left outer join events e on c.id_category = e.id_category
                   left outer join calendars cal on e.id_event = cal.id_event
-                  WHERE c.id_category = :id_category and cal.calendar_date >= now()";
+                  WHERE c.id_category = :id_category and cal.calendar_date >= now()
+                  group by e.description";
 
                 $parameters['id_category'] = $id_category;
 
